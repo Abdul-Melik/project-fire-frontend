@@ -1,15 +1,18 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
+import LeftScreen from "./components/leftscreen";
+import RightScreen from "./components/rightscreen";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div>
-      <Navbar />
-      <h1 className="v-full text-primary flex bg-red-400">Hello</h1>
-    </div>
+    <div className="flex h-screen">
+      <div className="w-1/2">
+        <LeftScreen />
+      </div>
+      <div className="w-1/2">
+        <RightScreen />
+      </div> 
+    </div> 
   );
 }
-
 export default App;
