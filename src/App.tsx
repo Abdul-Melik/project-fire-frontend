@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
-import LeftScreen from "./components/leftscreen";
-import RightScreen from "./components/rightscreen";
+import LeftScreen from "./components/Login/leftscreen";
+import Login from "./components/Login/login";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <LeftScreen />
       </div>
       <div className="w-1/2">
-        <RightScreen />
+        <Login />
       </div> 
     </div> 
   );

@@ -1,49 +1,9 @@
-import React, { useContext, useState } from "react";
-import { MyContext } from "../../contexts/MyContext";
+import React from "react";
 
-const Login: React.FC = () => {
-  const { setUserData } = useContext(MyContext);
-  const [input, setInput] = useState({ email: "", password: "" });
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setInput((prevInput) => ({
-      ...prevInput,
-      [event.target.name]: event.target.value,
-    })); 
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    /* const responseData = await sendRequest(
-               "http://localhost:5000/api/users/login",
-               "POST",
-               JSON.stringify({
-                  email: emailRef.current.value,
-                  password: passwordRef.current.value
-               }),
-               {
-                  "Content-Type": "application/json"
-               }
-            );
-            */
-    event.preventDefault();
-    setUserData(input);
-    setInput({ email: "", password: "" })
-    console.log(handleSubmit);
-  };
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
-  
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-  
-
-  return ( 
+function Login() {
+  return (
     <div className="w-1/1 h-screen flex items-center justify-center ">
-      <form className="w-full max-w-sm" onSubmit={handleSubmit}>
+      <form className="w-full max-w-sm">
         <h2 className="text-xl font-bold mb-4 justify-center text-center leading-10">Log in</h2>
         <div className="mb-4"> 
           <label className="block text-gray-700 text-sm font-bold mb-2"
@@ -51,8 +11,6 @@ const Login: React.FC = () => {
           <input className="shadow mt-0.5 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
-            value={email}
-            onChange={handleEmailChange}
             placeholder="Enter your email"/></div>
         <div className="mb-6">
           <label
@@ -62,8 +20,6 @@ const Login: React.FC = () => {
             className="shadow mt-0.5 appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
-            value={password}
-            onChange={handlePasswordChange}
             placeholder="Enter your password"/></div>
         <button 
             className="bg-buttonColor hover:bg-green-900 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline justify-center items-center mx-auto w-full content-center"
