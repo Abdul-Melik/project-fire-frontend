@@ -1,11 +1,9 @@
-import React from 'react'
-
-type Props = {}
+import React from "react";
+import Sidebar from "../components/Dashboard/Sidebar";
+type Props = {};
 
 const Dashboard = (props: Props) => {
-  return (
-    <div>Dashboard</div>
-  )
-} 
+  return <Sidebar />;
+};
 
-export default Dashboard
+export default Dashboard;

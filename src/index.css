@@ -1,5 +1,21 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;  
-  
+@tailwind utilities;
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/static/Inter-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Inter-light";
+  src: url("./fonts/static/Inter-Light.ttf") format("truetype");
+}
 
+@font-face {
+  font-family: "Gilroy";
+  src: url("./fonts/static/Gilroy-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Gilroy-bold";
+  src: url("./fonts/static/Gilroy-Bold.ttf") format("truetype");
+}
