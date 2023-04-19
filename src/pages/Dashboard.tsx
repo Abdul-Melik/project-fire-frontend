@@ -1,11 +1,16 @@
 import React from 'react'
+import MainArea from '../components/dashboard/MainArea' 
+import Sidebar from '../components/dashboard/Sidebar'
 
 type Props = {}
 
 const Dashboard = (props: Props) => {
   return (
-    <div>Dashboard</div>
-  )
+    <>
+    <Sidebar />
+    <MainArea />
+    </>
+  ) 
 } 
 
 export default Dashboard

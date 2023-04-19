@@ -37,9 +37,7 @@ const LoginForm = () => {
   } catch (error) {
     console.log(error)
   }
-
   }
-
   return (
     <div className="w-1/1 h-screen flex items-center justify-center ">
       <form className="w-full max-w-sm" onSubmit={submitHandler}>
@@ -71,8 +69,7 @@ const LoginForm = () => {
           <a className="inline-block mt-2 align-baseline underline font-bold text-sm text-textColor hover:text-green-900"
             href="#">Forgot Password?</a>
         </div>
-        <div className="flex items-center justify-center mt-6">
-          
+        <div className="flex items-center justify-center mt-6">  
         </div>
       </form>
     </div>
