@@ -21,6 +21,7 @@ const Sidebar = ({ onButtonClick }: Props) => {
   const buttonClickHandler = (button: string) => {
     onButtonClick(button);
   };
+  const [selectedButton, setSelectedButton] = useState("Home");
   const [userInfo, setUserInfo] = useState<any>([]);
   useEffect(() => {
     const getUserInfo = async () => {
@@ -57,54 +58,88 @@ const Sidebar = ({ onButtonClick }: Props) => {
         <img src={arrow} className="absolute ml-56 cursor-pointer pl-2"></img>
       </div>
       <div
-        className="mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md bg-selectedColor"
-        onClick={() => buttonClickHandler("Home")}
+        className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
+          selectedButton === "Home"
+            ? "bg-selectedColor font-GilroyBold"
+            : "font-Gilroy hover:bg-selectedColor"
+        }`}
+        onClick={() => {
+          setSelectedButton("Home");
+          buttonClickHandler("Home");
+        }}
       >
         <img src={home} className="ml-3 h-5 w-5"></img>
-        <button className="ml-3 font-GilroyBold text-sm">Home</button>
+        <button className="ml-3 text-sm">Home</button>
       </div>
       <div
-        className="mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md hover:bg-selectedColor"
-        onClick={() => buttonClickHandler("Projects")}
+        className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
+          selectedButton === "Projects"
+            ? "bg-selectedColor font-GilroyBold"
+            : "font-Gilroy hover:bg-selectedColor"
+        }`}
+        onClick={() => {
+          setSelectedButton("Projects");
+          buttonClickHandler("Projects");
+        }}
       >
         <img src={clipboard} className="ml-3 h-5 w-5"></img>
-        <button className="ml-3 font-Gilroy text-sm">Projects</button>
+        <button className="ml-3 text-sm">Projects</button>
       </div>
-      <div className="mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md hover:bg-selectedColor">
+      <div
+        className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
+          selectedButton === "Employees"
+            ? "bg-selectedColor font-GilroyBold"
+            : "font-Gilroy hover:bg-selectedColor"
+        }`}
+        onClick={() => {
+          setSelectedButton("Employees");
+          buttonClickHandler("Employees");
+        }}
+      >
         <img src={employees} className="ml-3 h-5 w-5"></img>
-        <button
-          className="ml-3 font-Gilroy text-sm"
-          onClick={() => buttonClickHandler("Employees")}
-        >
-          Employees
-        </button>
+        <button className="ml-3 text-sm">Employees</button>
       </div>
-      <div className="mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md hover:bg-selectedColor">
+      <div
+        className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
+          selectedButton === "Finance"
+            ? "bg-selectedColor font-GilroyBold"
+            : "font-Gilroy hover:bg-selectedColor"
+        }`}
+        onClick={() => {
+          setSelectedButton("Finance");
+          buttonClickHandler("Finance");
+        }}
+      >
         <img src={coins} className="ml-3 h-5 w-5"></img>
-        <button
-          className="ml-3 font-Gilroy text-sm"
-          onClick={() => buttonClickHandler("Finance")}
-        >
-          Financial Overview
-        </button>
+        <button className="ml-3 text-sm">Financial Overview</button>
       </div>
-      <div className="mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md hover:bg-selectedColor">
+      <div
+        className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
+          selectedButton === "Reporting"
+            ? "bg-selectedColor font-GilroyBold"
+            : "font-Gilroy hover:bg-selectedColor"
+        }`}
+        onClick={() => {
+          setSelectedButton("Reporting");
+          buttonClickHandler("Reporting");
+        }}
+      >
         <img src={document} className="ml-3 h-5 w-5"></img>
-        <button
-          className="ml-3 font-Gilroy text-sm"
-          onClick={() => buttonClickHandler("Reporting")}
-        >
-          Project Reporting
-        </button>
+        <button className="ml-3 text-sm">Project Reporting</button>
       </div>
-      <div className="mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md hover:bg-selectedColor">
+      <div
+        className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
+          selectedButton === "Invoicing"
+            ? "bg-selectedColor font-GilroyBold"
+            : "font-Gilroy hover:bg-selectedColor"
+        }`}
+        onClick={() => {
+          setSelectedButton("Invoicing");
+          buttonClickHandler("Invoicing");
+        }}
+      >
         <img src={invoice} className="ml-3 h-5 w-5"></img>
-        <button
-          className="ml-3 font-Gilroy text-sm"
-          onClick={() => buttonClickHandler("Invoicing")}
-        >
-          Invoicing
-        </button>
+        <button className="ml-3 text-sm">Invoicing</button>
       </div>
     </div>
   );
