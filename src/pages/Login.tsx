@@ -1,8 +1,8 @@
-import React from 'react'
-import LogoBanner from '../components/Login/LogoBanner'
-import LoginForm from '../components/Login/LoginForm'
+import React from "react";
+import LogoBanner from "../components/login/LogoBanner";
+import LoginForm from "../components/login/LoginForm";
 
-type Props = {}
+type Props = {};
 
 const Login = (props: Props) => {
   return (
@@ -11,11 +11,10 @@ const Login = (props: Props) => {
         <LogoBanner />
       </div>
       <div className="w-1/2">
-        <LoginForm
-        />
-      </div> 
-    </div> 
-  )
-}
+        <LoginForm />
+      </div>
+    </div>
+  );
+};
 
-export default Login
+export default Login;
