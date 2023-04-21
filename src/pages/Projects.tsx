@@ -35,7 +35,7 @@ const Projects = () => {
       </div>
       <div className="page-content flex-1 p-4 mr-8 ml-4">
       <div className="content-categories flex items-center">
-  <div className="text-2xl font-bold flex-1 p-8 py-4 text-3xl">Projects</div>
+  <div className="font-bold flex-1 p-8 py-4 text-3xl">Projects</div>
   <button className="font-semibold text-base bg-buttonColor hover:bg-green-900 text-white py-2 px-4 rounded-md ml-auto">
     Create new project
   </button>
