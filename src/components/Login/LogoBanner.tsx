@@ -13,9 +13,6 @@ function LogoBanner() {
           backgroundRepeat: "no-repeat",
           width: "300px",
           height: "150px"
-          
-          
-          
         }}
       />
     </div>

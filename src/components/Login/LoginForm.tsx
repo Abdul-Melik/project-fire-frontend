@@ -63,8 +63,7 @@ const LoginForm = () => {
         <form className="w-full" onSubmit={submitHandler}>
           <h2 className="text-xl font-bold mb-4 justify-center text-center leading-10">Log in</h2>
           <div className="mb-4"> 
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-              Email
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email
             </label>
             <input
               ref={refEmail}
@@ -76,8 +75,7 @@ const LoginForm = () => {
             />
           </div>
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-              Password
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Password
             </label>
             <input
               ref={refPassword}
@@ -90,9 +88,7 @@ const LoginForm = () => {
           </div>
           <button
             className="bg-buttonColor hover:bg-green-900 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline justify-center items-center mx-auto w-full content-center"
-            type="submit"
-          >
-            Log In
+            type="submit">Log In
           </button>
           <div className="flex items-center justify-between bloc">
             <label className="block mt-3 text-rempassColor">
@@ -105,9 +101,7 @@ const LoginForm = () => {
             </label>
             <a
               className="inline-block mt-2 align-baseline underline font-bold text-sm text-textColor hover:text-green-900"
-              href="#"
-            >
-              Forgot Password?
+              href="#">Forgot Password?
             </a>
           </div>
           <div className="flex items-center justify-center mt-6"></div>
