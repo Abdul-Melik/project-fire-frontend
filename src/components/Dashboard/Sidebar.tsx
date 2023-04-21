@@ -54,7 +54,7 @@ const Sidebar = ({ onButtonClick }: Props) => {
         <div className="flex-col">
           <p className="mb-0 ml-4 font-Inter font-medium">{`${userInfo.firstName} ${userInfo.lastName}`}</p>
           <p className="font-Inter-light ml-4 text-sm">
-            {userInfo.role.charAt(0).toUpperCase() + userInfo.role.slice(1)}
+            {userInfo.role === "admin" ? "Admin" : "Employee"}
           </p>
         </div>
         <img src={arrow} className="absolute ml-56 cursor-pointer pl-2"></img>

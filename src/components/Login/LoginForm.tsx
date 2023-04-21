@@ -32,7 +32,7 @@ const LoginForm = () => {
         responseData.expiresIn,
         responseData.user.id
       );
-      navigate("/Dashboard");
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
     }
