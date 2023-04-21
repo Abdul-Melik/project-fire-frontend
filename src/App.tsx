@@ -8,6 +8,8 @@ import {
   Navigate,
 } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
+import Projects from "./pages/Projects";
 
 interface IAuthContext {
   isLoggedIn: boolean;
@@ -24,6 +26,8 @@ const App = () => {
       <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/projects" element={<Projects />} />
     </>
   );
   return (
