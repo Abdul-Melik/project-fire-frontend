@@ -11,6 +11,13 @@
   .bloc label:first-child {
   margin-bottom: 0.5rem;
   }
+  body {
+    background-image: url('../../../public/svg/gradientbg.svg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
   }
 
   @media (max-width: 767px) {
