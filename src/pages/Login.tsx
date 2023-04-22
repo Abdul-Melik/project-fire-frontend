@@ -1,6 +1,6 @@
 import React from 'react'
-import LogoBanner from '../components/login/LogoBanner'
-import LoginForm from '../components/login/LoginForm'
+import LogoBanner from '../components/Login/LogoBanner'
+import LoginForm from '../components/Login/LoginForm'
 
 type Props = {}
 
