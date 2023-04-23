@@ -19,3 +19,27 @@
   font-family: "Gilroy-bold";
   src: url("./fonts/static/Gilroy-Bold.ttf") format("truetype");
 }
+@tailwind utilities;
+
+@media screen and (max-width: 768px) {
+  .bloc {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  .bloc label:first-child {
+    margin-bottom: 0.5rem;
+  }
+  body {
+    background-image: url("../../../public/svg/gradientbg.svg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (max-width: 767px) {
+  .logo-container {
+    display: block;
+  }
+}
