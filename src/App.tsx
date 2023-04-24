@@ -1,8 +1,7 @@
 import Login from './pages/Login';
 import useAuth from './shared/hooks/auth-hook';
 import AuthContext from './shared/context/auth-context';
-import { Routes } from 'react-router';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import Projects from './pages/Projects';

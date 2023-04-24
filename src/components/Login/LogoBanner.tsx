@@ -3,7 +3,7 @@ import '../../index.css';
 
 function LogoBanner() {
 	return (
-		<div className="w-full flex items-center justify-center h-full bg-[url('../../public/svg/gradientbg.svg')] bg-no-repeat bg-cover logo-banner">
+		<div className="w-full flex items-center justify-center h-full bg-[url('/svg/gradientbg.svg')] bg-no-repeat bg-cover logo-banner">
 			<div
 				className='w-full h-1/2 bg-cover bg-center  '
 				style={{

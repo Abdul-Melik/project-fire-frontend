@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useContext } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import useHttpClient from '../../shared/hooks/http-hook';
 import AuthContext from '../../shared/context/auth-context';
-import logotype from '../../public/images/logotype.svg';
+import logotype from '/svg/logotype.svg';
 import '../../index.css';
 
 const LoginForm = () => {

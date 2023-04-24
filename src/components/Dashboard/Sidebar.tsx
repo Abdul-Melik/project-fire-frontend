@@ -94,11 +94,13 @@ const Sidebar = ({ onButtonClick }: Props) => {
 			</div>
 			<div
 				className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
-					selectedButton === 'Finance' ? 'bg-selectedColor font-GilroyBold' : 'font-Gilroy hover:bg-selectedColor'
+					selectedButton === 'FinancialOverview'
+						? 'bg-selectedColor font-GilroyBold'
+						: 'font-Gilroy hover:bg-selectedColor'
 				}`}
 				onClick={() => {
-					setSelectedButton('Finance');
-					buttonClickHandler('Finance');
+					setSelectedButton('FinancialOverview');
+					buttonClickHandler('FinancialOverview');
 				}}
 			>
 				<img src={coins} className='ml-3 h-5 w-5'></img>
@@ -106,11 +108,13 @@ const Sidebar = ({ onButtonClick }: Props) => {
 			</div>
 			<div
 				className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
-					selectedButton === 'Reporting' ? 'bg-selectedColor font-GilroyBold' : 'font-Gilroy hover:bg-selectedColor'
+					selectedButton === 'ProjectReporting'
+						? 'bg-selectedColor font-GilroyBold'
+						: 'font-Gilroy hover:bg-selectedColor'
 				}`}
 				onClick={() => {
-					setSelectedButton('Reporting');
-					buttonClickHandler('Reporting');
+					setSelectedButton('ProjectReporting');
+					buttonClickHandler('ProjectReporting');
 				}}
 			>
 				<img src={document} className='ml-3 h-5 w-5'></img>

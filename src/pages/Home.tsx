@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 
-const Home = () => {
+type Props = {};
+
+const Home = (props: Props) => {
 	useEffect(() => {
 		const opt1 = document.getElementById('opt-1')!;
 		const opt2 = document.getElementById('opt-2')!;
