@@ -1,7 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
+
+import AuthContext from '../shared/context/auth-context';
+import useHttpClient from '../shared/hooks/http-hook';
+import MiniCard from '../shared/components/MiniCard';
+
+interface ProjectInfo {
+	totalProjects: number;
+	totalValue: number;
+	averageValue: number;
+	averageHourlyRate: number;
+	salesChannelPercentage: number[];
+	projectTypeCount: number[];
+}
 
 const Home = () => {
+	const { sendRequest } = useHttpClient();
+	const auth = useContext(AuthContext);
 	const [activeNav, setActiveNav] = useState(1);
+	const [selectedYear, setSelectedYear] = useState('2023');
+	const [projectsInfo, setProjectsInfo] = useState<ProjectInfo | null>(null);
 
 	useEffect(() => {
 		const opt1 = document.getElementById('opt-1')!;
@@ -22,11 +39,29 @@ const Home = () => {
 		});
 	}, []);
 
+	useEffect(() => {
+		const getProjectsInfo = async () => {
+			try {
+				const responseData = await sendRequest(
+					`https://project-fire.onrender.com/api/projects/info?year=${selectedYear}`,
+					'GET',
+					null,
+					{
+						Authorization: 'Bearer ' + auth.token,
+					}
+				);
+				setProjectsInfo(responseData);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		getProjectsInfo();
+	}, [sendRequest, auth.token, selectedYear]);
+
 	return (
 		<div className='page-content ml-4 mr-4 flex-1 p-4'>
 			<div className='flex-1 p-8 py-4 text-3xl font-bold'>Home</div>
 			<div className='content-categories flex'>
-				<div className='label-wrapper'></div>
 				<div className='flex-1 p-8 py-2'>
 					<div className='flex items-center justify-between py-4'>
 						<div className='flex'>
@@ -95,7 +130,13 @@ const Home = () => {
 							<label htmlFor='years' className='mr-4 font-medium'>
 								Year:
 							</label>
-							<select name='years' id='years' className='rounded-md border border-gray-400 px-4 py-2 font-medium'>
+							<select
+								className='rounded-md border border-gray-400 px-4 py-2 font-medium'
+								name='years'
+								id='years'
+								value={selectedYear}
+								onChange={event => setSelectedYear(event.target.value)}
+							>
 								<option value='2023'>2023</option>
 								<option value='2022'>2022</option>
 								<option value='2021'>2021</option>
@@ -103,9 +144,73 @@ const Home = () => {
 							</select>
 						</div>
 					</div>
-					<div className='inline w-1/5 justify-center'>
-						<h1 className='mt-6 text-2xl font-bold' id='content-heading'></h1>
-					</div>
+					{activeNav === 1 && (
+						<div className='grid gap-[30px] grid-cols-[repeat(auto-fit,minmax(240px,1fr))] auto-rows-[70px] mt-8'>
+							<MiniCard
+								description='Number of projects'
+								amount={`${projectsInfo?.totalProjects}` ?? '0'}
+								iconSrc='/svg/projectsno.svg'
+								iconAlt='Mini icon'
+								className='border border-[#DFE3E1] rounded-md box-border'
+							/>
+							<MiniCard
+								description='Total project value'
+								amount={
+									projectsInfo
+										? projectsInfo.totalValue.toLocaleString('en-US', {
+												minimumFractionDigits: 2,
+												maximumFractionDigits: 2,
+										  }) + ' KM'
+										: '0 KM'
+								}
+								iconSrc='/svg/totalvalue.svg'
+								iconAlt='Mini icon'
+								className='border border-[#DFE3E1] rounded-md box-border'
+							/>
+							<MiniCard
+								description='Avg. project value'
+								amount={projectsInfo ? projectsInfo.averageValue.toLocaleString('en-US') + ' KM' : '0 KM'}
+								iconSrc='/svg/avgvalue.svg'
+								iconAlt='Mini icon'
+								className='border border-[#DFE3E1] rounded-md box-border'
+							/>
+							<MiniCard
+								description='Avg. lead closing (d)'
+								amount={'12'}
+								iconSrc='/svg/leadclosing.svg'
+								iconAlt='Mini icon'
+								className='border border-[#DFE3E1] rounded-md box-border'
+							/>
+							<MiniCard
+								description='Avg. team size'
+								amount={'2.2'}
+								iconSrc='/svg/teamsize.svg'
+								iconAlt='Mini icon'
+								className='border border-[#DFE3E1] rounded-md box-border'
+							/>
+							<MiniCard
+								description='Avg. velocity'
+								amount={'64'}
+								iconSrc='/svg/velocity.svg'
+								iconAlt='Mini icon'
+								className='border border-[#DFE3E1] rounded-md box-border'
+							/>
+							<MiniCard
+								description='Weeks over deadline'
+								amount={'7'}
+								iconSrc='/svg/weeksover.svg'
+								iconAlt='Mini icon'
+								className='border border-[#DFE3E1] rounded-md box-border'
+							/>
+							<MiniCard
+								description='Avg. hourly price'
+								amount={`$${projectsInfo?.averageHourlyRate}` ?? '$0'}
+								iconSrc='/svg/hourlyprice.svg'
+								iconAlt='Mini icon'
+								className='border border-[#DFE3E1] rounded-md box-border'
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>
