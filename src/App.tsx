@@ -1,49 +1,37 @@
-import Login from "./pages/Login";
-import useAuth from "./shared/hooks/auth-hook";
-import AuthContext from "./shared/context/auth-context";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import Home from "./pages/Home";
-import Projects from "./pages/Projects";
-
-interface IAuthContext {
-  isLoggedIn: boolean;
-  token: string | null;
-  userId: string | null;
-  login: (token: string, expiresIn: number, userId: string) => void;
-  logout: () => void;
-}
+import Login from './pages/Login';
+import useAuth from './shared/hooks/auth-hook';
+import AuthContext from './shared/context/auth-context';
+import { Routes } from 'react-router';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+import Home from './pages/Home';
+import Projects from './pages/Projects';
 
 const App = () => {
-  const { token, userId, login, logout } = useAuth();
-  const routes = (
-    <>
-      <Route path="/" element={<Login />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/projects" element={<Projects />} />
-    </>
-  );
-  return (
-    <AuthContext.Provider
-      value={{
-        isLoggedIn: !!token,
-        token,
-        userId,
-        login,
-        logout,
-      }}
-    >
-      <Router>
-        <Routes>{routes}</Routes>
-      </Router>
-    </AuthContext.Provider>
-  );
+	const { token, userId, login, logout } = useAuth();
+	const routes = (
+		<>
+			<Route path='/' element={<Login />} />
+			<Route path='/login' element={<Login />} />
+			<Route path='/dashboard' element={<Dashboard />} />
+			<Route path='/home' element={<Home />} />
+			<Route path='/projects' element={<Projects />} />
+		</>
+	);
+	return (
+		<AuthContext.Provider
+			value={{
+				isLoggedIn: !!token,
+				token,
+				userId,
+				login,
+				logout,
+			}}
+		>
+			<Router>
+				<Routes>{routes}</Routes>
+			</Router>
+		</AuthContext.Provider>
+	);
 };
 export default App;
