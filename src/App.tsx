@@ -10,7 +10,7 @@ import {
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
-
+import Chart from "./components/dashboard/PieChart";
 interface IAuthContext {
   isLoggedIn: boolean;
   token: string | null;
@@ -28,6 +28,7 @@ const App = () => {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/home" element={<Home />} />
       <Route path="/projects" element={<Projects />} />
+      <Route path="/chart" element={<Chart />} />
     </>
   );
   return (

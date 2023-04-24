@@ -19,6 +19,10 @@
   font-family: "Gilroy-bold";
   src: url("./fonts/static/Gilroy-Bold.ttf") format("truetype");
 }
+@font-face {
+  font-family: "Gilroy-semibold";
+  src: url("./fonts/static/Gilroy-SemiBold.ttf") format("truetype");
+}
 @tailwind utilities;
 
 @media screen and (max-width: 768px) {

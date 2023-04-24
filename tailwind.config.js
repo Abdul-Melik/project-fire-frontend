@@ -20,6 +20,7 @@ export default {
         Inter: ["Inter", "sans-serif"],
         Gilroy: ["Gilroy", "sans-serif"],
         GilroyBold: ["Gilroy-Bold", "sans-serif"],
+        GilroySemiBold: ["Gilroy-semibold", "sans-serif"],
       },
     },
   },
