@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @font-face {
   font-family: "Inter";
   src: url("./fonts/static/Inter-Medium.ttf") format("truetype");

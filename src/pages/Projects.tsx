@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const Projects = () => {
+  const [activeNav, setActiveNav] = useState(2);
   useEffect(() => {
     const opt1 = document.getElementById("opt-1")!;
     const opt2 = document.getElementById("opt-2")!;
@@ -28,7 +29,7 @@ const Projects = () => {
   return (
     <div className="page-content ml-4 mr-8 flex-1 p-4">
       <div className="content-categories flex items-center">
-        <div className="flex-1 p-8 py-4 text-2xl text-3xl font-bold">
+        <div className="flex-1 p-8 py-4 text-3xl font-bold">
           Projects
         </div>
         <button className="ml-auto rounded-md bg-buttonColor px-4 py-2 text-base font-semibold text-white hover:bg-green-900">
@@ -41,43 +42,82 @@ const Projects = () => {
           <div className="flex items-center justify-between py-4">
             <div className="flex">
               <div className="relative">
-                <input type="radio" name="nav" id="opt-1" className="sr-only" />
+              <input
+                  type="radio"
+                  name="nav"
+                  id="opt-1"
+                  className="sr-only"
+                  checked={activeNav === 1}
+                  onChange={() => setActiveNav(1)}
+                />
                 <label
                   htmlFor="opt-1"
-                  className="cursor-pointer rounded-l-md border border-[#B3DFC9] px-4 py-2 text-sm font-semibold text-[#43A57C] transition-colors duration-200 ease-in-out hover:bg-[#F5FFFA] focus:bg-[#F5FFFA]"
+                  className={`cursor-pointer rounded-l border border-[#B3DFC9] ${
+                    activeNav === 1
+                      ? "bg-[#F5FFFA] text-[#43A57C]"
+                      : "border-[#B3DFC9] text-[#43A57C] hover:bg-[#F5FFFA]"
+                  } px-4 py-2 text-sm font-semibold transition-colors duration-200 ease-in-out`}
+                  
                 >
-                  All projects
+                  All Projects
+                </label>
+              </div>
+              <div className="relative">
+              <input
+                  type="radio"
+                  name="nav"
+                  id="opt-2"
+                  className="sr-only"
+                  checked={activeNav === 2}
+                  onChange={() => setActiveNav(2)}
+                />
+                <label
+                  htmlFor="opt-2"
+                  className={`cursor-pointer border-y border-r-[1px] border-[#B3DFC9] ${
+                    activeNav === 2
+                      ? "bg-[#F5FFFA] text-[#43A57C]"
+                      : "border-[#B3DFC9] text-[#43A57C] hover:bg-[#F5FFFA]"
+                  } px-4 py-2 text-sm font-semibold transition-colors duration-200 ease-in-out`}
+                >
+                  Active
                 </label>
               </div>
               <div className="relative">
                 <input
                   type="radio"
                   name="nav"
-                  id="opt-2"
+                  id="opt-3"
                   className="sr-only"
-                  defaultChecked
+                  checked={activeNav === 3}
+                  onChange={() => setActiveNav(3)}
                 />
                 <label
-                  htmlFor="opt-2"
-                  className="cursor-pointer border-y border-r border-[#B3DFC9] px-4 py-2 text-sm font-semibold text-[#43A57C] transition-colors duration-200 ease-in-out hover:bg-[#F5FFFA] focus:bg-green-100"
-                >
-                  Active
-                </label>
-              </div>
-              <div className="relative">
-                <input type="radio" name="nav" id="opt-3" className="sr-only" />
-                <label
                   htmlFor="opt-3"
-                  className="cursor-pointer  border-y border-[#B3DFC9] px-4 py-2 text-sm font-semibold text-[#43A57C] transition-colors duration-200 ease-in-out hover:bg-[#F5FFFA] focus:bg-green-100"
+                  className={`cursor-pointer border-y border-[#B3DFC9] ${
+                    activeNav === 3
+                      ? "bg-[#F5FFFA] text-[#43A57C]"
+                      : "border-[#B3DFC9] text-[#43A57C] hover:bg-[#F5FFFA]"
+                  } px-4 py-2 text-sm font-semibold transition-colors duration-200 ease-in-out`}
                 >
                   Inactive
                 </label>
               </div>
               <div className="relative">
-                <input type="radio" name="nav" id="opt-4" className="sr-only" />
+                <input
+                  type="radio"
+                  name="nav"
+                  id="opt-4"
+                  className="sr-only"
+                  checked={activeNav === 4}
+                  onChange={() => setActiveNav(4)}
+                />
                 <label
                   htmlFor="opt-4"
-                  className="cursor-pointer rounded-r-md border border-[#B3DFC9] px-4 py-2 text-sm font-semibold text-[#43A57C] transition-colors duration-200 ease-in-out hover:bg-[#F5FFFA] focus:bg-green-100"
+                  className={`cursor-pointer rounded-r border border-[#B3DFC9] ${
+                    activeNav === 4
+                      ? "bg-[#F5FFFA] text-[#43A57C]"
+                      : "border-[#B3DFC9] text-[#43A57C] hover:bg-[#F5FFFA]"
+                  } px-4 py-2 text-sm font-semibold transition-colors duration-200 ease-in-out`}
                 >
                   Completed
                 </label>
