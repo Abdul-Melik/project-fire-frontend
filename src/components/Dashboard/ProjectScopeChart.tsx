@@ -54,7 +54,8 @@ const HorizontalBarChartPage: React.FC = () => {
           barSize={40}
         >
           <CartesianGrid
-            strokeDasharray="6 6"
+            strokeDasharray="6 8"
+            strokeLinecap="round"
             horizontal={false}
             stroke="#DFE3E1"
             strokeWidth={1.5}
