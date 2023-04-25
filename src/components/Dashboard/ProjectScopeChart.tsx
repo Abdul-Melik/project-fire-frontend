@@ -18,7 +18,7 @@ interface ChartData {
 
 const chartData: ChartData[] = [
   { name: "Fixed", value: 3.75 },
-  { name: "Ongoing", value: 5 },
+  { name: "On-going", value: 5 },
 ];
 
 const CustomLabel = (props: any) => {
@@ -27,7 +27,7 @@ const CustomLabel = (props: any) => {
     <text
       x={x}
       y={y - 10}
-      fill="#000"
+      fill="#232F2D"
       textAnchor="start"
       className="font-GilroySemiBold text-sm"
     >
@@ -41,9 +41,11 @@ const barColors = ["#DFE3E1", "#7BB99F"];
 const HorizontalBarChartPage: React.FC = () => {
   return (
     <div className="h-[342px] w-[510px] flex-col rounded-[6px] border border-[#DFE3E1] text-lg">
-      <h2 className="ml-5 mt-5 font-GilroySemiBold">Project scope</h2>
+      <h2 className="ml-5 mt-5 font-GilroySemiBold text-[#232F2D]">
+        Project scope
+      </h2>
       <div className="bg-gray mx-auto mb-10 mt-3 h-[1px] w-11/12 bg-gray-300"></div>
-      <div className="ml-[30px] mt-[-15px] font-Gilroy text-sm font-medium leading-4">
+      <div className="ml-[30px] mt-[-15px] font-GilroyRegular text-sm leading-4">
         <BarChart
           width={425}
           height={250}
@@ -61,6 +63,7 @@ const HorizontalBarChartPage: React.FC = () => {
             tickLine={false}
             ticks={[0, 1.25, 2.5, 3.75, 5]}
             type="number"
+            stroke="#232F2D"
             axisLine={false}
             domain={[0, 5]}
           />

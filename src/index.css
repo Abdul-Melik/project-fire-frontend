@@ -17,6 +17,11 @@
 }
 
 @font-face {
+  font-family: "Gilroy-regular";
+  src: url("./fonts/static/Gilroy-Regular.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "Gilroy-bold";
   src: url("./fonts/static/Gilroy-Bold.ttf") format("truetype");
 }

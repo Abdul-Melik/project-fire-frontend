@@ -21,6 +21,7 @@ export default {
         Gilroy: ["Gilroy", "sans-serif"],
         GilroyBold: ["Gilroy-Bold", "sans-serif"],
         GilroySemiBold: ["Gilroy-semibold", "sans-serif"],
+        GilroyRegular: ["Gilroy-regular", "sans-serif"],
       },
     },
   },
