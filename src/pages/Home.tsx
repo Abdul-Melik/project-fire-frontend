@@ -45,7 +45,6 @@ const Home = () => {
                       ? "bg-[#F5FFFA] text-[#43A57C]"
                       : "border-[#B3DFC9] text-[#43A57C] hover:bg-[#F5FFFA]"
                   } px-4 py-2 text-sm font-semibold transition-colors duration-200 ease-in-out`}
-                  
                 >
                   2023 Performance
                 </label>
