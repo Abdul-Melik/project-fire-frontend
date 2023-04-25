@@ -54,7 +54,7 @@ const renderCustomizedLabel = ({
 const PieChartPage: React.FC = () => {
   return (
     <div className="h-[342px] w-[510px] rounded-[6px] border border-[#DFE3E1] text-lg">
-      <h2 className="ml-5 mt-5 font-GilroySemiBold">Sales Channels</h2>
+      <h2 className="ml-5 mt-5 font-GilroySemiBold">Sales channels</h2>
       <div className="bg-gray mx-auto mt-3 h-[1px] w-11/12 bg-gray-300"></div>
       <div className="font-['Helvetica Neue'] ml-[-100px] mt-[-15px] text-sm font-medium">
         <PieChart width={500} height={300}>

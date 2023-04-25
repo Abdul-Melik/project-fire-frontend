@@ -41,9 +41,9 @@ const barColors = ["#DFE3E1", "#7BB99F"];
 const HorizontalBarChartPage: React.FC = () => {
   return (
     <div className="h-[342px] w-[510px] flex-col rounded-[6px] border border-[#DFE3E1] text-lg">
-      <h2 className="ml-5 mt-5 font-GilroySemiBold">Project Scope</h2>
+      <h2 className="ml-5 mt-5 font-GilroySemiBold">Project scope</h2>
       <div className="bg-gray mx-auto mb-10 mt-3 h-[1px] w-11/12 bg-gray-300"></div>
-      <div className="font-['Helvetica Neue'] ml-[30px] mt-[-15px] text-sm font-medium">
+      <div className="ml-[30px] mt-[-15px] font-Gilroy text-sm font-medium leading-4">
         <BarChart
           width={425}
           height={250}
@@ -51,8 +51,14 @@ const HorizontalBarChartPage: React.FC = () => {
           layout="vertical"
           barSize={40}
         >
-          <CartesianGrid strokeDasharray="5 5" horizontal={false} />
+          <CartesianGrid
+            strokeDasharray="6 6"
+            horizontal={false}
+            stroke="#DFE3E1"
+            strokeWidth={1.5}
+          />
           <XAxis
+            tickLine={false}
             ticks={[0, 1.25, 2.5, 3.75, 5]}
             type="number"
             axisLine={false}
