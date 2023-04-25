@@ -11,7 +11,7 @@ type Props = {
 
 const MainArea = ({ activeButton }: Props) => {
 	let component = <Home />;
-
+	console.log("test test test")
 	if (activeButton === 'Projects') {
 		component = <Projects />;
 	} else if (activeButton === 'Employees') {
