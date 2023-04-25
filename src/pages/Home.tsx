@@ -43,7 +43,7 @@ const Home = () => {
 		const getProjectsInfo = async () => {
 			try {
 				const responseData = await sendRequest(
-					`https://project-fire.onrender.com/api/projects/info?year=${selectedYear}`,
+					`http://localhost:5000/api/projects/info?year=${selectedYear}`,
 					'GET',
 					null,
 					{

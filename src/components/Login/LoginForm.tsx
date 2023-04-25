@@ -21,7 +21,7 @@ const LoginForm = () => {
 
 		try {
 			const responseData = await sendRequest(
-				'https://project-fire.onrender.com/api/users/login',
+				'http://localhost:5000/api/users/login',
 				'POST',
 				JSON.stringify({
 					email: (refEmail.current as HTMLInputElement).value,

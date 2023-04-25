@@ -29,14 +29,9 @@ const Sidebar = ({ onButtonClick }: Props) => {
 	useEffect(() => {
 		const getUserInfo = async () => {
 			try {
-				const responseData = await sendRequest(
-					'https://project-fire.onrender.com/api/users/' + auth.userId,
-					'GET',
-					null,
-					{
-						Authorization: 'Bearer ' + auth.token,
-					}
-				);
+				const responseData = await sendRequest('http://localhost:5000/api/users/' + auth.userId, 'GET', null, {
+					Authorization: 'Bearer ' + auth.token,
+				});
 				setUserInfo(responseData);
 			} catch (err) {
 				console.log(err);
