@@ -1,7 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import useHttpClient from "../shared/hooks/http-hook";
+import AuthContext from "../shared/context/auth-context";
+import MiniCard from "../shared/components/MiniCard";
+import { PieChart } from "recharts";
+import ProjectScopeChart from "../components/Dashboard/ProjectScopeChart";
+import PieChartPage from "../components/Dashboard/PieChart";
+interface ProjectInfo {
+  totalProjects: number;
+  totalValue: number;
+  averageValue: number;
+  averageHourlyRate: number;
+  salesChannelPercentage: { salesChannel: string; percentage: number }[];
+  projectTypeCount: { count: number; projectType: string }[];
+}
 
 const Home = () => {
   const [activeNav, setActiveNav] = useState(1);
+  const [selectedYear, setSelectedYear] = useState("2023");
+  const { sendRequest } = useHttpClient();
+  const auth = useContext(AuthContext);
+  const [projectsInfo, setProjectsInfo] = useState<ProjectInfo | null>(null);
+  useEffect(() => {
+    const getProjectsInfo = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:5000/api/projects/info?year=${selectedYear}`,
+          "GET",
+          null,
+          {
+            Authorization: "Bearer " + auth.token,
+          }
+        );
+        setProjectsInfo(responseData);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProjectsInfo();
+  }, [sendRequest, auth.token, selectedYear]);
+
+  console.log(projectsInfo);
   useEffect(() => {
     const opt1 = document.getElementById("opt-1")!;
     const opt2 = document.getElementById("opt-2")!;
@@ -95,6 +133,8 @@ const Home = () => {
                 Year:
               </label>
               <select
+                value={selectedYear}
+                onChange={(event) => setSelectedYear(event.target.value)}
                 name="years"
                 id="years"
                 className="rounded-md border border-gray-400 px-4 py-2 font-medium"
@@ -106,9 +146,89 @@ const Home = () => {
               </select>
             </div>
           </div>
-          <div className="inline w-1/5 justify-center">
-            <h1 className="mt-6 text-2xl font-bold" id="content-heading"></h1>
-          </div>
+          {activeNav === 1 && (
+            <>
+              <div className="mt-8 grid auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-[30px]">
+                <MiniCard
+                  description="Number of projects"
+                  amount={`${projectsInfo?.totalProjects}` ?? "0"}
+                  iconSrc="/svg/projectsno.svg"
+                  iconAlt="Mini icon"
+                  className="box-border rounded-md border border-[#DFE3E1]"
+                />
+                <MiniCard
+                  description="Total project value"
+                  amount={
+                    projectsInfo
+                      ? projectsInfo.totalValue.toLocaleString("en-US", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        }) + " KM"
+                      : "0 KM"
+                  }
+                  iconSrc="/svg/totalvalue.svg"
+                  iconAlt="Mini icon"
+                  className="box-border rounded-md border border-[#DFE3E1]"
+                />
+                <MiniCard
+                  description="Avg. project value"
+                  amount={
+                    projectsInfo
+                      ? projectsInfo.averageValue.toLocaleString("en-US") +
+                        " KM"
+                      : "0 KM"
+                  }
+                  iconSrc="/svg/avgvalue.svg"
+                  iconAlt="Mini icon"
+                  className="box-border rounded-md border border-[#DFE3E1]"
+                />
+                <MiniCard
+                  description="Avg. lead closing (d)"
+                  amount={"12"}
+                  iconSrc="/svg/leadclosing.svg"
+                  iconAlt="Mini icon"
+                  className="box-border rounded-md border border-[#DFE3E1]"
+                />
+                <MiniCard
+                  description="Avg. team size"
+                  amount={"2.2"}
+                  iconSrc="/svg/teamsize.svg"
+                  iconAlt="Mini icon"
+                  className="box-border rounded-md border border-[#DFE3E1]"
+                />
+                <MiniCard
+                  description="Avg. velocity"
+                  amount={"64"}
+                  iconSrc="/svg/velocity.svg"
+                  iconAlt="Mini icon"
+                  className="box-border rounded-md border border-[#DFE3E1]"
+                />
+                <MiniCard
+                  description="Weeks over deadline"
+                  amount={"7"}
+                  iconSrc="/svg/weeksover.svg"
+                  iconAlt="Mini icon"
+                  className="box-border rounded-md border border-[#DFE3E1]"
+                />
+                <MiniCard
+                  description="Avg. hourly price"
+                  amount={`$${projectsInfo?.averageHourlyRate}` ?? "$0"}
+                  iconSrc="/svg/hourlyprice.svg"
+                  iconAlt="Mini icon"
+                  className="box-border rounded-md border border-[#DFE3E1]"
+                />
+              </div>
+              <div className="mt-[42px] flex gap-[31px]">
+                <PieChartPage
+                  chartValues={projectsInfo?.salesChannelPercentage ?? []}
+                />
+
+                <ProjectScopeChart
+                  chartValues={projectsInfo?.projectTypeCount ?? []}
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

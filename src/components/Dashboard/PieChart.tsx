@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import useHttpClient from "../../shared/hooks/http-hook";
 
 interface ChartData {
   name: string;
@@ -16,13 +17,9 @@ interface CustomizedLabelProps {
   index: number;
 }
 
-const chartData: ChartData[] = [
-  { name: "Sales channel #1", value: 30 },
-  { name: "Sales channel #2", value: 10 },
-  { name: "Sales channel #3", value: 10 },
-  { name: "Sales channel #4", value: 20 },
-  { name: "Sales channel #5", value: 30 },
-];
+type Props = {
+  chartValues: { salesChannel: string; percentage: number }[];
+};
 
 const COLORS = ["#3973F8", "#3491FA", "#9D5FF3", "#FF9F5A", "#7BB99F"];
 const RADIAN = Math.PI / 180;
@@ -47,11 +44,56 @@ const renderCustomizedLabel = ({
       textAnchor="middle"
       dominantBaseline="central"
     >
-      {`${(percent * 100).toFixed(0)}%`}
+      {percent !== 0 ? `${(percent * 100).toFixed(0)}%` : ""}
     </text>
   );
 };
-const PieChartPage: React.FC = () => {
+
+const PieChartPage = ({ chartValues }: Props) => {
+  const data = [];
+  const chartData: ChartData[] = [
+    {
+      name: "Online",
+      value:
+        chartValues.length !== 0 &&
+        chartValues.find((value) => value.salesChannel === "online") !==
+          undefined
+          ? chartValues.find((value) => value.salesChannel === "online")!
+              .percentage
+          : 0,
+    },
+    {
+      name: "In Person",
+      value:
+        chartValues.length !== 0 &&
+        chartValues.find((value) => value.salesChannel === "in-person") !==
+          undefined
+          ? chartValues.find((value) => value.salesChannel === "in-person")!
+              .percentage
+          : 0,
+    },
+    {
+      name: "Referral",
+      value:
+        chartValues.length !== 0 &&
+        chartValues.find((value) => value.salesChannel === "referral") !==
+          undefined
+          ? chartValues.find((value) => value.salesChannel === "referral")!
+              .percentage
+          : 0,
+    },
+    {
+      name: "Other",
+      value:
+        chartValues.length !== 0 &&
+        chartValues.find((value) => value.salesChannel === "other") !==
+          undefined
+          ? chartValues.find((value) => value.salesChannel === "other")!
+              .percentage
+          : 0,
+    },
+  ];
+
   return (
     <div className="h-[342px] w-[510px] rounded-[6px] border border-[#DFE3E1] text-lg">
       <h2 className="ml-5 mt-5 font-GilroySemiBold text-[#0C221F]">

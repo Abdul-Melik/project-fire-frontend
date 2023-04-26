@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Sidebar from "../components/dashboard/Sidebar";
-import MainArea from "../components/dashboard/MainArea";
+import Sidebar from "../components/Dashboard/Sidebar";
+import MainArea from "../components/Dashboard/MainArea";
 
 type Props = {};
 

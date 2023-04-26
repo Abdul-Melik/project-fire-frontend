@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -10,16 +10,26 @@ import {
   Cell,
   LabelList,
 } from "recharts";
+import useHttpClient from "../../shared/hooks/http-hook";
+import AuthContext from "../../shared/context/auth-context";
 
 interface ChartData {
   name: string;
   value: number;
 }
 
-const chartData: ChartData[] = [
-  { name: "Fixed", value: 3.75 },
-  { name: "On-going", value: 5 },
-];
+type Props = {
+  chartValues: { count: number; projectType: string }[];
+};
+
+interface ProjectInfo {
+  totalProjects: number;
+  totalValue: number;
+  averageValue: number;
+  averageHourlyRate: number;
+  salesChannelPercentage: number[];
+  projectTypeCount: number[];
+}
 
 const CustomLabel = (props: any) => {
   const { x, y, value } = props;
@@ -38,7 +48,25 @@ const CustomLabel = (props: any) => {
 
 const barColors = ["#DFE3E1", "#7BB99F"];
 
-const HorizontalBarChartPage: React.FC = () => {
+const HorizontalBarChartPage = ({ chartValues }: Props) => {
+  const chartData: ChartData[] = [
+    {
+      name: "Fixed",
+      value:
+        chartValues.length !== 0
+          ? chartValues.find((value) => value.projectType === "fixed")!.count
+          : 0,
+    },
+    {
+      name: "On-going",
+      value:
+        chartValues.length !== 0
+          ? chartValues.find((value) => value.projectType === "on-going")!.count
+          : 0,
+    },
+  ];
+
+  const maxValue = Math.max(...chartData.map((item) => item.value));
   return (
     <div className="h-[342px] w-[510px] flex-col rounded-[6px] border border-[#DFE3E1] text-lg">
       <h2 className="ml-5 mt-5 font-GilroySemiBold text-[#232F2D]">
@@ -48,7 +76,7 @@ const HorizontalBarChartPage: React.FC = () => {
       <div className="ml-[30px] mt-[-15px] font-GilroyRegular text-sm leading-4">
         <BarChart
           width={425}
-          height={250}
+          height={220}
           data={chartData}
           layout="vertical"
           barSize={40}
@@ -62,18 +90,24 @@ const HorizontalBarChartPage: React.FC = () => {
           />
           <XAxis
             tickLine={false}
-            ticks={[0, 1.25, 2.5, 3.75, 5]}
+            ticks={[
+              0,
+              maxValue / 4,
+              maxValue / 2,
+              (3 * maxValue) / 4,
+              maxValue,
+            ]}
             type="number"
             stroke="#232F2D"
             axisLine={false}
-            domain={[0, 5]}
+            domain={[0, maxValue]}
           />
           <YAxis type="category" hide={true} dataKey="name" axisLine={false} />
           <Tooltip />
           <Bar dataKey="value" barSize={32} radius={[6, 6, 6, 6]} label="none">
             {chartData.map((entry, index) => {
               const color = entry.name == "Fixed" ? barColors[1] : barColors[0];
-              return <Cell fill={color} />;
+              return <Cell key={index} fill={color} />;
             })}
             <LabelList dataKey="name" content={CustomLabel} />
           </Bar>

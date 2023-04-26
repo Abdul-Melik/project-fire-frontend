@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
-import Chart from "./components/dashboard/ProjectScopeChart";
 
 const App = () => {
   const { token, userId, login, logout } = useAuth();
@@ -16,7 +15,6 @@ const App = () => {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/home" element={<Home />} />
       <Route path="/projects" element={<Projects />} />
-      <Route path="/chart" element={<Chart />} />
     </>
   );
   return (
