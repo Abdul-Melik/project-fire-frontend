@@ -6,11 +6,14 @@ import AuthContext from '../../shared/context/auth-context';
 import logotype from '/svg/logotype.svg';
 import '../../index.css';
 
-const LoginForm = () => {
+type Props = {
+	handleError: (error: string | null) => void;
+};
+
+const LoginForm = ({ handleError }: Props) => {
 	const { sendRequest } = useHttpClient();
 	const auth = useContext(AuthContext);
 	const navigate = useNavigate();
-
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const refEmail = useRef<HTMLInputElement | null>(null);
 	const refPassword = useRef<HTMLInputElement | null>(null);
@@ -21,7 +24,7 @@ const LoginForm = () => {
 
 		try {
 			const responseData = await sendRequest(
-				'https://project-fire.onrender.com/api/users/login',
+				'http://localhost:5000/api/users/login',
 				'POST',
 				JSON.stringify({
 					email: (refEmail.current as HTMLInputElement).value,
@@ -35,7 +38,7 @@ const LoginForm = () => {
 			auth.login(responseData.token, responseData.expiresIn, responseData.user.id);
 			navigate('/dashboard');
 		} catch (error) {
-			console.log(error);
+			handleError((error as Error).message);
 		}
 	};
 

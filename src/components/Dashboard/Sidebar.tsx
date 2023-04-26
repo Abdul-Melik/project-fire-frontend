@@ -30,7 +30,7 @@ const Sidebar = ({ onButtonClick }: Props) => {
 		const getUserInfo = async () => {
 			try {
 				const responseData = await sendRequest(
-					'https://project-fire.onrender.com/api/users/' + auth.userId,
+					'http://localhost:5000/api/users/' + auth.userId,
 					'GET',
 					null,
 					{
