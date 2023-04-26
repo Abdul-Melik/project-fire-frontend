@@ -6,7 +6,7 @@ type Props = {
 	className?: string;
 };
 
-const MiniCard = ({ description, amount, iconSrc, iconAlt, className }: Props) => {
+const InfoCard = ({ description, amount, iconSrc, iconAlt, className }: Props) => {
 	return (
 		<div className={`flex justify-between py-[10px] px-4 gap-[19px] ${className}}`}>
 			<div className='flex flex-col gap-[2px] items-start'>
@@ -20,4 +20,4 @@ const MiniCard = ({ description, amount, iconSrc, iconAlt, className }: Props) =
 	);
 };
 
-export default MiniCard;
+export default InfoCard;

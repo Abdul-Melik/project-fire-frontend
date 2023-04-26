@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 
 import AuthContext from '../shared/context/auth-context';
 import useHttpClient from '../shared/hooks/http-hook';
-import MiniCard from '../shared/components/MiniCard';
+import InfoCard from '../shared/components/InfoCard';
 
 interface ProjectInfo {
 	totalProjects: number;
@@ -146,14 +146,14 @@ const Home = () => {
 					</div>
 					{activeNav === 1 && (
 						<div className='grid gap-[30px] grid-cols-[repeat(auto-fit,minmax(240px,1fr))] auto-rows-[70px] mt-8'>
-							<MiniCard
+							<InfoCard
 								description='Number of projects'
 								amount={`${projectsInfo?.totalProjects}` ?? '0'}
 								iconSrc='/svg/projectsno.svg'
 								iconAlt='Mini icon'
 								className='border border-[#DFE3E1] rounded-md box-border'
 							/>
-							<MiniCard
+							<InfoCard
 								description='Total project value'
 								amount={
 									projectsInfo
@@ -167,42 +167,42 @@ const Home = () => {
 								iconAlt='Mini icon'
 								className='border border-[#DFE3E1] rounded-md box-border'
 							/>
-							<MiniCard
+							<InfoCard
 								description='Avg. project value'
 								amount={projectsInfo ? projectsInfo.averageValue.toLocaleString('en-US') + ' KM' : '0 KM'}
 								iconSrc='/svg/avgvalue.svg'
 								iconAlt='Mini icon'
 								className='border border-[#DFE3E1] rounded-md box-border'
 							/>
-							<MiniCard
+							<InfoCard
 								description='Avg. lead closing (d)'
 								amount={'12'}
 								iconSrc='/svg/leadclosing.svg'
 								iconAlt='Mini icon'
 								className='border border-[#DFE3E1] rounded-md box-border'
 							/>
-							<MiniCard
+							<InfoCard
 								description='Avg. team size'
 								amount={'2.2'}
 								iconSrc='/svg/teamsize.svg'
 								iconAlt='Mini icon'
 								className='border border-[#DFE3E1] rounded-md box-border'
 							/>
-							<MiniCard
+							<InfoCard
 								description='Avg. velocity'
 								amount={'64'}
 								iconSrc='/svg/velocity.svg'
 								iconAlt='Mini icon'
 								className='border border-[#DFE3E1] rounded-md box-border'
 							/>
-							<MiniCard
+							<InfoCard
 								description='Weeks over deadline'
 								amount={'7'}
 								iconSrc='/svg/weeksover.svg'
 								iconAlt='Mini icon'
 								className='border border-[#DFE3E1] rounded-md box-border'
 							/>
-							<MiniCard
+							<InfoCard
 								description='Avg. hourly price'
 								amount={`$${projectsInfo?.averageHourlyRate}` ?? '$0'}
 								iconSrc='/svg/hourlyprice.svg'
