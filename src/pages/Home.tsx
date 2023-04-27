@@ -153,7 +153,14 @@ const Home = () => {
 							/>
 							<InfoCard
 								description='Avg. project value'
-								amount={projectsInfo ? projectsInfo.averageValue.toLocaleString('en-US') + ' KM' : '0 KM'}
+								amount={
+									projectsInfo
+										? projectsInfo.averageValue.toLocaleString('en-US', {
+												minimumFractionDigits: 2,
+												maximumFractionDigits: 2,
+										  }) + ' KM'
+										: '0 KM'
+								}
 								iconSrc='/svg/avgvalue.svg'
 								iconAlt='Mini icon'
 								className='border border-[#DFE3E1] rounded-md box-border'
@@ -221,7 +228,7 @@ const Home = () => {
 								/>
 								<InfoCard
 									description='Actual avg. margin'
-									amount={'102,382.00 Km'}
+									amount={'102,382.00 KM'}
 									iconSrc='/svg/avgmargin.svg'
 									iconAlt='Mini icon'
 									className='border border-[#DFE3E1] rounded-md box-border'
