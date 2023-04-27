@@ -2,22 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+/* INTER FONT */
+/* Font Weight: 400 */
 @font-face {
-	font-family: 'Inter';
-	src: url('./fonts/static/Inter-Medium.ttf') format('truetype');
-}
-@font-face {
-	font-family: 'Inter-light';
-	src: url('./fonts/static/Inter-Light.ttf') format('truetype');
+	font-family: 'Inter-Regular';
+	src: url('./fonts/static/Inter-Regular.ttf') format('truetype');
 }
 
+/* Font Weight: 500 */
 @font-face {
-	font-family: 'Gilroy';
+	font-family: 'Inter-Medium';
+	src: url('./fonts/static/Inter-Medium.ttf') format('truetype');
+}
+
+/* Font Weight: 600 */
+@font-face {
+	font-family: 'Inter-SemiBold';
+	src: url('./fonts/static/Inter-SemiBold.ttf') format('truetype');
+}
+
+/* Font Weight: 700 */
+@font-face {
+	font-family: 'Inter-Bold';
+	src: url('./fonts/static/Inter-Bold.ttf') format('truetype');
+}
+
+/* GILROY FONT */
+/* Font Weight: 400 */
+@font-face {
+	font-family: 'Gilroy-Regular';
+	src: url('./fonts/static/Gilroy-Regular.ttf') format('truetype');
+}
+
+/* Font Weight: 500 */
+@font-face {
+	font-family: 'Gilroy-Medium';
 	src: url('./fonts/static/Gilroy-Medium.ttf') format('truetype');
 }
 
+/* Font Weight: 600 */
 @font-face {
-	font-family: 'Gilroy-bold';
+	font-family: 'Gilroy-SemiBold';
+	src: url('./fonts/static/Gilroy-SemiBold.ttf') format('truetype');
+}
+
+/* Font Weight: 700 */
+@font-face {
+	font-family: 'Gilroy-Bold';
 	src: url('./fonts/static/Gilroy-Bold.ttf') format('truetype');
 }
 

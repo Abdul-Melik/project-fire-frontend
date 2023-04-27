@@ -42,7 +42,7 @@ const Home = () => {
 
 	return (
 		<div className='page-content ml-4 mr-4 flex-1 p-4'>
-			<div className='flex-1 p-8 py-4 text-3xl font-bold'>Home</div>
+			<div className='flex-1 p-8 py-4 text-3xl font-bold font-gilroy-bold'>Home</div>
 			<div className='content-categories flex'>
 				<div className='flex-1 p-8 py-2'>
 					<div className='flex items-center justify-between py-4'>
@@ -58,11 +58,11 @@ const Home = () => {
 								/>
 								<label
 									htmlFor='opt-1'
-									className={`cursor-pointer rounded-l border border-[#B3DFC9] ${
+									className={`cursor-pointer rounded-l border border-pale-jade ${
 										activeNav === 1
-											? 'bg-[#F5FFFA] text-[#43A57C]'
-											: 'border-[#B3DFC9] text-[#43A57C] hover:bg-[#F5FFFA]'
-									} px-4 py-2 text-sm font-semibold transition-colors duration-200 ease-in-out`}
+											? 'bg-pale-jade text-moss-green font-inter-semi-bold font-semibold'
+											: 'text-blue-grey font-inter-regular font-normal'
+									} px-4 py-2 text-sm`}
 								>
 									2023 Performance
 								</label>
@@ -78,11 +78,11 @@ const Home = () => {
 								/>
 								<label
 									htmlFor='opt-2'
-									className={`cursor-pointer border-y border-[#B3DFC9] ${
+									className={`cursor-pointer border-y border-pale-jade ${
 										activeNav === 2
-											? 'bg-[#F5FFFA] text-[#43A57C]'
-											: 'border-[#B3DFC9] text-[#43A57C] hover:bg-[#F5FFFA]'
-									} px-4 py-2 text-sm font-semibold transition-colors duration-200 ease-in-out`}
+											? 'bg-pale-jade text-moss-green font-semibold font-inter-semi-bold'
+											: 'text-blue-grey font-normal font-inter-regular'
+									} px-4 py-2 text-sm`}
 								>
 									Development Revenue &amp; Costs
 								</label>
@@ -98,11 +98,11 @@ const Home = () => {
 								/>
 								<label
 									htmlFor='opt-3'
-									className={`cursor-pointer rounded-r border border-[#B3DFC9] ${
+									className={`cursor-pointer rounded-r border border-pale-jade ${
 										activeNav === 3
-											? 'bg-[#F5FFFA] text-[#43A57C]'
-											: 'border-[#B3DFC9] text-[#43A57C] hover:bg-[#F5FFFA]'
-									} px-4 py-2 text-sm font-semibold transition-colors duration-200 ease-in-out`}
+											? 'bg-pale-jade text-moss-green font-semibold font-inter-semi-bold'
+											: 'text-blue-grey font-normal font-inter-regular'
+									} px-4 py-2 text-sm`}
 								>
 									2023 Plan
 								</label>
@@ -110,11 +110,11 @@ const Home = () => {
 						</div>
 						{activeNav === 1 && (
 							<div className='mr-5 flex items-center'>
-								<label htmlFor='years' className='mr-4 font-medium'>
+								<label htmlFor='years' className='mr-4 font-bold font-gilroy-bold text-deep-forest'>
 									Year:
 								</label>
 								<select
-									className='rounded-md border border-gray-400 px-4 py-2 font-medium'
+									className='rounded-md border border-ashen-grey px-4 py-2 font-bold font-gilroy-bold text-hunter-green'
 									name='years'
 									id='years'
 									value={selectedYear}
@@ -135,7 +135,7 @@ const Home = () => {
 								amount={`${projectsInfo?.totalProjects}` ?? '0'}
 								iconSrc='/svg/projectsno.svg'
 								iconAlt='Mini icon'
-								className='border border-[#DFE3E1] rounded-md box-border'
+								className='border border-ashen-grey rounded-md box-border'
 							/>
 							<InfoCard
 								description='Total project value'
@@ -149,7 +149,7 @@ const Home = () => {
 								}
 								iconSrc='/svg/totalvalue.svg'
 								iconAlt='Mini icon'
-								className='border border-[#DFE3E1] rounded-md box-border'
+								className='border border-ashen-grey rounded-md box-border'
 							/>
 							<InfoCard
 								description='Avg. project value'
@@ -163,42 +163,42 @@ const Home = () => {
 								}
 								iconSrc='/svg/avgvalue.svg'
 								iconAlt='Mini icon'
-								className='border border-[#DFE3E1] rounded-md box-border'
+								className='border border-ashen-grey rounded-md box-border'
 							/>
 							<InfoCard
 								description='Avg. lead closing (d)'
 								amount={'12'}
 								iconSrc='/svg/leadclosing.svg'
 								iconAlt='Mini icon'
-								className='border border-[#DFE3E1] rounded-md box-border'
+								className='border border-ashen-grey rounded-md box-border'
 							/>
 							<InfoCard
 								description='Avg. team size'
 								amount={'2.2'}
 								iconSrc='/svg/teamsize.svg'
 								iconAlt='Mini icon'
-								className='border border-[#DFE3E1] rounded-md box-border'
+								className='border border-ashen-grey rounded-md box-border'
 							/>
 							<InfoCard
 								description='Avg. velocity'
 								amount={'64'}
 								iconSrc='/svg/velocity.svg'
 								iconAlt='Mini icon'
-								className='border border-[#DFE3E1] rounded-md box-border'
+								className='border border-ashen-grey rounded-md box-border'
 							/>
 							<InfoCard
 								description='Weeks over deadline'
 								amount={'7'}
 								iconSrc='/svg/weeksover.svg'
 								iconAlt='Mini icon'
-								className='border border-[#DFE3E1] rounded-md box-border'
+								className='border border-ashen-grey rounded-md box-border'
 							/>
 							<InfoCard
 								description='Avg. hourly price'
 								amount={`$${projectsInfo?.averageHourlyRate}` ?? '$0'}
 								iconSrc='/svg/hourlyprice.svg'
 								iconAlt='Mini icon'
-								className='border border-[#DFE3E1] rounded-md box-border'
+								className='border border-ashen-grey rounded-md box-border'
 							/>
 						</div>
 					)}
@@ -210,34 +210,34 @@ const Home = () => {
 									amount={'1,615,341.00 KM'}
 									iconSrc='/svg/revenue.svg'
 									iconAlt='Mini icon'
-									className='border border-[#DFE3E1] rounded-md box-border'
+									className='border border-ashen-grey rounded-md box-border'
 								/>
 								<InfoCard
 									description='Planned direct costs'
 									amount={'1,890,000.00 KM'}
 									iconSrc='/svg/directcosts.svg'
 									iconAlt='Mini icon'
-									className='border border-[#DFE3E1] rounded-md box-border'
+									className='border border-ashen-grey rounded-md box-border'
 								/>
 								<InfoCard
 									description='Actual margin %'
 									amount={'40%'}
 									iconSrc='/svg/margin.svg'
 									iconAlt='Mini icon'
-									className='border border-[#DFE3E1] rounded-md box-border'
+									className='border border-ashen-grey rounded-md box-border'
 								/>
 								<InfoCard
 									description='Actual avg. margin'
 									amount={'102,382.00 KM'}
 									iconSrc='/svg/avgmargin.svg'
 									iconAlt='Mini icon'
-									className='border border-[#DFE3E1] rounded-md box-border'
+									className='border border-ashen-grey rounded-md box-border'
 								/>
 							</div>
 							<SummaryCard
 								description='Actual gross profit'
 								amount={'-284,086.00 KM'}
-								className='bg-[#E9F3F2] rounded-md box-border'
+								className='bg-winter-mint rounded-md box-border'
 							/>
 						</div>
 					)}

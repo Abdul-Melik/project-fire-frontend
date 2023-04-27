@@ -7,8 +7,8 @@ type Props = {
 const SummaryCard = ({ description, amount, className }: Props) => {
 	return (
 		<div className={`flex flex-col justify-center items-center gap-2 ${className}`}>
-			<p className='font-Gilroy font-medium text-[18px] leading-[28px] text-[#232F2D]'>{description}</p>
-			<span className='font-GilroyBold font-bold text-[30px] leading-[40px] text-[#0C221F]'>{amount}</span>
+			<p className='font-gilroy-medium font-medium text-[18px] leading-[28px] text-hunter-green'>{description}</p>
+			<span className='font-gilroy-semi-bold font-semibold text-[30px] leading-[40px] text-deep-forest'>{amount}</span>
 		</div>
 	);
 };

@@ -41,19 +41,23 @@ const Sidebar = ({ onButtonClick }: Props) => {
 	}, [sendRequest, auth.token]);
 
 	return (
-		<div className='h-screen w-72 flex-col items-center border-r border-sidebarColor1 bg-gradient-to-t from-sidebarColor1 to-sidebarColor2'>
-			<img src={logo} className='ml-6 w-3/5 pt-8'></img>
-			<div className='border-bordercolor mx-auto mt-10 flex h-20 w-11/12 items-center rounded-md border'>
+		<div className='h-screen w-72 flex-col items-center border-r border-opal-mist bg-gradient-to-b from-frost-white to-seafoam-green'>
+			<img src={logo} className='ml-6 w-3/5 pt-8' />
+			<div className='border-ashen-grey mx-auto mt-10 flex h-20 w-11/12 items-center rounded-md border'>
 				<img className='ml-3 h-14 w-14 rounded-lg object-cover' src={userInfo.image ? userInfo.image : avatar}></img>
 				<div className='flex-col'>
-					<p className='mb-0 ml-4 font-Inter font-medium'>{`${userInfo.firstName} ${userInfo.lastName}`}</p>
-					<p className='font-Inter-light ml-4 text-sm'>{userInfo.role === 'admin' ? 'Admin' : 'Employee'}</p>
+					<p className='mb-0 ml-4 font-inter-medium font-medium'>{`${userInfo.firstName} ${userInfo.lastName}`}</p>
+					<p className='font-normal font-inter-regular ml-4 text-sm'>
+						{userInfo.role === 'admin' ? 'Admin' : 'Employee'}
+					</p>
 				</div>
 				<img src={arrow} className='absolute ml-56 cursor-pointer pl-2'></img>
 			</div>
 			<div
 				className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
-					selectedButton === 'Home' ? 'bg-selectedColor font-GilroyBold' : 'font-Gilroy hover:bg-selectedColor'
+					selectedButton === 'Home'
+						? 'bg-winter-mint font-bold font-gilroy-bold'
+						: 'font-medium font-gilroy-medium hover:bg-winter-mint'
 				}`}
 				onClick={() => {
 					setSelectedButton('Home');
@@ -65,7 +69,9 @@ const Sidebar = ({ onButtonClick }: Props) => {
 			</div>
 			<div
 				className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
-					selectedButton === 'Projects' ? 'bg-selectedColor font-GilroyBold' : 'font-Gilroy hover:bg-selectedColor'
+					selectedButton === 'Projects'
+						? 'bg-winter-mint font-bold font-gilroy-bold'
+						: 'font-medium font-gilroy-medium hover:bg-winter-mint'
 				}`}
 				onClick={() => {
 					setSelectedButton('Projects');
@@ -77,7 +83,9 @@ const Sidebar = ({ onButtonClick }: Props) => {
 			</div>
 			<div
 				className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
-					selectedButton === 'Employees' ? 'bg-selectedColor font-GilroyBold' : 'font-Gilroy hover:bg-selectedColor'
+					selectedButton === 'Employees'
+						? 'bg-winter-mint font-bold font-gilroy-bold'
+						: 'font-medium font-gilroy-medium hover:bg-winter-mint'
 				}`}
 				onClick={() => {
 					setSelectedButton('Employees');
@@ -90,8 +98,8 @@ const Sidebar = ({ onButtonClick }: Props) => {
 			<div
 				className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
 					selectedButton === 'FinancialOverview'
-						? 'bg-selectedColor font-GilroyBold'
-						: 'font-Gilroy hover:bg-selectedColor'
+						? 'bg-winter-mint font-bold font-gilroy-bold'
+						: 'font-medium font-gilroy-medium hover:bg-winter-mint'
 				}`}
 				onClick={() => {
 					setSelectedButton('FinancialOverview');
@@ -104,8 +112,8 @@ const Sidebar = ({ onButtonClick }: Props) => {
 			<div
 				className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
 					selectedButton === 'ProjectReporting'
-						? 'bg-selectedColor font-GilroyBold'
-						: 'font-Gilroy hover:bg-selectedColor'
+						? 'bg-winter-mint font-bold font-gilroy-bold'
+						: 'font-medium font-gilroy-medium hover:bg-winter-mint'
 				}`}
 				onClick={() => {
 					setSelectedButton('ProjectReporting');
@@ -117,7 +125,9 @@ const Sidebar = ({ onButtonClick }: Props) => {
 			</div>
 			<div
 				className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
-					selectedButton === 'Invoicing' ? 'bg-selectedColor font-GilroyBold' : 'font-Gilroy hover:bg-selectedColor'
+					selectedButton === 'Invoicing'
+						? 'bg-winter-mint font-bold font-gilroy-bold'
+						: 'font-medium font-gilroy-medium hover:bg-winter-mint'
 				}`}
 				onClick={() => {
 					setSelectedButton('Invoicing');
