@@ -66,19 +66,19 @@ const LoginForm = ({ handleError }: Props) => {
           />
         )}
         <form className="w-full" onSubmit={submitHandler}>
-          <h2 className="mb-4 justify-center text-center text-xl font-bold leading-10">
+          <h2 className="mb-4 justify-center text-center text-[32px] font-semibold not-italic font-Gilroy leading-[40px] text-[#292929]">
             Log in
           </h2>
           <div className="mb-4">
             <label
-              className="mb-2 block text-sm font-bold text-gray-700"
+              className="mb-2 block font-Gilroy text-base font-medium text-[#292929] leading-[24px]"
               htmlFor="email"
             >
               Email
             </label>
             <input
               ref={refEmail}
-              className="focus:shadow-outline mt-0.5 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+              className="focus:shadow-outline mt-0.5 w-full appearance-none rounded border px-3 py-2 font-Gilroy text-base font-medium text-[#272934] leading-[24px] shadow focus:outline-none "
               id="email"
               type="email"
               placeholder="Enter your email"
@@ -87,14 +87,14 @@ const LoginForm = ({ handleError }: Props) => {
           </div>
           <div className="mb-6">
             <label
-              className="mb-2 block text-sm font-bold text-gray-700"
+              className="mb-2 block font-Gilroy text-base font-medium leading-[24px] text-[#292929]"
               htmlFor="password"
             >
               Password
             </label>
             <input
               ref={refPassword}
-              className="focus:shadow-outline mb-3 mt-0.5 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+              className="focus:shadow-outline mb-2 mt-0.5 w-full appearance-none rounded border px-3 py-2 font-Gilroy text-base font-medium text-[#272934] leading-[24px] shadow focus:outline-none"
               id="password"
               type="password"
               placeholder="Enter your password"
@@ -102,22 +102,24 @@ const LoginForm = ({ handleError }: Props) => {
             />
           </div>
           <button
-            className="focus:shadow-outline mx-auto w-full content-center items-center justify-center rounded bg-buttonColor px-6 py-2 font-bold text-white hover:bg-green-900 focus:outline-none"
+            className="mx-auto w-full content-center items-center justify-center rounded-md bg-buttonColor px-6 py-2 text-white hover:bg-green-900 font-Gilroy font-semibold leading-[24px] text-base"
             type="submit"
           >
             Log In
           </button>
-          <div className="bloc flex items-center justify-between">
-            <label className="mt-3 block text-rempassColor">
+          <div className="whitespace-nowrap flex justify-between items-center gap-2.5 mt-1 ">
+            <label className="mt-3 text-rempassColor flex items-center">
               <input
                 ref={refRememberMe}
-                className="mr-2 leading-tight accent-[#1A3835]"
+                className="mr-2 w-[18px] h-[18px] leading-tight accent-[#1A3835]"
                 type="checkbox"
               />
-              <span className="text-sm">Remember password</span>
+              <span className="font-Gilroy font-medium leading-[24px] text-base tracking-[-0.015em] text-[#292929]">
+                Remember password
+              </span>
             </label>
             <a
-              className="mt-2 inline-block align-baseline text-sm font-bold text-textColor underline hover:text-green-900"
+              className="mt-3 inline-block font-Gilroy font-medium leading-[24px] text-base tracking-[-0.015em] text-[#1A3835] underline hover:text-green-900 justify-end"
               href="#"
             >
               Forgot Password?
