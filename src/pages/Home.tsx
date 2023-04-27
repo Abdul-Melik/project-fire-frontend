@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import AuthContext from '../shared/context/auth-context';
 import useHttpClient from '../shared/hooks/http-hook';
 import InfoCard from '../shared/components/InfoCard';
+import SummaryCard from '../shared/components/SummaryCard';
 
 interface ProjectInfo {
 	totalProjects: number;
@@ -19,25 +20,6 @@ const Home = () => {
 	const [activeNav, setActiveNav] = useState(1);
 	const [selectedYear, setSelectedYear] = useState('2023');
 	const [projectsInfo, setProjectsInfo] = useState<ProjectInfo | null>(null);
-
-	useEffect(() => {
-		const opt1 = document.getElementById('opt-1')!;
-		const opt2 = document.getElementById('opt-2')!;
-		const opt3 = document.getElementById('opt-3')!;
-		const contentHeading = document.getElementById('content-heading')!;
-
-		opt1.addEventListener('click', () => {
-			contentHeading.textContent = '2023 Performance TEST';
-		});
-
-		opt2.addEventListener('click', () => {
-			contentHeading.textContent = 'Development Revenue & Costs TEST';
-		});
-
-		opt3.addEventListener('click', () => {
-			contentHeading.textContent = '2023 Plan TEST';
-		});
-	}, []);
 
 	useEffect(() => {
 		const getProjectsInfo = async () => {
@@ -126,23 +108,25 @@ const Home = () => {
 								</label>
 							</div>
 						</div>
-						<div className='mr-5 flex items-center'>
-							<label htmlFor='years' className='mr-4 font-medium'>
-								Year:
-							</label>
-							<select
-								className='rounded-md border border-gray-400 px-4 py-2 font-medium'
-								name='years'
-								id='years'
-								value={selectedYear}
-								onChange={event => setSelectedYear(event.target.value)}
-							>
-								<option value='2023'>2023</option>
-								<option value='2022'>2022</option>
-								<option value='2021'>2021</option>
-								<option value='2020'>2020</option>
-							</select>
-						</div>
+						{activeNav === 1 && (
+							<div className='mr-5 flex items-center'>
+								<label htmlFor='years' className='mr-4 font-medium'>
+									Year:
+								</label>
+								<select
+									className='rounded-md border border-gray-400 px-4 py-2 font-medium'
+									name='years'
+									id='years'
+									value={selectedYear}
+									onChange={event => setSelectedYear(event.target.value)}
+								>
+									<option value='2023'>2023</option>
+									<option value='2022'>2022</option>
+									<option value='2021'>2021</option>
+									<option value='2020'>2020</option>
+								</select>
+							</div>
+						)}
 					</div>
 					{activeNav === 1 && (
 						<div className='grid gap-[30px] grid-cols-[repeat(auto-fit,minmax(240px,1fr))] auto-rows-[70px] mt-8'>
@@ -208,6 +192,45 @@ const Home = () => {
 								iconSrc='/svg/hourlyprice.svg'
 								iconAlt='Mini icon'
 								className='border border-[#DFE3E1] rounded-md box-border'
+							/>
+						</div>
+					)}
+					{activeNav === 2 && (
+						<div className='grid gap-[30px] mt-7 grid-cols-[1fr,minmax(330px,auto)]'>
+							<div className='grid gap-[30px] grid-cols-[repeat(auto-fit,minmax(330px,1fr))] auto-rows-[70px]'>
+								<InfoCard
+									description='Actual revenue'
+									amount={'1,615,341.00 KM'}
+									iconSrc='/svg/revenue.svg'
+									iconAlt='Mini icon'
+									className='border border-[#DFE3E1] rounded-md box-border'
+								/>
+								<InfoCard
+									description='Planned direct costs'
+									amount={'1,890,000.00 KM'}
+									iconSrc='/svg/directcosts.svg'
+									iconAlt='Mini icon'
+									className='border border-[#DFE3E1] rounded-md box-border'
+								/>
+								<InfoCard
+									description='Actual margin %'
+									amount={'40%'}
+									iconSrc='/svg/margin.svg'
+									iconAlt='Mini icon'
+									className='border border-[#DFE3E1] rounded-md box-border'
+								/>
+								<InfoCard
+									description='Actual avg. margin'
+									amount={'102,382.00 Km'}
+									iconSrc='/svg/avgmargin.svg'
+									iconAlt='Mini icon'
+									className='border border-[#DFE3E1] rounded-md box-border'
+								/>
+							</div>
+							<SummaryCard
+								description='Actual gross profit'
+								amount={'-284,086.00 KM'}
+								className='bg-[#E9F3F2] rounded-md box-border'
 							/>
 						</div>
 					)}

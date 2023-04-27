@@ -5,30 +5,6 @@ type Props = {};
 const Projects = (props: Props) => {
 	const [activeNav, setActiveNav] = useState(1);
 
-	useEffect(() => {
-		const opt1 = document.getElementById('opt-1')!;
-		const opt2 = document.getElementById('opt-2')!;
-		const opt3 = document.getElementById('opt-3')!;
-		const opt4 = document.getElementById('opt-4')!;
-		const contentHeading = document.getElementById('content-heading')!;
-
-		opt1.addEventListener('click', () => {
-			contentHeading.textContent = 'All Projects TEST';
-		});
-
-		opt2.addEventListener('click', () => {
-			contentHeading.textContent = 'Active';
-		});
-
-		opt3.addEventListener('click', () => {
-			contentHeading.textContent = 'Inactive';
-		});
-
-		opt4.addEventListener('click', () => {
-			contentHeading.textContent = 'Completed';
-		});
-	}, []);
-
 	return (
 		<div className='page-content ml-4 mr-8 flex-1 p-4'>
 			<div className='content-categories flex items-center'>

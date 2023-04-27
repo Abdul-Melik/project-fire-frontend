@@ -1,10 +1,11 @@
-import Login from './pages/Login';
-import useAuth from './shared/hooks/auth-hook';
-import AuthContext from './shared/context/auth-context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
+import useAuth from './shared/hooks/auth-hook';
+import AuthContext from './shared/context/auth-context';
 
 const App = () => {
 	const { token, userId, login, logout } = useAuth();
