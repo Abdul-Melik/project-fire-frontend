@@ -25,11 +25,17 @@ const ProjectScopeChart = ({ chartValues }: Props) => {
 	const chartData: ChartData[] = [
 		{
 			name: 'Fixed',
-			value: chartValues.length !== 0 ? chartValues.find(value => value.projectType === 'fixed')!.count : 0,
+			value:
+				chartValues.length !== 0 && chartValues.find(value => value.projectType === 'fixed') !== undefined
+					? chartValues.find(value => value.projectType === 'fixed')!.count
+					: 0,
 		},
 		{
 			name: 'On-going',
-			value: chartValues.length !== 0 ? chartValues.find(value => value.projectType === 'on-going')!.count : 0,
+			value:
+				chartValues.length !== 0 && chartValues.find(value => value.projectType === 'fixed') !== undefined
+					? chartValues.find(value => value.projectType === 'on-going')!.count
+					: 0,
 		},
 	];
 

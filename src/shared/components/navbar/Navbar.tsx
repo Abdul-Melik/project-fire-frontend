@@ -4,11 +4,11 @@ import NavLink from './NavLink';
 
 type Props = {
 	selectedYear: string;
-	handlePageSelect: (page: string) => void;
+	handlePageSelect: (page: number) => void;
 };
 
 const Navbar = ({ selectedYear, handlePageSelect }: Props) => {
-	const [selectedPage, setSelectedPage] = useState(`${selectedYear}  Performance`);
+	const [selectedPage, setSelectedPage] = useState(1);
 	const activeLink = 'bg-pale-jade text-moss-green font-inter-semi-bold font-semibold';
 	const inactiveLink = 'text-blue-grey font-inter-regular font-normal';
 
@@ -18,28 +18,26 @@ const Navbar = ({ selectedYear, handlePageSelect }: Props) => {
 				<NavLink
 					text={`${selectedYear}  Performance`}
 					onClick={() => {
-						handlePageSelect(`${selectedYear}  Performance`);
-						setSelectedPage(`${selectedYear}  Performance`);
+						handlePageSelect(1);
+						setSelectedPage(1);
 					}}
-					className={`${
-						selectedPage === `${selectedYear}  Performance` ? activeLink : inactiveLink
-					} rounded-l border-r-0`}
+					className={`${selectedPage === 1 ? activeLink : inactiveLink} rounded-l border-r-0`}
 				/>
 				<NavLink
 					text='Development Revenue &amp; Costs'
 					onClick={() => {
-						handlePageSelect('Development Revenue &amp; Costs');
-						setSelectedPage('Development Revenue &amp; Costs');
+						handlePageSelect(2);
+						setSelectedPage(2);
 					}}
-					className={selectedPage === 'Development Revenue &amp; Costs' ? activeLink : inactiveLink}
+					className={selectedPage === 2 ? activeLink : inactiveLink}
 				/>
 				<NavLink
 					text={`${selectedYear} Plan`}
 					onClick={() => {
-						handlePageSelect(`${selectedYear} Plan`);
-						setSelectedPage(`${selectedYear} Plan`);
+						handlePageSelect(3);
+						setSelectedPage(3);
 					}}
-					className={`${selectedPage === `${selectedYear} Plan` ? activeLink : inactiveLink} rounded-r border-l-0`}
+					className={`${selectedPage === 3 ? activeLink : inactiveLink} rounded-r border-l-0`}
 				/>
 			</div>
 		</div>

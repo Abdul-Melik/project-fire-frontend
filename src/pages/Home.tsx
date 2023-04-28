@@ -24,7 +24,7 @@ const Home = () => {
 	const [loading, setLoading] = useState(true);
 	const [projectsInfo, setProjectsInfo] = useState<ProjectInfo | null>(null);
 	const [selectedYear, setSelectedYear] = useState('2023');
-	const [activePage, setActivePage] = useState(`${selectedYear}  Performance`);
+	const [activePage, setActivePage] = useState(1);
 
 	useEffect(() => {
 		const getProjectsInfo = async () => {
@@ -58,9 +58,9 @@ const Home = () => {
 						<Navbar selectedYear={selectedYear} handlePageSelect={page => setActivePage(page)} />
 						<YearFilter handleYearSelect={year => setSelectedYear(year)} />
 					</div>
-					{activePage === `${selectedYear}  Performance` && <Performance projectsInfo={projectsInfo} />}
-					{activePage === 'Development Revenue &amp; Costs' && <DevelopmentRevenueCosts />}
-					{activePage === `${selectedYear} Plan` && <Plan />}
+					{activePage === 1 && <Performance projectsInfo={projectsInfo} />}
+					{activePage === 2 && <DevelopmentRevenueCosts />}
+					{activePage === 3 && <Plan />}
 				</div>
 			</div>
 		</Layout>
