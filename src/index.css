@@ -3,45 +3,72 @@
 @tailwind utilities;
 
 @font-face {
-	font-family: 'Inter';
-	src: url('./fonts/static/Inter-Medium.ttf') format('truetype');
+  font-family: "Inter";
+  src: url("./fonts/static/Inter-Medium.ttf") format("truetype");
 }
 @font-face {
-	font-family: 'Inter-light';
-	src: url('./fonts/static/Inter-Light.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'Gilroy';
-	src: url('./fonts/static/Gilroy-Medium.ttf') format('truetype');
+  font-family: "Inter-light";
+  src: url("./fonts/static/Inter-Light.ttf") format("truetype");
 }
 
 @font-face {
-	font-family: 'Gilroy-bold';
-	src: url('./fonts/static/Gilroy-Bold.ttf') format('truetype');
+  font-family: "Gilroy";
+  src: url("./fonts/static/Gilroy-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Gilroy-bold";
+  src: url("./fonts/static/Gilroy-Bold.ttf") format("truetype");
 }
 
 @media screen and (max-width: 768px) {
-	.bloc {
-		flex-direction: column;
-		align-items: center;
-		margin-top: 1rem;
-	}
-	.bloc label:first-child {
-		margin-bottom: 0.5rem;
-	}
-	body {
-		background-image: url('../../../public/svg/gradientbg.svg');
-		background-size: cover;
-		background-position: center center;
-		background-repeat: no-repeat;
-	}
+  .bloc {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  .bloc label:first-child {
+    margin-bottom: 0.5rem;
+  }
+  body {
+    background-image: url("../../../public/svg/gradientbg.svg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  .whitespace-nowrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+  }
 }
 
 @media (max-width: 768px) {
-	.logo-container {
-		display: block;
-	}
+  .bloc label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
+@media (max-width: 768px) {
+  .logo-container {
+    display: block;
+  }
+}
 
+@media (max-width: 445px) {
+  .whitespace-nowrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .mt-3 {
+    margin-top: 0.5px;
+  }
+}
