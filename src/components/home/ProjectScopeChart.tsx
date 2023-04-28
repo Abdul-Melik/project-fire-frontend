@@ -33,7 +33,7 @@ const ProjectScopeChart = ({ chartValues }: Props) => {
 		{
 			name: 'On-going',
 			value:
-				chartValues.length !== 0 && chartValues.find(value => value.projectType === 'fixed') !== undefined
+				chartValues.length !== 0 && chartValues.find(value => value.projectType === 'on-going') !== undefined
 					? chartValues.find(value => value.projectType === 'on-going')!.count
 					: 0,
 		},
