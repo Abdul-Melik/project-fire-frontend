@@ -1,7 +1,11 @@
-type Props = {};
+import MainLayout from '../shared/components/layout/MainLayout';
 
-const Employees = (props: Props) => {
-	return <div>Employees</div>;
+const Employees = () => {
+	return (
+		<MainLayout selectedButton={'Employees'}>
+			<div>Employees</div>
+		</MainLayout>
+	);
 };
 
 export default Employees;

@@ -1,107 +1,98 @@
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-import useHttpClient from '../../shared/hooks/http-hook';
 import AuthContext from '../../shared/context/auth-context';
-import logotype from '/svg/logotype.svg';
-import '../../index.css';
+import FormInput from '../../shared/components/form/FormInput';
+import { logo } from '../../assets';
 
 const LoginForm = () => {
-	const { sendRequest } = useHttpClient();
 	const auth = useContext(AuthContext);
 	const navigate = useNavigate();
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [rememberMe, setRememberMe] = useState(false);
 
-	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-	const refEmail = useRef<HTMLInputElement | null>(null);
-	const refPassword = useRef<HTMLInputElement | null>(null);
-	const refRememberMe = useRef<HTMLInputElement | null>(null);
-
-	const submitHandler = async (event: React.FormEvent) => {
+	const handleFormSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
-
 		try {
-			const responseData = await sendRequest(
+			const response = await axios.post(
 				'http://localhost:5000/api/users/login',
-				'POST',
-				JSON.stringify({
-					email: (refEmail.current as HTMLInputElement).value,
-					password: (refPassword.current as HTMLInputElement).value,
-					rememberMe: (refRememberMe.current as HTMLInputElement).checked,
-				}),
 				{
-					'Content-Type': 'application/json',
+					email,
+					password,
+					rememberMe,
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
 				}
 			);
+			const responseData = response.data;
 			auth.login(responseData.token, responseData.expiresIn, responseData.user.id);
-			navigate('/dashboard');
+			navigate('/home');
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	useEffect(() => {
-		const handleResize = () => {
-			setWindowWidth(window.innerWidth);
-		};
-		window.addEventListener('resize', handleResize);
-
-		return () => window.removeEventListener('resize', handleResize);
-	}, []);
-
 	return (
-		<div className='w-1/1 flex h-screen items-center justify-center '>
-			<div className='w-full max-w-sm'>
-				{windowWidth < 768 && <img src={logotype} alt='Logo' className='mx-auto mb-3 w-full pb-20' />}
-				<form className='w-full' onSubmit={submitHandler}>
-					<h2 className='mb-4 justify-center text-center text-xl font-semibold font-gilroy-semi-bold leading-10'>
-						Log in
-					</h2>
-					<div className='mb-4'>
-						<label className='mb-2 block text-sm font-medium font-gilroy-medium text-midnight-grey' htmlFor='email'>
-							Email
-						</label>
-						<input
-							ref={refEmail}
-							className='focus:shadow-outline mt-0.5 w-full appearance-none rounded border px-3 py-2 leading-tight text-dark-indigo shadow focus:outline-none'
-							id='email'
-							type='email'
-							placeholder='Enter your email'
-							required
-						/>
-					</div>
-					<div className='mb-6'>
-						<label className='mb-2 block text-sm font-medium font-gilroy-medium text-midnight-grey' htmlFor='password'>
-							Password
-						</label>
-						<input
-							ref={refPassword}
-							className='focus:shadow-outline mb-3 mt-0.5 w-full appearance-none rounded border px-3 py-2 leading-tight text-dark-indigo shadow focus:outline-none'
-							id='password'
-							type='password'
-							placeholder='Enter your password'
-							required
-						/>
-					</div>
-					<button
-						className='focus:shadow-outline mx-auto w-full content-center items-center justify-center rounded bg-deep-teal px-6 py-2 font-semibold font-gilroy-semi-bold text-white focus:outline-none'
-						type='submit'
-					>
-						Log In
-					</button>
-					<div className='bloc flex items-center justify-between'>
-						<label className='mt-3 block'>
-							<input ref={refRememberMe} className='mr-2 leading-tight accent-deep-teal' type='checkbox' />
-							<span className='text-sm text-midnight-grey font-medium font-gilroy-medium'>Remember password</span>
-						</label>
-						<a
-							className='mt-2 inline-block align-baseline text-sm font-medium font-gilroy-medium text-deep-teal underline'
-							href='#'
-						>
-							Forgot Password?
-						</a>
-					</div>
-					<div className='mt-6 flex items-center justify-center'></div>
-				</form>
+		<div className='text-center px-[135px] py-72 min-[1000px]:pt-[303px] min-[1000px]:pb-[334px]'>
+			<div
+				className='w-[280px] h-[32.25px] absolute top-[20%] left-[50%] translate-x-[-50%] translate-y-[-50%] min-[1000px]:hidden'
+				style={{
+					backgroundImage: `url(${logo})`,
+				}}
+			/>
+			<h2 className='text-[32px] text-midnight-grey leading-10 font-semibold font-gilroy-semi-bold mb-[42px]'>
+				Log in
+			</h2>
+			<form className='flex flex-col items-center justify-center mb-[17px] text-base' onSubmit={handleFormSubmit}>
+				<FormInput
+					label='Email'
+					htmlFor='email'
+					type='email'
+					id='email'
+					placeholder='Enter your email'
+					value={email}
+					required={true}
+					handleInput={email => setEmail(email)}
+				/>
+				<FormInput
+					label='Password'
+					htmlFor='password'
+					type='password'
+					id='password'
+					placeholder='Enter your password'
+					value={password}
+					required={true}
+					handleInput={password => setPassword(password)}
+				/>
+				<button
+					className='py-3 pl-3 mt-[13px] rounded-md w-full bg-deep-teal font-semibold font-gilroy-semi-bold text-white'
+					type='submit'
+				>
+					Log In
+				</button>
+			</form>
+			<div className='flex flex-col items-center gap-3 min-[1188px]:justify-between min-[1188px]:flex-row'>
+				<div className='flex items-center justify-start gap-[9px]'>
+					<input
+						className=' accent-deep-teal w-[18px] h-[18px]'
+						type='checkbox'
+						onChange={() => setRememberMe(!rememberMe)}
+					/>
+					<span className='text-midnight-grey font-medium font-gilroy-medium tracking-[-0.015em] whitespace-nowrap'>
+						Remember password
+					</span>
+				</div>
+				<a
+					className='font-medium font-gilroy-medium text-deep-teal underline tracking-[-0.015em] whitespace-nowrap'
+					href='#'
+				>
+					Forgot Password?
+				</a>
 			</div>
 		</div>
 	);

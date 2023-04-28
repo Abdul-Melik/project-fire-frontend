@@ -1,7 +1,11 @@
-type Props = {};
+import MainLayout from '../shared/components/layout/MainLayout';
 
-const ProjectReporting = (props: Props) => {
-	return <div>ProjectReporting</div>;
+const ProjectReporting = () => {
+	return (
+		<MainLayout selectedButton={'ProjectReporting'}>
+			<div>ProjectReporting</div>
+		</MainLayout>
+	);
 };
 
 export default ProjectReporting;

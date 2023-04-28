@@ -1,7 +1,11 @@
-type Props = {};
+import MainLayout from '../shared/components/layout/MainLayout';
 
-const FinancialOverview = (props: Props) => {
-	return <div>FinancialOverview</div>;
+const FinancialOverview = () => {
+	return (
+		<MainLayout selectedButton={'FinancialOverview'}>
+			<div>FinancialOverview</div>
+		</MainLayout>
+	);
 };
 
 export default FinancialOverview;

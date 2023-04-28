@@ -52,25 +52,15 @@
 	src: url('./fonts/static/Gilroy-Bold.ttf') format('truetype');
 }
 
-@media screen and (max-width: 768px) {
-	.bloc {
-		flex-direction: column;
-		align-items: center;
-		margin-top: 1rem;
-	}
-	.bloc label:first-child {
-		margin-bottom: 0.5rem;
-	}
-	body {
-		background-image: url('../../../public/svg/gradientbg.svg');
-		background-size: cover;
-		background-position: center center;
-		background-repeat: no-repeat;
-	}
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
-@media (max-width: 767px) {
-	.logo-container {
-		display: block;
-	}
+html {
+	height: 100%;
+}
+body {
+	min-height: 100%;
 }
