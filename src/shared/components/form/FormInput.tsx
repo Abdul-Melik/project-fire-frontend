@@ -16,7 +16,7 @@ const FormInput = ({ label, htmlFor, type, id, placeholder, value, required, han
 				{label}
 			</label>
 			<input
-				className='text-dark-indigo py-3 pl-3 pr-[10px] rounded-md outline-none border border-misty-lavender w-full'
+				className='text-dark-indigo py-3 pl-3 pr-[10px] rounded-md outline-none border border-misty-lavender w-full focus:shadow-md'
 				onChange={event => handleInput(event.target.value)}
 				type={type}
 				id={id}

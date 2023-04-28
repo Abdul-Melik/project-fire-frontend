@@ -40,94 +40,96 @@ const Layout = ({ selectedButton, children }: Props) => {
 	}
 
 	return (
-		<div className='flex'>
-			<div className='h-screen w-72 flex-col items-center border-r border-opal-mist bg-gradient-to-b from-frost-white to-seafoam-green'>
-				<img src={assets.logo} className='ml-6 w-3/5 pt-8' />
-				<div className='border-ashen-grey mx-auto mt-10 flex h-20 w-11/12 items-center rounded-md border'>
+		<div className='flex min-h-screen min-w-[1280px]'>
+			<div className='w-[284px] gap-[10px] flex-col items-center border-r border-opal-mist bg-gradient-to-b from-frost-white to-seafoam-green'>
+				<img src={assets.logo} className='w-2/3 py-[30px] pr-0 pl-7' />
+				<div className='flex gap-[13px] border-ashen-grey mx-[14px] my-[10px] px-[14px] py-[10px] items-center rounded-md border'>
 					<img
-						className='ml-3 h-14 w-14 rounded-lg object-cover'
+						className='h-[54px] w-[54px] rounded-lg object-cover'
 						src={userInfo.image ? userInfo.image : assets.avatar}
 					/>
-					<div className='flex-col'>
-						<p className='mb-0 ml-4 font-inter-medium font-medium'>{`${userInfo.firstName} ${userInfo.lastName}`}</p>
-						<p className='font-normal font-inter-regular ml-4 text-sm'>
+					<div className='flex-col flex-start'>
+						<p className='font-inter-medium font-medium text-base mb-[3px] text-steel-blue'>{`${userInfo.firstName} ${userInfo.lastName}`}</p>
+						<p className='font-normal font-inter-regular text-[14px] leading-[18px] text-charcoal-grey'>
 							{userInfo.role === 'admin' ? 'Admin' : 'Employee'}
 						</p>
 					</div>
-					<img src={assets.arrow} className='absolute ml-56 cursor-pointer pl-2' />
+					<img src={assets.arrow} className='cursor-pointer pl-3' />
 				</div>
-				<Link to='/home'>
-					<div
-						className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
-							selectedButton === 'Home'
-								? 'bg-winter-mint font-bold font-gilroy-bold'
-								: 'font-medium font-gilroy-medium hover:bg-winter-mint'
-						}`}
-					>
-						<img src={assets.home} className='ml-3 h-5 w-5' />
-						<p className='ml-3 text-sm'>Home</p>
-					</div>
-				</Link>
-				<Link to='/projects'>
-					<div
-						className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
-							selectedButton === 'Projects'
-								? 'bg-winter-mint font-bold font-gilroy-bold'
-								: 'font-medium font-gilroy-medium hover:bg-winter-mint'
-						}`}
-					>
-						<img src={assets.clipboard} className='ml-3 h-5 w-5'></img>
-						<p className='ml-3 text-sm'>Projects</p>
-					</div>
-				</Link>
-				<Link to='/employees'>
-					<div
-						className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
-							selectedButton === 'Employees'
-								? 'bg-winter-mint font-bold font-gilroy-bold'
-								: 'font-medium font-gilroy-medium hover:bg-winter-mint'
-						}`}
-					>
-						<img src={assets.employees} className='ml-3 h-5 w-5'></img>
-						<p className='ml-3 text-sm'>Employees</p>
-					</div>
-				</Link>
-				<Link to='/financial-overview'>
-					<div
-						className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
-							selectedButton === 'FinancialOverview'
-								? 'bg-winter-mint font-bold font-gilroy-bold'
-								: 'font-medium font-gilroy-medium hover:bg-winter-mint'
-						}`}
-					>
-						<img src={assets.coins} className='ml-3 h-5 w-5'></img>
-						<p className='ml-3 text-sm'>Financial Overview</p>
-					</div>
-				</Link>
-				<Link to='/project-reporting'>
-					<div
-						className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
-							selectedButton === 'ProjectReporting'
-								? 'bg-winter-mint font-bold font-gilroy-bold'
-								: 'font-medium font-gilroy-medium hover:bg-winter-mint'
-						}`}
-					>
-						<img src={assets.document} className='ml-3 h-5 w-5' />
-						<p className='ml-3 text-sm'>Project Reporting</p>
-					</div>
-				</Link>
-				<Link to='/invoicing'>
-					<div
-						className={`mx-auto mt-3 flex h-12 w-11/12 cursor-pointer items-center rounded-md ${
-							selectedButton === 'Invoicing'
-								? 'bg-winter-mint font-bold font-gilroy-bold'
-								: 'font-medium font-gilroy-medium hover:bg-winter-mint'
-						}`}
-					>
-						<img src={assets.invoice} className='ml-3 h-5 w-5' />
-						<p className='ml-3 text-sm'>Invoicing</p>
-					</div>
-				</Link>
+				<div className='flex flex-col px-[14px] py-[10px] gap-[8px] text-base'>
+					<Link to='/home'>
+						<div
+							className={`flex flex-start gap-[10px] py-[12px] pl-[14px] pr-0 cursor-pointer items-center rounded-md ${
+								selectedButton === 'Home'
+									? 'bg-winter-mint font-bold font-gilroy-bold'
+									: 'font-medium font-gilroy-medium hover:bg-winter-mint'
+							}`}
+						>
+							<img src={assets.home} className='h-5 w-5' />
+							<p className='text-sm'>Home</p>
+						</div>
+					</Link>
+					<Link to='/projects'>
+						<div
+							className={`flex flex-start gap-[10px] py-[12px] pl-[14px] pr-0 cursor-pointer items-center rounded-md ${
+								selectedButton === 'Projects'
+									? 'bg-winter-mint font-bold font-gilroy-bold'
+									: 'font-medium font-gilroy-medium hover:bg-winter-mint'
+							}`}
+						>
+							<img src={assets.clipboard} className='h-5 w-5'></img>
+							<p className='text-sm'>Projects</p>
+						</div>
+					</Link>
+					<Link to='/employees'>
+						<div
+							className={`flex flex-start gap-[10px] py-[12px] pl-[14px] pr-0 cursor-pointer items-center rounded-md ${
+								selectedButton === 'Employees'
+									? 'bg-winter-mint font-bold font-gilroy-bold'
+									: 'font-medium font-gilroy-medium hover:bg-winter-mint'
+							}`}
+						>
+							<img src={assets.employees} className='h-5 w-5'></img>
+							<p className='text-sm'>Employees</p>
+						</div>
+					</Link>
+					<Link to='/financial-overview'>
+						<div
+							className={`flex flex-start gap-[10px] py-[12px] pl-[14px] pr-0 cursor-pointer items-center rounded-md ${
+								selectedButton === 'FinancialOverview'
+									? 'bg-winter-mint font-bold font-gilroy-bold'
+									: 'font-medium font-gilroy-medium hover:bg-winter-mint'
+							}`}
+						>
+							<img src={assets.coins} className='h-5 w-5'></img>
+							<p className='text-sm'>Financial Overview</p>
+						</div>
+					</Link>
+					<Link to='/project-reporting'>
+						<div
+							className={`flex flex-start gap-[10px] py-[12px] pl-[14px] pr-0 cursor-pointer items-center rounded-md ${
+								selectedButton === 'ProjectReporting'
+									? 'bg-winter-mint font-bold font-gilroy-bold'
+									: 'font-medium font-gilroy-medium hover:bg-winter-mint'
+							}`}
+						>
+							<img src={assets.document} className='h-5 w-5' />
+							<p className='text-sm'>Project Reporting</p>
+						</div>
+					</Link>
+					<Link to='/invoicing'>
+						<div
+							className={`flex flex-start gap-[10px] py-[12px] pl-[14px] pr-0 cursor-pointer items-center rounded-md ${
+								selectedButton === 'Invoicing'
+									? 'bg-winter-mint font-bold font-gilroy-bold'
+									: 'font-medium font-gilroy-medium hover:bg-winter-mint'
+							}`}
+						>
+							<img src={assets.invoice} className='h-5 w-5' />
+							<p className='text-sm'>Invoicing</p>
+						</div>
+					</Link>
+				</div>
 			</div>
 			<div className='flex-1'>{children}</div>
 		</div>

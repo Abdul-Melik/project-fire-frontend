@@ -6,7 +6,10 @@ type Props = {
 
 const NavLink = ({ text, onClick, className }: Props) => {
 	return (
-		<div className={`cursor-pointer border border-pale-jade px-4 py-2 text-sm ${className}`} onClick={onClick}>
+		<div
+			className={`cursor-pointer border border-pale-jade px-4 py-[9px] text-sm leading-[22px] ${className}`}
+			onClick={onClick}
+		>
 			{text}
 		</div>
 	);

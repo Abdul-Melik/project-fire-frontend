@@ -51,16 +51,16 @@ const Home = () => {
 
 	return (
 		<Layout selectedButton={'Home'}>
-			<div className='page-content ml-4 mr-4 p-4'>
-				<div className='flex-1 p-8 py-4 text-3xl font-bold font-gilroy-bold'>Home</div>
-				<div className='content-categories flex flex-col'>
-					<div className='flex justify-between'>
+			<div className='page-content mx-14 my-[34px]'>
+				<div className='flex-1 text-3xl leading-[40px] text-deep-forest font-bold font-gilroy-bold'>Home</div>
+				<div className='flex flex-col mt-[30px]'>
+					<div className='flex justify-between mb-12'>
 						<Navbar selectedYear={selectedYear} handlePageSelect={page => setActivePage(page)} />
 						<YearFilter handleYearSelect={year => setSelectedYear(year)} />
 					</div>
 					{activePage === `${selectedYear}  Performance` && <Performance projectsInfo={projectsInfo} />}
-					{activePage === 'Development Revenue &amp; Costs' && <DevelopmentRevenueCosts projectsInfo={projectsInfo} />}
-					{activePage === `${selectedYear} Plan` && <Plan projectsInfo={projectsInfo} />}
+					{activePage === 'Development Revenue &amp; Costs' && <DevelopmentRevenueCosts />}
+					{activePage === `${selectedYear} Plan` && <Plan />}
 				</div>
 			</div>
 		</Layout>

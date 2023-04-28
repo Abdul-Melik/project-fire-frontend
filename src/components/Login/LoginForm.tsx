@@ -38,13 +38,7 @@ const LoginForm = () => {
 	};
 
 	return (
-		<div className='text-center px-[135px] py-72 min-[1000px]:pt-[303px] min-[1000px]:pb-[334px]'>
-			<div
-				className='w-[280px] h-[32.25px] absolute top-[20%] left-[50%] translate-x-[-50%] translate-y-[-50%] min-[1000px]:hidden'
-				style={{
-					backgroundImage: `url(${logo})`,
-				}}
-			/>
+		<div className='text-center px-[135px] pt-[303px] pb-[334px]'>
 			<h2 className='text-[32px] text-midnight-grey leading-10 font-semibold font-gilroy-semi-bold mb-[42px]'>
 				Log in
 			</h2>
@@ -70,27 +64,24 @@ const LoginForm = () => {
 					handleInput={password => setPassword(password)}
 				/>
 				<button
-					className='py-3 pl-3 mt-[13px] rounded-md w-full bg-deep-teal font-semibold font-gilroy-semi-bold text-white'
+					className='py-3 pl-3 mt-[13px] rounded-md w-full bg-deep-teal font-semibold font-gilroy-semi-bold text-white hover:saturate-200'
 					type='submit'
 				>
 					Log In
 				</button>
 			</form>
-			<div className='flex flex-col items-center gap-3 min-[1188px]:justify-between min-[1188px]:flex-row'>
+			<div className='flex items-center gap-3 justify-between'>
 				<div className='flex items-center justify-start gap-[9px]'>
 					<input
 						className=' accent-deep-teal w-[18px] h-[18px]'
 						type='checkbox'
 						onChange={() => setRememberMe(!rememberMe)}
 					/>
-					<span className='text-midnight-grey font-medium font-gilroy-medium tracking-[-0.015em] whitespace-nowrap'>
+					<span className='text-midnight-grey font-medium font-gilroy-medium tracking-[-0.015em]'>
 						Remember password
 					</span>
 				</div>
-				<a
-					className='font-medium font-gilroy-medium text-deep-teal underline tracking-[-0.015em] whitespace-nowrap'
-					href='#'
-				>
+				<a className='font-medium font-gilroy-medium text-deep-teal underline tracking-[-0.015em]' href='#'>
 					Forgot Password?
 				</a>
 			</div>

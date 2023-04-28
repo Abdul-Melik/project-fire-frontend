@@ -13,8 +13,8 @@ const Navbar = ({ selectedYear, handlePageSelect }: Props) => {
 	const inactiveLink = 'text-blue-grey font-inter-regular font-normal';
 
 	return (
-		<div className='flex items-center justify-between py-4'>
-			<div className='flex'>
+		<div className='flex items-center justify-between'>
+			<div className='flex flex-start'>
 				<NavLink
 					text={`${selectedYear}  Performance`}
 					onClick={() => {
