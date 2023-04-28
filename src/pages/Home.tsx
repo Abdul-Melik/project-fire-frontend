@@ -15,8 +15,8 @@ interface ProjectInfo {
 	totalValue: number;
 	averageValue: number;
 	averageHourlyRate: number;
-	salesChannelPercentage: number[];
-	projectTypeCount: number[];
+	salesChannelPercentage: { salesChannel: string; percentage: number }[];
+	projectTypeCount: { count: number; projectType: string }[];
 }
 
 const Home = () => {

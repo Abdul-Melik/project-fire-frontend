@@ -1,12 +1,15 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import AuthContext from '../../shared/context/auth-context';
 import FormInput from '../../shared/components/form/FormInput';
-import { logo } from '../../assets';
 
-const LoginForm = () => {
+type Props = {
+	handleError: (error: string | null) => void;
+};
+
+const LoginForm = ({ handleError }: Props) => {
 	const auth = useContext(AuthContext);
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
@@ -32,8 +35,12 @@ const LoginForm = () => {
 			const responseData = response.data;
 			auth.login(responseData.token, responseData.expiresIn, responseData.user.id);
 			navigate('/home');
-		} catch (error) {
-			console.log(error);
+		} catch (error: any) {
+			if (axios.isAxiosError(error)) {
+				handleError(error.response?.data.error);
+			} else {
+				console.error('Unexpected error: ', error);
+			}
 		}
 	};
 
