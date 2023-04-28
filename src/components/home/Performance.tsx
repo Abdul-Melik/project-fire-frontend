@@ -2,6 +2,7 @@ import SalesChannelsChart from './SalesChannelsChart';
 import InfoCard from '../../shared/components/card/InfoCard';
 import * as assets from '../../assets';
 import ProjectScopeChart from './ProjectScopeChart';
+import HoursChart from './HoursChart';
 
 type Props = {
 	projectsInfo: {
@@ -92,6 +93,9 @@ const Performance = ({ projectsInfo }: Props) => {
 			<div className='flex gap-[30px] mt-[42px]'>
 				<SalesChannelsChart chartValues={projectsInfo?.salesChannelPercentage ?? []} />
 				<ProjectScopeChart chartValues={projectsInfo?.projectTypeCount ?? []} />
+			</div>
+			<div className='mt-[42px]'>
+				<HoursChart />
 			</div>
 		</>
 	);
