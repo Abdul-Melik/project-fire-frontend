@@ -40,7 +40,7 @@ const HoursChart = () => {
 							type='checkbox'
 							checked={showBlue}
 						/>
-						<p className='ml-2 text-sm font-medium font-gilroy-meidum text-gray-900'>Grand Total Hours Billed</p>
+						<p className='ml-2 text-sm font-medium font-gilroy-medium text-gray-900'>Grand Total Hours Billed</p>
 					</div>
 				</div>
 			</div>
