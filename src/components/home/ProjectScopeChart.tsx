@@ -13,7 +13,7 @@ type Props = {
 const CustomLabel = (props: any) => {
 	const { x, y, value } = props;
 	return (
-		<text x={x} y={y - 10} fill='#232F2D' textAnchor='start' className='font-semibold font-gilroy-semi-bold text-sm'>
+		<text x={x} y={y - 10} fill='#232F2D' textAnchor='start' className='font-gilroy-semi-bold text-sm font-semibold'>
 			{value}
 		</text>
 	);

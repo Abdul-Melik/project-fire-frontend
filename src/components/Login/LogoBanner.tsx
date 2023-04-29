@@ -3,13 +3,13 @@ import { logo, gradientBackground } from '../../assets';
 const LogoBanner = () => {
 	return (
 		<div
-			className='h-full bg-no-repeat bg-cover flex justify-center items-center'
+			className='flex h-full items-center justify-center bg-cover bg-no-repeat'
 			style={{
 				backgroundImage: `url(${gradientBackground})`,
 			}}
 		>
 			<div
-				className='w-[280px] h-[32.25px]'
+				className='h-[32.25px] w-[280px]'
 				style={{
 					backgroundImage: `url(${logo})`,
 				}}

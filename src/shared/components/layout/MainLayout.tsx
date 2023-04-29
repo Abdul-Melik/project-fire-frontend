@@ -33,7 +33,7 @@ const Layout = ({ selectedButton, children }: Props) => {
 
 	if (loading) {
 		return (
-			<div className='flex justify-center items-center h-screen'>
+			<div className='flex h-screen items-center justify-center'>
 				<ClipLoader color='#43A57C' cssOverride={{ borderWidth: '5px' }} size={100} />
 			</div>
 		);
@@ -41,28 +41,28 @@ const Layout = ({ selectedButton, children }: Props) => {
 
 	return (
 		<div className='flex min-h-screen min-w-[1280px]'>
-			<div className='w-[284px] gap-[10px] flex-col items-center border-r border-opal-mist bg-gradient-to-b from-frost-white to-seafoam-green'>
-				<img src={assets.logo} className='w-2/3 py-[30px] pr-0 pl-7' />
-				<div className='flex gap-[13px] border-ashen-grey mx-[14px] my-[10px] px-[14px] py-[10px] items-center rounded-md border'>
+			<div className='w-[284px] flex-col items-center gap-[10px] border-r border-opal-mist bg-gradient-to-b from-frost-white to-seafoam-green'>
+				<img src={assets.logo} className='w-2/3 py-[30px] pl-7 pr-0' />
+				<div className='mx-[14px] my-[10px] flex items-center gap-[13px] rounded-md border border-ashen-grey px-[14px] py-[10px]'>
 					<img
 						className='h-[54px] w-[54px] rounded-lg object-cover'
 						src={userInfo.image ? userInfo.image : assets.avatar}
 					/>
-					<div className='flex-col flex-start'>
-						<p className='font-inter-medium font-medium text-base mb-[3px] text-steel-blue'>{`${userInfo.firstName} ${userInfo.lastName}`}</p>
-						<p className='font-normal font-inter-regular text-[14px] leading-[18px] text-charcoal-grey'>
+					<div className='flex-start flex-col'>
+						<p className='mb-[3px] font-inter-medium text-base font-medium text-steel-blue'>{`${userInfo.firstName} ${userInfo.lastName}`}</p>
+						<p className='font-inter-regular text-[14px] font-normal leading-[18px] text-charcoal-grey'>
 							{userInfo.role === 'admin' ? 'Admin' : 'Employee'}
 						</p>
 					</div>
 					<img src={assets.arrow} className='cursor-pointer pl-3' />
 				</div>
-				<div className='flex flex-col px-[14px] py-[10px] gap-[8px] text-base'>
+				<div className='flex flex-col gap-[8px] px-[14px] py-[10px] text-base'>
 					<Link to='/home'>
 						<div
-							className={`flex flex-start gap-[10px] py-[12px] pl-[14px] pr-0 cursor-pointer items-center rounded-md ${
+							className={`flex-start flex cursor-pointer items-center gap-[10px] rounded-md py-[12px] pl-[14px] pr-0 ${
 								selectedButton === 'Home'
-									? 'bg-winter-mint font-bold font-gilroy-bold'
-									: 'font-medium font-gilroy-medium hover:bg-winter-mint'
+									? 'bg-winter-mint font-gilroy-bold font-bold'
+									: 'font-gilroy-medium font-medium hover:bg-winter-mint'
 							}`}
 						>
 							<img src={assets.home} className='h-5 w-5' />
@@ -71,10 +71,10 @@ const Layout = ({ selectedButton, children }: Props) => {
 					</Link>
 					<Link to='/projects'>
 						<div
-							className={`flex flex-start gap-[10px] py-[12px] pl-[14px] pr-0 cursor-pointer items-center rounded-md ${
+							className={`flex-start flex cursor-pointer items-center gap-[10px] rounded-md py-[12px] pl-[14px] pr-0 ${
 								selectedButton === 'Projects'
-									? 'bg-winter-mint font-bold font-gilroy-bold'
-									: 'font-medium font-gilroy-medium hover:bg-winter-mint'
+									? 'bg-winter-mint font-gilroy-bold font-bold'
+									: 'font-gilroy-medium font-medium hover:bg-winter-mint'
 							}`}
 						>
 							<img src={assets.clipboard} className='h-5 w-5'></img>
@@ -83,10 +83,10 @@ const Layout = ({ selectedButton, children }: Props) => {
 					</Link>
 					<Link to='/employees'>
 						<div
-							className={`flex flex-start gap-[10px] py-[12px] pl-[14px] pr-0 cursor-pointer items-center rounded-md ${
+							className={`flex-start flex cursor-pointer items-center gap-[10px] rounded-md py-[12px] pl-[14px] pr-0 ${
 								selectedButton === 'Employees'
-									? 'bg-winter-mint font-bold font-gilroy-bold'
-									: 'font-medium font-gilroy-medium hover:bg-winter-mint'
+									? 'bg-winter-mint font-gilroy-bold font-bold'
+									: 'font-gilroy-medium font-medium hover:bg-winter-mint'
 							}`}
 						>
 							<img src={assets.employees} className='h-5 w-5'></img>
@@ -95,10 +95,10 @@ const Layout = ({ selectedButton, children }: Props) => {
 					</Link>
 					<Link to='/financial-overview'>
 						<div
-							className={`flex flex-start gap-[10px] py-[12px] pl-[14px] pr-0 cursor-pointer items-center rounded-md ${
+							className={`flex-start flex cursor-pointer items-center gap-[10px] rounded-md py-[12px] pl-[14px] pr-0 ${
 								selectedButton === 'FinancialOverview'
-									? 'bg-winter-mint font-bold font-gilroy-bold'
-									: 'font-medium font-gilroy-medium hover:bg-winter-mint'
+									? 'bg-winter-mint font-gilroy-bold font-bold'
+									: 'font-gilroy-medium font-medium hover:bg-winter-mint'
 							}`}
 						>
 							<img src={assets.coins} className='h-5 w-5'></img>
@@ -107,10 +107,10 @@ const Layout = ({ selectedButton, children }: Props) => {
 					</Link>
 					<Link to='/project-reporting'>
 						<div
-							className={`flex flex-start gap-[10px] py-[12px] pl-[14px] pr-0 cursor-pointer items-center rounded-md ${
+							className={`flex-start flex cursor-pointer items-center gap-[10px] rounded-md py-[12px] pl-[14px] pr-0 ${
 								selectedButton === 'ProjectReporting'
-									? 'bg-winter-mint font-bold font-gilroy-bold'
-									: 'font-medium font-gilroy-medium hover:bg-winter-mint'
+									? 'bg-winter-mint font-gilroy-bold font-bold'
+									: 'font-gilroy-medium font-medium hover:bg-winter-mint'
 							}`}
 						>
 							<img src={assets.document} className='h-5 w-5' />
@@ -119,10 +119,10 @@ const Layout = ({ selectedButton, children }: Props) => {
 					</Link>
 					<Link to='/invoicing'>
 						<div
-							className={`flex flex-start gap-[10px] py-[12px] pl-[14px] pr-0 cursor-pointer items-center rounded-md ${
+							className={`flex-start flex cursor-pointer items-center gap-[10px] rounded-md py-[12px] pl-[14px] pr-0 ${
 								selectedButton === 'Invoicing'
-									? 'bg-winter-mint font-bold font-gilroy-bold'
-									: 'font-medium font-gilroy-medium hover:bg-winter-mint'
+									? 'bg-winter-mint font-gilroy-bold font-bold'
+									: 'font-gilroy-medium font-medium hover:bg-winter-mint'
 							}`}
 						>
 							<img src={assets.invoice} className='h-5 w-5' />

@@ -14,7 +14,7 @@ const Navbar = ({ selectedYear, handlePageSelect }: Props) => {
 
 	return (
 		<div className='flex items-center justify-between'>
-			<div className='flex flex-start'>
+			<div className='flex-start flex'>
 				<NavLink
 					text={`${selectedYear}  Performance`}
 					onClick={() => {

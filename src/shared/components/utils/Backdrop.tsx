@@ -6,7 +6,7 @@ type Props = {
 
 const Backdrop = ({ onClick }: Props) => {
 	return ReactDOM.createPortal(
-		<div className='fixed top-0 left-0 w-full h-screen bg-black bg-opacity-40 z-10' onClick={() => onClick()}></div>,
+		<div className='fixed left-0 top-0 z-10 h-screen w-full bg-black bg-opacity-40' onClick={() => onClick()}></div>,
 		document.getElementById('backdrop-hook') as HTMLElement
 	);
 };

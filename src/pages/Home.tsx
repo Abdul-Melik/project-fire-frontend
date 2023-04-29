@@ -43,7 +43,7 @@ const Home = () => {
 
 	if (loading) {
 		return (
-			<div className='flex justify-center items-center h-screen'>
+			<div className='flex h-screen items-center justify-center'>
 				<ClipLoader color='#43A57C' cssOverride={{ borderWidth: '5px' }} size={100} />
 			</div>
 		);
@@ -52,9 +52,9 @@ const Home = () => {
 	return (
 		<Layout selectedButton={'Home'}>
 			<div className='page-content mx-14 my-[34px]'>
-				<div className='flex-1 text-3xl leading-[40px] text-deep-forest font-bold font-gilroy-bold'>Home</div>
-				<div className='flex flex-col mt-[30px]'>
-					<div className='flex justify-between mb-12'>
+				<div className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</div>
+				<div className='mt-[30px] flex flex-col'>
+					<div className='mb-12 flex justify-between'>
 						<Navbar selectedYear={selectedYear} handlePageSelect={page => setActivePage(page)} />
 						<YearFilter handleYearSelect={year => setSelectedYear(year)} />
 					</div>

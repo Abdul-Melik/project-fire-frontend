@@ -15,38 +15,38 @@ const HoursChart = () => {
 	const [showBlue, setShowBlue] = useState(true);
 
 	return (
-		<div className='bg-white border-solid border rounded-md box-border w-[1050px] h-[550px]'>
-			<div className='flex-row inline-flex justify-between items-center gap-2.5 w-[1010px] h-[68px] top-0 mt-1 ml-5'>
+		<div className='box-border h-[550px] w-[1050px] rounded-md border border-solid bg-white'>
+			<div className='top-0 ml-5 mt-1 inline-flex h-[68px] w-[1010px] flex-row items-center justify-between gap-2.5'>
 				<div className=' flex items-center'>
-					<h2 className='font-semibold not-italic text-lg font-gilroy-semi-bold text-deep-forest '>Hours Overview</h2>
-					<a href='#' className='ml-3 not-italic font-inter-bold text-base font-bold underline text-sage-green '>
+					<h2 className='font-gilroy-semi-bold text-lg font-semibold not-italic text-deep-forest '>Hours Overview</h2>
+					<a href='#' className='ml-3 font-inter-bold text-base font-bold not-italic text-sage-green underline '>
 						See Details
 					</a>
 				</div>
-				<div className='flex h-[68px] flex-row justify-end items-center gap-4 mr-1'>
-					<div className='flex flex-row items-center p-0 gap-y-2 top-0'>
+				<div className='mr-1 flex h-[68px] flex-row items-center justify-end gap-4'>
+					<div className='top-0 flex flex-row items-center gap-y-2 p-0'>
 						<input
 							onChange={() => setShowOrange(!showOrange)}
-							className='border-2 border-solid border-[#FF9F5A] rounded-full w-[15px] h-[15px] appearance-none checked:bg-[#FF9F5A] checked:border-transparent focus:outline-none'
+							className='h-[15px] w-[15px] appearance-none rounded-full border-2 border-solid border-[#FF9F5A] checked:border-transparent checked:bg-[#FF9F5A] focus:outline-none'
 							type='checkbox'
 							checked={showOrange}
 						/>
-						<p className=' ml-2 text-sm font-medium font-gilroy-medium text-gray-900'>Grand Total Hours Available</p>
+						<p className=' ml-2 font-gilroy-medium text-sm font-medium text-gray-900'>Grand Total Hours Available</p>
 					</div>
-					<div className='flex flex-row items-center p-0 gap-y-2'>
+					<div className='flex flex-row items-center gap-y-2 p-0'>
 						<input
 							onChange={() => setShowBlue(!showBlue)}
-							className='border-2 border-solid border-sage-green rounded-full w-[15px] h-[15px] appearance-none checked:bg-sage-green checked:border-transparent focus:outline-none'
+							className='h-[15px] w-[15px] appearance-none rounded-full border-2 border-solid border-sage-green checked:border-transparent checked:bg-sage-green focus:outline-none'
 							type='checkbox'
 							checked={showBlue}
 						/>
-						<p className='ml-2 text-sm font-medium font-gilroy-medium text-gray-900'>Grand Total Hours Billed</p>
+						<p className='ml-2 font-gilroy-medium text-sm font-medium text-gray-900'>Grand Total Hours Billed</p>
 					</div>
 				</div>
 			</div>
 			<hr className='mb-5 ml-5 mr-5'></hr>
 			<div className='ml-4'>
-				<BarChart width={1020} height={420} data={data} className='absolute top-0 left-0'>
+				<BarChart width={1020} height={420} data={data} className='absolute left-0 top-0'>
 					<CartesianGrid strokeDasharray='3 3' vertical={false} />
 					<XAxis dataKey='month' tickLine={false} dy={12} />
 					<YAxis domain={[0, 6000]} axisLine={false} tickLine={false} />

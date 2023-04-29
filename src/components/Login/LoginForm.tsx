@@ -45,11 +45,11 @@ const LoginForm = ({ handleError }: Props) => {
 	};
 
 	return (
-		<div className='text-center px-[135px] pt-[303px] pb-[334px]'>
-			<h2 className='text-[32px] text-midnight-grey leading-10 font-semibold font-gilroy-semi-bold mb-[42px]'>
+		<div className='px-[135px] pb-[334px] pt-[303px] text-center'>
+			<h2 className='mb-[42px] font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey'>
 				Log in
 			</h2>
-			<form className='flex flex-col items-center justify-center mb-[17px] text-base' onSubmit={handleFormSubmit}>
+			<form className='mb-[17px] flex flex-col items-center justify-center text-base' onSubmit={handleFormSubmit}>
 				<FormInput
 					label='Email'
 					htmlFor='email'
@@ -71,24 +71,24 @@ const LoginForm = ({ handleError }: Props) => {
 					handleInput={password => setPassword(password)}
 				/>
 				<button
-					className='py-3 pl-3 mt-[13px] rounded-md w-full bg-deep-teal font-semibold font-gilroy-semi-bold text-white hover:saturate-200'
+					className='mt-[13px] w-full rounded-md bg-deep-teal py-3 pl-3 font-gilroy-semi-bold font-semibold text-white hover:saturate-200'
 					type='submit'
 				>
 					Log In
 				</button>
 			</form>
-			<div className='flex items-center gap-3 justify-between'>
+			<div className='flex items-center justify-between gap-3'>
 				<div className='flex items-center justify-start gap-[9px]'>
 					<input
-						className=' accent-deep-teal w-[18px] h-[18px]'
+						className=' h-[18px] w-[18px] accent-deep-teal'
 						type='checkbox'
 						onChange={() => setRememberMe(!rememberMe)}
 					/>
-					<span className='text-midnight-grey font-medium font-gilroy-medium tracking-[-0.015em]'>
+					<span className='font-gilroy-medium font-medium tracking-[-0.015em] text-midnight-grey'>
 						Remember password
 					</span>
 				</div>
-				<a className='font-medium font-gilroy-medium text-deep-teal underline tracking-[-0.015em]' href='#'>
+				<a className='font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal underline' href='#'>
 					Forgot Password?
 				</a>
 			</div>

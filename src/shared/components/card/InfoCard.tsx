@@ -8,12 +8,12 @@ type Props = {
 
 const InfoCard = ({ description, amount, iconSrc, iconAlt, className }: Props) => {
 	return (
-		<div className={`flex justify-between py-[10px] px-4 gap-[19px] ${className}}`}>
-			<div className='flex flex-col gap-[2px] items-start'>
-				<p className='font-gilroy-regular font-normal text-[14px] leading-[22px] text-hunter-green'>{description}</p>
-				<span className='font-gilroy-bold font-bold text-[18px] leading-[26px] text-deep-forest'>{amount}</span>
+		<div className={`flex justify-between gap-[19px] px-4 py-[10px] ${className}}`}>
+			<div className='flex flex-col items-start gap-[2px]'>
+				<p className='font-gilroy-regular text-[14px] font-normal leading-[22px] text-hunter-green'>{description}</p>
+				<span className='font-gilroy-bold text-[18px] font-bold leading-[26px] text-deep-forest'>{amount}</span>
 			</div>
-			<div className='flex justify-center items-center w-[42px] h-[42px] bg-winter-mint rounded-full'>
+			<div className='flex h-[42px] w-[42px] items-center justify-center rounded-full bg-winter-mint'>
 				<img src={iconSrc} alt={iconAlt} />
 			</div>
 		</div>
