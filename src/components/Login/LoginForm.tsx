@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 import AuthContext from '../../shared/context/auth-context';
 import FormInput from '../../shared/components/form/FormInput';

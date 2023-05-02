@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
+import { motion } from 'framer-motion';
 
 import Backdrop from './Backdrop';
-import { motion } from 'framer-motion';
 
 type Props = {
 	header: string;

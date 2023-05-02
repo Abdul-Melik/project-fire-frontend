@@ -1,6 +1,6 @@
+import * as assets from '../../assets';
 import InfoCard from '../../shared/components/card/InfoCard';
 import SummaryCard from '../../shared/components/card/SummaryCard';
-import * as assets from '../../assets';
 
 const DevelopmentRevenueCosts = () => {
 	return (

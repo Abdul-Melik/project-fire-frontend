@@ -1,6 +1,6 @@
-import SalesChannelsChart from './SalesChannelsChart';
-import InfoCard from '../../shared/components/card/InfoCard';
 import * as assets from '../../assets';
+import InfoCard from '../../shared/components/card/InfoCard';
+import SalesChannelsChart from './SalesChannelsChart';
 import ProjectScopeChart from './ProjectScopeChart';
 import HoursChart from './HoursChart';
 

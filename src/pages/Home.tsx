@@ -1,8 +1,8 @@
-import { useState, useEffect, useContext } from 'react';
-import ClipLoader from 'react-spinners/ClipLoader';
+import { useState, useEffect, useCallback, useContext } from 'react';
 import axios from 'axios';
 
 import AuthContext from '../shared/context/auth-context';
+import Modal from '../shared/components/utils/Modal';
 import Layout from '../shared/components/layout/MainLayout';
 import Navbar from '../shared/components/navbar/Navbar';
 import YearFilter from '../shared/components/utils/YearFilter';
@@ -21,49 +21,50 @@ interface ProjectInfo {
 
 const Home = () => {
 	const auth = useContext(AuthContext);
-	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<string | null>(null);
 	const [projectsInfo, setProjectsInfo] = useState<ProjectInfo | null>(null);
 	const [selectedYear, setSelectedYear] = useState('2023');
 	const [activePage, setActivePage] = useState(1);
 
-	useEffect(() => {
-		const getProjectsInfo = async () => {
-			try {
-				const response = await axios.get(`http://localhost:5000/api/projects/info?year=${selectedYear}`, {
-					headers: { Authorization: 'Bearer ' + auth.token },
-				});
-				setProjectsInfo(response.data);
-				setLoading(false);
-			} catch (err) {
-				console.log(err);
+	const getProjectsInfo = useCallback(async () => {
+		try {
+			const response = await axios.get(`http://localhost:5000/api/projects/info?year=${selectedYear}`, {
+				headers: { Authorization: 'Bearer ' + auth.token },
+			});
+			setProjectsInfo(response.data);
+		} catch (error: any) {
+			if (axios.isAxiosError(error)) {
+				setError(error.response?.data.error);
+			} else {
+				console.error('Unexpected error: ', error);
 			}
-		};
-		getProjectsInfo();
+		}
 	}, [auth.token, selectedYear]);
 
-	if (loading) {
-		return (
-			<div className='flex h-screen items-center justify-center'>
-				<ClipLoader color='#43A57C' cssOverride={{ borderWidth: '5px' }} size={100} />
-			</div>
-		);
-	}
+	useEffect(() => {
+		if (auth.token && selectedYear) getProjectsInfo();
+	}, [auth.token, selectedYear]);
 
 	return (
-		<Layout selectedButton={'Home'}>
-			<div className='page-content mx-14 my-[34px]'>
-				<div className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</div>
-				<div className='mt-[30px] flex flex-col'>
-					<div className='mb-12 flex justify-between'>
-						<Navbar selectedYear={selectedYear} handlePageSelect={page => setActivePage(page)} />
-						<YearFilter handleYearSelect={year => setSelectedYear(year)} />
+		<>
+			<Modal onCancel={() => setError(null)} header='An error occurred!' show={!!error} isError={!!error}>
+				<p>{error}</p>
+			</Modal>
+			<Layout selectedButton={'Home'}>
+				<div className='page-content mx-14 my-[34px]'>
+					<div className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</div>
+					<div className='mt-[30px] flex flex-col'>
+						<div className='mb-12 flex justify-between'>
+							<Navbar selectedYear={selectedYear} handlePageSelect={page => setActivePage(page)} />
+							<YearFilter handleYearSelect={year => setSelectedYear(year)} />
+						</div>
+						{activePage === 1 && <Performance projectsInfo={projectsInfo} />}
+						{activePage === 2 && <DevelopmentRevenueCosts />}
+						{activePage === 3 && <Plan />}
 					</div>
-					{activePage === 1 && <Performance projectsInfo={projectsInfo} />}
-					{activePage === 2 && <DevelopmentRevenueCosts />}
-					{activePage === 3 && <Plan />}
 				</div>
-			</div>
-		</Layout>
+			</Layout>
+		</>
 	);
 };
 

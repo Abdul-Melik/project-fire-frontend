@@ -1,4 +1,5 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, LabelList } from 'recharts';
+
 import DataCard from '../../shared/components/card/DataCard';
 
 interface ChartData {
