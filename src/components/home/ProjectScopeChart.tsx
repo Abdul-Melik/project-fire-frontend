@@ -1,4 +1,4 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, LabelList } from 'recharts';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, LabelList } from 'recharts';
 
 import DataCard from '../../shared/components/card/DataCard';
 
@@ -14,7 +14,15 @@ type Props = {
 const CustomLabel = (props: any) => {
 	const { x, y, value } = props;
 	return (
-		<text x={x} y={y - 10} fill='#232F2D' textAnchor='start' className='font-gilroy-semi-bold text-sm font-semibold'>
+		<text
+			x={x}
+			y={y - 10}
+			fill='#232F2D'
+			textAnchor='start'
+			fontFamily='Gilroy-SemiBold'
+			fontWeight={600}
+			fontSize={14}
+		>
 			{value}
 		</text>
 	);
@@ -41,35 +49,45 @@ const ProjectScopeChart = ({ chartValues }: Props) => {
 	];
 
 	const maxValue = Math.max(...chartData.map(item => item.value));
+	const shouldRenderChart = maxValue !== 0;
 
 	return (
-		<DataCard text='Project Scope' className='ml-[15px] mt-[35px] font-gilroy-regular font-normal leading-4'>
-			<BarChart width={425} height={220} data={chartData} layout='vertical' barSize={40}>
-				<CartesianGrid
-					strokeDasharray='6 8'
-					strokeLinecap='round'
-					horizontal={false}
-					stroke='#DFE3E1'
-					strokeWidth={1.5}
-				/>
-				<XAxis
-					tickLine={false}
-					ticks={[0, maxValue / 4, maxValue / 2, (3 * maxValue) / 4, maxValue]}
-					type='number'
-					stroke='#232F2D'
-					axisLine={false}
-					domain={[0, maxValue]}
-				/>
-				<YAxis type='category' hide={true} dataKey='name' axisLine={false} />
-				<Tooltip />
-				<Bar dataKey='value' barSize={32} radius={[6, 6, 6, 6]} label='none'>
-					{chartData.map((entry, index) => {
-						const color = entry.name == 'Fixed' ? barColors[1] : barColors[0];
-						return <Cell key={index} fill={color} />;
-					})}
-					<LabelList dataKey='name' content={CustomLabel} />
-				</Bar>
-			</BarChart>
+		<DataCard className='h-[342px] w-[510px]' text='Project scope'>
+			{shouldRenderChart ? (
+				<ResponsiveContainer width='100%' height='100%'>
+					<BarChart data={chartData} layout='vertical' barSize={40}>
+						<CartesianGrid
+							strokeDasharray='6 8'
+							strokeLinecap='round'
+							strokeWidth={1.5}
+							stroke='#DFE3E1'
+							horizontal={false}
+						/>
+						<XAxis
+							type='number'
+							axisLine={false}
+							tickLine={false}
+							domain={[0, maxValue]}
+							ticks={[0, maxValue / 4, maxValue / 2, (3 * maxValue) / 4, maxValue]}
+							stroke='#232F2D'
+							fontFamily='Gilroy-Regular'
+							fontWeight={400}
+							fontSize={14}
+						/>
+						<YAxis type='category' dataKey='name' axisLine={false} hide={true} />
+						<Tooltip />
+						<Bar dataKey='value' label='none' barSize={32} radius={[6, 6, 6, 6]}>
+							{chartData.map((entry, index) => {
+								const color = entry.name === 'Fixed' ? barColors[1] : barColors[0];
+								return <Cell key={index} fill={color} />;
+							})}
+							<LabelList dataKey='name' content={CustomLabel} />
+						</Bar>
+					</BarChart>
+				</ResponsiveContainer>
+			) : (
+				<div className='font-gilroy-medium font-medium text-deep-forest'>No data to display.</div>
+			)}
 		</DataCard>
 	);
 };

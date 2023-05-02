@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useContext } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
 import axios from 'axios';
 
 import AuthContext from '../shared/context/auth-context';
@@ -54,7 +54,7 @@ const Home = () => {
 				<div className='page-content mx-14 my-[34px]'>
 					<div className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</div>
 					<div className='mt-[30px] flex flex-col'>
-						<div className='mb-12 flex justify-between'>
+						<div className='mb-12 flex flex-wrap justify-between gap-4'>
 							<Navbar selectedYear={selectedYear} handlePageSelect={page => setActivePage(page)} />
 							<YearFilter handleYearSelect={year => setSelectedYear(year)} />
 						</div>

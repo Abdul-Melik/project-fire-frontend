@@ -12,23 +12,20 @@ import Invoicing from './pages/Invoicing';
 
 const App = () => {
 	const { token, userId, login, logout } = useAuth();
+
 	const routes = (
 		<>
 			<Route path='/login' element={<Login />} />
-			if(token)
-			{
-				<>
-					<Route path='/home' element={<Home />} />
-					<Route path='/projects' element={<Projects />} />
-					<Route path='/employees' element={<Employees />} />
-					<Route path='/financial-overview' element={<FinancialOverview />} />
-					<Route path='/project-reporting' element={<ProjectReporting />} />
-					<Route path='/invoicing' element={<Invoicing />} />
-				</>
-			}
-			else {<Route path='/*' element={<Navigate to='/login' />} />}
+			<Route path='/home' element={<Home />} />
+			<Route path='/projects' element={<Projects />} />
+			<Route path='/employees' element={<Employees />} />
+			<Route path='/financial-overview' element={<FinancialOverview />} />
+			<Route path='/project-reporting' element={<ProjectReporting />} />
+			<Route path='/invoicing' element={<Invoicing />} />
+			<Route path='/*' element={<Navigate to='/login' />} />
 		</>
 	);
+
 	return (
 		<AuthContext.Provider
 			value={{

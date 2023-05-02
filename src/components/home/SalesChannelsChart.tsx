@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
 import DataCard from '../../shared/components/card/DataCard';
 
@@ -33,11 +33,25 @@ const renderCustomizedLabel = ({
 	index,
 }: CustomizedLabelProps) => {
 	const radius = innerRadius + (outerRadius - innerRadius) * 0.6;
-	const x = cx + radius * Math.cos(-midAngle * RADIAN);
-	const y = cy + radius * Math.sin(-midAngle * RADIAN);
+	let x = cx + radius * Math.cos(-midAngle * RADIAN);
+	let y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+	if (percent === 1) {
+		x = cx;
+		y = cy;
+	}
 
 	return (
-		<text x={x} y={y} fill={index < 3 ? 'white' : 'black'} textAnchor='middle' dominantBaseline='central'>
+		<text
+			x={x}
+			y={y}
+			textAnchor='middle'
+			dominantBaseline='central'
+			fill={index < 3 ? 'white' : '#1D2129'}
+			fontFamily='Helvetica Neue'
+			fontWeight={500}
+			fontSize={14}
+		>
 			{percent !== 0 ? `${(percent * 100).toFixed(0)}%` : ''}
 		</text>
 	);
@@ -75,38 +89,46 @@ const SalesChannelsChart = ({ chartValues }: Props) => {
 		},
 	];
 
+	const sum = chartData.reduce((total, entry) => total + entry.value, 0);
+	const shouldRenderChart = sum !== 0;
+
 	return (
-		<DataCard text='Sales Channels' className="font-['Helvetica Neue'] ml-[-100px] font-medium">
-			<PieChart width={500} height={300}>
-				<Pie
-					dataKey='value'
-					isAnimationActive={true}
-					data={chartData}
-					cx={220}
-					cy={150}
-					outerRadius={100}
-					fill='#8884d8'
-					labelLine={false}
-					label={renderCustomizedLabel}
-					stroke='none'
-					width={300}
-					height={300}
-				>
-					{chartData.map((entry, index) => (
-						<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-					))}
-				</Pie>
-				<Tooltip />
-				<Legend
-					layout='vertical'
-					align='right'
-					verticalAlign='middle'
-					iconType='circle'
-					formatter={(value, entry, index) => (
-						<span className='font-gilroy-semi-bold font-semibold leading-10 text-deep-forest'>{value}</span>
-					)}
-				/>
-			</PieChart>
+		<DataCard className='h-[342px] w-[510px]' text='Sales channels'>
+			{shouldRenderChart ? (
+				<ResponsiveContainer width='100%' height='100%'>
+					<PieChart>
+						<Pie
+							dataKey='value'
+							data={chartData}
+							labelLine={false}
+							label={renderCustomizedLabel}
+							isAnimationActive={true}
+							outerRadius={100}
+							cx={100}
+							cy={100}
+							fill='#8884d8'
+							stroke='none'
+						>
+							{chartData.map((entry, index) => (
+								<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+							))}
+						</Pie>
+						<Tooltip />
+						<Legend
+							layout='vertical'
+							iconType='circle'
+							formatter={(value, entry, index) => (
+								<span className='ml-[7px] font-gilroy-semi-bold font-semibold leading-10 text-deep-forest'>
+									{value}
+								</span>
+							)}
+							wrapperStyle={{ top: 0, marginLeft: 57 }}
+						/>
+					</PieChart>
+				</ResponsiveContainer>
+			) : (
+				<div className='font-gilroy-medium font-medium text-deep-forest'>No data to display.</div>
+			)}
 		</DataCard>
 	);
 };

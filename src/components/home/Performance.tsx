@@ -90,7 +90,7 @@ const Performance = ({ projectsInfo }: Props) => {
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
 			</div>
-			<div className='mt-[42px] flex gap-[30px]'>
+			<div className='mt-[42px] flex flex-wrap gap-[30px]'>
 				<SalesChannelsChart chartValues={projectsInfo?.salesChannelPercentage ?? []} />
 				<ProjectScopeChart chartValues={projectsInfo?.projectTypeCount ?? []} />
 			</div>

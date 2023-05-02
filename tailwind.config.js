@@ -23,6 +23,7 @@ export default {
 				'blue-grey': '#788489',
 				'sage-green': '#7BB99F',
 				'opal-mist': '#EBF4F1',
+				'spicy-apricot': '#FF9F5A',
 			},
 			fontFamily: {
 				'inter-regular': ['Inter-Regular', 'sans-serif'],

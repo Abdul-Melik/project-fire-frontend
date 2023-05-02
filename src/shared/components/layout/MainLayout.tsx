@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useContext } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import axios from 'axios';
@@ -49,21 +49,30 @@ const Layout = ({ selectedButton, children }: Props) => {
 				</div>
 			)}
 			{!isLoading && (
-				<div className='flex min-h-screen min-w-[1280px]'>
-					<div className='w-[284px] flex-col items-center gap-[10px] border-r border-opal-mist bg-gradient-to-b from-frost-white to-seafoam-green'>
+				<div className='flex min-h-screen'>
+					<div className='flex-col items-center gap-[10px] border-r border-opal-mist bg-gradient-to-b from-frost-white to-seafoam-green'>
 						<img src={assets.logo} className='w-2/3 py-[30px] pl-7 pr-0' />
-						<div className='mx-[14px] my-[10px] flex items-center gap-[13px] rounded-md border border-ashen-grey px-[14px] py-[10px]'>
-							<img
-								className='h-[54px] w-[54px] rounded-lg object-cover'
-								src={userInfo?.image ? userInfo.image : assets.avatar}
-							/>
-							<div className='flex-start flex-col'>
-								<p className='mb-[3px] font-inter-medium text-base font-medium text-steel-blue'>{`${userInfo?.firstName} ${userInfo?.lastName}`}</p>
-								<p className='font-inter-regular text-[14px] font-normal leading-[18px] text-charcoal-grey'>
-									{userInfo?.role === 'admin' ? 'Admin' : 'Employee'}
-								</p>
+						<div className='mx-[14px] my-[10px] flex items-center justify-between gap-[13px] rounded-md border border-ashen-grey px-[14px] py-[10px]'>
+							<div className='flex flex-wrap gap-[13px]'>
+								<img
+									className='h-[54px] w-[54px] rounded-lg object-cover'
+									src={userInfo?.image ? userInfo.image : assets.avatar}
+								/>
+								<div className='flex flex-col gap-[3px]'>
+									<div className='flex flex-wrap gap-[3px]'>
+										<span className='whitespace-nowrap font-inter-medium text-base font-medium text-steel-blue'>
+											{userInfo?.firstName}
+										</span>
+										<span className='whitespace-nowrap font-inter-medium text-base font-medium text-steel-blue'>
+											{userInfo?.lastName}
+										</span>
+									</div>
+									<span className='font-inter-regular text-[14px] font-normal leading-[18px] text-charcoal-grey'>
+										{userInfo?.role === 'admin' ? 'Admin' : 'Employee'}
+									</span>
+								</div>
 							</div>
-							<img src={assets.arrow} className='cursor-pointer pl-3' />
+							<img src={assets.arrow} className='cursor-pointer' />
 						</div>
 						<div className='flex flex-col gap-[8px] px-[14px] py-[10px] text-base'>
 							<Link to='/home'>
