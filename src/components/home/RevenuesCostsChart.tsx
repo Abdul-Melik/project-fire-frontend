@@ -1,18 +1,52 @@
 import { useState } from "react";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 
-import DataCard from "../../shared/components/card/DataCard";
+import RevenuesCard from "../../shared/components/card/RevenuesCard";
 
 const data = [
-  { month: "January: 1/1/2023", "Grand Total Hours Available": 3310, "Grand Total Hours Billed": 450 },
-  { month: "March: 1/3/2023", "Grand Total Hours Available": 4433, "Grand Total Hours Billed": 705 },
-  { month: "May: 1/5/2023", "Grand Total Hours Available": 3000, "Grand Total Hours Billed": 3001 },
-  { month: "July: 1/7/2023", "Grand Total Hours Available": 300, "Grand Total Hours Billed": 4225 },
-  { month: "September: 1/9/2023", "Grand Total Hours Available": 1080, "Grand Total Hours Billed": 5000 },
-  { month: "November: 1/11/2023", "Grand Total Hours Available": 1501, "Grand Total Hours Billed": 610 },
+  {
+    organisation: "AlphaBid",
+    "Grand Total Hours Available": 125310,
+    "Grand Total Hours Billed": 434450,
+  },
+  {
+    organisation: "Audiowolf",
+    "Grand Total Hours Available": 554433,
+    "Grand Total Hours Billed": 233705,
+  },
+  {
+    organisation: "GIZ",
+    "Grand Total Hours Available": 223000,
+    "Grand Total Hours Billed": 113001,
+  },
+  {
+    organisation: "HUB71",
+    "Grand Total Hours Available": 334300,
+    "Grand Total Hours Billed": 444225,
+  },
+  {
+    organisation: "Kutuby",
+    "Grand Total Hours Available": 111080,
+    "Grand Total Hours Billed": 345000,
+  },
+  {
+    organisation: "Travelspot",
+    "Grand Total Hours Available": 441501,
+    "Grand Total Hours Billed": 111610,
+  },
+  {
+    organisation: "Virgin Pulse",
+    "Grand Total Hours Available": 111501,
+    "Grand Total Hours Billed": 444610,
+  },
+  {
+    organisation: "Zeppelin (CAT)",
+    "Grand Total Hours Available": 551501,
+    "Grand Total Hours Billed": 62210,
+  },
 ];
 
-const HoursChart = () => {
+const RevenuesCostsChart = () => {
   const [firstOption, setFirstOption] = useState(true);
   const [secondOption, setSecondOption] = useState(true);
 
@@ -23,20 +57,23 @@ const HoursChart = () => {
   };
 
   return (
-    <DataCard
+    <RevenuesCard
       className='h-[392px] w-[1050px]'
-      text='Hours overview'
+      text='Revenues & costs (per project) - actual'
       linkIsVisible={true}
       selectorsAreVisible={true}
       handleSelection={handleSelection}
       selectedOptions={{ firstOption, secondOption }}
-      textOptions={{ textFirstOption: "Grand Total Hours Available", textSecondOption: "Grand Total Hours Billed" }}
+      textOptions={{
+        textFirstOption: "Grand Total Hours Available",
+        textSecondOption: "Grand Total Hours Billed",
+      }}
     >
       <ResponsiveContainer width='100%' height='65%'>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray='3 3' vertical={false} />
           <XAxis
-            dataKey='month'
+            dataKey='organisation'
             tickLine={false}
             dy={12}
             tick={{
@@ -48,7 +85,7 @@ const HoursChart = () => {
             }}
           />
           <YAxis
-            domain={[0, 6000]}
+            domain={[0, 600000]}
             axisLine={false}
             tickLine={false}
             tick={{
@@ -65,8 +102,8 @@ const HoursChart = () => {
           {secondOption && <Bar dataKey='Grand Total Hours Billed' fill='#7BB99F' radius={[4, 4, 0, 0]} barSize={20} />}
         </BarChart>
       </ResponsiveContainer>
-    </DataCard>
+    </RevenuesCard>
   );
 };
 
-export default HoursChart;
+export default RevenuesCostsChart;
