@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import axios from 'axios';
 
@@ -14,9 +14,11 @@ type Props = {
 
 const Layout = ({ selectedButton, children }: Props) => {
 	const auth = useContext(AuthContext);
+	const navigate = useNavigate();
 	const [error, setError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [userInfo, setUserInfo] = useState<any>(null);
+	const [tokenAvailability, setTokenAvailability] = useState(false);
 
 	const getUserInfo = useCallback(async () => {
 		try {
@@ -35,8 +37,14 @@ const Layout = ({ selectedButton, children }: Props) => {
 	}, [auth.token, auth.userId]);
 
 	useEffect(() => {
-		if (auth.token && auth.userId) getUserInfo();
-	}, [auth.token, auth.userId]);
+		if (auth.token && auth.userId) {
+			getUserInfo();
+		} else if (!tokenAvailability) {
+			setTokenAvailability(true);
+		} else {
+			navigate('/login');
+		}
+	}, [auth.token, auth.userId, tokenAvailability]);
 
 	return (
 		<>
