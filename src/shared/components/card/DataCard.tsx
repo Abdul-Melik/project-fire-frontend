@@ -37,7 +37,7 @@ const DataCard = ({
 
 	return (
 		<div className={`flex flex-col rounded-[6px] border border-ashen-grey bg-white px-5 ${className}`}>
-			<div className='mb-[38px] flex items-center justify-between border-b border-b-ashen-grey py-5'>
+			<div className='flex items-center justify-between border-b border-b-ashen-grey py-5'>
 				<div className='flex items-center gap-[10px]'>
 					<h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>{text}</h2>
 					{linkIsVisible && (

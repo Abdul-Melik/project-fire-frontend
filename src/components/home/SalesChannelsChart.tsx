@@ -95,7 +95,7 @@ const SalesChannelsChart = ({ chartValues }: Props) => {
 	return (
 		<DataCard className='h-[342px] w-[510px]' text='Sales channels'>
 			{shouldRenderChart ? (
-				<ResponsiveContainer width='100%' height='100%'>
+				<ResponsiveContainer width='100%' height='100%' className='mt-[38px]'>
 					<PieChart>
 						<Pie
 							dataKey='value'
@@ -127,7 +127,7 @@ const SalesChannelsChart = ({ chartValues }: Props) => {
 					</PieChart>
 				</ResponsiveContainer>
 			) : (
-				<div className='font-gilroy-medium font-medium text-deep-forest'>No data to display.</div>
+				<div className='mt-[38px] font-gilroy-medium font-medium text-deep-forest'>No data to display.</div>
 			)}
 		</DataCard>
 	);
