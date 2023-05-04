@@ -1,4 +1,5 @@
 # project-fire-frontend
+
 Repository for the frontend of the Ant Colony internship project from Team Fire.
 
 Package versions:
@@ -16,6 +17,7 @@ Dev depedencies:
 
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",

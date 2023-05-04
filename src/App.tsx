@@ -1,15 +1,37 @@
-import { useState } from "react";
-import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0);
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import Home from './pages/Home';
+import Projects from './pages/Projects';
+import useAuth from './shared/hooks/auth-hook';
+import AuthContext from './shared/context/auth-context';
 
-  return (
-    <div>
-      <Navbar />
-      <h1 className="v-full text-primary flex bg-red-400">Hello</h1>
-    </div>
-  );
-}
-
+const App = () => {
+	const { token, userId, login, logout } = useAuth();
+	const routes = (
+		<>
+			<Route path='/' element={<Login />} />
+			<Route path='/login' element={<Login />} />
+			<Route path='/dashboard' element={<Dashboard />} />
+			<Route path='/home' element={<Home />} />
+			<Route path='/projects' element={<Projects />} />
+		</>
+	);
+	return (
+		<AuthContext.Provider
+			value={{
+				isLoggedIn: !!token,
+				token,
+				userId,
+				login,
+				logout,
+			}}
+		>
+			<Router>
+				<Routes>{routes}</Routes>
+			</Router>
+		</AuthContext.Provider>
+	);
+};
 export default App;
