@@ -3,6 +3,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 import DataSelector from "../../shared/components/utils/DataSelector";
 import { useState } from "react";
 import ChartSelector from "./ChartSelector";
+import InfoCard from "../../shared/components/InfoCard";
+import SummaryCard from "../../shared/components/card/SummaryCard";
 
 const data = [
   {
@@ -59,7 +61,11 @@ const MonthlyChart = ({ tickNumbers }: MonthlyChartProps) => {
   return (
     <div className="flex flex-col items-center">
       <BarChart width={330} height={280} data={data}>
-        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+        <CartesianGrid
+          strokeDasharray="6 6"
+          stroke="#DFE3E1"
+          vertical={false}
+        />
         <XAxis
           dataKey="month"
           tickLine={false}
@@ -140,6 +146,11 @@ const MonthlyChart = ({ tickNumbers }: MonthlyChartProps) => {
           option={selectedOptions.fourthOption}
           color="#FDCA48"
           onChange={toggleFourthOption}
+        />
+        <SummaryCard
+          description={"Revenue gap"}
+          amount={"10000.00 KM"}
+          className="px-18 h-24 w-64 rounded-md bg-[#E9F3F2] py-5"
         />
       </div>
     </div>
