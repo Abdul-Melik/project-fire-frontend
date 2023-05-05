@@ -13,7 +13,7 @@ const ChartSelector = ({ name, option, color, onChange }: Props) => {
     <div className="flex gap-2">
       <input
         type="checkbox"
-        className={`h-[15px] w-[15px] cursor-pointer appearance-none rounded-full border-2 border-solid border-[${color}] checked:bg-[${color}]`}
+        className={`h-[15px] w-[15px] cursor-pointer appearance-none rounded-full border-2 border-solid ${color}`}
         defaultChecked={optionState === true}
         onClick={() => onChange()}
       />

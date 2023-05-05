@@ -70,7 +70,7 @@ const MonthlyChart = ({ tickNumbers }: MonthlyChartProps) => {
           dataKey="month"
           tickLine={false}
           axisLine={{ stroke: "#DFE3E1" }}
-          dy={12}
+          dy={16}
           tick={{
             fontSize: 12,
             letterSpacing: "0.06em",
@@ -126,25 +126,25 @@ const MonthlyChart = ({ tickNumbers }: MonthlyChartProps) => {
         <ChartSelector
           name="Grand Total Planned Revenue"
           option={selectedOptions.firstOption}
-          color="#FF9F5A"
+          color="border-spicy-apricot checked:bg-spicy-apricot"
           onChange={toggleFirstOption}
         />
         <ChartSelector
           name="Grand Total Actual Revenue"
           option={selectedOptions.secondOption}
-          color="#7BB99F"
+          color="border-sage-green checked:bg-sage-green"
           onChange={toggleSecondOption}
         />
         <ChartSelector
           name="Grand Total Expenses (planned)"
           option={selectedOptions.thirdOption}
-          color="#4C84F2"
+          color="border-bar-blue checked:bg-bar-blue"
           onChange={toggleThirdOption}
         />
         <ChartSelector
           name="Grand Total Expenses (actual)"
           option={selectedOptions.fourthOption}
-          color="#FDCA48"
+          color="border-bar-yellow checked:bg-bar-yellow"
           onChange={toggleFourthOption}
         />
         <SummaryCard
