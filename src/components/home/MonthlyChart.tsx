@@ -122,7 +122,7 @@ const MonthlyChart = ({ tickNumbers }: MonthlyChartProps) => {
         )}
       </BarChart>
       <div className="mt-[26px] h-[1px] w-[260px] self-end bg-[#DFE3E1]"></div>
-      <div className="ml-7 mt-[26px] flex flex-col gap-4">
+      <div className="ml-16 mt-[26px] flex flex-col gap-4">
         <ChartSelector
           name="Grand Total Planned Revenue"
           option={selectedOptions.firstOption}
