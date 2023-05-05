@@ -2,6 +2,7 @@ import { color } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 import DataSelector from "../../shared/components/utils/DataSelector";
 import { useState } from "react";
+import ChartSelector from "./ChartSelector";
 
 const data = [
   {
@@ -30,6 +31,30 @@ const MonthlyChart = ({ tickNumbers }: MonthlyChartProps) => {
     thirdOption: true,
     fourthOption: true,
   });
+  function toggleFirstOption() {
+    setSelectedOptions({
+      ...selectedOptions,
+      firstOption: !selectedOptions.firstOption,
+    });
+  }
+  function toggleSecondOption() {
+    setSelectedOptions({
+      ...selectedOptions,
+      secondOption: !selectedOptions.secondOption,
+    });
+  }
+  function toggleThirdOption() {
+    setSelectedOptions({
+      ...selectedOptions,
+      thirdOption: !selectedOptions.thirdOption,
+    });
+  }
+  function toggleFourthOption() {
+    setSelectedOptions({
+      ...selectedOptions,
+      fourthOption: !selectedOptions.fourthOption,
+    });
+  }
 
   return (
     <div className="flex flex-col items-center">
@@ -65,7 +90,7 @@ const MonthlyChart = ({ tickNumbers }: MonthlyChartProps) => {
             barSize={20}
           />
         )}
-        {true && (
+        {selectedOptions.secondOption && (
           <Bar
             dataKey="Grand Total Actual Revenue"
             fill="#7BB99F"
@@ -73,7 +98,7 @@ const MonthlyChart = ({ tickNumbers }: MonthlyChartProps) => {
             barSize={20}
           />
         )}
-        {true && (
+        {selectedOptions.thirdOption && (
           <Bar
             dataKey="Grand Total Total Expenses (planned)"
             fill="#4C84F2"
@@ -81,7 +106,7 @@ const MonthlyChart = ({ tickNumbers }: MonthlyChartProps) => {
             barSize={20}
           />
         )}
-        {true && (
+        {selectedOptions.fourthOption && (
           <Bar
             dataKey="Grand Total Total Expenses (actual)"
             fill="#FDCA48"
@@ -92,23 +117,30 @@ const MonthlyChart = ({ tickNumbers }: MonthlyChartProps) => {
       </BarChart>
       <div className="mt-[26px] h-[1px] w-[260px] self-end bg-[#DFE3E1]"></div>
       <div className="ml-7 mt-[26px] flex flex-col gap-4">
-        <div className="flex gap-2">
-          <input
-            type="checkbox"
-            className={` h-[15px] w-[15px] cursor-pointer appearance-none rounded-full border-2 border-solid border-spicy-apricot checked:bg-spicy-apricot`}
-            checked={selectedOptions.firstOption}
-            onClick={() =>
-              setSelectedOptions({
-                ...selectedOptions,
-                firstOption: !selectedOptions.firstOption,
-              })
-            }
-          />
-
-          <p className="font-gilroy-medium text-sm font-medium leading-4 text-[#232F2D]">
-            Grand Total Planned Revenue
-          </p>
-        </div>
+        <ChartSelector
+          name="Grand Total Planned Revenue"
+          option={selectedOptions.firstOption}
+          color="#FF9F5A"
+          onChange={toggleFirstOption}
+        />
+        <ChartSelector
+          name="Grand Total Actual Revenue"
+          option={selectedOptions.secondOption}
+          color="#7BB99F"
+          onChange={toggleSecondOption}
+        />
+        <ChartSelector
+          name="Grand Total Expenses (planned)"
+          option={selectedOptions.thirdOption}
+          color="#4C84F2"
+          onChange={toggleThirdOption}
+        />
+        <ChartSelector
+          name="Grand Total Expenses (actual)"
+          option={selectedOptions.fourthOption}
+          color="#FDCA48"
+          onChange={toggleFourthOption}
+        />
       </div>
     </div>
   );
