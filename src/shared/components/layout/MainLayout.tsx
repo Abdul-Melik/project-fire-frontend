@@ -20,9 +20,11 @@ const Layout = ({ selectedButton, children }: Props) => {
 	const [userInfo, setUserInfo] = useState<any>(null);
 	const [tokenAvailability, setTokenAvailability] = useState(false);
 
+	const baseUrl = import.meta.env.VITE_BASE_URL;
+
 	const getUserInfo = useCallback(async () => {
 		try {
-			const responseData = await axios.get(`http://localhost:5000/api/users/${auth.userId}`, {
+			const responseData = await axios.get(`${baseUrl}/api/users/${auth.userId}`, {
 				headers: { Authorization: 'Bearer ' + auth.token },
 			});
 			setUserInfo(responseData.data);

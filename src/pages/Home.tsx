@@ -26,9 +26,11 @@ const Home = () => {
 	const [selectedYear, setSelectedYear] = useState('2023');
 	const [activePage, setActivePage] = useState(1);
 
+	const baseUrl = import.meta.env.VITE_BASE_URL;
+
 	const getProjectsInfo = useCallback(async () => {
 		try {
-			const response = await axios.get(`http://localhost:5000/api/projects/info?year=${selectedYear}`, {
+			const response = await axios.get(`${baseUrl}/api/projects/info?year=${selectedYear}`, {
 				headers: { Authorization: 'Bearer ' + auth.token },
 			});
 			setProjectsInfo(response.data);

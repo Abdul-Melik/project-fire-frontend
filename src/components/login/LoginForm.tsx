@@ -16,11 +16,13 @@ const LoginForm = ({ handleError }: Props) => {
 	const [password, setPassword] = useState('');
 	const [rememberMe, setRememberMe] = useState(false);
 
+	const baseUrl = import.meta.env.VITE_BASE_URL;
+
 	const handleFormSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 		try {
 			const response = await axios.post(
-				'http://localhost:5000/api/users/login',
+				`${baseUrl}/api/users/login`,
 				{
 					email,
 					password,
