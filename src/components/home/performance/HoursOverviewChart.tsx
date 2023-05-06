@@ -12,7 +12,7 @@ const data = [
 	{ month: 'November: 1/11/2023', 'Grand Total Hours Available': 1501, 'Grand Total Hours Billed': 610 },
 ];
 
-const HoursChart = () => {
+const HoursOverviewChart = () => {
 	const [firstOption, setFirstOption] = useState(true);
 	const [secondOption, setSecondOption] = useState(true);
 
@@ -64,4 +64,4 @@ const HoursChart = () => {
 	);
 };
 
-export default HoursChart;
+export default HoursOverviewChart;
