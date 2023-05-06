@@ -12,12 +12,12 @@ const UserMenu = ({ className, onClick }: Props) => {
 			className={`absolute flex flex-col items-center ${className}`}
 			initial={{ opacity: 0, y: '-5%' }}
 			animate={{ opacity: 1, y: '0' }}
-			transition={{ duration: 0.3, ease: 'easeInOut' }}
+			transition={{ duration: 0.2, ease: 'easeInOut' }}
 		>
-			<UserMenuItem className='border-b border-ashen-grey' label='Placeholder text 1' />
-			<UserMenuItem className='border-b border-ashen-grey' label='Placeholder text 2' />
-			<UserMenuItem className='border-b border-ashen-grey' label='Placeholder text 3' />
-			<UserMenuItem className='border-b border-ashen-grey' label='Logout' onClick={onClick} />
+			<UserMenuItem label='Placeholder text 1' />
+			<UserMenuItem label='Placeholder text 2' />
+			<UserMenuItem label='Placeholder text 3' />
+			<UserMenuItem label='Logout' onClick={onClick} />
 		</motion.div>
 	);
 };

@@ -92,7 +92,7 @@ const Layout = ({ selectedButton, children }: Props) => {
 							<div className='relative'>
 								{isUserMenuOpen && (
 									<UserMenu
-										className='-left-8 top-4 w-[15vw] overflow-hidden rounded-md bg-seafoam-green shadow-[3px_3px_3px_rgba(0,0,0,0.3)]'
+										className='-left-8 top-4 w-[15vw] overflow-hidden rounded-md border border-ashen-grey bg-seafoam-green shadow-[3px_3px_3px_rgba(0,0,0,0.3)]'
 										onClick={() => auth.logout()}
 									/>
 								)}

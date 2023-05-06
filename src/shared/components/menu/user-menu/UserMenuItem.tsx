@@ -1,5 +1,5 @@
 type Props = {
-	className: string;
+	className?: string;
 	label: string;
 	onClick?: () => void;
 };
@@ -7,7 +7,7 @@ type Props = {
 const UserMenuItem = ({ className, label, onClick }: Props) => {
 	return (
 		<div
-			className={`w-full cursor-pointer py-3 text-center font-gilroy-medium text-sm font-medium text-deep-teal hover:underline ${className}`}
+			className={`w-full cursor-pointer py-3 text-center font-gilroy-medium text-sm font-medium text-deep-teal hover:bg-pale-jade ${className}`}
 			onClick={onClick}
 		>
 			{label}

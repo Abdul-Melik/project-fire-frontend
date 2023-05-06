@@ -1,9 +1,10 @@
 import { useState, useCallback, useEffect, useContext } from 'react';
+import { ClipLoader } from 'react-spinners';
 import axios from 'axios';
 
 import AuthContext from '../shared/context/auth-context';
 import Modal from '../shared/components/utils/Modal';
-import Layout from '../shared/components/layout/MainLayout';
+import MainLayout from '../shared/components/layout/MainLayout';
 import Navbar from '../shared/components/navbar/Navbar';
 import YearFilter from '../shared/components/utils/YearFilter';
 import Performance from '../components/home/performance/Performance';
@@ -22,6 +23,7 @@ interface ProjectInfo {
 const Home = () => {
 	const auth = useContext(AuthContext);
 	const [error, setError] = useState<string | null>(null);
+	const [isLoading, setIsLoading] = useState(true);
 	const [projectsInfo, setProjectsInfo] = useState<ProjectInfo | null>(null);
 	const [selectedYear, setSelectedYear] = useState('2023');
 	const [activePage, setActivePage] = useState(1);
@@ -41,6 +43,7 @@ const Home = () => {
 				console.error('Unexpected error: ', error);
 			}
 		}
+		setIsLoading(false);
 	}, [auth.token, selectedYear]);
 
 	useEffect(() => {
@@ -52,20 +55,27 @@ const Home = () => {
 			<Modal onCancel={() => setError(null)} header='An error occurred!' show={!!error} isError={!!error}>
 				<p>{error}</p>
 			</Modal>
-			<Layout selectedButton={'Home'}>
-				<div className='page-content mx-14 my-[34px]'>
-					<div className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</div>
-					<div className='mt-[30px] flex flex-col'>
-						<div className='mb-12 flex flex-wrap justify-between gap-4'>
-							<Navbar selectedYear={selectedYear} handlePageSelect={page => setActivePage(page)} />
-							<YearFilter handleYearSelect={year => setSelectedYear(year)} />
-						</div>
-						{activePage === 1 && <Performance projectsInfo={projectsInfo} />}
-						{activePage === 2 && <DevelopmentRevenueCosts />}
-						{activePage === 3 && <Plan />}
-					</div>
+			{isLoading && (
+				<div className='flex h-screen items-center justify-center'>
+					<ClipLoader color='#43A57C' cssOverride={{ borderWidth: '5px' }} size={100} />
 				</div>
-			</Layout>
+			)}
+			<MainLayout selectedButton={'Home'}>
+				{!isLoading && (
+					<div className='page-content mx-14 my-[34px]'>
+						<div className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</div>
+						<div className='mt-[30px] flex flex-col'>
+							<div className='mb-12 flex flex-wrap justify-between gap-4'>
+								<Navbar selectedYear={selectedYear} handlePageSelect={page => setActivePage(page)} />
+								<YearFilter handleYearSelect={year => setSelectedYear(year)} />
+							</div>
+							{activePage === 1 && <Performance projectsInfo={projectsInfo} />}
+							{activePage === 2 && <DevelopmentRevenueCosts />}
+							{activePage === 3 && <Plan />}
+						</div>
+					</div>
+				)}
+			</MainLayout>
 		</>
 	);
 };
