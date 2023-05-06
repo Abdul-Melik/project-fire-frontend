@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
-import DataCard from '../../shared/components/card/DataCard';
+import DataCard from '../../../shared/components/card/DataCard';
 
 const data = [
 	{ month: 'January: 1/1/2023', 'Grand Total Hours Available': 3310, 'Grand Total Hours Billed': 450 },

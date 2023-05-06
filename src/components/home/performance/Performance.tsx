@@ -1,8 +1,8 @@
-import * as assets from '../../assets';
-import InfoCard from '../../shared/components/card/InfoCard';
+import * as assets from '../../../assets';
+import InfoCard from '../../../shared/components/card/InfoCard';
 import SalesChannelsChart from './SalesChannelsChart';
 import ProjectScopeChart from './ProjectScopeChart';
-import HoursChart from './HoursChart';
+import HoursOverviewChart from './HoursOverviewChart';
 
 type Props = {
 	projectsInfo: {
@@ -95,7 +95,7 @@ const Performance = ({ projectsInfo }: Props) => {
 				<ProjectScopeChart chartValues={projectsInfo?.projectTypeCount ?? []} />
 			</div>
 			<div className='mt-[42px]'>
-				<HoursChart />
+				<HoursOverviewChart />
 			</div>
 		</>
 	);

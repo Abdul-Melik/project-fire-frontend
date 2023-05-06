@@ -6,9 +6,9 @@ import Modal from '../shared/components/utils/Modal';
 import Layout from '../shared/components/layout/MainLayout';
 import Navbar from '../shared/components/navbar/Navbar';
 import YearFilter from '../shared/components/utils/YearFilter';
-import Performance from '../components/home/Performance';
-import DevelopmentRevenueCosts from '../components/home/DevelopmentRevenueCosts';
-import Plan from '../components/home/Plan';
+import Performance from '../components/home/performance/Performance';
+import DevelopmentRevenueCosts from '../components/home/development-revenue-costs/DevelopmentRevenueCosts';
+import Plan from '../components/home/plan/Plan';
 
 interface ProjectInfo {
 	totalProjects: number;

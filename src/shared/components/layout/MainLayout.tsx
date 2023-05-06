@@ -6,6 +6,7 @@ import axios from 'axios';
 import AuthContext from '../../context/auth-context';
 import * as assets from '../../../assets';
 import Modal from '../utils/Modal';
+import UserMenu from '../menu/user-menu/UserMenu';
 
 type Props = {
 	selectedButton: string;
@@ -19,6 +20,7 @@ const Layout = ({ selectedButton, children }: Props) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [userInfo, setUserInfo] = useState<any>(null);
 	const [tokenAvailability, setTokenAvailability] = useState(false);
+	const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -82,7 +84,19 @@ const Layout = ({ selectedButton, children }: Props) => {
 									</span>
 								</div>
 							</div>
-							<img src={assets.arrow} className='cursor-pointer' />
+							<img
+								src={assets.arrow}
+								className={`cursor-pointer transition ${isUserMenuOpen ? 'rotate-180' : ''}`}
+								onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+							/>
+							<div className='relative'>
+								{isUserMenuOpen && (
+									<UserMenu
+										className='-left-8 top-4 w-[15vw] overflow-hidden rounded-md bg-seafoam-green shadow-[3px_3px_3px_rgba(0,0,0,0.3)]'
+										onClick={() => auth.logout()}
+									/>
+								)}
+							</div>
 						</div>
 						<div className='flex flex-col gap-[8px] px-[14px] py-[10px] text-base'>
 							<Link to='/home'>
@@ -94,7 +108,7 @@ const Layout = ({ selectedButton, children }: Props) => {
 									}`}
 								>
 									<img src={assets.home} className='h-5 w-5' />
-									<p className='text-sm'>Home</p>
+									<p className='text-sm text-deep-teal'>Home</p>
 								</div>
 							</Link>
 							<Link to='/projects'>
@@ -106,7 +120,7 @@ const Layout = ({ selectedButton, children }: Props) => {
 									}`}
 								>
 									<img src={assets.clipboard} className='h-5 w-5'></img>
-									<p className='text-sm'>Projects</p>
+									<p className='text-sm text-deep-teal'>Projects</p>
 								</div>
 							</Link>
 							<Link to='/employees'>
@@ -118,7 +132,7 @@ const Layout = ({ selectedButton, children }: Props) => {
 									}`}
 								>
 									<img src={assets.employees} className='h-5 w-5'></img>
-									<p className='text-sm'>Employees</p>
+									<p className='text-sm text-deep-teal'>Employees</p>
 								</div>
 							</Link>
 							<Link to='/financial-overview'>
@@ -130,7 +144,7 @@ const Layout = ({ selectedButton, children }: Props) => {
 									}`}
 								>
 									<img src={assets.coins} className='h-5 w-5'></img>
-									<p className='text-sm'>Financial Overview</p>
+									<p className='text-sm text-deep-teal'>Financial Overview</p>
 								</div>
 							</Link>
 							<Link to='/project-reporting'>
@@ -142,7 +156,7 @@ const Layout = ({ selectedButton, children }: Props) => {
 									}`}
 								>
 									<img src={assets.document} className='h-5 w-5' />
-									<p className='text-sm'>Project Reporting</p>
+									<p className='text-sm text-deep-teal'>Project Reporting</p>
 								</div>
 							</Link>
 							<Link to='/invoicing'>
@@ -154,7 +168,7 @@ const Layout = ({ selectedButton, children }: Props) => {
 									}`}
 								>
 									<img src={assets.invoice} className='h-5 w-5' />
-									<p className='text-sm'>Invoicing</p>
+									<p className='text-sm text-deep-teal'>Invoicing</p>
 								</div>
 							</Link>
 						</div>
