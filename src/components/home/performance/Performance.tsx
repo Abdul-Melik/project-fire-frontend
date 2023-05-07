@@ -1,8 +1,8 @@
-import * as assets from '../../../assets';
-import InfoCard from '../../../shared/components/card/InfoCard';
-import SalesChannelsChart from './SalesChannelsChart';
-import ProjectScopeChart from './ProjectScopeChart';
-import HoursOverviewChart from './HoursOverviewChart';
+import * as assets from 'src/assets';
+import InfoCard from 'src/shared/components/card/InfoCard';
+import SalesChannelsChart from 'src/components/home/performance/SalesChannelsChart';
+import ProjectScopeChart from 'src/components/home/performance/ProjectScopeChart';
+import HoursOverviewChart from 'src/components/home/performance/HoursOverviewChart';
 
 type Props = {
 	projectsInfo: {

@@ -1,5 +1,5 @@
-import DataCard from '../../../shared/components/card/DataCard';
-import PlanCardItem from './PlanCardItem';
+import DataCard from 'src/shared/components/card/DataCard';
+import PlanCardItem from 'src/components/home/plan/PlanCardItem';
 
 const Plan = () => {
 	return (

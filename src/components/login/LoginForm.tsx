@@ -2,8 +2,8 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import AuthContext from '../../shared/context/auth-context';
-import FormInput from '../../shared/components/form/FormInput';
+import AuthContext from 'src/shared/context/auth-context';
+import FormInput from 'src/shared/components/form/FormInput';
 
 type Props = {
 	handleError: (error: string | null) => void;

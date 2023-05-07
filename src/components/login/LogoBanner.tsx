@@ -1,4 +1,4 @@
-import { logo, gradientBackground } from '../../assets';
+import { logo, gradientBackground } from 'src/assets';
 
 const LogoBanner = () => {
 	return (

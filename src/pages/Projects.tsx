@@ -1,4 +1,4 @@
-import MainLayout from '../shared/components/layout/MainLayout';
+import MainLayout from 'src/shared/components/layout/MainLayout';
 
 const Projects = () => {
 	return (

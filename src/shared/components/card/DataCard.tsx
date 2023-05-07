@@ -1,4 +1,4 @@
-import DataSelector from '../utils/DataSelector';
+import DataSelector from 'src/shared/components/utils/DataSelector';
 
 type Props = {
 	className?: string;

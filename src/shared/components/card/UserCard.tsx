@@ -1,4 +1,4 @@
-import { avatar, arrow } from '../../../assets';
+import { avatar, arrow } from 'src/assets';
 
 type Props = {
 	className: string;

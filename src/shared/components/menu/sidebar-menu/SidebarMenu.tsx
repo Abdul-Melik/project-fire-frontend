@@ -1,5 +1,5 @@
-import * as assets from '../../../../assets';
-import SidebarMenuItem from './SidebarMenuItem';
+import * as assets from 'src/assets';
+import SidebarMenuItem from 'src/shared/components/menu/sidebar-menu/SidebarMenuItem';
 
 type Props = {
 	activeMenuItem: string;

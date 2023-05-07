@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-import AuthContext from './shared/context/auth-context';
-import useAuth from './shared/hooks/auth-hook';
-import Login from './pages/Login';
-import Home from './pages/Home';
-import Projects from './pages/Projects';
-import Employees from './pages/Employees';
-import FinancialOverview from './pages/FinancialOverview';
-import ProjectReporting from './pages/ProjectReporting';
-import Invoicing from './pages/Invoicing';
+import AuthContext from 'src/shared/context/auth-context';
+import useAuth from 'src/shared/hooks/auth-hook';
+import Login from 'src/pages/Login';
+import Home from 'src/pages/Home';
+import Projects from 'src/pages/Projects';
+import Employees from 'src/pages/Employees';
+import FinancialOverview from 'src/pages/FinancialOverview';
+import ProjectReporting from 'src/pages/ProjectReporting';
+import Invoicing from 'src/pages/Invoicing';
 
 const App = () => {
 	const { token, userId, login, logout } = useAuth();

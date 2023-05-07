@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import NavLink from './NavLink';
+import NavLink from 'src/shared/components/navbar/NavLink';
 
 type Props = {
 	selectedYear: string;

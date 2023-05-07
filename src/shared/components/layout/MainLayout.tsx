@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import axios from 'axios';
 
-import AuthContext from '../../context/auth-context';
-import * as assets from '../../../assets';
-import Modal from '../utils/Modal';
-import SidebarMenu from '../menu/sidebar-menu/SidebarMenu';
-import UserMenu from '../menu/user-menu/UserMenu';
-import UserCard from '../card/UserCard';
+import * as assets from 'src/assets';
+import AuthContext from 'src/shared/context/auth-context';
+import Modal from 'src/shared/components/utils/Modal';
+import UserCard from 'src/shared/components/card/UserCard';
+import SidebarMenu from 'src/shared/components/menu/sidebar-menu/SidebarMenu';
+import UserMenu from 'src/shared/components/menu/user-menu/UserMenu';
 
 type Props = {
 	activeMenuItem: string;

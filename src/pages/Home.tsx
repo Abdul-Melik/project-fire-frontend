@@ -2,14 +2,14 @@ import { useState, useCallback, useEffect, useContext } from 'react';
 import { ClipLoader } from 'react-spinners';
 import axios from 'axios';
 
-import AuthContext from '../shared/context/auth-context';
-import Modal from '../shared/components/utils/Modal';
-import MainLayout from '../shared/components/layout/MainLayout';
-import Navbar from '../shared/components/navbar/Navbar';
-import YearFilter from '../shared/components/utils/YearFilter';
-import Performance from '../components/home/performance/Performance';
-import DevelopmentRevenueCosts from '../components/home/development-revenue-costs/DevelopmentRevenueCosts';
-import Plan from '../components/home/plan/Plan';
+import AuthContext from 'src/shared/context/auth-context';
+import Modal from 'src/shared/components/utils/Modal';
+import YearFilter from 'src/shared/components/utils/YearFilter';
+import MainLayout from 'src/shared/components/layout/MainLayout';
+import Navbar from 'src/shared/components/navbar/Navbar';
+import Performance from 'src/components/home/performance/Performance';
+import DevelopmentRevenueCosts from 'src/components/home/development-revenue-costs/DevelopmentRevenueCosts';
+import Plan from 'src/components/home/plan/Plan';
 
 interface ProjectInfo {
 	totalProjects: number;
