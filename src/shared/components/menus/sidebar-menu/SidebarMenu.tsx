@@ -1,5 +1,6 @@
 import { home, clipboard, employees, coins, document, invoice } from 'src/assets';
-import SidebarMenuItem from 'src/shared/components/menu/sidebar-menu/SidebarMenuItem';
+
+import SidebarMenuItem from 'src/shared/components/menus/sidebar-menu/SidebarMenuItem';
 
 type Props = {
 	activeMenuItem: string;

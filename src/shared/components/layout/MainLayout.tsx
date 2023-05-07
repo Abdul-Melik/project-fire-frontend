@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { logo } from 'src/assets';
 import AuthContext from 'src/shared/context/auth-context';
 import UserCard from 'src/shared/components/cards/UserCard';
-import SidebarMenu from 'src/shared/components/menu/sidebar-menu/SidebarMenu';
-import UserMenu from 'src/shared/components/menu/user-menu/UserMenu';
+import SidebarMenu from 'src/shared/components/menus/sidebar-menu/SidebarMenu';
+import UserMenu from 'src/shared/components/menus/user-menu/UserMenu';
 
 type Props = {
 	activeMenuItem: string;
