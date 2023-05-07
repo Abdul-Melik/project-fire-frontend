@@ -1,4 +1,4 @@
-import DataCard from 'src/shared/components/card/DataCard';
+import DataCard from 'src/shared/components/cards/DataCard';
 import PlanCardItem from 'src/components/home/plan/PlanCardItem';
 
 const Plan = () => {

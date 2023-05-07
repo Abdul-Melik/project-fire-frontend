@@ -9,7 +9,7 @@ type Props = {
 	handleInput: (variable: string) => void;
 };
 
-const FormInput = ({ label, htmlFor, type, id, placeholder, value, required, handleInput }: Props) => {
+const InputField = ({ label, htmlFor, type, id, placeholder, value, required, handleInput }: Props) => {
 	return (
 		<div className='mb-[21px] flex w-full flex-col items-start gap-[10px]'>
 			<label className='font-gilroy-medium font-medium text-midnight-grey' htmlFor={htmlFor}>
@@ -28,4 +28,4 @@ const FormInput = ({ label, htmlFor, type, id, placeholder, value, required, han
 	);
 };
 
-export default FormInput;
+export default InputField;

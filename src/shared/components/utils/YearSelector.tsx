@@ -4,7 +4,7 @@ type Props = {
 	handleYearSelect: (year: string) => void;
 };
 
-const YearFilter = ({ handleYearSelect }: Props) => {
+const YearSelector = ({ handleYearSelect }: Props) => {
 	const [selectedYear, setSelectedYear] = useState<string>('2023');
 
 	return (
@@ -29,4 +29,4 @@ const YearFilter = ({ handleYearSelect }: Props) => {
 	);
 };
 
-export default YearFilter;
+export default YearSelector;

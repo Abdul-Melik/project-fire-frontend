@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import AuthContext from 'src/shared/context/auth-context';
 import Modal from 'src/shared/components/utils/Modal';
-import FormInput from 'src/shared/components/form/FormInput';
+import InputField from 'src/shared/components/form-elements/InputField';
 
 type Props = {
 	handleError: (error: string | null) => void;
@@ -58,7 +58,7 @@ const LoginForm = ({ handleError }: Props) => {
 					Log in
 				</h2>
 				<form className='mb-[17px] flex flex-col items-center justify-center text-base' onSubmit={handleFormSubmit}>
-					<FormInput
+					<InputField
 						label='Email'
 						htmlFor='email'
 						type='email'
@@ -68,7 +68,7 @@ const LoginForm = ({ handleError }: Props) => {
 						required={true}
 						handleInput={email => setEmail(email)}
 					/>
-					<FormInput
+					<InputField
 						label='Password'
 						htmlFor='password'
 						type='password'

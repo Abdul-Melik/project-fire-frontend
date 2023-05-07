@@ -8,10 +8,10 @@ import {
 	weeksOver,
 	hourlyPrice,
 } from 'src/assets';
-import InfoCard from 'src/shared/components/card/InfoCard';
-import SalesChannelsChart from 'src/components/home/performance/SalesChannelsChart';
-import ProjectScopeChart from 'src/components/home/performance/ProjectScopeChart';
-import HoursOverviewChart from 'src/components/home/performance/HoursOverviewChart';
+import InfoCard from 'src/shared/components/cards/InfoCard';
+import SalesChannelsChart from 'src/components/home/performance/charts/SalesChannelsChart';
+import ProjectScopeChart from 'src/components/home/performance/charts/ProjectScopeChart';
+import HoursOverviewChart from 'src/components/home/performance/charts/HoursOverviewChart';
 
 type Props = {
 	projectsInfo: {
@@ -95,7 +95,7 @@ const Performance = ({ projectsInfo }: Props) => {
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
 			</div>
-			<div className='mt-[42px] flex flex-wrap gap-[30px]'>
+			<div className='mt-[42px] flex gap-[30px]'>
 				<SalesChannelsChart chartValues={projectsInfo?.salesChannelPercentage ?? []} />
 				<ProjectScopeChart chartValues={projectsInfo?.projectTypeCount ?? []} />
 			</div>

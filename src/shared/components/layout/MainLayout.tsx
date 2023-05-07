@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { logo } from 'src/assets';
 import AuthContext from 'src/shared/context/auth-context';
-import UserCard from 'src/shared/components/card/UserCard';
+import UserCard from 'src/shared/components/cards/UserCard';
 import SidebarMenu from 'src/shared/components/menu/sidebar-menu/SidebarMenu';
 import UserMenu from 'src/shared/components/menu/user-menu/UserMenu';
 
@@ -19,7 +19,7 @@ const MainLayout = ({ activeMenuItem, children }: Props) => {
 
 	return (
 		<div className='flex min-h-screen'>
-			<div className='flex-col items-center gap-[10px] border-r border-opal-mist bg-gradient-to-b from-frost-white to-seafoam-green'>
+			<div className='items-center gap-[10px] border-r border-opal-mist bg-gradient-to-b from-frost-white to-seafoam-green'>
 				<img src={logo} className='w-2/3 py-[30px] pl-7 pr-0' />
 				<UserCard
 					className='mx-[14px] my-[10px] rounded-md border border-ashen-grey'

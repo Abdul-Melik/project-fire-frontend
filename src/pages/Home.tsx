@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import AuthContext from 'src/shared/context/auth-context';
 import Modal from 'src/shared/components/utils/Modal';
-import YearFilter from 'src/shared/components/utils/YearFilter';
+import YearSelector from 'src/shared/components/utils/YearSelector';
 import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import MainLayout from 'src/shared/components/layout/MainLayout';
 import Navbar from 'src/shared/components/navbar/Navbar';
@@ -65,7 +65,7 @@ const Home = () => {
 					<div className='mt-[30px] flex flex-col'>
 						<div className='mb-12 flex flex-wrap justify-between gap-4'>
 							<Navbar selectedYear={selectedYear} handlePageSelect={page => setActivePage(page)} />
-							<YearFilter handleYearSelect={year => setSelectedYear(year)} />
+							<YearSelector handleYearSelect={year => setSelectedYear(year)} />
 						</div>
 						{isLoading ? (
 							<LoadingSpinner />

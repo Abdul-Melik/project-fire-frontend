@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
-import DataCard from 'src/shared/components/card/DataCard';
+import DataCard from 'src/shared/components/cards/DataCard';
 import DataSelector from 'src/shared/components/utils/DataSelector';
 
 const data = [
@@ -43,7 +43,7 @@ const HoursOverviewChart = () => {
 	);
 
 	return (
-		<DataCard className='h-[392px] w-[1050px] rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
+		<DataCard className='h-[392px] rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
 			<ResponsiveContainer width='100%' height='65%' className='mt-[38px]'>
 				<BarChart data={data}>
 					<CartesianGrid strokeDasharray='3 3' vertical={false} />

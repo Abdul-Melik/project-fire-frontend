@@ -1,6 +1,6 @@
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, LabelList } from 'recharts';
 
-import DataCard from 'src/shared/components/card/DataCard';
+import DataCard from 'src/shared/components/cards/DataCard';
 
 interface ChartData {
 	name: string;
@@ -53,7 +53,7 @@ const ProjectScopeChart = ({ chartValues }: Props) => {
 	);
 
 	return (
-		<DataCard className='h-[342px] w-[510px] rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
+		<DataCard className='h-[342px] flex-1 rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
 			{shouldRenderChart ? (
 				<ResponsiveContainer width='100%' height='100%' className='mt-[38px]'>
 					<BarChart data={chartData} layout='vertical' barSize={40}>

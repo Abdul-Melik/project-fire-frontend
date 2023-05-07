@@ -1,6 +1,6 @@
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
-import DataCard from 'src/shared/components/card/DataCard';
+import DataCard from 'src/shared/components/cards/DataCard';
 
 interface ChartData {
 	name: string;
@@ -87,7 +87,7 @@ const SalesChannelsChart = ({ chartValues }: Props) => {
 	);
 
 	return (
-		<DataCard className='h-[342px] w-[510px] rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
+		<DataCard className='h-[342px] flex-1 rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
 			{shouldRenderChart ? (
 				<ResponsiveContainer width='100%' height='100%' className='mt-[38px]'>
 					<PieChart>
@@ -116,7 +116,7 @@ const SalesChannelsChart = ({ chartValues }: Props) => {
 									{value}
 								</span>
 							)}
-							wrapperStyle={{ top: 0, marginLeft: 57 }}
+							wrapperStyle={{ top: 0, marginLeft: '6vw' }}
 						/>
 					</PieChart>
 				</ResponsiveContainer>

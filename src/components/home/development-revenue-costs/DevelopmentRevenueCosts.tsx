@@ -1,6 +1,6 @@
 import { revenue, directCosts, margin, avgMargin } from 'src/assets';
-import InfoCard from 'src/shared/components/card/InfoCard';
-import SummaryCard from 'src/shared/components/card/SummaryCard';
+import InfoCard from 'src/shared/components/cards/InfoCard';
+import SummaryCard from 'src/shared/components/cards/SummaryCard';
 
 const DevelopmentRevenueCosts = () => {
 	return (
