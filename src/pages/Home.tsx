@@ -60,7 +60,7 @@ const Home = () => {
 					<ClipLoader color='#43A57C' cssOverride={{ borderWidth: '5px' }} size={100} />
 				</div>
 			)}
-			<MainLayout selectedButton={'Home'}>
+			<MainLayout activeMenuItem={'home'}>
 				{!isLoading && (
 					<div className='page-content mx-14 my-[34px]'>
 						<div className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</div>

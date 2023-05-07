@@ -2,7 +2,7 @@ import MainLayout from '../shared/components/layout/MainLayout';
 
 const Invoicing = () => {
 	return (
-		<MainLayout selectedButton={'Invoicing'}>
+		<MainLayout activeMenuItem={'invoicing'}>
 			<div>Invoicing</div>
 		</MainLayout>
 	);

@@ -2,7 +2,7 @@ import MainLayout from '../shared/components/layout/MainLayout';
 
 const Projects = () => {
 	return (
-		<MainLayout selectedButton={'Projects'}>
+		<MainLayout activeMenuItem={'projects'}>
 			<div>Projects</div>
 		</MainLayout>
 	);

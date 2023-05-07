@@ -1,19 +1,20 @@
 import { useState, useCallback, useEffect, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import axios from 'axios';
 
 import AuthContext from '../../context/auth-context';
 import * as assets from '../../../assets';
 import Modal from '../utils/Modal';
+import SidebarMenu from '../menu/sidebar-menu/SidebarMenu';
 import UserMenu from '../menu/user-menu/UserMenu';
 
 type Props = {
-	selectedButton: string;
+	activeMenuItem: string;
 	children: React.ReactNode;
 };
 
-const Layout = ({ selectedButton, children }: Props) => {
+const Layout = ({ activeMenuItem, children }: Props) => {
 	const auth = useContext(AuthContext);
 	const navigate = useNavigate();
 	const [error, setError] = useState<string | null>(null);
@@ -98,80 +99,7 @@ const Layout = ({ selectedButton, children }: Props) => {
 								)}
 							</div>
 						</div>
-						<div className='flex flex-col gap-[8px] px-[14px] py-[10px] text-base'>
-							<Link to='/home'>
-								<div
-									className={`flex-start flex cursor-pointer items-center gap-[10px] rounded-md py-[12px] pl-[14px] pr-0 ${
-										selectedButton === 'Home'
-											? 'bg-winter-mint font-gilroy-bold font-bold'
-											: 'font-gilroy-medium font-medium hover:bg-winter-mint'
-									}`}
-								>
-									<img src={assets.home} className='h-5 w-5' />
-									<p className='text-sm text-deep-teal'>Home</p>
-								</div>
-							</Link>
-							<Link to='/projects'>
-								<div
-									className={`flex-start flex cursor-pointer items-center gap-[10px] rounded-md py-[12px] pl-[14px] pr-0 ${
-										selectedButton === 'Projects'
-											? 'bg-winter-mint font-gilroy-bold font-bold'
-											: 'font-gilroy-medium font-medium hover:bg-winter-mint'
-									}`}
-								>
-									<img src={assets.clipboard} className='h-5 w-5'></img>
-									<p className='text-sm text-deep-teal'>Projects</p>
-								</div>
-							</Link>
-							<Link to='/employees'>
-								<div
-									className={`flex-start flex cursor-pointer items-center gap-[10px] rounded-md py-[12px] pl-[14px] pr-0 ${
-										selectedButton === 'Employees'
-											? 'bg-winter-mint font-gilroy-bold font-bold'
-											: 'font-gilroy-medium font-medium hover:bg-winter-mint'
-									}`}
-								>
-									<img src={assets.employees} className='h-5 w-5'></img>
-									<p className='text-sm text-deep-teal'>Employees</p>
-								</div>
-							</Link>
-							<Link to='/financial-overview'>
-								<div
-									className={`flex-start flex cursor-pointer items-center gap-[10px] rounded-md py-[12px] pl-[14px] pr-0 ${
-										selectedButton === 'FinancialOverview'
-											? 'bg-winter-mint font-gilroy-bold font-bold'
-											: 'font-gilroy-medium font-medium hover:bg-winter-mint'
-									}`}
-								>
-									<img src={assets.coins} className='h-5 w-5'></img>
-									<p className='text-sm text-deep-teal'>Financial Overview</p>
-								</div>
-							</Link>
-							<Link to='/project-reporting'>
-								<div
-									className={`flex-start flex cursor-pointer items-center gap-[10px] rounded-md py-[12px] pl-[14px] pr-0 ${
-										selectedButton === 'ProjectReporting'
-											? 'bg-winter-mint font-gilroy-bold font-bold'
-											: 'font-gilroy-medium font-medium hover:bg-winter-mint'
-									}`}
-								>
-									<img src={assets.document} className='h-5 w-5' />
-									<p className='text-sm text-deep-teal'>Project Reporting</p>
-								</div>
-							</Link>
-							<Link to='/invoicing'>
-								<div
-									className={`flex-start flex cursor-pointer items-center gap-[10px] rounded-md py-[12px] pl-[14px] pr-0 ${
-										selectedButton === 'Invoicing'
-											? 'bg-winter-mint font-gilroy-bold font-bold'
-											: 'font-gilroy-medium font-medium hover:bg-winter-mint'
-									}`}
-								>
-									<img src={assets.invoice} className='h-5 w-5' />
-									<p className='text-sm text-deep-teal'>Invoicing</p>
-								</div>
-							</Link>
-						</div>
+						<SidebarMenu activeMenuItem={activeMenuItem} />
 					</div>
 					<div className='flex-1'>{children}</div>
 				</div>
