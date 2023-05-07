@@ -8,6 +8,7 @@ import * as assets from '../../../assets';
 import Modal from '../utils/Modal';
 import SidebarMenu from '../menu/sidebar-menu/SidebarMenu';
 import UserMenu from '../menu/user-menu/UserMenu';
+import UserCard from '../card/UserCard';
 
 type Props = {
 	activeMenuItem: string;
@@ -65,7 +66,21 @@ const Layout = ({ activeMenuItem, children }: Props) => {
 				<div className='flex min-h-screen'>
 					<div className='flex-col items-center gap-[10px] border-r border-opal-mist bg-gradient-to-b from-frost-white to-seafoam-green'>
 						<img src={assets.logo} className='w-2/3 py-[30px] pl-7 pr-0' />
-						<div className='mx-[14px] my-[10px] flex items-center justify-between gap-[13px] rounded-md border border-ashen-grey px-[14px] py-[10px]'>
+						<UserCard
+							className='mx-[14px] my-[10px] rounded-md border border-ashen-grey'
+							userInfo={userInfo}
+							isUserMenuOpen={isUserMenuOpen}
+							onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+						/>
+						<div className='relative'>
+							{isUserMenuOpen && (
+								<UserMenu
+									className='right-0 top-0 w-[15vw] overflow-hidden rounded-md border border-ashen-grey bg-seafoam-green shadow-[3px_3px_3px_rgba(0,0,0,0.3)]'
+									onClick={() => auth.logout()}
+								/>
+							)}
+						</div>
+						{/* <div className='mx-[14px] my-[10px] flex items-center justify-between gap-[13px] rounded-md border border-ashen-grey px-[14px] py-[10px]'>
 							<div className='flex flex-wrap gap-[13px]'>
 								<img
 									className='h-[54px] w-[54px] rounded-lg object-cover'
@@ -98,7 +113,7 @@ const Layout = ({ activeMenuItem, children }: Props) => {
 									/>
 								)}
 							</div>
-						</div>
+						</div> */}
 						<SidebarMenu activeMenuItem={activeMenuItem} />
 					</div>
 					<div className='flex-1'>{children}</div>

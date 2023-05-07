@@ -10,7 +10,7 @@ const UserMenu = ({ className, onClick }: Props) => {
 	return (
 		<motion.div
 			className={`absolute flex flex-col items-center ${className}`}
-			initial={{ opacity: 0, y: '-5%' }}
+			initial={{ opacity: 0, x: '80%', y: '-10%' }}
 			animate={{ opacity: 1, y: '0' }}
 			transition={{ duration: 0.2, ease: 'easeInOut' }}
 		>
