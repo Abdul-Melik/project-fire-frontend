@@ -15,7 +15,7 @@ type Props = {
 	children: React.ReactNode;
 };
 
-const Layout = ({ activeMenuItem, children }: Props) => {
+const MainLayout = ({ activeMenuItem, children }: Props) => {
 	const auth = useContext(AuthContext);
 	const navigate = useNavigate();
 	const [error, setError] = useState<string | null>(null);
@@ -80,40 +80,6 @@ const Layout = ({ activeMenuItem, children }: Props) => {
 								/>
 							)}
 						</div>
-						{/* <div className='mx-[14px] my-[10px] flex items-center justify-between gap-[13px] rounded-md border border-ashen-grey px-[14px] py-[10px]'>
-							<div className='flex flex-wrap gap-[13px]'>
-								<img
-									className='h-[54px] w-[54px] rounded-lg object-cover'
-									src={userInfo?.image ? userInfo.image : assets.avatar}
-								/>
-								<div className='flex flex-col gap-[3px]'>
-									<div className='flex flex-wrap gap-[3px]'>
-										<span className='whitespace-nowrap font-inter-medium text-base font-medium text-steel-blue'>
-											{userInfo?.firstName}
-										</span>
-										<span className='whitespace-nowrap font-inter-medium text-base font-medium text-steel-blue'>
-											{userInfo?.lastName}
-										</span>
-									</div>
-									<span className='font-inter-regular text-[14px] font-normal leading-[18px] text-charcoal-grey'>
-										{userInfo?.role === 'admin' ? 'Admin' : 'Employee'}
-									</span>
-								</div>
-							</div>
-							<img
-								src={assets.arrow}
-								className={`cursor-pointer transition ${isUserMenuOpen ? 'rotate-180' : ''}`}
-								onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-							/>
-							<div className='relative'>
-								{isUserMenuOpen && (
-									<UserMenu
-										className='-left-8 top-4 w-[15vw] overflow-hidden rounded-md border border-ashen-grey bg-seafoam-green shadow-[3px_3px_3px_rgba(0,0,0,0.3)]'
-										onClick={() => auth.logout()}
-									/>
-								)}
-							</div>
-						</div> */}
 						<SidebarMenu activeMenuItem={activeMenuItem} />
 					</div>
 					<div className='flex-1'>{children}</div>
@@ -123,4 +89,4 @@ const Layout = ({ activeMenuItem, children }: Props) => {
 	);
 };
 
-export default Layout;
+export default MainLayout;

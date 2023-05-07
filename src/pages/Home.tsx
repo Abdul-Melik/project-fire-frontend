@@ -50,6 +50,10 @@ const Home = () => {
 		if (auth.token && selectedYear) getProjectsInfo();
 	}, [auth.token, selectedYear]);
 
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
 	return (
 		<>
 			<Modal onCancel={() => setError(null)} header='An error occurred!' show={!!error} isError={!!error}>
@@ -61,20 +65,18 @@ const Home = () => {
 				</div>
 			)}
 			<MainLayout activeMenuItem={'home'}>
-				{!isLoading && (
-					<div className='page-content mx-14 my-[34px]'>
-						<div className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</div>
-						<div className='mt-[30px] flex flex-col'>
-							<div className='mb-12 flex flex-wrap justify-between gap-4'>
-								<Navbar selectedYear={selectedYear} handlePageSelect={page => setActivePage(page)} />
-								<YearFilter handleYearSelect={year => setSelectedYear(year)} />
-							</div>
-							{activePage === 1 && <Performance projectsInfo={projectsInfo} />}
-							{activePage === 2 && <DevelopmentRevenueCosts />}
-							{activePage === 3 && <Plan />}
+				<div className='page-content mx-14 my-[34px]'>
+					<div className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</div>
+					<div className='mt-[30px] flex flex-col'>
+						<div className='mb-12 flex flex-wrap justify-between gap-4'>
+							<Navbar selectedYear={selectedYear} handlePageSelect={page => setActivePage(page)} />
+							<YearFilter handleYearSelect={year => setSelectedYear(year)} />
 						</div>
+						{activePage === 1 && <Performance projectsInfo={projectsInfo} />}
+						{activePage === 2 && <DevelopmentRevenueCosts />}
+						{activePage === 3 && <Plan />}
 					</div>
-				)}
+				</div>
 			</MainLayout>
 		</>
 	);

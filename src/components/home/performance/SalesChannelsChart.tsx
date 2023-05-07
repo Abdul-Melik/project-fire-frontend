@@ -61,31 +61,19 @@ const SalesChannelsChart = ({ chartValues }: Props) => {
 	const chartData: ChartData[] = [
 		{
 			name: 'Online',
-			value:
-				chartValues.length !== 0 && chartValues.find(value => value.salesChannel === 'online') !== undefined
-					? chartValues.find(value => value.salesChannel === 'online')!.percentage
-					: 0,
+			value: chartValues.find(value => value.salesChannel === 'online')?.percentage ?? 0,
 		},
 		{
 			name: 'In Person',
-			value:
-				chartValues.length !== 0 && chartValues.find(value => value.salesChannel === 'in-person') !== undefined
-					? chartValues.find(value => value.salesChannel === 'in-person')!.percentage
-					: 0,
+			value: chartValues.find(value => value.salesChannel === 'in-person')?.percentage ?? 0,
 		},
 		{
 			name: 'Referral',
-			value:
-				chartValues.length !== 0 && chartValues.find(value => value.salesChannel === 'referral') !== undefined
-					? chartValues.find(value => value.salesChannel === 'referral')!.percentage
-					: 0,
+			value: chartValues.find(value => value.salesChannel === 'referral')?.percentage ?? 0,
 		},
 		{
 			name: 'Other',
-			value:
-				chartValues.length !== 0 && chartValues.find(value => value.salesChannel === 'other') !== undefined
-					? chartValues.find(value => value.salesChannel === 'other')!.percentage
-					: 0,
+			value: chartValues.find(value => value.salesChannel === 'other')?.percentage ?? 0,
 		},
 	];
 

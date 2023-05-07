@@ -21,7 +21,7 @@ const Performance = ({ projectsInfo }: Props) => {
 			<div className='grid auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-[30px]'>
 				<InfoCard
 					description='Number of projects'
-					amount={`${projectsInfo?.totalProjects}` ?? '0'}
+					amount={`${projectsInfo?.totalProjects ?? 0}`}
 					iconSrc={assets.projectsNumber}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
@@ -29,12 +29,10 @@ const Performance = ({ projectsInfo }: Props) => {
 				<InfoCard
 					description='Total project value'
 					amount={
-						projectsInfo
-							? projectsInfo.totalValue.toLocaleString('en-US', {
-									minimumFractionDigits: 2,
-									maximumFractionDigits: 2,
-							  }) + ' KM'
-							: '0 KM'
+						(projectsInfo?.totalValue ?? 0).toLocaleString('en-US', {
+							minimumFractionDigits: 2,
+							maximumFractionDigits: 2,
+						}) + ' KM'
 					}
 					iconSrc={assets.totalValue}
 					iconAlt='Mini icon'
@@ -43,12 +41,10 @@ const Performance = ({ projectsInfo }: Props) => {
 				<InfoCard
 					description='Avg. project value'
 					amount={
-						projectsInfo
-							? projectsInfo.averageValue.toLocaleString('en-US', {
-									minimumFractionDigits: 2,
-									maximumFractionDigits: 2,
-							  }) + ' KM'
-							: '0 KM'
+						(projectsInfo?.averageValue ?? 0).toLocaleString('en-US', {
+							minimumFractionDigits: 2,
+							maximumFractionDigits: 2,
+						}) + ' KM'
 					}
 					iconSrc={assets.avgValue}
 					iconAlt='Mini icon'
@@ -84,7 +80,7 @@ const Performance = ({ projectsInfo }: Props) => {
 				/>
 				<InfoCard
 					description='Avg. hourly price'
-					amount={`$${projectsInfo?.averageHourlyRate}` ?? '$0'}
+					amount={`$${projectsInfo?.averageHourlyRate ?? 0}`}
 					iconSrc={assets.hourlyPrice}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
