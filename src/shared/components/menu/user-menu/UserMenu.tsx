@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+
 import UserMenuItem from './UserMenuItem';
 
 type Props = {

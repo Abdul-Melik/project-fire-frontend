@@ -1,17 +1,24 @@
 import { createContext } from 'react';
 
+interface User {
+	id: string;
+	email: string;
+	firstName: string;
+	lastName: string;
+	role: string;
+	image?: string;
+}
+
 interface IAuthContext {
-	isLoggedIn: boolean;
 	token: string | null;
-	userId: string | null;
-	login: (token: string, expiresIn: number, userId: string) => void;
+	user: User | null;
+	login: (token: string, expiresIn: number, user: User) => void;
 	logout: () => void;
 }
 
 const AuthContext = createContext<IAuthContext>({
-	isLoggedIn: false,
 	token: null,
-	userId: null,
+	user: null,
 	login: () => {},
 	logout: () => {},
 });

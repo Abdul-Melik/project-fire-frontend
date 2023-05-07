@@ -10,7 +10,7 @@ type Props = {
 const UserCard = ({ className, userInfo, isUserMenuOpen, onClick }: Props) => {
 	return (
 		<div className={`flex items-center justify-between gap-[13px] px-[14px] py-[10px] ${className}`}>
-			<div className='flex flex-wrap gap-[13px]'>
+			<div className='flex flex-wrap items-center gap-[13px]'>
 				<img className='h-[54px] w-[54px] rounded-lg object-cover' src={userInfo?.image ? userInfo.image : avatar} />
 				<div className='flex flex-col gap-[3px]'>
 					<div className='flex flex-wrap gap-[3px]'>

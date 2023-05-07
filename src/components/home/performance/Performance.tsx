@@ -1,4 +1,13 @@
-import * as assets from 'src/assets';
+import {
+	projectsNumber,
+	totalValue,
+	avgValue,
+	leadClosing,
+	teamSize,
+	velocity,
+	weeksOver,
+	hourlyPrice,
+} from 'src/assets';
 import InfoCard from 'src/shared/components/card/InfoCard';
 import SalesChannelsChart from 'src/components/home/performance/SalesChannelsChart';
 import ProjectScopeChart from 'src/components/home/performance/ProjectScopeChart';
@@ -22,7 +31,7 @@ const Performance = ({ projectsInfo }: Props) => {
 				<InfoCard
 					description='Number of projects'
 					amount={`${projectsInfo?.totalProjects ?? 0}`}
-					iconSrc={assets.projectsNumber}
+					iconSrc={projectsNumber}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
@@ -34,7 +43,7 @@ const Performance = ({ projectsInfo }: Props) => {
 							maximumFractionDigits: 2,
 						}) + ' KM'
 					}
-					iconSrc={assets.totalValue}
+					iconSrc={totalValue}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
@@ -46,42 +55,42 @@ const Performance = ({ projectsInfo }: Props) => {
 							maximumFractionDigits: 2,
 						}) + ' KM'
 					}
-					iconSrc={assets.avgValue}
+					iconSrc={avgValue}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
 				<InfoCard
 					description='Avg. lead closing (d)'
 					amount={'12'}
-					iconSrc={assets.leadClosing}
+					iconSrc={leadClosing}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
 				<InfoCard
 					description='Avg. team size'
 					amount={'2.2'}
-					iconSrc={assets.teamSize}
+					iconSrc={teamSize}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
 				<InfoCard
 					description='Avg. velocity'
 					amount={'64'}
-					iconSrc={assets.velocity}
+					iconSrc={velocity}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
 				<InfoCard
 					description='Weeks over deadline'
 					amount={'7'}
-					iconSrc={assets.weeksOver}
+					iconSrc={weeksOver}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
 				<InfoCard
 					description='Avg. hourly price'
 					amount={`$${projectsInfo?.averageHourlyRate ?? 0}`}
-					iconSrc={assets.hourlyPrice}
+					iconSrc={hourlyPrice}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>

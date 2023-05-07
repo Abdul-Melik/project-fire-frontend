@@ -1,4 +1,4 @@
-import * as assets from 'src/assets';
+import { revenue, directCosts, margin, avgMargin } from 'src/assets';
 import InfoCard from 'src/shared/components/card/InfoCard';
 import SummaryCard from 'src/shared/components/card/SummaryCard';
 
@@ -9,28 +9,28 @@ const DevelopmentRevenueCosts = () => {
 				<InfoCard
 					description='Actual revenue'
 					amount={'1,615,341.00 KM'}
-					iconSrc={assets.revenue}
+					iconSrc={revenue}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
 				<InfoCard
 					description='Planned direct costs'
 					amount={'1,890,000.00 KM'}
-					iconSrc={assets.directCosts}
+					iconSrc={directCosts}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
 				<InfoCard
 					description='Actual margin %'
 					amount={'40%'}
-					iconSrc={assets.margin}
+					iconSrc={margin}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
 				<InfoCard
 					description='Actual avg. margin'
 					amount={'102,382.00 KM'}
-					iconSrc={assets.avgMargin}
+					iconSrc={avgMargin}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>

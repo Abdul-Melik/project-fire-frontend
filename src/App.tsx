@@ -1,7 +1,8 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 
 import AuthContext from 'src/shared/context/auth-context';
 import useAuth from 'src/shared/hooks/auth-hook';
+import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import Login from 'src/pages/Login';
 import Home from 'src/pages/Home';
 import Projects from 'src/pages/Projects';
@@ -11,17 +12,24 @@ import ProjectReporting from 'src/pages/ProjectReporting';
 import Invoicing from 'src/pages/Invoicing';
 
 const App = () => {
-	const { token, userId, login, logout } = useAuth();
+	const { isLoading, token, user, login, logout } = useAuth();
+
+	const PrivateRoutes = () => {
+		if (isLoading) return <LoadingSpinner />;
+		return !!token ? <Outlet /> : <Navigate to='/login' />;
+	};
 
 	const routes = (
 		<>
 			<Route path='/login' element={<Login />} />
-			<Route path='/home' element={<Home />} />
-			<Route path='/projects' element={<Projects />} />
-			<Route path='/employees' element={<Employees />} />
-			<Route path='/financial-overview' element={<FinancialOverview />} />
-			<Route path='/project-reporting' element={<ProjectReporting />} />
-			<Route path='/invoicing' element={<Invoicing />} />
+			<Route element={<PrivateRoutes />}>
+				<Route path='/home' element={<Home />} />
+				<Route path='/projects' element={<Projects />} />
+				<Route path='/employees' element={<Employees />} />
+				<Route path='/financial-overview' element={<FinancialOverview />} />
+				<Route path='/project-reporting' element={<ProjectReporting />} />
+				<Route path='/invoicing' element={<Invoicing />} />
+			</Route>
 			<Route path='/*' element={<Navigate to='/login' />} />
 		</>
 	);
@@ -29,9 +37,8 @@ const App = () => {
 	return (
 		<AuthContext.Provider
 			value={{
-				isLoggedIn: !!token,
 				token,
-				userId,
+				user,
 				login,
 				logout,
 			}}

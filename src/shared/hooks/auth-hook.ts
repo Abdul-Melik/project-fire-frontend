@@ -2,23 +2,33 @@ import { useState, useCallback, useEffect } from 'react';
 
 let logoutTimer: ReturnType<typeof setTimeout>;
 
-const useAuth = () => {
-	const [token, setToken] = useState<string | null>(null);
-	const [userId, setUserId] = useState<string | null>(null);
-	const [tokenExpirationDate, setTokenExpirationDate] = useState<Date | null>(null);
-	const [expiresIn, setExpiresIn] = useState<number>(0);
+interface User {
+	id: string;
+	email: string;
+	firstName: string;
+	lastName: string;
+	role: string;
+	image?: string;
+}
 
-	const login = useCallback((token: string, expiresIn: number, userId: string, expirationDate?: Date) => {
+const useAuth = () => {
+	const [isLoading, setIsLoading] = useState(true);
+	const [token, setToken] = useState<string | null>(null);
+	const [user, setUser] = useState<User | null>(null);
+	const [tokenExpirationDate, setTokenExpirationDate] = useState<Date | null>(null);
+	const [expiresIn, setExpiresIn] = useState(0);
+
+	const login = useCallback((token: string, expiresIn: number, user: User, expirationDate?: Date) => {
 		setToken(token);
-		setUserId(userId);
 		setExpiresIn(expiresIn);
+		setUser(user);
 		const tokenLoginExpirationDate = expirationDate || new Date(new Date().getTime() + expiresIn);
 		setTokenExpirationDate(tokenLoginExpirationDate);
 		localStorage.setItem(
-			'userData',
+			'data',
 			JSON.stringify({
 				token,
-				userId,
+				user,
 				expiration: tokenLoginExpirationDate.toLocaleString(),
 			})
 		);
@@ -26,9 +36,9 @@ const useAuth = () => {
 
 	const logout = useCallback(() => {
 		setToken('');
-		setUserId(null);
+		setUser(null);
 		setTokenExpirationDate(null);
-		localStorage.removeItem('userData');
+		localStorage.removeItem('data');
 		clearTimeout(logoutTimer);
 	}, [logoutTimer]);
 
@@ -43,12 +53,14 @@ const useAuth = () => {
 	}, [token, tokenExpirationDate, logout]);
 
 	useEffect(() => {
-		const storedData = JSON.parse(localStorage.getItem('userData') || 'null');
+		const storedData = JSON.parse(localStorage.getItem('data') || 'null');
 		if (storedData && storedData.token && new Date(storedData.expiration) > new Date()) {
-			login(storedData.token, expiresIn, storedData.userId, new Date(storedData.expiration));
+			login(storedData.token, expiresIn, storedData.user, new Date(storedData.expiration));
 		}
+		setIsLoading(false);
 	}, [login]);
-	return { token, userId, login, logout };
+
+	return { isLoading, token, user, login, logout };
 };
 
 export default useAuth;

@@ -1,10 +1,10 @@
 import { useState, useCallback, useEffect, useContext } from 'react';
-import { ClipLoader } from 'react-spinners';
 import axios from 'axios';
 
 import AuthContext from 'src/shared/context/auth-context';
 import Modal from 'src/shared/components/utils/Modal';
 import YearFilter from 'src/shared/components/utils/YearFilter';
+import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import MainLayout from 'src/shared/components/layout/MainLayout';
 import Navbar from 'src/shared/components/navbar/Navbar';
 import Performance from 'src/components/home/performance/Performance';
@@ -21,7 +21,7 @@ interface ProjectInfo {
 }
 
 const Home = () => {
-	const auth = useContext(AuthContext);
+	const { token } = useContext(AuthContext);
 	const [error, setError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [projectsInfo, setProjectsInfo] = useState<ProjectInfo | null>(null);
@@ -33,7 +33,7 @@ const Home = () => {
 	const getProjectsInfo = useCallback(async () => {
 		try {
 			const response = await axios.get(`${baseUrl}/api/projects/info?year=${selectedYear}`, {
-				headers: { Authorization: 'Bearer ' + auth.token },
+				headers: { Authorization: 'Bearer ' + token },
 			});
 			setProjectsInfo(response.data);
 		} catch (error: any) {
@@ -44,11 +44,11 @@ const Home = () => {
 			}
 		}
 		setIsLoading(false);
-	}, [auth.token, selectedYear]);
+	}, [token, selectedYear]);
 
 	useEffect(() => {
-		if (auth.token && selectedYear) getProjectsInfo();
-	}, [auth.token, selectedYear]);
+		if (token && selectedYear) getProjectsInfo();
+	}, [token, selectedYear]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -59,11 +59,6 @@ const Home = () => {
 			<Modal onCancel={() => setError(null)} header='An error occurred!' show={!!error} isError={!!error}>
 				<p>{error}</p>
 			</Modal>
-			{isLoading && (
-				<div className='flex h-screen items-center justify-center'>
-					<ClipLoader color='#43A57C' cssOverride={{ borderWidth: '5px' }} size={100} />
-				</div>
-			)}
 			<MainLayout activeMenuItem={'home'}>
 				<div className='page-content mx-14 my-[34px]'>
 					<div className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</div>
@@ -72,9 +67,15 @@ const Home = () => {
 							<Navbar selectedYear={selectedYear} handlePageSelect={page => setActivePage(page)} />
 							<YearFilter handleYearSelect={year => setSelectedYear(year)} />
 						</div>
-						{activePage === 1 && <Performance projectsInfo={projectsInfo} />}
-						{activePage === 2 && <DevelopmentRevenueCosts />}
-						{activePage === 3 && <Plan />}
+						{isLoading ? (
+							<LoadingSpinner />
+						) : (
+							<>
+								{activePage === 1 && <Performance projectsInfo={projectsInfo} />}
+								{activePage === 2 && <DevelopmentRevenueCosts />}
+								{activePage === 3 && <Plan />}
+							</>
+						)}
 					</div>
 				</div>
 			</MainLayout>
