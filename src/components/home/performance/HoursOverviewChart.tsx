@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 import DataCard from 'src/shared/components/card/DataCard';
+import DataSelector from 'src/shared/components/utils/DataSelector';
 
 const data = [
 	{ month: 'January: 1/1/2023', 'Grand Total Hours Available': 3310, 'Grand Total Hours Billed': 450 },
@@ -16,22 +17,33 @@ const HoursOverviewChart = () => {
 	const [firstOption, setFirstOption] = useState(true);
 	const [secondOption, setSecondOption] = useState(true);
 
-	const handleSelection = () => {
-		const toggleFirstOption = () => setFirstOption(!firstOption);
-		const toggleSecondOption = () => setSecondOption(!secondOption);
-		return { toggleFirstOption, toggleSecondOption };
-	};
+	const headerContent = (
+		<>
+			<div className='flex items-center gap-[10px]'>
+				<h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>Hours overview</h2>
+				<a href='#' className='font-inter-medium text-base font-medium leading-[19px] text-sage-green underline'>
+					See Details
+				</a>
+			</div>
+			<div className='flex gap-4'>
+				<DataSelector
+					label='Grand Total Hours Available'
+					color='#FF9F5A'
+					checked={firstOption}
+					toggle={() => setFirstOption(!firstOption)}
+				/>
+				<DataSelector
+					label='Grand Total Hours Billed'
+					color='#7BB99F'
+					checked={secondOption}
+					toggle={() => setSecondOption(!secondOption)}
+				/>
+			</div>
+		</>
+	);
 
 	return (
-		<DataCard
-			className='h-[392px] w-[1050px]'
-			text='Hours overview'
-			linkIsVisible={true}
-			selectorsAreVisible={true}
-			handleSelection={handleSelection}
-			selectedOptions={{ firstOption, secondOption }}
-			textOptions={{ textFirstOption: 'Grand Total Hours Available', textSecondOption: 'Grand Total Hours Billed' }}
-		>
+		<DataCard className='h-[392px] w-[1050px] rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
 			<ResponsiveContainer width='100%' height='65%' className='mt-[38px]'>
 				<BarChart data={data}>
 					<CartesianGrid strokeDasharray='3 3' vertical={false} />

@@ -80,8 +80,14 @@ const SalesChannelsChart = ({ chartValues }: Props) => {
 	const sum = chartData.reduce((total, entry) => total + entry.value, 0);
 	const shouldRenderChart = sum !== 0;
 
+	const headerContent = (
+		<div className='flex items-center gap-[10px]'>
+			<h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>Sales channels</h2>
+		</div>
+	);
+
 	return (
-		<DataCard className='h-[342px] w-[510px]' text='Sales channels'>
+		<DataCard className='h-[342px] w-[510px] rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
 			{shouldRenderChart ? (
 				<ResponsiveContainer width='100%' height='100%' className='mt-[38px]'>
 					<PieChart>

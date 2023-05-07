@@ -13,6 +13,7 @@ type Props = {
 
 const CustomLabel = (props: any) => {
 	const { x, y, value } = props;
+
 	return (
 		<text
 			x={x}
@@ -45,8 +46,14 @@ const ProjectScopeChart = ({ chartValues }: Props) => {
 	const maxValue = Math.max(...chartData.map(item => item.value));
 	const shouldRenderChart = maxValue !== 0;
 
+	const headerContent = (
+		<div className='flex items-center gap-[10px]'>
+			<h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>Project scope</h2>
+		</div>
+	);
+
 	return (
-		<DataCard className='h-[342px] w-[510px]' text='Project scope'>
+		<DataCard className='h-[342px] w-[510px] rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
 			{shouldRenderChart ? (
 				<ResponsiveContainer width='100%' height='100%' className='mt-[38px]'>
 					<BarChart data={chartData} layout='vertical' barSize={40}>
@@ -68,7 +75,7 @@ const ProjectScopeChart = ({ chartValues }: Props) => {
 							fontWeight={400}
 							fontSize={14}
 						/>
-						<YAxis type='category' dataKey='name' axisLine={false} hide={true} />
+						<YAxis type='category' dataKey='name' axisLine={false} hide />
 						<Tooltip />
 						<Bar dataKey='value' label='none' barSize={32} radius={[6, 6, 6, 6]}>
 							{chartData.map((entry, index) => {
