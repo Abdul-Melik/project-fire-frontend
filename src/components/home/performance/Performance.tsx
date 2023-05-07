@@ -9,9 +9,9 @@ import {
 	hourlyPrice,
 } from 'src/assets';
 import InfoCard from 'src/shared/components/cards/InfoCard';
-import SalesChannelsChart from 'src/components/home/performance/charts/SalesChannelsChart';
-import ProjectScopeChart from 'src/components/home/performance/charts/ProjectScopeChart';
-import HoursOverviewChart from 'src/components/home/performance/charts/HoursOverviewChart';
+import SalesChannels from 'src/components/home/performance/charts/SalesChannels';
+import ProjectScope from 'src/components/home/performance/charts/ProjectScope';
+import HoursOverview from 'src/components/home/performance/charts/HoursOverview';
 
 type Props = {
 	projectsInfo: {
@@ -96,11 +96,11 @@ const Performance = ({ projectsInfo }: Props) => {
 				/>
 			</div>
 			<div className='mt-[42px] flex gap-[30px]'>
-				<SalesChannelsChart chartValues={projectsInfo?.salesChannelPercentage ?? []} />
-				<ProjectScopeChart chartValues={projectsInfo?.projectTypeCount ?? []} />
+				<SalesChannels chartValues={projectsInfo?.salesChannelPercentage ?? []} />
+				<ProjectScope chartValues={projectsInfo?.projectTypeCount ?? []} />
 			</div>
 			<div className='mt-[42px]'>
-				<HoursOverviewChart />
+				<HoursOverview />
 			</div>
 		</>
 	);

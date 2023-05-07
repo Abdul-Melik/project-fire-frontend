@@ -31,7 +31,7 @@ const CustomLabel = (props: any) => {
 
 const barColors = ['#DFE3E1', '#7BB99F'];
 
-const ProjectScopeChart = ({ chartValues }: Props) => {
+const ProjectScope = ({ chartValues }: Props) => {
 	const chartData: ChartData[] = [
 		{
 			name: 'Fixed',
@@ -93,4 +93,4 @@ const ProjectScopeChart = ({ chartValues }: Props) => {
 	);
 };
 
-export default ProjectScopeChart;
+export default ProjectScope;

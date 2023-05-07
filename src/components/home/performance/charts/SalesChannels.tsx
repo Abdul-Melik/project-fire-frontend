@@ -57,7 +57,7 @@ const renderCustomizedLabel = ({
 	);
 };
 
-const SalesChannelsChart = ({ chartValues }: Props) => {
+const SalesChannels = ({ chartValues }: Props) => {
 	const chartData: ChartData[] = [
 		{
 			name: 'Online',
@@ -127,4 +127,4 @@ const SalesChannelsChart = ({ chartValues }: Props) => {
 	);
 };
 
-export default SalesChannelsChart;
+export default SalesChannels;
