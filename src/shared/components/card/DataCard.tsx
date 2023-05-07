@@ -47,12 +47,20 @@ const DataCard = ({
 					)}
 				</div>
 				{selectorsAreVisible && (
-					<DataSelector
-						textFirstOption={textFirstOption}
-						textSecondOption={textSecondOption}
-						selectedOptions={selectedOptions}
-						onChange={handleSelection}
-					/>
+					<div className='flex gap-4'>
+						<DataSelector
+							label={textFirstOption}
+							color='#FF9F5A'
+							checked={selectedOptions.firstOption}
+							toggle={handleSelection().toggleFirstOption}
+						/>
+						<DataSelector
+							label={textSecondOption}
+							color='#7BB99F'
+							checked={selectedOptions.secondOption}
+							toggle={handleSelection().toggleSecondOption}
+						/>
+					</div>
 				)}
 			</div>
 			{children}
