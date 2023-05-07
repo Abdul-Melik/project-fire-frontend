@@ -7,42 +7,42 @@ import DataSelector from 'src/shared/components/utils/DataSelector';
 const data = [
 	{
 		organisation: 'AlphaBid',
-		'Grand Total Revenues': 125310,
+		'Grand Total Total Billed': 125310,
 		'Grand Total Costs': 434450,
 	},
 	{
 		organisation: 'Audiowolf',
-		'Grand Total Revenues': 554433,
+		'Grand Total Total Billed': 554433,
 		'Grand Total Costs': 233705,
 	},
 	{
 		organisation: 'GIZ',
-		'Grand Total Revenues': 223000,
+		'Grand Total Total Billed': 223000,
 		'Grand Total Costs': 113001,
 	},
 	{
 		organisation: 'HUB71',
-		'Grand Total Revenues': 334300,
+		'Grand Total Total Billed': 334300,
 		'Grand Total Costs': 444225,
 	},
 	{
 		organisation: 'Kutuby',
-		'Grand Total Revenues': 111080,
+		'Grand Total Total Billed': 111080,
 		'Grand Total Costs': 345000,
 	},
 	{
 		organisation: 'Travelspot',
-		'Grand Total Revenues': 441501,
+		'Grand Total Total Billed': 441501,
 		'Grand Total Costs': 111610,
 	},
 	{
 		organisation: 'Virgin Pulse',
-		'Grand Total Revenues': 111501,
+		'Grand Total Total Billed': 111501,
 		'Grand Total Costs': 444610,
 	},
 	{
 		organisation: 'Zeppelin (CAT)',
-		'Grand Total Revenues': 551501,
+		'Grand Total Total Billed': 551501,
 		'Grand Total Costs': 62210,
 	},
 ];
@@ -63,7 +63,7 @@ const RevenuesCostsActual = () => {
 			</div>
 			<div className='flex gap-4'>
 				<DataSelector
-					label='Grand Total Revenues'
+					label='Grand Total Total Billed'
 					color='#FF9F5A'
 					checked={firstOption}
 					toggle={() => setFirstOption(!firstOption)}
@@ -102,7 +102,7 @@ const RevenuesCostsActual = () => {
 						tick={{ fontFamily: 'Gilroy-Medium', fontWeight: 500, fontSize: 14, fill: '#232F2D' }}
 					/>
 					<Tooltip />
-					{firstOption && <Bar dataKey='Grand Total Revenues' fill='#FF9F5A' radius={[4, 4, 0, 0]} barSize={20} />}
+					{firstOption && <Bar dataKey='Grand Total Total Billed' fill='#FF9F5A' radius={[4, 4, 0, 0]} barSize={20} />}
 					{secondOption && <Bar dataKey='Grand Total Costs' fill='#7BB99F' radius={[4, 4, 0, 0]} barSize={20} />}
 				</BarChart>
 			</ResponsiveContainer>
