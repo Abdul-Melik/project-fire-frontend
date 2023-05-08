@@ -1,11 +1,13 @@
 import { revenue, directCosts, margin, avgMargin } from 'src/assets';
+
 import InfoCard from 'src/shared/components/cards/InfoCard';
 import SummaryCard from 'src/shared/components/cards/SummaryCard';
-import RevenuesCostsActual from './charts/RevenuesCostsActual';
+import RevenuesCostsActual from 'src/components/home/development-revenue-costs/charts/RevenuesCostsActual';
+import RevenuesCostsPerMonth from 'src/components/home/development-revenue-costs/charts/RevenuesCostsPerMonth';
 
 const DevelopmentRevenueCosts = () => {
 	return (
-		<>
+		<div className='flex flex-col gap-[42px]'>
 			<div className='grid grid-cols-[1fr,minmax(330px,auto)] gap-[30px]'>
 				<div className='grid auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(330px,1fr))] gap-[30px]'>
 					<InfoCard
@@ -40,13 +42,14 @@ const DevelopmentRevenueCosts = () => {
 				<SummaryCard
 					description='Actual gross profit'
 					amount={'-284,086.00 KM'}
-					className='overflow-hidden rounded-md bg-winter-mint'
+					className='gap-2 overflow-hidden rounded-md bg-winter-mint'
+					descriptionClassName='text-[18px] leading-[28px]'
+					amountClassName='text-[30px] leading-[40px]'
 				/>
 			</div>
-			<div className='mt-[42px]'>
-				<RevenuesCostsActual />
-			</div>
-		</>
+			<RevenuesCostsActual />
+			<RevenuesCostsPerMonth />
+		</div>
 	);
 };
 

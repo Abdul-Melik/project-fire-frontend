@@ -24,7 +24,7 @@ const Navbar = ({ navLabels, handlePageSelect }: Props) => {
 							setSelectedPage(index + 1);
 						}}
 						className={`${selectedPage === index + 1 ? activeLink : inactiveLink} ${
-							index === 0 ? 'rounded-l border-l' : ''
+							index === 0 ? 'rounded-l border-l' : 'border-l-0'
 						} ${index === navLabels.length - 1 ? 'rounded-r' : ''}`}
 					/>
 				))}

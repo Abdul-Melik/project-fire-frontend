@@ -26,7 +26,7 @@ type Props = {
 
 const Performance = ({ projectsInfo }: Props) => {
 	return (
-		<>
+		<div className='flex flex-col gap-[42px]'>
 			<div className='grid auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-[30px]'>
 				<InfoCard
 					description='Number of projects'
@@ -95,14 +95,12 @@ const Performance = ({ projectsInfo }: Props) => {
 					className='overflow-hidden rounded-md border border-ashen-grey'
 				/>
 			</div>
-			<div className='mt-[42px] flex gap-[30px]'>
+			<div className='flex gap-[30px]'>
 				<SalesChannels chartValues={projectsInfo?.salesChannelPercentage ?? []} />
 				<ProjectScope chartValues={projectsInfo?.projectTypeCount ?? []} />
 			</div>
-			<div className='mt-[42px]'>
-				<HoursOverview />
-			</div>
-		</>
+			<HoursOverview />
+		</div>
 	);
 };
 
