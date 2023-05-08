@@ -79,7 +79,7 @@ const LoginForm = ({ handleError }: Props) => {
 						handleInput={password => setPassword(password)}
 					/>
 					<button
-						className='mt-[13px] w-full rounded-md bg-deep-teal py-3 pl-3 font-gilroy-semi-bold font-semibold text-white hover:saturate-200'
+						className='mt-[13px] w-full rounded-md bg-deep-teal py-3 pl-3 font-gilroy-semi-bold font-semibold text-white hover:saturate-[400%]'
 						type='submit'
 					>
 						Log In
