@@ -90,6 +90,19 @@ const ProjectsTable = (props: Props) => {
     } else return "bg-[#CECECE]";
   };
 
+  const statusOrder: any = {
+    active: 1,
+    "on-hold": 2,
+    inactive: 3,
+    completed: 4,
+  };
+
+  const sortedProjects = projects.sort((a, b) => {
+    const statusA = a.projectStatus.toLowerCase();
+    const statusB = b.projectStatus.toLowerCase();
+    return statusOrder[statusA] - statusOrder[statusB];
+  });
+
   return (
     <div className="w-[1050px] rounded-md border border-ashen-grey">
       <div className="flex items-center">
