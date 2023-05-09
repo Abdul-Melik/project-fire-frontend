@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import search from "../../assets/svg/search.svg";
 import axios from "axios";
 import AuthContext from "src/shared/context/auth-context";
+import Avatars from "./Avatars";
 
 type Props = {};
 enum ProjectType {
@@ -111,7 +112,7 @@ const ProjectsTable = (props: Props) => {
         </h2>
         <div className="flex h-[30px] items-center bg-[#F5FFFA]">
           <h2 className="px-4 text-center font-gilroy-medium text-sm text-moss-green">
-            45 Total
+            {projects.length} total
           </h2>
         </div>
         <div className="relative ml-auto w-4/12">
@@ -140,16 +141,23 @@ const ProjectsTable = (props: Props) => {
         </thead>
         <tbody>
           {projects.map((item, index) => (
-            <tr className="h-[60px] w-[157px] border-t border-ashen-grey text-left font-gilroy-regular text-sm text-[#6C6D75]">
+            <tr
+              key={index}
+              className="h-[60px] w-[157px] border-t border-ashen-grey text-left font-gilroy-regular text-sm text-[#6C6D75]"
+            >
               <td className="w-[150px] pl-4">{item.name}</td>
-              <td className="w-[150px] pl-4">{item.description}</td>
+              <td className="w-[150px] pl-4">
+                {item.description.slice(0, 15)}...
+              </td>
               <td className="w-[150px] pl-4">
                 {getDates(item).startDateString} -{" "}
                 {getDates(item).endDateString}
               </td>
-              <td className="w-[150px] pl-5">6</td>
-              <td className="w-[150px] pl-4">{item.hourlyRate}</td>
-              <td className="w-[150px] pl-4">{item.projectValueBAM}</td>
+              <td className="w-[150px] pl-5">
+                <Avatars />
+              </td>
+              <td className="w-[150px] pl-4">${item.hourlyRate}</td>
+              <td className="w-[150px] pl-4">{item.projectValueBAM} KM</td>
               <td className="flex w-[150px] pl-9 pt-[19px]">
                 {" "}
                 <div
@@ -161,7 +169,6 @@ const ProjectsTable = (props: Props) => {
               </td>
             </tr>
           ))}
-          {/* Add more rows as needed */}
         </tbody>
       </table>
     </div>
