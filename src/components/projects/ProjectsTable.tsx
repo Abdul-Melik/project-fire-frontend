@@ -145,7 +145,7 @@ const ProjectsTable = ({ data }: Props) => {
   });
 
   return (
-    <div className="w-[1050px] rounded-md border border-ashen-grey">
+    <div className="w-full rounded-md border border-ashen-grey">
       <div className="flex items-center">
         <h2 className="px-4 py-[23px] font-gilroy-medium text-lg">
           Projects Table

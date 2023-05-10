@@ -67,7 +67,7 @@ const Avatars = ({ images }: Props) => {
           key={index}
           src={avatar.src}
           alt={avatar.alt}
-          className="-ml-1"
+          className={!images ? "-ml-1 rounded-none" : "-ml-1"}
         />
       ))}
       {overflowCount > 0 && (
