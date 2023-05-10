@@ -2,8 +2,10 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import search from "../../assets/svg/search.svg";
 import axios from "axios";
 import AuthContext from "src/shared/context/auth-context";
+import avatarImg from "../../assets/img/avatar.png";
 import Avatars from "./Avatars";
 import { TIMEOUT } from "dns";
+import { avatar } from "src/assets";
 
 type Props = {
   data: Project[];
@@ -90,6 +92,10 @@ const ProjectsTable = ({ data }: Props) => {
             employees[i].employee._id === usersData[j].employee._id
           ) {
             images.push(usersData[j].image);
+            break;
+          }
+          if (j === usersData.length - 1) {
+            images.push(avatarImg);
           }
         }
       }
