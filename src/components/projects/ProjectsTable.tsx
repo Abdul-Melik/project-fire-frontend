@@ -155,7 +155,7 @@ const ProjectsTable = ({ data }: Props) => {
             {data.length} total
           </h2>
         </div>
-        <div className="relative ml-auto w-4/12">
+        <div className="relative ml-auto mr-4">
           <input
             className="font-gilroy h-10 w-[315px] rounded-sm border border-ashen-grey pl-[46px] text-[#57585F]"
             placeholder="Search"
