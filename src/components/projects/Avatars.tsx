@@ -48,6 +48,9 @@ const Avatars = ({ images }: Props) => {
   ];
 
   //create variable that will hold array of objects from the images array
+  if (!images) {
+    images = pravatarUrls;
+  }
   const avatars = images.map((url, index) => ({
     src: url,
     alt: `avatar-${index}`,
