@@ -1,9 +1,15 @@
-import { FC, useState } from "react";
+import axios from "axios";
+import { FC, Key, useState } from "react";
 
 type AvatarProps = {
   src: string;
   alt: string;
   className?: string;
+};
+
+//prop types
+type Props = {
+  images: string[];
 };
 
 const Avatar: FC<AvatarProps> = ({ src, alt, className }) => {
@@ -31,7 +37,7 @@ const Avatar: FC<AvatarProps> = ({ src, alt, className }) => {
   );
 };
 
-const Avatars = () => {
+const Avatars = ({ images }: Props) => {
   const pravatarUrls = [
     "https://i.pravatar.cc/150?u=david",
     "https://i.pravatar.cc/150?u=john",
@@ -41,20 +47,29 @@ const Avatars = () => {
     "https://i.pravatar.cc/150?u=jane",
   ];
 
-  const avatars = pravatarUrls.map((url) => ({ src: url, alt: "Pravatar" }));
+  //create variable that will hold array of objects from the images array
+  const avatars = images.map((url, index) => ({
+    src: url,
+    alt: `avatar-${index}`,
+  }));
 
   const maxVisibleAvatars = 3;
 
   const overflowCount = Math.max(0, avatars.length - maxVisibleAvatars);
 
   return (
-    <div className='-ml-0.5 flex flex-wrap -space-x-3'>
+    <div className="-ml-0.5 flex flex-wrap -space-x-3">
       {avatars.slice(0, maxVisibleAvatars).map((avatar, index) => (
-        <Avatar key={index} src={avatar.src} alt={avatar.alt} className={index > 0 ? "-ml-1" : ""} />
+        <Avatar
+          key={index}
+          src={avatar.src}
+          alt={avatar.alt}
+          className="-ml-1"
+        />
       ))}
       {overflowCount > 0 && (
-        <div className='-ml-0.5'>
-          <span className='absolute flex h-[35px] w-[35px] items-center justify-center rounded-full bg-deep-teal text-center font-gilroy-regular text-sm font-semibold not-italic leading-[22px] text-white ring-white'>
+        <div className="-ml-0.5">
+          <span className="absolute flex h-[35px] w-[35px] items-center justify-center rounded-full bg-deep-teal text-center font-gilroy-regular text-sm font-semibold not-italic leading-[22px] text-white ring-white">
             +{overflowCount}
           </span>
         </div>

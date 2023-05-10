@@ -27,10 +27,18 @@ interface Project {
   endDate: Date;
   actualEndDate: Date;
   projectType: ProjectType;
+  projectStatus: string;
   hourlyRate: number;
   projectValueBAM: number;
   salesChannel: SalesChannel;
   finished: boolean;
+  employees: [
+    {
+      employee: {
+        _id: string;
+      };
+    }
+  ];
 }
 
 const Projects = () => {
@@ -98,7 +106,7 @@ const Projects = () => {
                 handlePageSelect={(page) => setActivePage(page)}
               />
             </div>
-            <ProjectsTable />
+            <ProjectsTable data={projects} />
             {isLoading ? <LoadingSpinner /> : null}
           </div>
         </div>

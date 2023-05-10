@@ -3,8 +3,11 @@ import search from "../../assets/svg/search.svg";
 import axios from "axios";
 import AuthContext from "src/shared/context/auth-context";
 import Avatars from "./Avatars";
+import { TIMEOUT } from "dns";
 
-type Props = {};
+type Props = {
+  data: Project[];
+};
 enum ProjectType {
   Fixed = "fixed",
   OnGoing = "on-going",
@@ -29,40 +32,71 @@ interface Project {
   projectValueBAM: number;
   salesChannel: SalesChannel;
   finished: boolean;
+  employees: [
+    {
+      employee: {
+        _id: string;
+      };
+    }
+  ];
+}
+interface user {
+  id: string;
+  image: string;
 }
 
-const ProjectsTable = (props: Props) => {
+const ProjectsTable = ({ data }: Props) => {
+  //get all the users from the db using axios
   const { token } = useContext(AuthContext);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [activePage, setActivePage] = useState(1);
-  const [projects, setProjects] = useState<Project[]>([]);
-
+  const [users, setUsers] = useState<user[]>([]);
   const baseUrl = import.meta.env.VITE_BASE_URL;
-
-  const getProjects = useCallback(async () => {
+  const [usersData, setUsersData] = useState<any>([]);
+  const getUsers = useCallback(async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/projects`, {
+      const response = await axios.get(`${baseUrl}/api/users`, {
         headers: { Authorization: "Bearer " + token },
       });
-      setProjects(response.data);
+      return response.data;
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
-        setError(error.response?.data.error);
+        console.log(error.response?.data.error);
       } else {
         console.error("Unexpected error: ", error);
       }
     }
-    setIsLoading(false);
   }, [token]);
-
+  //get the users on mount
   useEffect(() => {
-    if (token) getProjects();
-  }, [token]);
+    const getUsersData = async () => {
+      const data = await getUsers();
+      if (data.length > 0) {
+        setUsersData(data);
+      }
+    };
+    getUsersData();
+  }, [getUsers]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  //if the employee id in data matches the id in users, return the image. the input will be an array of employees
+  const getImages = (employees: any) => {
+    if (usersData.length > 0) {
+      const images: any = [];
+      for (let i = 0; i < employees.length; i++) {
+        for (let j = 0; j < usersData.length; j++) {
+          if (
+            employees[i].employee &&
+            employees[i].employee._id &&
+            usersData[j].employee &&
+            usersData[j].employee._id &&
+            employees[i].employee._id === usersData[j].employee._id
+          ) {
+            images.push(usersData[j].image);
+          }
+        }
+      }
+      console.log(images);
+      return images;
+    } else setTimeout(getImages, 1000);
+  };
 
   //get the dates from the project
   const getDates = (project: Project) => {
@@ -98,7 +132,7 @@ const ProjectsTable = (props: Props) => {
     completed: 4,
   };
 
-  const sortedProjects = projects.sort((a, b) => {
+  const sortedProjects = data.sort((a, b) => {
     const statusA = a.projectStatus.toLowerCase();
     const statusB = b.projectStatus.toLowerCase();
     return statusOrder[statusA] - statusOrder[statusB];
@@ -112,7 +146,7 @@ const ProjectsTable = (props: Props) => {
         </h2>
         <div className="flex h-[30px] items-center bg-[#F5FFFA]">
           <h2 className="px-4 text-center font-gilroy-medium text-sm text-moss-green">
-            {projects.length} total
+            {data.length} total
           </h2>
         </div>
         <div className="relative ml-auto w-4/12">
@@ -140,7 +174,7 @@ const ProjectsTable = (props: Props) => {
           </tr>
         </thead>
         <tbody>
-          {projects.map((item, index) => (
+          {data.map((item, index) => (
             <tr
               key={index}
               className="h-[60px] w-[157px] border-t border-ashen-grey text-left font-gilroy-regular text-sm text-[#6C6D75]"
@@ -154,7 +188,7 @@ const ProjectsTable = (props: Props) => {
                 {getDates(item).endDateString}
               </td>
               <td className="w-[150px] pl-5">
-                <Avatars />
+                <Avatars images={getImages(item.employees)} />
               </td>
               <td className="w-[150px] pl-4">${item.hourlyRate}</td>
               <td className="w-[150px] pl-4">{item.projectValueBAM} KM</td>
