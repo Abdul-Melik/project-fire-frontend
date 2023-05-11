@@ -55,9 +55,6 @@ const Projects = () => {
 			setProjects(response.data.projects);
 			setTotalNumberOfProjects(response.data.pageInfo.total);
 			setLastPage(response.data.pageInfo.lastPage);
-			if (currentPage > lastPage) {
-				setCurrentPage(lastPage);
-			}
 		} catch (error: any) {
 			if (axios.isAxiosError(error)) {
 				setError(error.response?.data.error);
@@ -66,11 +63,11 @@ const Projects = () => {
 			}
 		}
 		setIsLoading(false);
-	}, [token, projectsPerPage, currentPage, lastPage]);
+	}, [token, projectsPerPage, currentPage]);
 
 	useEffect(() => {
 		if (token) getProjects();
-	}, [token, projectsPerPage, currentPage, lastPage]);
+	}, [token, projectsPerPage, currentPage]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -117,7 +114,10 @@ const Projects = () => {
 						currentPage={currentPage}
 						lastPage={lastPage}
 						projectsPerPage={projectsPerPage}
-						handleProjectsPerPage={projectsPerPage => setProjectsPerPage(projectsPerPage)}
+						handleProjectsPerPage={projectsPerPage => {
+							setProjectsPerPage(projectsPerPage);
+							setCurrentPage(1);
+						}}
 						handlePageChange={pageNumber => setCurrentPage(pageNumber)}
 					/>
 				</div>

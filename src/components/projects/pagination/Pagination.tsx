@@ -20,15 +20,7 @@ const Pagination = ({
 	handleProjectsPerPage,
 	handlePageChange,
 }: Props) => {
-	const [pageNumbers, setPageNumbers] = useState<number[]>([]);
-
-	useEffect(
-		() =>
-			setPageNumbers(
-				Array.from({ length: Math.ceil(totalNumberOfProjects / projectsPerPage) }, (_, index) => index + 1)
-			),
-		[totalNumberOfProjects, projectsPerPage]
-	);
+	const pageNumbers = Array.from({ length: lastPage }, (_, index) => index + 1);
 
 	return (
 		<div className='flex items-center justify-between'>
@@ -40,11 +32,13 @@ const Pagination = ({
 					<ProjectsPerPageSelector projectsPerPage={projectsPerPage} handleProjectsPerPage={handleProjectsPerPage} />
 				</div>
 				<span className='font-["Open_Sans"] text-sm font-semibold leading-[30px] tracking-[0.15px] text-whispering-gray'>
-					{(currentPage - 1) * projectsPerPage + 1} -{' '}
+					{(currentPage - 1) * projectsPerPage + 1}
+					{' - '}
 					{currentPage * projectsPerPage < totalNumberOfProjects
 						? currentPage * projectsPerPage
-						: totalNumberOfProjects}{' '}
-					of {totalNumberOfProjects}
+						: totalNumberOfProjects}
+					{' of '}
+					{totalNumberOfProjects}
 				</span>
 			</div>
 			<div className='flex gap-2'>
