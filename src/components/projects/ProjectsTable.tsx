@@ -143,67 +143,63 @@ const ProjectsTable = ({ data }: Props) => {
     const statusB = b.projectStatus.toLowerCase();
     return statusOrder[statusA] - statusOrder[statusB];
   });
+  // Search Bar
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredData = data.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
-    <div className="w-full rounded-md border border-ashen-grey">
-      <div className="flex items-center">
-        <h2 className="px-4 py-[23px] font-gilroy-medium text-lg">
-          Projects Table
-        </h2>
-        <div className="flex h-[30px] items-center bg-[#F5FFFA]">
-          <h2 className="px-4 text-center font-gilroy-medium text-sm text-moss-green">
-            {data.length} total
-          </h2>
+    <div className='w-full rounded-md border border-ashen-grey'>
+      <div className='flex items-center'>
+        <h2 className='px-4 py-[23px] font-gilroy-medium text-lg'>Projects Table</h2>
+        <div className='flex h-[30px] items-center bg-[#F5FFFA]'>
+          <h2 className='px-4 text-center font-gilroy-medium text-sm text-moss-green'>{data.length} total</h2>
         </div>
-        <div className="relative ml-auto mr-4">
+        <div className='relative ml-auto mr-4'>
           <input
-            className="font-gilroy h-10 w-[315px] rounded-sm border border-ashen-grey pl-[46px] text-[#57585F]"
-            placeholder="Search"
+            className='font-gilroy h-10 w-[315px] rounded-sm border border-ashen-grey pl-[46px] text-[#57585F]'
+            placeholder='Search'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <img
             src={search}
-            className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform cursor-pointer"
-            alt="search-icon"
+            className='absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform cursor-pointer'
+            alt='search-icon'
           />
         </div>
       </div>
-      <table className="w-full border-t border-ashen-grey">
-        <thead className="font-gilroy-medium text-sm text-[#6C6D75]">
-          <tr className="h-[40px] text-left">
-            <th className="w-[150px] pl-4">Name</th>
-            <th className="w-[150px] pl-4">Description</th>
-            <th className="w-[150px] pl-4">Duration (from-to)</th>
-            <th className="w-[150px] pl-5">Developers</th>
-            <th className="w-[150px] pl-4">Hourly rate</th>
-            <th className="w-[150px] pl-4">Project value in BAM</th>
-            <th className="w-[150px] pl-9">Status</th>
+      <table className='w-full border-t border-ashen-grey'>
+        <thead className='font-gilroy-medium text-sm text-[#6C6D75]'>
+          <tr className='h-[40px] text-left'>
+            <th className='w-[150px] pl-4'>Name</th>
+            <th className='w-[150px] pl-4'>Description</th>
+            <th className='w-[150px] pl-4'>Duration (from-to)</th>
+            <th className='w-[150px] pl-5'>Developers</th>
+            <th className='w-[150px] pl-4'>Hourly rate</th>
+            <th className='w-[150px] pl-4'>Project value in BAM</th>
+            <th className='w-[150px] pl-9'>Status</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
+          {filteredData.map((item, index) => (
             <tr
               key={index}
-              className="h-[60px] w-[157px] border-t border-ashen-grey text-left font-gilroy-regular text-sm text-[#6C6D75]"
+              className='h-[60px] w-[157px] border-t border-ashen-grey text-left font-gilroy-regular text-sm text-[#6C6D75]'
             >
-              <td className="w-[150px] pl-4">{item.name}</td>
-              <td className="w-[150px] pl-4">
-                {item.description.slice(0, 15)}...
+              <td className='w-[150px] pl-4'>{item.name}</td>
+              <td className='w-[150px] pl-4'>{item.description.slice(0, 15)}...</td>
+              <td className='w-[150px] pl-4'>
+                {getDates(item).startDateString} - {getDates(item).endDateString}
               </td>
-              <td className="w-[150px] pl-4">
-                {getDates(item).startDateString} -{" "}
-                {getDates(item).endDateString}
-              </td>
-              <td className="w-[150px] pl-5">
+              <td className='w-[150px] pl-5'>
                 <Avatars images={getImages(item.employees)} />
               </td>
-              <td className="w-[150px] pl-4">${item.hourlyRate}</td>
-              <td className="w-[150px] pl-4">{item.projectValueBAM} KM</td>
-              <td className="flex w-[150px] pl-9 pt-[19px]">
+              <td className='w-[150px] pl-4'>${item.hourlyRate}</td>
+              <td className='w-[150px] pl-4'>{item.projectValueBAM} KM</td>
+              <td className='flex w-[150px] pl-9 pt-[19px]'>
                 {" "}
                 <div
-                  className={`mb-auto mr-2 mt-auto h-[6px] w-[6px] rounded-full ${getColor(
-                    item.projectStatus
-                  )}`}
+                  className={`mb-auto mr-2 mt-auto h-[6px] w-[6px] rounded-full ${getColor(item.projectStatus)}`}
                 ></div>
                 {item.projectStatus}
               </td>

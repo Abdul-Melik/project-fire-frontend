@@ -55,7 +55,7 @@ const Projects = () => {
       const response = await axios.get(`${baseUrl}/api/projects`, {
         headers: { Authorization: "Bearer " + token },
       });
-      setProjects(response.data);
+      setProjects(response.data.projects);
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
         setError(error.response?.data.error);
@@ -78,33 +78,23 @@ const Projects = () => {
 
   return (
     <>
-      <Modal
-        onCancel={() => setError(null)}
-        header="An error occurred!"
-        show={!!error}
-        isError={!!error}
-      >
+      <Modal onCancel={() => setError(null)} header='An error occurred!' show={!!error} isError={!!error}>
         <p>{error}</p>
       </Modal>
       <MainLayout activeMenuItem={"projects"}>
-        <div className="mx-14 my-[34px]">
-          <div className="flex items-center justify-between">
-            <div className="font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest">
-              Projects
-            </div>
+        <div className='mx-14 my-[34px]'>
+          <div className='flex items-center justify-between'>
+            <div className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</div>
             <button
-              className="rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white hover:saturate-[400%]"
+              className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white hover:saturate-[400%]'
               onClick={() => {}}
             >
               Create new project
             </button>
           </div>
-          <div className="mt-[30px] flex flex-col">
-            <div className="mb-12">
-              <Navbar
-                navLabels={navLabels}
-                handlePageSelect={(page) => setActivePage(page)}
-              />
+          <div className='mt-[30px] flex flex-col'>
+            <div className='mb-12'>
+              <Navbar navLabels={navLabels} handlePageSelect={(page) => setActivePage(page)} />
             </div>
             <ProjectsTable data={projects} />
             {isLoading ? <LoadingSpinner /> : null}
