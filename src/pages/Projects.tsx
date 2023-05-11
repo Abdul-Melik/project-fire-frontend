@@ -47,6 +47,7 @@ const Projects = () => {
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
 	const getProjects = useCallback(async () => {
+		setIsLoading(true);
 		try {
 			const response = await axios.get(`${baseUrl}/api/projects?limit=${projectsPerPage}&page=${currentPage}`, {
 				headers: { Authorization: 'Bearer ' + token },

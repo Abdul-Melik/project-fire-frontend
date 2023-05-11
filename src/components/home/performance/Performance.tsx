@@ -89,7 +89,10 @@ const Performance = ({ projectsInfo }: Props) => {
 				/>
 				<InfoCard
 					description='Avg. hourly price'
-					amount={`$${projectsInfo?.averageHourlyRate ?? 0}`}
+					amount={`$${(projectsInfo?.averageHourlyRate ?? 0).toLocaleString('en-US', {
+						minimumFractionDigits: 2,
+						maximumFractionDigits: 2,
+					})}`}
 					iconSrc={hourlyPrice}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
