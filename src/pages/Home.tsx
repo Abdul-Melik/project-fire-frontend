@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import AuthContext from 'src/shared/context/auth-context';
 import Modal from 'src/shared/components/utils/Modal';
-import YearSelector from 'src/shared/components/utils/YearSelector';
+import YearSelector from 'src/components/home/performance/YearSelector';
 import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import MainLayout from 'src/shared/components/layout/MainLayout';
 import Navbar from 'src/shared/components/navbar/Navbar';

@@ -6,6 +6,7 @@ import Modal from 'src/shared/components/utils/Modal';
 import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import Navbar from 'src/shared/components/navbar/Navbar';
 import MainLayout from 'src/shared/components/layout/MainLayout';
+import Pagination from 'src/components/projects/pagination/Pagination';
 
 enum ProjectType {
 	Fixed = 'fixed',
@@ -38,15 +39,24 @@ const Projects = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [activePage, setActivePage] = useState(1);
 	const [projects, setProjects] = useState<Project[]>([]);
+	const [totalNumberOfProjects, setTotalNumberOfProjects] = useState(0);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [lastPage, setLastPage] = useState(1);
+	const [projectsPerPage, setProjectsPerPage] = useState(5);
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
 	const getProjects = useCallback(async () => {
 		try {
-			const response = await axios.get(`${baseUrl}/api/projects`, {
+			const response = await axios.get(`${baseUrl}/api/projects?limit=${projectsPerPage}&page=${currentPage}`, {
 				headers: { Authorization: 'Bearer ' + token },
 			});
-			setProjects(response.data);
+			setProjects(response.data.projects);
+			setTotalNumberOfProjects(response.data.pageInfo.total);
+			setLastPage(response.data.pageInfo.lastPage);
+			if (currentPage > lastPage) {
+				setCurrentPage(lastPage);
+			}
 		} catch (error: any) {
 			if (axios.isAxiosError(error)) {
 				setError(error.response?.data.error);
@@ -55,11 +65,11 @@ const Projects = () => {
 			}
 		}
 		setIsLoading(false);
-	}, [token]);
+	}, [token, projectsPerPage, currentPage, lastPage]);
 
 	useEffect(() => {
 		if (token) getProjects();
-	}, [token]);
+	}, [token, projectsPerPage, currentPage, lastPage]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -85,7 +95,7 @@ const Projects = () => {
 					</div>
 					<div className='mt-[30px] flex flex-col'>
 						<div className='mb-12'>
-							<Navbar navLabels={navLabels} handlePageSelect={page => setActivePage(page)} />
+							<Navbar navLabels={navLabels} handlePageSelect={pageNumber => setActivePage(pageNumber)} />
 						</div>
 						{isLoading ? (
 							<LoadingSpinner />
@@ -93,12 +103,22 @@ const Projects = () => {
 							<div className='flex flex-col gap-4'>
 								{projects.map(project => (
 									<div className='border border-black p-2' key={project.name}>
-										{JSON.stringify(project)}
+										{JSON.stringify(project.name)} {JSON.stringify(project.description)}
 									</div>
 								))}
 							</div>
 						)}
 					</div>
+				</div>
+				<div className='mx-14 mb-[25px] mt-[17px]'>
+					<Pagination
+						totalNumberOfProjects={totalNumberOfProjects}
+						currentPage={currentPage}
+						lastPage={lastPage}
+						projectsPerPage={projectsPerPage}
+						handleProjectsPerPage={projectsPerPage => setProjectsPerPage(projectsPerPage)}
+						handlePageChange={pageNumber => setCurrentPage(pageNumber)}
+					/>
 				</div>
 			</MainLayout>
 		</>

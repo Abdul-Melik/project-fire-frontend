@@ -24,6 +24,13 @@ export default {
 				'sage-green': '#7BB99F',
 				'opal-mist': '#EBF4F1',
 				'spicy-apricot': '#FF9F5A',
+				'nightfall-navy': '#505475',
+				'misty-moonstone': '#CACCD2',
+				'midnight-steel': '#404B57',
+				'whispering-gray': '#9EA1B0',
+				'shadow-slate': '#3F3F3F',
+				'silvery-sky': '#C3C8CD',
+				'cloudy-pearl': '#F5F6FB',
 			},
 			fontFamily: {
 				'inter-regular': ['Inter-Regular', 'sans-serif'],
