@@ -96,7 +96,7 @@ const Projects = () => {
             <div className='mb-12'>
               <Navbar navLabels={navLabels} handlePageSelect={(page) => setActivePage(page)} />
             </div>
-            <ProjectsTable data={projects} />
+            <ProjectsTable data={projects} activePage={activePage} />
             {isLoading ? <LoadingSpinner /> : null}
           </div>
         </div>

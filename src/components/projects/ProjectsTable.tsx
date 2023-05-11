@@ -9,6 +9,7 @@ import { avatar } from "src/assets";
 
 type Props = {
   data: Project[];
+  activePage: any;
 };
 enum ProjectType {
   Fixed = "fixed",
@@ -47,7 +48,7 @@ interface user {
   image: string;
 }
 
-const ProjectsTable = ({ data }: Props) => {
+const ProjectsTable = ({ data, activePage }: Props) => {
   //get all the users from the db using axios
   const { token } = useContext(AuthContext);
   const [users, setUsers] = useState<user[]>([]);
@@ -143,9 +144,22 @@ const ProjectsTable = ({ data }: Props) => {
     const statusB = b.projectStatus.toLowerCase();
     return statusOrder[statusA] - statusOrder[statusB];
   });
-  // Search Bar
+
+  // Search Bar & Active/Inactive on Click
   const [searchTerm, setSearchTerm] = useState("");
-  const filteredData = data.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  let filteredData = data.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
+  if (activePage === 2) {
+    filteredData = data.filter((item) => item.projectStatus === "active");
+  } else if (activePage === 3) {
+    filteredData = data.filter((item) => item.projectStatus === "inactive");
+  } else if (activePage === 4) {
+    filteredData = data.filter((item) => item.projectStatus === "completed");
+  }
+
+  if (searchTerm) {
+    filteredData = data.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  }
 
   return (
     <div className='w-full rounded-md border border-ashen-grey'>
@@ -171,7 +185,7 @@ const ProjectsTable = ({ data }: Props) => {
       <table className='w-full border-t border-ashen-grey'>
         <thead className='font-gilroy-medium text-sm text-[#6C6D75]'>
           <tr className='h-[40px] text-left'>
-            <th className='w-[150px] pl-4'>Name</th>
+            <th className='w-[150px] pl-4'>Name </th>
             <th className='w-[150px] pl-4'>Description</th>
             <th className='w-[150px] pl-4'>Duration (from-to)</th>
             <th className='w-[150px] pl-5'>Developers</th>
