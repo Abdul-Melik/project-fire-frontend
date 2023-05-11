@@ -55,7 +55,7 @@ const Projects = () => {
       const response = await axios.get(`${baseUrl}/api/projects`, {
         headers: { Authorization: "Bearer " + token },
       });
-      setProjects(response.data);
+      setProjects(response.data.projects);
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
         setError(error.response?.data.error);
