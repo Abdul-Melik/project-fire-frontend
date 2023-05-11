@@ -9,7 +9,7 @@ type Props = {
 
 const Navbar = ({ navLabels, handlePageSelect }: Props) => {
 	const [selectedPage, setSelectedPage] = useState(1);
-	const activeLink = 'bg-pale-jade text-moss-green font-inter-semi-bold font-semibold';
+	const activeLink = 'bg-aqua-haze text-moss-green font-inter-semi-bold font-semibold';
 	const inactiveLink = 'text-blue-grey font-inter-regular font-normal';
 
 	return (

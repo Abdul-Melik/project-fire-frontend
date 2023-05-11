@@ -31,6 +31,7 @@ export default {
 				'shadow-slate': '#3F3F3F',
 				'silvery-sky': '#C3C8CD',
 				'cloudy-pearl': '#F5F6FB',
+				'aqua-haze': '#F5FFFA',
 			},
 			fontFamily: {
 				'inter-regular': ['Inter-Regular', 'sans-serif'],
