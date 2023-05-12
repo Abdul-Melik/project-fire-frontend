@@ -6,22 +6,13 @@ import avatarImg from "../../assets/img/avatar.png";
 import Avatars from "./Avatars";
 import { TIMEOUT } from "dns";
 import { avatar } from "src/assets";
+import TableHead from "src/shared/components/table-elements/TableHead";
+import TableRow from "src/shared/components/table-elements/TableRow";
 
 type Props = {
   data: Project[];
   activePage: any;
 };
-enum ProjectType {
-  Fixed = "fixed",
-  OnGoing = "on-going",
-}
-
-enum SalesChannel {
-  Online = "online",
-  InPerson = "in-person",
-  Referral = "referral",
-  Other = "other",
-}
 
 interface Project {
   name: string;
@@ -29,11 +20,9 @@ interface Project {
   startDate: Date;
   endDate: Date;
   actualEndDate: Date;
-  projectType: ProjectType;
   projectStatus: string;
   hourlyRate: number;
   projectValueBAM: number;
-  salesChannel: SalesChannel;
   finished: boolean;
   employees: [
     {
@@ -102,34 +91,7 @@ const ProjectsTable = ({ data, activePage }: Props) => {
       }
       console.log(images);
       return images;
-    } else setTimeout(getImages, 1000);
-  };
-
-  //get the dates from the project
-  const getDates = (project: Project) => {
-    const startDate = new Date(project.startDate);
-    const endDate = new Date(project.endDate);
-    const actualEndDate = new Date(project.actualEndDate);
-    const startDateString = startDate.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-    });
-    const endDateString = endDate.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-    });
-    const actualEndDateString = actualEndDate.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-    });
-    return { startDateString, endDateString, actualEndDateString };
-  };
-  const getColor = (project: string) => {
-    if (project === "active") {
-      return "bg-[#32C653]";
-    } else if (project === "on-hold") {
-      return "bg-[#FFB341]";
-    } else return "bg-[#CECECE]";
+    }
   };
 
   const statusOrder: any = {
@@ -147,7 +109,9 @@ const ProjectsTable = ({ data, activePage }: Props) => {
 
   // Search Bar & Active/Inactive on Click
   const [searchTerm, setSearchTerm] = useState("");
-  let filteredData = data.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  let filteredData = data.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   if (activePage === 2) {
     filteredData = data.filter((item) => item.projectStatus === "active");
@@ -158,70 +122,60 @@ const ProjectsTable = ({ data, activePage }: Props) => {
   }
 
   if (searchTerm) {
-    filteredData = data.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    filteredData = data.filter((item) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   }
 
+  const columns: string[] = [
+    "Name",
+    "Description",
+    "Duration (from-to)",
+    "Developers",
+    "Hourly rate",
+    "Project value in BAM",
+    "Status",
+  ];
+
   return (
-    <div className='w-full rounded-md border border-ashen-grey'>
-      <div className='flex items-center'>
-        <h2 className='px-4 py-[23px] font-gilroy-medium text-lg'>Projects Table</h2>
-        <div className='flex h-[30px] items-center bg-[#F5FFFA]'>
-          <h2 className='px-4 text-center font-gilroy-medium text-sm text-moss-green'>{data.length} total</h2>
+    <>
+      <div className="w-full rounded-md border border-ashen-grey">
+        <div className="flex items-center">
+          <h2 className="px-4 py-[23px] font-gilroy-medium text-lg">
+            Projects Table
+          </h2>
+          <div className="flex h-[30px] items-center bg-[#F5FFFA]">
+            <h2 className="px-4 text-center font-gilroy-medium text-sm text-moss-green">
+              {data.length} total
+            </h2>
+          </div>
+          <div className="relative ml-auto mr-4">
+            <input
+              className="font-gilroy h-10 w-[315px] rounded-sm border border-ashen-grey pl-[46px] text-[#57585F]"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <img
+              src={search}
+              className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform cursor-pointer"
+              alt="search-icon"
+            />
+          </div>
         </div>
-        <div className='relative ml-auto mr-4'>
-          <input
-            className='font-gilroy h-10 w-[315px] rounded-sm border border-ashen-grey pl-[46px] text-[#57585F]'
-            placeholder='Search'
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <img
-            src={search}
-            className='absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform cursor-pointer'
-            alt='search-icon'
-          />
-        </div>
+        <table className="w-full border-t border-ashen-grey">
+          <TableHead columns={columns} />
+          <tbody>
+            {filteredData.map((item, index) => (
+              <TableRow
+                rowItems={item}
+                avatars={<Avatars images={getImages(item.employees)} />}
+              />
+            ))}
+          </tbody>
+        </table>
       </div>
-      <table className='w-full border-t border-ashen-grey'>
-        <thead className='font-gilroy-medium text-sm text-[#6C6D75]'>
-          <tr className='h-[40px] text-left'>
-            <th className='w-[150px] pl-4'>Name </th>
-            <th className='w-[150px] pl-4'>Description</th>
-            <th className='w-[150px] pl-4'>Duration (from-to)</th>
-            <th className='w-[150px] pl-5'>Developers</th>
-            <th className='w-[150px] pl-4'>Hourly rate</th>
-            <th className='w-[150px] pl-4'>Project value in BAM</th>
-            <th className='w-[150px] pl-9'>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((item, index) => (
-            <tr
-              key={index}
-              className='h-[60px] w-[157px] border-t border-ashen-grey text-left font-gilroy-regular text-sm text-[#6C6D75]'
-            >
-              <td className='w-[150px] pl-4'>{item.name}</td>
-              <td className='w-[150px] pl-4'>{item.description.slice(0, 15)}...</td>
-              <td className='w-[150px] pl-4'>
-                {getDates(item).startDateString} - {getDates(item).endDateString}
-              </td>
-              <td className='w-[150px] pl-5'>
-                <Avatars images={getImages(item.employees)} />
-              </td>
-              <td className='w-[150px] pl-4'>${item.hourlyRate}</td>
-              <td className='w-[150px] pl-4'>{item.projectValueBAM} KM</td>
-              <td className='flex w-[150px] pl-9 pt-[19px]'>
-                {" "}
-                <div
-                  className={`mb-auto mr-2 mt-auto h-[6px] w-[6px] rounded-full ${getColor(item.projectStatus)}`}
-                ></div>
-                {item.projectStatus}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    </>
   );
 };
 

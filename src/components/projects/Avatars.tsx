@@ -1,5 +1,6 @@
 import axios from "axios";
 import { FC, Key, useState } from "react";
+import avatar from "../../assets/img/avatar.png";
 
 type AvatarProps = {
   src: string;
@@ -28,7 +29,7 @@ const Avatar: FC<AvatarProps> = ({ src, alt, className }) => {
   return (
     <img
       className={`-ml-0.5 inline-block h-[35px] w-[35px] rounded-full border-2 border-white ${className}`}
-      src={src}
+      src={src ? src : avatar}
       alt={alt}
       style={{ zIndex }}
       onMouseOver={handleHover}
@@ -38,18 +39,9 @@ const Avatar: FC<AvatarProps> = ({ src, alt, className }) => {
 };
 
 const Avatars = ({ images }: Props) => {
-  const pravatarUrls = [
-    "https://i.pravatar.cc/150?u=david",
-    "https://i.pravatar.cc/150?u=john",
-    "https://i.pravatar.cc/150?u=mary",
-    "https://i.pravatar.cc/150?u=peter",
-    "https://i.pravatar.cc/150?u=susan",
-    "https://i.pravatar.cc/150?u=jane",
-  ];
-
   //create variable that will hold array of objects from the images array
   if (!images) {
-    images = pravatarUrls;
+    images = [avatar];
   }
   const avatars = images.map((url, index) => ({
     src: url,
