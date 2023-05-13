@@ -17,6 +17,7 @@ import FinancialOverview from "src/pages/FinancialOverview";
 import ProjectReporting from "src/pages/ProjectReporting";
 import Invoicing from "src/pages/Invoicing";
 import ProjectsTable from "./components/projects/ProjectsTable";
+import Signup from "./pages/Signup";
 
 const App = () => {
   const { isLoading, token, user, login, logout } = useAuth();
@@ -36,9 +37,9 @@ const App = () => {
         <Route path="/financial-overview" element={<FinancialOverview />} />
         <Route path="/project-reporting" element={<ProjectReporting />} />
         <Route path="/invoicing" element={<Invoicing />} />
+        <Route path="/signup" element={<Signup />} />
       </Route>
       <Route path="/*" element={<Navigate to="/login" />} />
-      <Route path="/hello" element={<ProjectsTable />} />
     </>
   );
 

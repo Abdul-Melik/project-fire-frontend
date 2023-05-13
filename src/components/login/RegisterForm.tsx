@@ -10,12 +10,14 @@ type Props = {
   handleError: (error: string | null) => void;
 };
 
-const LoginForm = ({ handleError }: Props) => {
+const RegisterForm = ({ handleError }: Props) => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -24,11 +26,12 @@ const LoginForm = ({ handleError }: Props) => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        `${baseUrl}/api/users/login`,
+        `${baseUrl}/api/users/register`,
         {
           email,
           password,
-          rememberMe,
+          firstName,
+          lastName,
         },
         {
           headers: {
@@ -58,9 +61,9 @@ const LoginForm = ({ handleError }: Props) => {
       >
         <p>{error}</p>
       </Modal>
-      <div className="px-[135px] pb-[334px] pt-[303px] text-center">
+      <div className="-mt-12 px-[135px] pb-[334px] pt-[303px] text-center">
         <h2 className="mb-[42px] font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey">
-          Log in
+          Register
         </h2>
         <form
           className="mb-[17px] flex flex-col items-center justify-center text-base"
@@ -77,6 +80,26 @@ const LoginForm = ({ handleError }: Props) => {
             handleInput={(email) => setEmail(email)}
           />
           <InputField
+            label="First name"
+            htmlFor="First name"
+            type="text"
+            id="firstName"
+            placeholder="Enter your first name"
+            value={firstName}
+            required={true}
+            handleInput={(firstName) => setFirstName(firstName)}
+          />
+          <InputField
+            label="Last name"
+            htmlFor="Last name"
+            type="text"
+            id="lastName"
+            placeholder="Enter your last name"
+            value={lastName}
+            required={true}
+            handleInput={(lastName) => setLastName(lastName)}
+          />
+          <InputField
             label="Password"
             htmlFor="password"
             type="password"
@@ -90,38 +113,23 @@ const LoginForm = ({ handleError }: Props) => {
             className="mt-[13px] w-full rounded-md bg-deep-teal py-3 pl-3 font-gilroy-semi-bold font-semibold text-white hover:saturate-[400%]"
             type="submit"
           >
-            Log In
+            Register
           </button>
         </form>
         <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center justify-start gap-[9px]">
-            <input
-              className=" h-[18px] w-[18px] accent-deep-teal"
-              type="checkbox"
-              onChange={() => setRememberMe(!rememberMe)}
-            />
-            <span className="font-gilroy-medium font-medium tracking-[-0.015em] text-midnight-grey">
-              Remember password
-            </span>
-          </div>
-          <a
-            className="font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal underline"
-            href="#"
-          >
-            Forgot Password?
-          </a>
+          <div className="flex items-center justify-start gap-[9px]"></div>
         </div>
-        <div className="h-4"></div>
+        <div className="block h-5"></div>
         <a
           className="font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal underline"
           href="#"
-          onClick={() => navigate("/signup")}
+          onClick={() => navigate("/login")}
         >
-          Don't have an account? Sign Up!
+          Return to login
         </a>
       </div>
     </>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

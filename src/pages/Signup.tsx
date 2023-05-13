@@ -3,8 +3,9 @@ import { useState } from "react";
 import Modal from "src/shared/components/utils/Modal";
 import LoginForm from "src/components/login/LoginForm";
 import LogoBanner from "src/components/login/LogoBanner";
+import RegisterForm from "src/components/login/RegisterForm";
 
-const Login = () => {
+const Signup = () => {
   const [error, setError] = useState<string | null>(null);
 
   return (
@@ -22,11 +23,11 @@ const Login = () => {
           <LogoBanner />
         </div>
         <div className="flex-1">
-          <LoginForm handleError={(error) => setError(error)} />
+          <RegisterForm handleError={(error) => setError(error)} />
         </div>
       </div>
     </>
   );
 };
 
-export default Login;
+export default Signup;
