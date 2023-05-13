@@ -49,7 +49,7 @@ const LoginForm = ({ handleError }: Props) => {
   };
 
   return (
-    <>
+    <div className="flex h-screen flex-col items-center justify-center">
       <Modal
         onCancel={() => setError(null)}
         header="An error occurred!"
@@ -58,12 +58,12 @@ const LoginForm = ({ handleError }: Props) => {
       >
         <p>{error}</p>
       </Modal>
-      <div className="px-[135px] pb-[334px] pt-[303px] text-center">
+      <div className="w-[450px] text-center">
         <h2 className="mb-[42px] font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey">
           Log in
         </h2>
         <form
-          className="mb-[17px] flex flex-col items-center justify-center text-base"
+          className="mb-[17px] items-center justify-center text-base"
           onSubmit={handleFormSubmit}
         >
           <InputField
@@ -111,7 +111,7 @@ const LoginForm = ({ handleError }: Props) => {
             Forgot Password?
           </a>
         </div>
-        <div className="h-4"></div>
+        <div className="h-8"></div>
         <a
           className="font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal underline"
           href="#"
@@ -120,7 +120,7 @@ const LoginForm = ({ handleError }: Props) => {
           Don't have an account? Sign Up!
         </a>
       </div>
-    </>
+    </div>
   );
 };
 

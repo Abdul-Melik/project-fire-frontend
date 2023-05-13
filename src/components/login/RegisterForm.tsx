@@ -52,7 +52,7 @@ const RegisterForm = ({ handleError }: Props) => {
   };
 
   return (
-    <>
+    <div className="flex h-screen flex-col items-center justify-center">
       <Modal
         onCancel={() => setError(null)}
         header="An error occurred!"
@@ -61,7 +61,7 @@ const RegisterForm = ({ handleError }: Props) => {
       >
         <p>{error}</p>
       </Modal>
-      <div className="-mt-12 px-[135px] pb-[334px] pt-[303px] text-center">
+      <div className="w-[450px] text-center">
         <h2 className="mb-[42px] font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey">
           Register
         </h2>
@@ -128,7 +128,7 @@ const RegisterForm = ({ handleError }: Props) => {
           Return to login
         </a>
       </div>
-    </>
+    </div>
   );
 };
 

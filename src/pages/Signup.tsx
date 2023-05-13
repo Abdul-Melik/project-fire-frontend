@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import Modal from "src/shared/components/utils/Modal";
-import LoginForm from "src/components/login/LoginForm";
 import LogoBanner from "src/components/login/LogoBanner";
 import RegisterForm from "src/components/login/RegisterForm";
 
