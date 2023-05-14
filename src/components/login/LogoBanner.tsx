@@ -1,21 +1,20 @@
-import { logo, gradientBackground } from 'src/assets';
+import { logo } from "src/assets";
 
-const LogoBanner = () => {
-	return (
-		<div
-			className='flex h-full items-center justify-center bg-cover bg-no-repeat'
-			style={{
-				backgroundImage: `url(${gradientBackground})`,
-			}}
-		>
-			<div
-				className='h-[32.25px] w-[280px]'
-				style={{
-					backgroundImage: `url(${logo})`,
-				}}
-			/>
-		</div>
-	);
-};
+function LogoBanner() {
+  return (
+    <div className="logo-banner flex h-full w-full items-center justify-center bg-[url('src/assets/svg/gradient-background.svg')] bg-cover bg-no-repeat">
+      <div
+        className='h-1/2 w-full bg-cover bg-center  '
+        style={{
+          backgroundImage: `url(${logo})`,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          width: "300px",
+          height: "150px",
+        }}
+      />
+    </div>
+  );
+}
 
 export default LogoBanner;
