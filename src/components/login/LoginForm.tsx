@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import AuthContext from 'src/shared/context/auth-context';
@@ -96,9 +96,12 @@ const LoginForm = ({ handleError }: Props) => {
 							Remember password
 						</span>
 					</div>
-					<a className='font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal underline' href='#'>
+					<Link
+						className='font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal underline'
+						to='/forgot-password'
+					>
 						Forgot Password?
-					</a>
+					</Link>
 				</div>
 			</div>
 		</>

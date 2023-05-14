@@ -32,7 +32,7 @@ const Pagination = ({
 					<ProjectsPerPageSelector projectsPerPage={projectsPerPage} handleProjectsPerPage={handleProjectsPerPage} />
 				</div>
 				<span className='font-["Open_Sans"] text-sm font-semibold leading-[30px] tracking-[0.15px] text-whispering-gray'>
-					{(currentPage - 1) * projectsPerPage + 1}
+					{totalNumberOfProjects === 0 ? 0 : (currentPage - 1) * projectsPerPage + 1}
 					{' - '}
 					{currentPage * projectsPerPage < totalNumberOfProjects
 						? currentPage * projectsPerPage

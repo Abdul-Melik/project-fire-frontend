@@ -7,6 +7,7 @@ import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import Navbar from 'src/shared/components/navbar/Navbar';
 import MainLayout from 'src/shared/components/layout/MainLayout';
 import Pagination from 'src/components/projects/pagination/Pagination';
+import ProjectsTable from 'src/components/projects/table/ProjectsTable';
 
 enum ProjectType {
 	Fixed = 'fixed',
@@ -27,10 +28,24 @@ interface Project {
 	endDate: Date;
 	actualEndDate: Date;
 	projectType: ProjectType;
+	projectStatus: string;
 	hourlyRate: number;
 	projectValueBAM: number;
 	salesChannel: SalesChannel;
 	finished: boolean;
+	employees: [
+		{
+			employee: {
+				_id: string;
+				firstName: string;
+				lastName: string;
+				department: string;
+				salary: number;
+				techStack: string[];
+				__v: number;
+			};
+		}
+	];
 }
 
 const Projects = () => {
@@ -38,20 +53,26 @@ const Projects = () => {
 	const [error, setError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [activePage, setActivePage] = useState(1);
+	const [projectStatus, setProjectStatus] = useState('');
+	const [searchTerm, setSearchTerm] = useState('');
 	const [projects, setProjects] = useState<Project[]>([]);
 	const [totalNumberOfProjects, setTotalNumberOfProjects] = useState(0);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [lastPage, setLastPage] = useState(1);
 	const [projectsPerPage, setProjectsPerPage] = useState(5);
+	const [users, setUsers] = useState<any[]>([]);
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
 	const getProjects = useCallback(async () => {
 		setIsLoading(true);
 		try {
-			const response = await axios.get(`${baseUrl}/api/projects?limit=${projectsPerPage}&page=${currentPage}`, {
-				headers: { Authorization: 'Bearer ' + token },
-			});
+			const response = await axios.get(
+				`${baseUrl}/api/projects?name=${searchTerm}&projectStatus=${projectStatus}&limit=${projectsPerPage}&page=${currentPage}`,
+				{
+					headers: { Authorization: 'Bearer ' + token },
+				}
+			);
 			setProjects(response.data.projects);
 			setTotalNumberOfProjects(response.data.pageInfo.total);
 			setLastPage(response.data.pageInfo.lastPage);
@@ -63,11 +84,39 @@ const Projects = () => {
 			}
 		}
 		setIsLoading(false);
-	}, [token, projectsPerPage, currentPage]);
+	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage]);
 
 	useEffect(() => {
 		if (token) getProjects();
-	}, [token, projectsPerPage, currentPage]);
+	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage]);
+
+	useEffect(() => {
+		if (activePage === 1) setProjectStatus('');
+		else if (activePage === 2) setProjectStatus('active');
+		else if (activePage === 3) setProjectStatus('inactive');
+		else if (activePage === 4) setProjectStatus('completed');
+	}, [activePage]);
+
+	const getUsers = useCallback(async () => {
+		setIsLoading(true);
+		try {
+			const response = await axios.get(`${baseUrl}/api/users`, {
+				headers: { Authorization: 'Bearer ' + token },
+			});
+			setUsers(response.data);
+		} catch (error: any) {
+			if (axios.isAxiosError(error)) {
+				setError(error.response?.data.error);
+			} else {
+				console.error('Unexpected error: ', error);
+			}
+		}
+		setIsLoading(false);
+	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage]);
+
+	useEffect(() => {
+		if (token) getUsers();
+	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -93,18 +142,25 @@ const Projects = () => {
 					</div>
 					<div className='mt-[30px] flex flex-col'>
 						<div className='mb-12'>
-							<Navbar navLabels={navLabels} handlePageSelect={pageNumber => setActivePage(pageNumber)} />
+							<Navbar
+								navLabels={navLabels}
+								handlePageSelect={pageNumber => {
+									setActivePage(pageNumber);
+									setProjectsPerPage(5);
+									setCurrentPage(1);
+									setSearchTerm('');
+								}}
+							/>
 						</div>
 						{isLoading ? (
 							<LoadingSpinner />
 						) : (
-							<div className='flex flex-col gap-4'>
-								{projects.map(project => (
-									<div className='border border-black p-2' key={project.name}>
-										{JSON.stringify(project.name)} {JSON.stringify(project.description)}
-									</div>
-								))}
-							</div>
+							<ProjectsTable
+								totalNumberOfProjects={totalNumberOfProjects}
+								projects={projects}
+								users={users}
+								handleSearch={input => setSearchTerm(input)}
+							/>
 						)}
 					</div>
 				</div>

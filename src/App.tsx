@@ -10,6 +10,8 @@ import Employees from 'src/pages/Employees';
 import FinancialOverview from 'src/pages/FinancialOverview';
 import ProjectReporting from 'src/pages/ProjectReporting';
 import Invoicing from 'src/pages/Invoicing';
+import ForgotPassword from 'src/pages/ForgotPassword';
+import ResetPassword from 'src/pages/ResetPassword';
 
 const App = () => {
 	const { isLoading, token, user, login, logout } = useAuth();
@@ -22,6 +24,8 @@ const App = () => {
 	const routes = (
 		<>
 			<Route path='/login' element={<Login />} />
+			<Route path='/forgot-password' element={<ForgotPassword />} />
+			<Route path='/:userId/reset-password/:token' element={<ResetPassword />} />
 			<Route element={<PrivateRoutes />}>
 				<Route path='/home' element={<Home />} />
 				<Route path='/projects' element={<Projects />} />
