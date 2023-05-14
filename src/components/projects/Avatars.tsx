@@ -26,8 +26,19 @@ const Avatar = ({ src, alt, className }: AvatarProps) => {
         style={{ objectFit: "cover" }}
       />
       {showAllEmployers && (
-        <div className=' absolute left-1/2 top-[-32px] flex h-[23px] w-[357px] -translate-x-1/2  items-center justify-center whitespace-nowrap rounded bg-black p-2 text-center font-sans text-[11px] font-semibold leading-[26px] text-white'>
-          Adela Pervan, Maja Prikaski, Zerina Djuheric, Faris Kunic, Tarik Mehic,
+        <div className='absolute left-1/2 top-[-32px] -translate-x-1/2 transform'>
+          <div className='relative z-0 flex items-center justify-center'>
+            <div className='h-[23px] w-[357px] whitespace-nowrap rounded bg-black p-2 font-sans text-[11px] font-semibold text-white'>
+              <div className='flex h-full items-center'>
+                <p className='z-20 flex-shrink-0 flex-grow text-center'>
+                  Adela Pervan, Maja Prikaski, Zerina Djuheric, Faris Kunic, Tarik Mehic,
+                </p>
+              </div>
+            </div>
+            <div className=' absolute bottom-0 left-1/2 -translate-x-3 transform'>
+              <div className='z-10 h-4 w-4 rotate-45 transform bg-black'></div>
+            </div>
+          </div>
         </div>
       )}
     </div>
