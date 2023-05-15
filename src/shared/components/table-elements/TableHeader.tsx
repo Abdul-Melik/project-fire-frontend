@@ -36,31 +36,28 @@ const TableHeader = ({ totalNumberOfProjects, handleSearch }: Props) => {
 	const [input, setInput] = useState('');
 
 	return (
-		<div className='flex items-center'>
-			<h2 className='px-4 py-[23px] font-gilroy-medium text-lg'>Projects Table</h2>
-			<div className='flex h-[30px] items-center bg-[#F5FFFA]'>
-				<h2 className='px-4 text-center font-gilroy-medium text-sm text-moss-green'>{totalNumberOfProjects} total</h2>
+		<div className='flex items-center justify-between px-4'>
+			<div className='flex items-center gap-4 py-[23px]'>
+				<h2 className='leadin-[26px] font-gilroy-medium text-lg font-medium text-midnight-grey'>Projects Table</h2>
+				<div className='flex h-[30px] flex-col items-center justify-center rounded-md bg-aqua-haze px-[10px] py-[2px] font-gilroy-medium text-sm font-medium leading-[18px] text-moss-green'>
+					{totalNumberOfProjects} total
+				</div>
 			</div>
-			<div className='relative ml-auto mr-4 rounded-[4px]'>
-				<form
-					onSubmit={event => {
-						event.preventDefault();
-						handleSearch(input);
-					}}
-				>
-					<input
-						className='font-gilroy h-10 w-[315px] rounded-sm border border-ashen-grey pl-[46px] text-[#57585F]'
-						placeholder='Search'
-						value={input}
-						onChange={event => setInput(event.target.value)}
-					/>
-					<img
-						src={search}
-						className='absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform cursor-pointer'
-						alt='search-icon'
-					/>
-				</form>
-			</div>
+			<form
+				className='relative'
+				onSubmit={event => {
+					event.preventDefault();
+					handleSearch(input);
+				}}
+			>
+				<input
+					className='h-10 w-[315px] rounded-sm border border-ashen-grey pl-[46px] font-inter-regular text-sm font-normal leading-[22px] text-charcoal-grey placeholder:font-inter-regular placeholder:text-sm placeholder:font-normal placeholder:leading-[22px] placeholder:text-charcoal-grey'
+					placeholder='Search'
+					value={input}
+					onChange={event => setInput(event.target.value)}
+				/>
+				<img src={search} className='absolute left-3 top-2 h-6 w-6 cursor-pointer' alt='Search icon' />
+			</form>
 		</div>
 	);
 };

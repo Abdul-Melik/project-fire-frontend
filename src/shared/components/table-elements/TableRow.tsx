@@ -17,12 +17,18 @@ interface Project {
 		{
 			employee: {
 				_id: string;
+				firstName: string;
+				lastName: string;
+				department: string;
+				salary: number;
+				techStack: string[];
+				__v: number;
 			};
 		}
 	];
 }
 
-const getDates = (project: Project) => {
+const getProjectDate = (project: Project) => {
 	const startDate = new Date(project.startDate);
 	const endDate = new Date(project.endDate);
 	const actualEndDate = new Date(project.actualEndDate);
@@ -41,31 +47,37 @@ const getDates = (project: Project) => {
 	return { startDateString, endDateString, actualEndDateString };
 };
 
-const getColor = (project: string) => {
-	if (project === 'active') {
-		return 'bg-[#32C653]';
-	} else if (project === 'on-hold') {
-		return 'bg-[#FFB341]';
-	} else return 'bg-[#CECECE]';
+const getProjectValueBAM = (project: Project) => {
+	return project.projectValueBAM.toLocaleString('en-US', {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2,
+	});
+};
+
+const getProjectColorAndStatus = (project: Project) => {
+	const projectStatus = project.projectStatus;
+	if (projectStatus === 'active') return { color: 'bg-spring-fern', status: 'Active' };
+	else if (projectStatus === 'on-hold') return { color: 'bg-golden-tangerine', status: 'On hold' };
+	else if (projectStatus === 'inactive') return { color: 'bg-silver-mist', status: 'Inactive' };
+	else return { color: 'bg-silver-mist', status: 'Completed' };
 };
 
 const TableRow = ({ project, avatars }: Props) => {
 	return (
-		<tr className='h-[60px] w-[157px] border-t border-ashen-grey text-left font-gilroy-regular text-sm text-[#6C6D75]'>
+		<tr className='h-[60px] border-t border-ashen-grey text-left font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>
 			<td className='w-[150px] pl-4'>{project.name}</td>
 			<td className='w-[150px] pl-4'>{project.description}</td>
 			<td className='w-[150px] pl-4'>
-				{getDates(project).startDateString}
+				{getProjectDate(project).startDateString}
 				{' - '}
-				{getDates(project).endDateString}
+				{getProjectDate(project).endDateString}
 			</td>
 			<td className='w-[150px] pl-4'>{avatars}</td>
 			<td className='w-[150px] pl-4'>${project.hourlyRate}</td>
-			<td className='w-[150px] pl-4'>{project.projectValueBAM} KM</td>
-			<td className='flex w-[150px] pl-9 pt-[19px]'>
-				{' '}
-				<div className={`mb-auto mr-2 mt-auto h-[6px] w-[6px] rounded-full ${getColor(project.projectStatus)}`}></div>
-				{project.projectStatus}
+			<td className='w-[150px] pl-4'>${getProjectValueBAM(project)} KM</td>
+			<td className='flex h-[60px] w-[150px] items-center gap-2 pl-4'>
+				<div className={`h-[6px] w-[6px] rounded-full ${getProjectColorAndStatus(project).color}`} />
+				<div className='font-gilroy-semi-bold font-semibold'>{getProjectColorAndStatus(project).status}</div>
 			</td>
 		</tr>
 	);

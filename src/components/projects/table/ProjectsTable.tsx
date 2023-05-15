@@ -67,7 +67,7 @@ const ProjectsTable = ({ totalNumberOfProjects, projects, users, handleSearch }:
 		return statusOrder[statusA] - statusOrder[statusB];
 	});
 
-	const columns: string[] = [
+	const columns = [
 		'Name',
 		'Description',
 		'Duration (from-to)',
@@ -79,7 +79,7 @@ const ProjectsTable = ({ totalNumberOfProjects, projects, users, handleSearch }:
 
 	return (
 		<>
-			<div className='w-full rounded-md border border-ashen-grey'>
+			<div className='w-full rounded-md border border-ashen-grey bg-white'>
 				<TableHeader totalNumberOfProjects={totalNumberOfProjects} data={sortedProjects} handleSearch={handleSearch} />
 				<table className='w-full border-t border-ashen-grey'>
 					<TableHead columns={columns} />
@@ -87,8 +87,18 @@ const ProjectsTable = ({ totalNumberOfProjects, projects, users, handleSearch }:
 						{projects.map((project, index) => {
 							const employees = project.employees;
 							const employeeIds = employees.map(employeeObj => employeeObj.employee._id);
+							const employeeNames = employees.map(employeeObj => ({
+								firstName: employeeObj.employee.firstName,
+								lastName: employeeObj.employee.lastName,
+							}));
 							const images = users.filter(user => employeeIds.includes(user.employee._id)).map(user => user.image);
-							return <TableRow key={index} project={project} avatars={<Avatars images={images} />} />;
+							return (
+								<TableRow
+									key={index}
+									project={project}
+									avatars={<Avatars employeeNames={employeeNames} images={images} />}
+								/>
+							);
 						})}
 					</tbody>
 				</table>

@@ -32,6 +32,10 @@ export default {
 				'silvery-sky': '#C3C8CD',
 				'cloudy-pearl': '#F5F6FB',
 				'aqua-haze': '#F5FFFA',
+				'slate-mist': '#6C6D75',
+				'silver-mist': '#CECECE',
+				'spring-fern': '#32C653',
+				'golden-tangerine': '#FFB341',
 			},
 			fontFamily: {
 				'inter-regular': ['Inter-Regular', 'sans-serif'],

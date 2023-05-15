@@ -130,8 +130,8 @@ const Projects = () => {
 				<p>{error}</p>
 			</Modal>
 			<MainLayout activeMenuItem={'projects'}>
-				<div className='mx-14 my-[34px]'>
-					<div className='flex items-center justify-between'>
+				<div className='mx-14 mb-[17px] mt-[34px]'>
+					<div className='mb-[30px] flex items-center justify-between'>
 						<div className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</div>
 						<button
 							className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white hover:saturate-[400%]'
@@ -140,8 +140,8 @@ const Projects = () => {
 							Create new project
 						</button>
 					</div>
-					<div className='mt-[30px] flex flex-col'>
-						<div className='mb-12'>
+					<div className='flex flex-col'>
+						<div className='mb-[30px]'>
 							<Navbar
 								navLabels={navLabels}
 								handlePageSelect={pageNumber => {
@@ -164,7 +164,7 @@ const Projects = () => {
 						)}
 					</div>
 				</div>
-				<div className='mx-14 mb-[25px] mt-[17px]'>
+				<div className='mx-14 mb-[25px]'>
 					<Pagination
 						totalNumberOfProjects={totalNumberOfProjects}
 						currentPage={currentPage}
