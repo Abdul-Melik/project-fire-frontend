@@ -12,11 +12,11 @@ const Signup = () => {
       <Modal onCancel={() => setError(null)} header='Login error!' show={!!error} isError={!!error}>
         <p>{error}</p>
       </Modal>
-      <div className='flex'>
+      <div className='flex h-screen'>
         <div className='hidden lg:block lg:w-1/2'>
           <LogoBanner />
         </div>
-        <div className='mx-4 w-full flex-col items-center justify-center p-4 lg:w-1/2'>
+        <div className='mx-4 flex flex-1 flex-col items-center justify-center p-4'>
           <RegisterForm handleError={(error) => setError(error)} />
         </div>
       </div>
