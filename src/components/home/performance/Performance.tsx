@@ -18,6 +18,7 @@ type Props = {
 		totalProjects: number;
 		totalValue: number;
 		averageValue: number;
+		averageTeamSize: number;
 		averageHourlyRate: number;
 		salesChannelPercentage: { salesChannel: string; percentage: number }[];
 		projectTypeCount: { count: number; projectType: string }[];
@@ -68,7 +69,7 @@ const Performance = ({ projectsInfo }: Props) => {
 				/>
 				<InfoCard
 					description='Avg. team size'
-					amount={'2.2'}
+					amount={(projectsInfo?.averageTeamSize ?? 0).toFixed(1).toString()}
 					iconSrc={teamSize}
 					iconAlt='Mini icon'
 					className='overflow-hidden rounded-md border border-ashen-grey'
