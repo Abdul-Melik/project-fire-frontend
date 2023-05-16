@@ -17,7 +17,7 @@ const PageNotFound = () => {
 	};
 
 	return (
-		<div className='flex h-screen w-full flex-col items-center justify-center gap-10 p-12'>
+		<div className='flex h-screen w-full flex-col items-center justify-start gap-10 p-16'>
 			<div className='flex w-1/4 flex-col items-center'>
 				<img src={error} alt='404 Error' />
 			</div>

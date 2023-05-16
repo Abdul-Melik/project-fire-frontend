@@ -7,7 +7,7 @@ import coins from 'src/assets/svg/coins.svg';
 import directCosts from 'src/assets/svg/direct-costs.svg';
 import document from 'src/assets/svg/document.svg';
 import employees from 'src/assets/svg/employees.svg';
-import error from 'src/assets/svg/error.svg';
+import error from 'src/assets/img/error.png';
 import gradientBackground from 'src/assets/svg/gradient-background.svg';
 import home from 'src/assets/svg/home.svg';
 import hourlyPrice from 'src/assets/svg/hourly-price.svg';
