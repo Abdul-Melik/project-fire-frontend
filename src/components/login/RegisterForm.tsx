@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -11,13 +11,14 @@ type Props = {
 	handleError: (error: string | null) => void;
 };
 
-const LoginForm = ({ handleError }: Props) => {
+const RegisterForm = ({ handleError }: Props) => {
 	const { login } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const [error, setError] = useState<string | null>(null);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [rememberMe, setRememberMe] = useState(false);
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -26,11 +27,12 @@ const LoginForm = ({ handleError }: Props) => {
 		event.preventDefault();
 		try {
 			const response = await axios.post(
-				`${baseUrl}/api/users/login`,
+				`${baseUrl}/api/users/register`,
 				{
 					email,
 					password,
-					rememberMe,
+					firstName,
+					lastName,
 				},
 				{
 					headers: {
@@ -66,15 +68,8 @@ const LoginForm = ({ handleError }: Props) => {
 					<img src={gradientBackground} alt='Background' className='h-full w-full object-cover' />
 				</div>
 			)}
-			{windowWidth < 1024 && (
-				<div className='h-20'>
-					<img src={logo} alt='Logo' className='mx-auto mb-3 h-[150px] w-[300px] pb-20' />
-				</div>
-			)}
 			<div className='w-[450px] text-center'>
-				<h2 className='mb-[42px] font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey'>
-					Log in
-				</h2>
+				<h2 className='mb-6 font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey'>Register</h2>
 				<form className='mb-[17px] flex flex-col items-center justify-center text-base' onSubmit={handleFormSubmit}>
 					<InputField
 						label='Email'
@@ -85,6 +80,26 @@ const LoginForm = ({ handleError }: Props) => {
 						value={email}
 						required={true}
 						handleInput={email => setEmail(email)}
+					/>
+					<InputField
+						label='First name'
+						htmlFor='First name'
+						type='text'
+						id='firstName'
+						placeholder='Enter your first name'
+						value={firstName}
+						required={true}
+						handleInput={firstName => setFirstName(firstName)}
+					/>
+					<InputField
+						label='Last name'
+						htmlFor='Last name'
+						type='text'
+						id='lastName'
+						placeholder='Enter your last name'
+						value={lastName}
+						required={true}
+						handleInput={lastName => setLastName(lastName)}
 					/>
 					<InputField
 						label='Password'
@@ -100,36 +115,15 @@ const LoginForm = ({ handleError }: Props) => {
 						className='mt-[13px] w-full rounded-md bg-deep-teal px-3 py-3 font-gilroy-semi-bold font-semibold text-white hover:saturate-[400%]'
 						type='submit'
 					>
-						Log In
+						Register
 					</button>
 				</form>
-				<div className='mb-8 flex items-center justify-between gap-3'>
-					<div className='flex items-center justify-start gap-[9px]'>
-						<input
-							className=' h-[18px] w-[18px] accent-deep-teal'
-							type='checkbox'
-							onChange={() => setRememberMe(!rememberMe)}
-						/>
-						<span className='font-gilroy-medium font-medium tracking-[-0.015em] text-midnight-grey'>
-							Remember password
-						</span>
-					</div>
-					<Link
-						className='font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal underline'
-						to='/forgot-password'
-					>
-						Forgot Password?
-					</Link>
-				</div>
-				<div className='font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal'>
-					Don't have an account?{' '}
-					<Link to='/signup'>
-						<span className='font-gilroy-bold font-bold hover:cursor-pointer hover:underline'>Sign up.</span>
-					</Link>
-				</div>
+				<Link className='font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal underline' to='/login'>
+					Return to login
+				</Link>
 			</div>
 		</div>
 	);
 };
 
-export default LoginForm;
+export default RegisterForm;

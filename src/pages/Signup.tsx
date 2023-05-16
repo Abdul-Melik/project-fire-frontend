@@ -1,15 +1,15 @@
 import { useState } from 'react';
 
 import Modal from 'src/shared/components/utils/Modal';
-import LoginForm from 'src/components/login/LoginForm';
 import LogoBanner from 'src/components/login/LogoBanner';
+import RegisterForm from 'src/components/login/RegisterForm';
 
-const Login = () => {
+const Signup = () => {
 	const [error, setError] = useState<string | null>(null);
 
 	return (
 		<>
-			<Modal onCancel={() => setError(null)} header='Login error!' show={!!error} isError={!!error}>
+			<Modal onCancel={() => setError(null)} header='Signup error!' show={!!error} isError={!!error}>
 				<p>{error}</p>
 			</Modal>
 			<div className='flex h-screen'>
@@ -17,11 +17,11 @@ const Login = () => {
 					<LogoBanner />
 				</div>
 				<div className='mx-4 flex flex-1 flex-col items-center justify-center p-4'>
-					<LoginForm handleError={error => setError(error)} />
+					<RegisterForm handleError={error => setError(error)} />
 				</div>
 			</div>
 		</>
 	);
 };
 
-export default Login;
+export default Signup;

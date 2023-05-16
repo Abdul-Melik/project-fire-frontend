@@ -48,7 +48,7 @@ const renderCustomizedLabel = ({
 			textAnchor='middle'
 			dominantBaseline='central'
 			fill={index < 3 ? 'white' : '#1D2129'}
-			fontFamily='Helvetica Neue'
+			fontFamily='HelveticaNeue-Medium'
 			fontWeight={500}
 			fontSize={14}
 		>

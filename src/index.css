@@ -52,6 +52,25 @@
 	src: url('./fonts/static/Gilroy-Bold.ttf') format('truetype');
 }
 
+/* HELVETICA NEUE */
+/* Font Weight: 400 */
+@font-face {
+	font-family: 'HelveticaNeue-Regular';
+	src: url('./fonts/static/HelveticaNeue-Regular.ttf') format('truetype');
+}
+
+/* Font Weight: 500 */
+@font-face {
+	font-family: 'HelveticaNeue-Medium';
+	src: url('./fonts/static/HelveticaNeue-Medium.ttf') format('truetype');
+}
+
+/* Font Weight: 700 */
+@font-face {
+	font-family: 'HelveticaNeue-Bold';
+	src: url('./fonts/static/HelveticaNeue-Bold.ttf') format('truetype');
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
