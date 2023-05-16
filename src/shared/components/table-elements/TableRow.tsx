@@ -66,7 +66,7 @@ const TableRow = ({ project, avatars }: Props) => {
 	return (
 		<tr className='h-[60px] border-t border-ashen-grey text-left font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>
 			<td className='w-[150px] pl-4'>{project.name}</td>
-			<td className='w-[150px] pl-4'>{project.description}</td>
+			<td className='line-clamp-1 w-[150px] text-ellipsis pl-4'>{project.description}</td>
 			<td className='w-[150px] pl-4'>
 				{getProjectDate(project).startDateString}
 				{' - '}
