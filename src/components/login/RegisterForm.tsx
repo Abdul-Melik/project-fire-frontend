@@ -6,6 +6,7 @@ import { logo, gradientBackground } from 'src/assets';
 import AuthContext from 'src/shared/context/auth-context';
 import Modal from 'src/shared/components/utils/Modal';
 import InputField from 'src/shared/components/form-elements/InputField';
+import ImageUpload from 'src/shared/components/utils/ImageUpload';
 
 type Props = {
 	handleError: (error: string | null) => void;
@@ -14,32 +15,29 @@ type Props = {
 const RegisterForm = ({ handleError }: Props) => {
 	const { login } = useContext(AuthContext);
 	const navigate = useNavigate();
-	const [error, setError] = useState<string | null>(null);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
 	const handleFormSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
+		const formData = new FormData();
+		if (selectedImage) formData.append('image', selectedImage);
+		formData.append('email', email);
+		formData.append('password', password);
+		formData.append('firstName', firstName);
+		formData.append('lastName', lastName);
 		try {
-			const response = await axios.post(
-				`${baseUrl}/api/users/register`,
-				{
-					email,
-					password,
-					firstName,
-					lastName,
+			const response = await axios.post(`${baseUrl}/api/users/register`, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
 				},
-				{
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				}
-			);
+			});
 			const responseData = response.data;
 			login(responseData.token, responseData.expiresIn, responseData.user);
 			navigate('/home');
@@ -50,6 +48,7 @@ const RegisterForm = ({ handleError }: Props) => {
 				console.error('Unexpected error: ', error);
 			}
 		}
+		setSelectedImage(null);
 	};
 
 	useEffect(() => {
@@ -62,7 +61,7 @@ const RegisterForm = ({ handleError }: Props) => {
 	}, []);
 
 	return (
-		<div className='flex h-screen flex-col items-center justify-center'>
+		<div className='flex h-full flex-col items-center justify-center'>
 			{windowWidth < 1024 && (
 				<div className='fixed inset-0 z-[-1]'>
 					<img src={gradientBackground} alt='Background' className='h-full w-full object-cover' />
@@ -70,7 +69,7 @@ const RegisterForm = ({ handleError }: Props) => {
 			)}
 			<div className='w-[450px] text-center'>
 				<h2 className='mb-6 font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey'>Register</h2>
-				<form className='mb-[17px] flex flex-col items-center justify-center text-base' onSubmit={handleFormSubmit}>
+				<form className='mb-6 flex flex-col text-base' onSubmit={handleFormSubmit}>
 					<InputField
 						label='Email'
 						htmlFor='email'
@@ -111,16 +110,25 @@ const RegisterForm = ({ handleError }: Props) => {
 						required={true}
 						handleInput={password => setPassword(password)}
 					/>
-					<button
-						className='mt-[13px] w-full rounded-md bg-deep-teal px-3 py-3 font-gilroy-semi-bold font-semibold text-white hover:saturate-[400%]'
-						type='submit'
-					>
-						Register
-					</button>
+					<div className='flex items-center justify-start gap-4'>
+						<ImageUpload
+							label={selectedImage ? 'Image uploaded' : 'Choose an image'}
+							onChange={image => setSelectedImage(image)}
+						/>
+						<button
+							className='flex-1 rounded-md bg-deep-teal px-4 py-2 font-gilroy-semi-bold font-semibold text-white hover:saturate-[400%]'
+							type='submit'
+						>
+							Register
+						</button>
+					</div>
 				</form>
-				<Link className='font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal underline' to='/login'>
-					Return to login
-				</Link>
+				<div className='font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal'>
+					Changed your mind?{' '}
+					<Link to='/login'>
+						<span className='font-gilroy-bold font-bold hover:cursor-pointer hover:underline'>Go back.</span>
+					</Link>
+				</div>
 			</div>
 		</div>
 	);

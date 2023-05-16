@@ -16,7 +16,7 @@ const Signup = () => {
 				<div className='hidden lg:block lg:w-1/2'>
 					<LogoBanner />
 				</div>
-				<div className='mx-4 flex flex-1 flex-col items-center justify-center p-4'>
+				<div className='h-full w-full lg:w-1/2'>
 					<RegisterForm handleError={error => setError(error)} />
 				</div>
 			</div>

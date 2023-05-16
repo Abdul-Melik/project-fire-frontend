@@ -75,7 +75,7 @@ const LoginForm = ({ handleError }: Props) => {
 				<h2 className='mb-[42px] font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey'>
 					Log in
 				</h2>
-				<form className='mb-[17px] flex flex-col items-center justify-center text-base' onSubmit={handleFormSubmit}>
+				<form className='mb-4 flex flex-col items-center justify-center text-base' onSubmit={handleFormSubmit}>
 					<InputField
 						label='Email'
 						htmlFor='email'
