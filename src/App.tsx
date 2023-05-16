@@ -12,7 +12,7 @@ import ProjectReporting from 'src/pages/ProjectReporting';
 import Invoicing from 'src/pages/Invoicing';
 import ForgotPassword from 'src/pages/ForgotPassword';
 import ResetPassword from 'src/pages/ResetPassword';
-import Signup from 'src/pages/Signup';
+import Register from 'src/pages/Register';
 import PageNotFound from 'src/pages/PageNotFound';
 
 const App = () => {
@@ -27,7 +27,7 @@ const App = () => {
 		<>
 			<Route path='/' element={<Login />} />
 			<Route path='/login' element={<Login />} />
-			<Route path='/signup' element={<Signup />} />
+			<Route path='/register' element={<Register />} />
 			<Route path='/forgot-password' element={<ForgotPassword />} />
 			<Route path='/:userId/reset-password/:token' element={<ResetPassword />} />
 			<Route element={<PrivateRoutes />}>

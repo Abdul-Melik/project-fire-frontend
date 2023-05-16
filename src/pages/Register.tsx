@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import Modal from 'src/shared/components/utils/Modal';
-import LogoBanner from 'src/components/login/LogoBanner';
-import RegisterForm from 'src/components/login/RegisterForm';
+import LogoBanner from 'src/components/auth/LogoBanner';
+import RegisterForm from 'src/components/auth/register/RegisterForm';
 
-const Signup = () => {
+const Register = () => {
 	const [error, setError] = useState<string | null>(null);
 
 	return (
@@ -24,4 +24,4 @@ const Signup = () => {
 	);
 };
 
-export default Signup;
+export default Register;

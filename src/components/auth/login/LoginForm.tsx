@@ -4,7 +4,6 @@ import axios from 'axios';
 
 import { logo, gradientBackground } from 'src/assets';
 import AuthContext from 'src/shared/context/auth-context';
-import Modal from 'src/shared/components/utils/Modal';
 import InputField from 'src/shared/components/form-elements/InputField';
 
 type Props = {
@@ -12,9 +11,8 @@ type Props = {
 };
 
 const LoginForm = ({ handleError }: Props) => {
-	const { login } = useContext(AuthContext);
+	const { token, login } = useContext(AuthContext);
 	const navigate = useNavigate();
-	const [error, setError] = useState<string | null>(null);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [rememberMe, setRememberMe] = useState(false);
@@ -49,6 +47,10 @@ const LoginForm = ({ handleError }: Props) => {
 			}
 		}
 	};
+
+	useEffect(() => {
+		if (token) navigate('/home');
+	}, [token]);
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -123,7 +125,7 @@ const LoginForm = ({ handleError }: Props) => {
 				</div>
 				<div className='font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal'>
 					Don't have an account?{' '}
-					<Link to='/signup'>
+					<Link to='/register'>
 						<span className='font-gilroy-bold font-bold hover:cursor-pointer hover:underline'>Sign up.</span>
 					</Link>
 				</div>

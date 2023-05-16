@@ -2,9 +2,8 @@ import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import { logo, gradientBackground } from 'src/assets';
+import { gradientBackground } from 'src/assets';
 import AuthContext from 'src/shared/context/auth-context';
-import Modal from 'src/shared/components/utils/Modal';
 import InputField from 'src/shared/components/form-elements/InputField';
 import ImageUpload from 'src/shared/components/utils/ImageUpload';
 
