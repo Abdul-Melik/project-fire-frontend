@@ -62,7 +62,7 @@ const ResetPassword = () => {
 						</h2>
 						<form className='flex flex-col items-center justify-center text-base' onSubmit={handleFormSubmit}>
 							<InputField
-								label='Password'
+								label='New Password'
 								htmlFor='password'
 								type='password'
 								id='password'
