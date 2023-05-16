@@ -63,24 +63,11 @@ const columns = [
 	'Status',
 ];
 
-const statusOrder: any = {
-	active: 1,
-	'on-hold': 2,
-	inactive: 3,
-	completed: 4,
-};
-
 const ProjectsTable = ({ totalNumberOfProjects, projects, users, handleSearch }: Props) => {
-	const sortedProjects = projects.sort((a, b) => {
-		const statusA = a.projectStatus.toLowerCase();
-		const statusB = b.projectStatus.toLowerCase();
-		return statusOrder[statusA] - statusOrder[statusB];
-	});
-
 	return (
 		<>
 			<div className='w-full rounded-md border border-ashen-grey bg-white'>
-				<TableHeader totalNumberOfProjects={totalNumberOfProjects} data={sortedProjects} handleSearch={handleSearch} />
+				<TableHeader totalNumberOfProjects={totalNumberOfProjects} data={projects} handleSearch={handleSearch} />
 				<table className='w-full border-t border-ashen-grey'>
 					<TableHead columns={columns} />
 					<tbody>
