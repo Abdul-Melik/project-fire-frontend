@@ -53,29 +53,29 @@ type Props = {
 	handleSearch: (input: string) => void;
 };
 
-const ProjectsTable = ({ totalNumberOfProjects, projects, users, handleSearch }: Props) => {
-	const statusOrder: any = {
-		active: 1,
-		'on-hold': 2,
-		inactive: 3,
-		completed: 4,
-	};
+const columns = [
+	'Name',
+	'Description',
+	'Duration (from-to)',
+	'Developers',
+	'Hourly rate',
+	'Project value in BAM',
+	'Status',
+];
 
+const statusOrder: any = {
+	active: 1,
+	'on-hold': 2,
+	inactive: 3,
+	completed: 4,
+};
+
+const ProjectsTable = ({ totalNumberOfProjects, projects, users, handleSearch }: Props) => {
 	const sortedProjects = projects.sort((a, b) => {
 		const statusA = a.projectStatus.toLowerCase();
 		const statusB = b.projectStatus.toLowerCase();
 		return statusOrder[statusA] - statusOrder[statusB];
 	});
-
-	const columns = [
-		'Name',
-		'Description',
-		'Duration (from-to)',
-		'Developers',
-		'Hourly rate',
-		'Project value in BAM',
-		'Status',
-	];
 
 	return (
 		<>

@@ -9,29 +9,17 @@ import MainLayout from 'src/shared/components/layout/MainLayout';
 import Pagination from 'src/components/projects/pagination/Pagination';
 import ProjectsTable from 'src/components/projects/table/ProjectsTable';
 
-enum ProjectType {
-	Fixed = 'fixed',
-	OnGoing = 'on-going',
-}
-
-enum SalesChannel {
-	Online = 'online',
-	InPerson = 'in-person',
-	Referral = 'referral',
-	Other = 'other',
-}
-
 interface Project {
 	name: string;
 	description: string;
 	startDate: Date;
 	endDate: Date;
 	actualEndDate: Date;
-	projectType: ProjectType;
+	projectType: string;
 	projectStatus: string;
 	hourlyRate: number;
 	projectValueBAM: number;
-	salesChannel: SalesChannel;
+	salesChannel: string;
 	finished: boolean;
 	employees: [
 		{
@@ -59,7 +47,7 @@ const Projects = () => {
 	const [totalNumberOfProjects, setTotalNumberOfProjects] = useState(0);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [lastPage, setLastPage] = useState(1);
-	const [projectsPerPage, setProjectsPerPage] = useState(5);
+	const [projectsPerPage, setProjectsPerPage] = useState(10);
 	const [users, setUsers] = useState<any[]>([]);
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
