@@ -13,6 +13,7 @@ import Invoicing from 'src/pages/Invoicing';
 import ForgotPassword from 'src/pages/ForgotPassword';
 import ResetPassword from 'src/pages/ResetPassword';
 import Signup from 'src/pages/Signup';
+import PageNotFound from 'src/pages/PageNotFound';
 
 const App = () => {
 	const { isLoading, token, user, login, logout } = useAuth();
@@ -36,7 +37,7 @@ const App = () => {
 				<Route path='/project-reporting' element={<ProjectReporting />} />
 				<Route path='/invoicing' element={<Invoicing />} />
 			</Route>
-			<Route path='/*' element={<Navigate to='/login' />} />
+			<Route path='/*' element={<PageNotFound />} />
 		</>
 	);
 
