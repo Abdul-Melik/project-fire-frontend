@@ -161,6 +161,7 @@ const Projects = () => {
 						handleProjectsPerPage={projectsPerPage => {
 							setProjectsPerPage(projectsPerPage);
 							setCurrentPage(1);
+							setSearchTerm('');
 						}}
 						handlePageChange={pageNumber => setCurrentPage(pageNumber)}
 					/>
