@@ -4,37 +4,51 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				'deep-teal': '#1A3835',
-				'midnight-grey': '#292929',
-				'misty-lavender': '#B1B5CA',
-				'dark-indigo': '#272934',
-				'frost-white': '#FCFDFC',
-				'seafoam-green': '#E6F2ED',
-				'ashen-grey': '#DFE3E1',
-				'light-silver': '#D9D9D9',
-				'steel-blue': '#242834',
-				'charcoal-grey': '#57585F',
+				// Green Tones
+				'deep-forest': '#0C221F',
 				'hunter-green': '#232F2D',
 				evergreen: '#142E2B',
-				'winter-mint': '#E9F3F2',
-				'deep-forest': '#0C221F',
-				'pale-jade': '#B3DFC9',
 				'moss-green': '#43A57C',
-				'blue-grey': '#788489',
 				'sage-green': '#7BB99F',
-				'opal-mist': '#EBF4F1',
-				'spicy-apricot': '#FF9F5A',
-				'nightfall-navy': '#505475',
-				'misty-moonstone': '#CACCD2',
-				'midnight-steel': '#404B57',
-				'whispering-gray': '#9EA1B0',
-				'shadow-slate': '#3F3F3F',
-				'silvery-sky': '#C3C8CD',
-				'cloudy-pearl': '#F5F6FB',
-				'aqua-haze': '#F5FFFA',
-				'slate-mist': '#6C6D75',
-				'silver-mist': '#CECECE',
 				'spring-fern': '#32C653',
+				'pale-jade': '#B3DFC9',
+				'seafoam-green': '#E6F2ED',
+
+				//Blue Tones
+				'dark-indigo': '#272934',
+				'deep-teal': '#1A3835',
+				'midnight-steel': '#404B57',
+				'slate-mist': '#6C6D75',
+				'steel-blue': '#242834',
+				'nightfall-navy': '#505475',
+				'blue-grey': '#788489',
+				'luminous-azure': '#3973F8',
+				'cerulean-breeze': '#3491FA',
+				'winter-mint': '#E9F3F2',
+
+				// Grey Tones
+				'midnight-grey': '#292929',
+				'shadow-slate': '#3F3F3F',
+				'charcoal-grey': '#57585F',
+				'whispering-gray': '#9EA1B0',
+				'silver-mist': '#CECECE',
+				'light-silver': '#D9D9D9',
+				'ashen-grey': '#DFE3E1',
+
+				// Purple Tones
+				'mystic-amethyst': '#9D5FF3',
+				'misty-lavender': '#B1B5CA',
+				'misty-moonstone': '#CACCD2',
+				'silvery-sky': '#C3C8CD',
+				'opal-mist': '#EBF4F1',
+				'cloudy-pearl': '#F5F6FB',
+
+				// White Tones
+				'frost-white': '#FCFDFC',
+				'aqua-haze': '#F5FFFA',
+
+				// Orange Tones
+				'spicy-apricot': '#FF9F5A',
 				'golden-tangerine': '#FFB341',
 			},
 			fontFamily: {

@@ -81,8 +81,9 @@ const Projects = () => {
 	useEffect(() => {
 		if (activePage === 1) setProjectStatus('');
 		else if (activePage === 2) setProjectStatus('active');
-		else if (activePage === 3) setProjectStatus('inactive');
-		else if (activePage === 4) setProjectStatus('completed');
+		else if (activePage === 3) setProjectStatus('on-hold');
+		else if (activePage === 4) setProjectStatus('inactive');
+		else if (activePage === 5) setProjectStatus('completed');
 	}, [activePage]);
 
 	const getUsers = useCallback(async () => {
@@ -110,7 +111,7 @@ const Projects = () => {
 		window.scrollTo(0, 0);
 	}, []);
 
-	const navLabels = ['All Projects', 'Active', 'Inactive', 'Completed'];
+	const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
 
 	return (
 		<>

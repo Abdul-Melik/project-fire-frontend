@@ -59,7 +59,7 @@ const getProjectColorAndStatus = (project: Project) => {
 	if (projectStatus === 'active') return { color: 'bg-spring-fern', status: 'Active' };
 	else if (projectStatus === 'on-hold') return { color: 'bg-golden-tangerine', status: 'On hold' };
 	else if (projectStatus === 'inactive') return { color: 'bg-silver-mist', status: 'Inactive' };
-	else return { color: 'bg-silver-mist', status: 'Completed' };
+	else return { color: 'bg-cerulean-breeze', status: 'Completed' };
 };
 
 const TableRow = ({ project, avatars }: Props) => {
