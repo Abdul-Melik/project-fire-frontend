@@ -14,6 +14,7 @@ import ForgotPassword from 'src/pages/ForgotPassword';
 import ResetPassword from 'src/pages/ResetPassword';
 import Register from 'src/pages/Register';
 import PageNotFound from 'src/pages/PageNotFound';
+import ResponsiveRevenuePerProject from './components/home/development-revenue-costs/charts/ResponsiveRevenuePerProject';
 
 const App = () => {
 	const { isLoading, token, user, login, logout } = useAuth();
@@ -26,6 +27,7 @@ const App = () => {
 	const routes = (
 		<>
 			<Route path='/' element={<Login />} />
+			<Route path='/responsive' element={<ResponsiveRevenuePerProject />} />
 			<Route path='/login' element={<Login />} />
 			<Route path='/register' element={<Register />} />
 			<Route path='/forgot-password' element={<ForgotPassword />} />
