@@ -20,17 +20,14 @@ const ModalSelector = ({ show, header, onCancel, isError, children, selectProjec
 			{show && <Backdrop onClick={() => onCancel()} />}
 			{show && (
 				<motion.div
-					className='fixed left-1/2 top-1/2 z-20 w-3/5 -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white shadow-md md:w-1/4'
+					className='fixed left-1/2 top-1/2 z-20 w-3/5 -translate-x-1/2 -translate-y-1/2 transform rounded-sm bg-white shadow-md md:w-1/4'
 					initial={{ opacity: 0, x: '-50%', y: '-100%' }}
 					animate={{ opacity: 1, x: '0%', y: '0%', translateX: '-50%', translateY: '-50%' }}
 					transition={{ duration: 0.5, ease: 'easeInOut' }}
 				>
-					<header className='w-full bg-deep-teal p-4 text-white'>
-						<h2>{header}</h2>
-					</header>
 					<div className='p-4'>
 						{children.map((child, index) => (
-							<div key={index} onClick={() => selectProject(index)} className='my-3 cursor-pointer'>
+							<div key={index} onClick={() => selectProject(index)} className='mt-2 cursor-pointer border-b leading-8'>
 								{child.name}
 							</div>
 						))}
