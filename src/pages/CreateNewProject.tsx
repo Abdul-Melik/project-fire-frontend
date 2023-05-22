@@ -89,8 +89,6 @@ const CreateNewProject = () => {
 		}
 	};
 
-	console.log('EMPLOYEES ON PROJECT: ' + JSON.stringify(employeesOnProject));
-
 	return (
 		<>
 			<Modal
