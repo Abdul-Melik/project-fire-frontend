@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect, useContext } from 'react';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import AuthContext from 'src/shared/context/auth-context';
-import Modal from 'src/shared/components/utils/Modal';
 import YearSelector from 'src/components/home/performance/YearSelector';
 import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import MainLayout from 'src/shared/components/layout/MainLayout';
@@ -15,6 +15,7 @@ interface ProjectInfo {
 	totalProjects: number;
 	totalValue: number;
 	averageValue: number;
+	averageTeamSize: number;
 	averageHourlyRate: number;
 	salesChannelPercentage: { salesChannel: string; percentage: number }[];
 	projectTypeCount: { count: number; projectType: string }[];
@@ -22,7 +23,6 @@ interface ProjectInfo {
 
 const Home = () => {
 	const { token } = useContext(AuthContext);
-	const [error, setError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [projectsInfo, setProjectsInfo] = useState<ProjectInfo | null>(null);
 	const [selectedYear, setSelectedYear] = useState('2023');
@@ -31,17 +31,14 @@ const Home = () => {
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
 	const getProjectsInfo = useCallback(async () => {
+		setIsLoading(true);
 		try {
 			const response = await axios.get(`${baseUrl}/api/projects/info?year=${selectedYear}`, {
 				headers: { Authorization: 'Bearer ' + token },
 			});
 			setProjectsInfo(response.data);
 		} catch (error: any) {
-			if (axios.isAxiosError(error)) {
-				setError(error.response?.data.error);
-			} else {
-				console.error('Unexpected error: ', error);
-			}
+			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
 		}
 		setIsLoading(false);
 	}, [token, selectedYear]);
@@ -58,12 +55,9 @@ const Home = () => {
 
 	return (
 		<>
-			<Modal onCancel={() => setError(null)} header='An error occurred!' show={!!error} isError={!!error}>
-				<p>{error}</p>
-			</Modal>
 			<MainLayout activeMenuItem={'home'}>
 				<div className='mx-14 my-[34px]'>
-					<div className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</div>
+					<h1 className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</h1>
 					<div className='mt-[30px] flex flex-col'>
 						<div className='mb-12 flex flex-wrap justify-between gap-4'>
 							<Navbar navLabels={navLabels} handlePageSelect={page => setActivePage(page)} />

@@ -1,12 +1,12 @@
 type Props = {
-	description: string;
-	amount: string;
 	className?: string;
 	descriptionClassName?: string;
 	amountClassName?: string;
+	description: string;
+	amount: string;
 };
 
-const SummaryCard = ({ description, amount, className, descriptionClassName, amountClassName }: Props) => {
+const SummaryCard = ({ className, descriptionClassName, amountClassName, description, amount }: Props) => {
 	return (
 		<div className={`flex flex-col items-center justify-center ${className}`}>
 			<p className={`font-gilroy-medium font-medium text-hunter-green ${descriptionClassName}`}>{description}</p>

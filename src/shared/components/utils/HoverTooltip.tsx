@@ -1,12 +1,12 @@
 type Props = {
-	employeeNames?: {
+	names?: {
 		firstName: string;
 		lastName: string;
 	}[];
 };
 
-const HoverTooltip = ({ employeeNames = [] }: Props) => {
-	const formattedNames = employeeNames.map(({ firstName, lastName }) => `${firstName} ${lastName}`).join(', ');
+const HoverTooltip = ({ names = [] }: Props) => {
+	const formattedNames = names.map(({ firstName, lastName }) => `${firstName} ${lastName}`).join(', ');
 
 	return (
 		<div className='absolute left-1/2 top-[-32px] -translate-x-1/2 transform'>

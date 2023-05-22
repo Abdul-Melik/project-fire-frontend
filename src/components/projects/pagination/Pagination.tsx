@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-
 import ProjectsPerPageSelector from 'src/components/projects/pagination/ProjectsPerPageSelector';
 import PageNumberButton from 'src/components/projects/pagination/PageNumberButton';
 

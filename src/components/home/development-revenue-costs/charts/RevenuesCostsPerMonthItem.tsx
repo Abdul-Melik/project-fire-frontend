@@ -89,11 +89,11 @@ const RevenuesCostsPerMonthItem = ({ className, wrapperClassName, data, revenueG
 					/>
 				</div>
 				<SummaryCard
-					description={'Revenue gap'}
-					amount={revenueGap}
 					className='h-[100px] w-full gap-[6px] overflow-hidden rounded-md bg-winter-mint'
 					descriptionClassName='text-sm leading-[22px]'
 					amountClassName='text-2xl'
+					description={'Revenue gap'}
+					amount={revenueGap}
 				/>
 			</div>
 		</div>

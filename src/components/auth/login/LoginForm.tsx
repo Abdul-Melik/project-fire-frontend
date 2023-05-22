@@ -1,16 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import { logo, gradientBackground } from 'src/assets';
 import AuthContext from 'src/shared/context/auth-context';
 import InputField from 'src/shared/components/form-elements/InputField';
 
-type Props = {
-	handleError: (error: string | null) => void;
-};
-
-const LoginForm = ({ handleError }: Props) => {
+const LoginForm = () => {
 	const { token, login } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
@@ -20,7 +17,7 @@ const LoginForm = ({ handleError }: Props) => {
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
-	const handleFormSubmit = async (event: React.FormEvent) => {
+	const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		try {
 			const response = await axios.post(
@@ -40,11 +37,7 @@ const LoginForm = ({ handleError }: Props) => {
 			login(responseData.token, responseData.expiresIn, responseData.user);
 			navigate('/home');
 		} catch (error: any) {
-			if (axios.isAxiosError(error)) {
-				handleError(error.response?.data.error);
-			} else {
-				console.error('Unexpected error: ', error);
-			}
+			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
 		}
 	};
 
@@ -74,32 +67,34 @@ const LoginForm = ({ handleError }: Props) => {
 				</div>
 			)}
 			<div className='w-[450px] text-center'>
-				<h2 className='mb-[42px] font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey'>
+				<h1 className='mb-[42px] font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey'>
 					Log in
-				</h2>
+				</h1>
 				<form className='mb-4 flex flex-col items-center justify-center text-base' onSubmit={handleFormSubmit}>
 					<InputField
+						className='mb-[21px]'
 						label='Email'
 						htmlFor='email'
+						required
 						type='email'
 						id='email'
-						placeholder='Enter your email'
 						value={email}
-						required={true}
+						placeholder='Enter your email'
 						handleInput={email => setEmail(email)}
 					/>
 					<InputField
+						className='mb-[34px]'
 						label='Password'
 						htmlFor='password'
+						required
 						type='password'
 						id='password'
-						placeholder='Enter your password'
 						value={password}
-						required={true}
+						placeholder='Enter your password'
 						handleInput={password => setPassword(password)}
 					/>
 					<button
-						className='mt-[13px] w-full rounded-md bg-deep-teal px-3 py-3 font-gilroy-semi-bold font-semibold text-white hover:saturate-[400%]'
+						className='w-full rounded-md bg-deep-teal px-[10px] py-3 font-gilroy-semi-bold font-semibold text-white hover:saturate-[400%]'
 						type='submit'
 					>
 						Log In

@@ -1,21 +1,21 @@
 import Avatar from 'src/shared/components/utils/Avatar';
 
 type Props = {
-	images?: string[];
-	employeeNames?: {
+	images?: (string | undefined)[];
+	names?: {
 		firstName: string;
 		lastName: string;
 	}[];
 };
 
-const Avatars = ({ images = [], employeeNames = [] }: Props) => {
+const Avatars = ({ images = [], names = [] }: Props) => {
 	const maxVisibleAvatars = 3;
 	const overflowCount = Math.max(0, images.length - maxVisibleAvatars);
 
 	return (
 		<div className='relative flex flex-wrap -space-x-3'>
 			{images.slice(0, maxVisibleAvatars).map((image, index) => (
-				<Avatar src={image} key={index} alt='Employee icon' employeeNames={employeeNames} />
+				<Avatar key={index} src={image} alt='Employee icon' names={names} />
 			))}
 			{overflowCount > 0 && (
 				<div className=''>
