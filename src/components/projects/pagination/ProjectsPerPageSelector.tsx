@@ -7,7 +7,7 @@ const ProjectsPerPageSelector = ({ projectsPerPage, handleProjectsPerPage }: Pro
 	return (
 		<div className='h-8 w-[54px] overflow-hidden rounded-md border border-misty-moonstone text-center'>
 			<select
-				className='h-full w-3/4 font-["Open_Sans"] text-sm font-semibold leading-[30px] tracking-[0.15px] text-midnight-steel outline-none'
+				className='h-full w-3/4 font-opensans-semi-bold text-sm font-semibold leading-[30px] tracking-[0.15px] text-midnight-steel outline-none'
 				value={projectsPerPage}
 				onChange={event => handleProjectsPerPage(Number(event.target.value))}
 			>
