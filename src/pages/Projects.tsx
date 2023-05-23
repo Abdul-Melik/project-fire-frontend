@@ -131,6 +131,7 @@ const Projects = () => {
 								totalNumberOfProjects={totalNumberOfProjects}
 								projects={projects}
 								usersPerProject={usersPerProject}
+								value={searchTerm}
 								handleSearch={input => setSearchTerm(input)}
 							/>
 						)}

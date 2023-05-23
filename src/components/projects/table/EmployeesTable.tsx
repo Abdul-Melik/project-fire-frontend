@@ -93,7 +93,12 @@ const EmployeesTable = ({
 				<LoadingSpinner />
 			) : (
 				<>
-					<TableHeader label='Employees' total={employees.length} handleSearch={input => setSearchTerm(input)} />
+					<TableHeader
+						label='Employees'
+						total={employees.length}
+						value={searchTerm}
+						handleSearch={input => setSearchTerm(input)}
+					/>
 					<table className='w-full border-t border-ashen-grey'>
 						<TableHead columns={columns} />
 						<tbody>

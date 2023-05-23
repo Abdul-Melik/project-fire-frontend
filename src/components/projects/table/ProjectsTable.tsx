@@ -39,6 +39,7 @@ type Props = {
 	totalNumberOfProjects: number;
 	projects: Project[];
 	usersPerProject: UsersPerProject[];
+	value: string;
 	handleSearch: (input: string) => void;
 };
 
@@ -81,10 +82,10 @@ const getProjectColorAndStatus = (project: Project) => {
 	else return { color: 'bg-cerulean-breeze', status: 'Completed' };
 };
 
-const ProjectsTable = ({ totalNumberOfProjects, projects, usersPerProject, handleSearch }: Props) => {
+const ProjectsTable = ({ totalNumberOfProjects, projects, usersPerProject, value, handleSearch }: Props) => {
 	return (
 		<div className='w-full rounded-md border border-ashen-grey bg-white'>
-			<TableHeader label='Projects Table' total={totalNumberOfProjects} handleSearch={handleSearch} />
+			<TableHeader label='Projects Table' total={totalNumberOfProjects} value={value} handleSearch={handleSearch} />
 			<table className='w-full border-t border-ashen-grey'>
 				<TableHead columns={columns} />
 				<tbody>
