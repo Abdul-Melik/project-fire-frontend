@@ -39,7 +39,7 @@ type Props = {
 	handleCheckboxesSelection: (checkboxes: string[]) => void;
 };
 
-const columns = ['First Name', 'Last Name', 'Department', 'Salary', 'Tech Stack', 'Full Time'];
+const columns = ['First Name', 'Last Name', 'Department', 'Salary', 'Tech Stack', 'Part Time'];
 
 const EmployeesTable = ({
 	confirmData,
@@ -79,7 +79,7 @@ const EmployeesTable = ({
 				const checkbox = selectedCheckboxes.find(checkboxId => checkboxId === id);
 				const employee = employees.find(employee => employee.id === id);
 				if (employee) {
-					acc.push({ employee, fullTime: checkbox ? true : false });
+					acc.push({ employee, fullTime: checkbox ? false : true });
 				}
 				return acc;
 			}, []);
