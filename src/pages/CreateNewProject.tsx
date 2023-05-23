@@ -10,6 +10,7 @@ import InputField from 'src/shared/components/form-elements/InputField';
 import TextArea from 'src/shared/components/form-elements/TextArea';
 import DateInput from 'src/shared/components/form-elements/DateInput';
 import Radio from 'src/shared/components/form-elements/Radio';
+import NumberInput from 'src/shared/components/form-elements/NumberInput';
 import EmployeesTable from 'src/components/projects/table/EmployeesTable';
 import Modal from 'src/shared/components/utils/Modal';
 
@@ -214,32 +215,28 @@ const CreateNewProject = () => {
 										</div>
 									</div>
 									<div className='flex w-full gap-4'>
-										<div className='flex flex-1 flex-col gap-[10px]'>
-											<label className='font-gilroy-medium font-medium text-midnight-grey'>Hourly Rate</label>
-											<input
-												className='rounded-md border border-misty-lavender p-3 outline-none'
-												type='number'
-												name='hourly-rate'
-												id='hourly-rate'
-												step='0.01'
-												min='0'
-												value={hourlyRate}
-												onChange={e => setHourlyRate(Number(e.target.value))}
-											/>
-										</div>
-										<div className='flex flex-1 flex-col gap-[10px]'>
-											<label className='font-gilroy-medium font-medium text-midnight-grey'>Project Value</label>
-											<input
-												className='rounded-md border border-misty-lavender p-3 outline-none'
-												type='number'
-												name='project-value'
-												id='project-value'
-												step='0.01'
-												min='0'
-												value={projectValue}
-												onChange={e => setProjectValue(Number(e.target.value))}
-											/>
-										</div>
+										<NumberInput
+											label='Hourly Rate'
+											info=' (in USD)'
+											htmlFor='hourly-rate'
+											required
+											id='hourly-rate'
+											step={0.01}
+											min={0}
+											value={hourlyRate}
+											handleInput={e => setHourlyRate(Number(e.target.value))}
+										/>
+										<NumberInput
+											label='Project Value'
+											info=' (in BAM)'
+											htmlFor='project-value'
+											required
+											id='project-value'
+											step={0.01}
+											min={0}
+											value={projectValue}
+											handleInput={e => setProjectValue(Number(e.target.value))}
+										/>
 									</div>
 								</div>
 							</div>

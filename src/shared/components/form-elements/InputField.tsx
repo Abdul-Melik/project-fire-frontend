@@ -2,7 +2,7 @@ type Props = {
 	className?: string;
 	label: string;
 	htmlFor: string;
-	required: boolean;
+	required?: boolean;
 	type?: string;
 	id: string;
 	value: string;
