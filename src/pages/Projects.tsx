@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import AuthContext from 'src/shared/context/auth-context';
-import Modal from 'src/shared/components/utils/Modal';
 import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import Navbar from 'src/shared/components/navbar/Navbar';
 import MainLayout from 'src/shared/components/layout/MainLayout';
@@ -10,35 +11,40 @@ import Pagination from 'src/components/projects/pagination/Pagination';
 import ProjectsTable from 'src/components/projects/table/ProjectsTable';
 
 interface Project {
+	id: string;
 	name: string;
 	description: string;
 	startDate: Date;
 	endDate: Date;
-	actualEndDate: Date;
+	actualEndDate?: Date;
 	projectType: string;
-	projectStatus: string;
 	hourlyRate: number;
 	projectValueBAM: number;
 	salesChannel: string;
+	projectStatus: string;
 	finished: boolean;
-	employees: [
-		{
-			employee: {
-				_id: string;
-				firstName: string;
-				lastName: string;
-				department: string;
-				salary: number;
-				techStack: string[];
-				__v: number;
-			};
-		}
-	];
+	employees: {
+		employee: string;
+		fullTime: boolean;
+	}[];
+}
+
+interface UsersPerProject {
+	id: string;
+	name: string;
+	users: {
+		id: string;
+		firstName: string;
+		lastName: string;
+		role: string;
+		image?: string;
+		employee: string;
+	}[];
 }
 
 const Projects = () => {
 	const { token } = useContext(AuthContext);
-	const [error, setError] = useState<string | null>(null);
+	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(true);
 	const [activePage, setActivePage] = useState(1);
 	const [projectStatus, setProjectStatus] = useState('');
@@ -48,34 +54,35 @@ const Projects = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [lastPage, setLastPage] = useState(1);
 	const [projectsPerPage, setProjectsPerPage] = useState(10);
-	const [users, setUsers] = useState<any[]>([]);
+	const [usersPerProject, setUsersPerProject] = useState<UsersPerProject[]>([]);
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
-	const getProjects = useCallback(async () => {
+	const getProjectsAndUsers = useCallback(async () => {
 		setIsLoading(true);
 		try {
-			const response = await axios.get(
+			const projectsResponse = await axios.get(
 				`${baseUrl}/api/projects?name=${searchTerm}&projectStatus=${projectStatus}&limit=${projectsPerPage}&page=${currentPage}`,
 				{
 					headers: { Authorization: 'Bearer ' + token },
 				}
 			);
-			setProjects(response.data.projects);
-			setTotalNumberOfProjects(response.data.pageInfo.total);
-			setLastPage(response.data.pageInfo.lastPage);
+			setProjects(projectsResponse.data.projects);
+			setTotalNumberOfProjects(projectsResponse.data.pageInfo.total);
+			setLastPage(projectsResponse.data.pageInfo.lastPage);
+
+			const usersPerProjectResponse = await axios.get(`${baseUrl}/api/projects/users-per-project`, {
+				headers: { Authorization: 'Bearer ' + token },
+			});
+			setUsersPerProject(usersPerProjectResponse.data);
 		} catch (error: any) {
-			if (axios.isAxiosError(error)) {
-				setError(error.response?.data.error);
-			} else {
-				console.error('Unexpected error: ', error);
-			}
+			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
 		}
 		setIsLoading(false);
 	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage]);
 
 	useEffect(() => {
-		if (token) getProjects();
+		if (token) getProjectsAndUsers();
 	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage]);
 
 	useEffect(() => {
@@ -86,27 +93,6 @@ const Projects = () => {
 		else if (activePage === 5) setProjectStatus('completed');
 	}, [activePage]);
 
-	const getUsers = useCallback(async () => {
-		setIsLoading(true);
-		try {
-			const response = await axios.get(`${baseUrl}/api/users`, {
-				headers: { Authorization: 'Bearer ' + token },
-			});
-			setUsers(response.data);
-		} catch (error: any) {
-			if (axios.isAxiosError(error)) {
-				setError(error.response?.data.error);
-			} else {
-				console.error('Unexpected error: ', error);
-			}
-		}
-		setIsLoading(false);
-	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage]);
-
-	useEffect(() => {
-		if (token) getUsers();
-	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage]);
-
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
@@ -115,16 +101,13 @@ const Projects = () => {
 
 	return (
 		<>
-			<Modal onCancel={() => setError(null)} header='An error occurred!' show={!!error} isError={!!error}>
-				<p>{error}</p>
-			</Modal>
 			<MainLayout activeMenuItem={'projects'}>
 				<div className='mx-14 mb-[17px] mt-[34px]'>
 					<div className='mb-[30px] flex items-center justify-between'>
-						<div className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</div>
+						<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</h1>
 						<button
 							className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white hover:saturate-[400%]'
-							onClick={() => {}}
+							onClick={() => navigate('/projects/create')}
 						>
 							Create new project
 						</button>
@@ -135,7 +118,7 @@ const Projects = () => {
 								navLabels={navLabels}
 								handlePageSelect={pageNumber => {
 									setActivePage(pageNumber);
-									setProjectsPerPage(5);
+									setProjectsPerPage(10);
 									setCurrentPage(1);
 									setSearchTerm('');
 								}}
@@ -147,7 +130,8 @@ const Projects = () => {
 							<ProjectsTable
 								totalNumberOfProjects={totalNumberOfProjects}
 								projects={projects}
-								users={users}
+								usersPerProject={usersPerProject}
+								value={searchTerm}
 								handleSearch={input => setSearchTerm(input)}
 							/>
 						)}

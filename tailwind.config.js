@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+	content: [
+		'./index.html',
+		'./src/**/*.{js,ts,jsx,tsx}',
+		'./node_modules/react-tailwindcss-datepicker/dist/index.esm.js',
+	],
 	theme: {
 		extend: {
 			colors: {
@@ -63,6 +67,10 @@ export default {
 				'helvetica-neue-regular': ['HelveticaNeue-Regular', 'sans-serif'],
 				'helvetica-neue-medium': ['HelveticaNeue-Medium', 'sans-serif'],
 				'helvetica-neue-bold': ['HelveticaNeue-Bold', 'sans-serif'],
+				'opensans-regular': ['OpenSans-Regular', 'sans-serif'],
+				'opensans-medium': ['OpenSans-Medium', 'sans-serif'],
+				'opensans-semi-bold': ['OpenSans-SemiBold', 'sans-serif'],
+				'opensans-bold': ['OpenSans-Bold', 'sans-serif'],
 			},
 		},
 	},

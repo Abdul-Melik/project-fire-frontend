@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-
 import ProjectsPerPageSelector from 'src/components/projects/pagination/ProjectsPerPageSelector';
 import PageNumberButton from 'src/components/projects/pagination/PageNumberButton';
 
@@ -26,12 +24,12 @@ const Pagination = ({
 		<div className='flex items-center justify-between'>
 			<div className='flex items-center gap-7'>
 				<div className='flex items-center gap-[9px]'>
-					<span className='font-["Open_Sans"] text-sm font-semibold leading-[30px] tracking-[0.15px] text-nightfall-navy'>
+					<span className='font-opensans-semi-bold text-sm font-semibold leading-[30px] tracking-[0.15px] text-nightfall-navy'>
 						Rows per page:
 					</span>
 					<ProjectsPerPageSelector projectsPerPage={projectsPerPage} handleProjectsPerPage={handleProjectsPerPage} />
 				</div>
-				<span className='font-["Open_Sans"] text-sm font-semibold leading-[30px] tracking-[0.15px] text-whispering-gray'>
+				<span className='font-opensans-semi-bold text-sm font-semibold leading-[30px] tracking-[0.15px] text-whispering-gray'>
 					{totalNumberOfProjects === 0 ? 0 : (currentPage - 1) * projectsPerPage + 1}
 					{' - '}
 					{currentPage * projectsPerPage < totalNumberOfProjects

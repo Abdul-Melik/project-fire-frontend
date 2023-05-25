@@ -1,12 +1,12 @@
 type Props = {
+	className?: string;
 	description: string;
 	amount: string;
 	iconSrc: string;
 	iconAlt: string;
-	className?: string;
 };
 
-const InfoCard = ({ description, amount, iconSrc, iconAlt, className }: Props) => {
+const InfoCard = ({ className, description, amount, iconSrc, iconAlt }: Props) => {
 	return (
 		<div className={`flex justify-between gap-[19px] px-4 py-[10px] ${className}}`}>
 			<div className='flex flex-col items-start gap-[2px]'>

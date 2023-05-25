@@ -2,11 +2,12 @@ type Props = {
 	className?: string;
 	label: string;
 	htmlFor: string;
-	required?: boolean;
-	type?: string;
+	rows?: number;
+	maxlength?: number;
 	id: string;
-	value: string;
 	placeholder: string;
+	value: string;
+	required: boolean;
 	handleInput: (input: string) => void;
 };
 
@@ -15,24 +16,24 @@ const InputField = ({
 	label,
 	htmlFor,
 	required,
-	type = 'text',
 	id,
 	value,
 	placeholder,
+	maxlength = 300,
 	handleInput,
 }: Props) => {
 	return (
-		<div className={`flex w-full flex-col items-start gap-[10px] ${className}`}>
+		<div className={`flex h-full w-full flex-col items-start gap-[10px] ${className}`}>
 			<label className='font-gilroy-medium font-medium text-midnight-grey' htmlFor={htmlFor}>
 				{label}
 			</label>
-			<input
-				className='w-full rounded-md border border-misty-lavender p-3 text-dark-indigo outline-none focus:shadow-md'
+			<textarea
+				className='h-full w-full resize-none rounded-md border border-misty-lavender p-3 leading-[22px] text-dark-indigo outline-none focus:shadow-md'
 				required={required}
-				type={type}
 				id={id}
 				value={value}
 				placeholder={placeholder}
+				maxLength={maxlength}
 				onChange={event => handleInput(event.target.value)}
 			/>
 		</div>

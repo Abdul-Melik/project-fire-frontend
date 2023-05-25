@@ -1,46 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import { search } from 'src/assets';
 
-interface Project {
-	name: string;
-	description: string;
-	startDate: Date;
-	endDate: Date;
-	actualEndDate: Date;
-	projectStatus: string;
-	hourlyRate: number;
-	projectValueBAM: number;
-	finished: boolean;
-	employees: [
-		{
-			employee: {
-				_id: string;
-				firstName: string;
-				lastName: string;
-				department: string;
-				salary: number;
-				techStack: string[];
-				__v: number;
-			};
-		}
-	];
-}
-
 type Props = {
-	totalNumberOfProjects: number;
-	data: Project[];
+	label: string;
+	total: number;
+	value: string;
 	handleSearch: (input: string) => void;
 };
 
-const TableHeader = ({ totalNumberOfProjects, handleSearch }: Props) => {
-	const [input, setInput] = useState('');
+const TableHeader = ({ label, total, value, handleSearch }: Props) => {
+	const [input, setInput] = useState(value);
 
 	return (
 		<div className='flex items-center justify-between px-4'>
 			<div className='flex items-center gap-4 py-[23px]'>
-				<h2 className='leadin-[26px] font-gilroy-medium text-lg font-medium text-midnight-grey'>Projects Table</h2>
+				<h2 className='leadin-[26px] font-gilroy-medium text-lg font-medium text-midnight-grey'>{label}</h2>
 				<div className='flex h-[30px] flex-col items-center justify-center rounded-md bg-aqua-haze px-[10px] py-[2px] font-gilroy-medium text-sm font-medium leading-[18px] text-moss-green'>
-					{totalNumberOfProjects} total
+					{total} total
 				</div>
 			</div>
 			<form

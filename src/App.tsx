@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import AuthContext from 'src/shared/context/auth-context';
 import useAuth from 'src/shared/hooks/auth-hook';
@@ -6,6 +8,7 @@ import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import Login from 'src/pages/Login';
 import Home from 'src/pages/Home';
 import Projects from 'src/pages/Projects';
+import CreateNewProject from 'src/pages/CreateNewProject';
 import Employees from 'src/pages/Employees';
 import FinancialOverview from 'src/pages/FinancialOverview';
 import ProjectReporting from 'src/pages/ProjectReporting';
@@ -35,6 +38,7 @@ const App = () => {
 			<Route element={<PrivateRoutes />}>
 				<Route path='/home' element={<Home />} />
 				<Route path='/projects' element={<Projects />} />
+				<Route path='/projects/create' element={<CreateNewProject />} />
 				<Route path='/employees' element={<Employees />} />
 				<Route path='/financial-overview' element={<FinancialOverview />} />
 				<Route path='/project-reporting' element={<ProjectReporting />} />
@@ -56,7 +60,9 @@ const App = () => {
 			<Router>
 				<Routes>{routes}</Routes>
 			</Router>
+			<ToastContainer />
 		</AuthContext.Provider>
 	);
 };
+
 export default App;

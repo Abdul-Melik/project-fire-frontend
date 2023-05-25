@@ -6,8 +6,8 @@ type Props = {
 const ImageUpload = ({ label, onChange }: Props) => {
 	return (
 		<>
-			<label className='rounded-md bg-whispering-gray px-4 py-2 text-midnight-grey hover:cursor-pointer hover:brightness-[80%]'>
-				<span className='font-gilroy-medium font-medium'>{label}</span>
+			<label className='rounded-md bg-golden-tangerine px-4 py-2 text-midnight-grey hover:cursor-pointer hover:saturate-150'>
+				<span className='font-gilroy-semi-bold font-semibold'>{label}</span>
 				<input
 					className='hidden'
 					type='file'

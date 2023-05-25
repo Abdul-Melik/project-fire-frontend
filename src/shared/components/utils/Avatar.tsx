@@ -4,30 +4,30 @@ import { avatar } from 'src/assets';
 import HoverTooltip from 'src/shared/components/utils/HoverTooltip';
 
 type Props = {
-	src: string;
+	className?: string;
+	src?: string;
 	alt: string;
-	employeeNames?: {
+	names?: {
 		firstName: string;
 		lastName: string;
 	}[];
-	className?: string;
 };
 
-const Avatar = ({ src, alt, employeeNames, className }: Props) => {
-	const [showEmployeeNames, setShowEmployeeNames] = useState(false);
+const Avatar = ({ className, src, alt, names }: Props) => {
+	const [showNames, setShowNames] = useState(false);
 
 	return (
 		<div
 			className='relative hover:cursor-pointer'
-			onMouseEnter={() => setShowEmployeeNames(true)}
-			onMouseLeave={() => setShowEmployeeNames(false)}
+			onMouseEnter={() => setShowNames(true)}
+			onMouseLeave={() => setShowNames(false)}
 		>
 			<img
 				className={`h-[35px] w-[35px] rounded-full border-2 border-white object-cover ${className}`}
 				src={src ? src : avatar}
 				alt={alt}
 			/>
-			{showEmployeeNames && <HoverTooltip employeeNames={employeeNames} />}
+			{showNames && <HoverTooltip names={names} />}
 		</div>
 	);
 };

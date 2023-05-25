@@ -18,14 +18,14 @@ const Navbar = ({ navLabels, handlePageSelect }: Props) => {
 				{navLabels.map((label, index) => (
 					<NavLink
 						key={index}
+						className={`${selectedPage === index + 1 ? activeLink : inactiveLink} ${
+							index === 0 ? 'rounded-l border-l' : 'border-l-0'
+						} ${index === navLabels.length - 1 ? 'rounded-r' : ''}`}
 						label={label}
 						onClick={() => {
 							handlePageSelect(index + 1);
 							setSelectedPage(index + 1);
 						}}
-						className={`${selectedPage === index + 1 ? activeLink : inactiveLink} ${
-							index === 0 ? 'rounded-l border-l' : 'border-l-0'
-						} ${index === navLabels.length - 1 ? 'rounded-r' : ''}`}
 					/>
 				))}
 			</div>

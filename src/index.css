@@ -71,6 +71,31 @@
 	src: url('./fonts/static/HelveticaNeue-Bold.ttf') format('truetype');
 }
 
+/* OPENSANS */
+/* Font Weight: 400 */
+@font-face {
+	font-family: 'OpenSans-Regular';
+	src: url('./fonts/static/OpenSans-Regular.ttf') format('truetype');
+}
+
+/* Font Weight: 500 */
+@font-face {
+	font-family: 'OpenSans-Medium';
+	src: url('./fonts/static/OpenSans-Medium.ttf') format('truetype');
+}
+
+/* Font Weight: 600 */
+@font-face {
+	font-family: 'OpenSans-SemiBold';
+	src: url('./fonts/static/OpenSans-SemiBold.ttf') format('truetype');
+}
+
+/* Font Weight: 700 */
+@font-face {
+	font-family: 'OpenSans-Bold';
+	src: url('./fonts/static/OpenSans-Bold.ttf') format('truetype');
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;

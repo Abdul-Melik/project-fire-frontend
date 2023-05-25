@@ -1,17 +1,14 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import { gradientBackground } from 'src/assets';
 import AuthContext from 'src/shared/context/auth-context';
 import InputField from 'src/shared/components/form-elements/InputField';
-import ImageUpload from 'src/shared/components/utils/ImageUpload';
+import ImageUpload from 'src/shared/components/form-elements/ImageUpload';
 
-type Props = {
-	handleError: (error: string | null) => void;
-};
-
-const RegisterForm = ({ handleError }: Props) => {
+const RegisterForm = () => {
 	const { login } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
@@ -23,7 +20,7 @@ const RegisterForm = ({ handleError }: Props) => {
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
-	const handleFormSubmit = async (event: React.FormEvent) => {
+	const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const formData = new FormData();
 		if (selectedImage) formData.append('image', selectedImage);
@@ -41,11 +38,7 @@ const RegisterForm = ({ handleError }: Props) => {
 			login(responseData.token, responseData.expiresIn, responseData.user);
 			navigate('/home');
 		} catch (error: any) {
-			if (axios.isAxiosError(error)) {
-				handleError(error.response?.data.error);
-			} else {
-				console.error('Unexpected error: ', error);
-			}
+			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
 		}
 		setSelectedImage(null);
 	};
@@ -67,46 +60,50 @@ const RegisterForm = ({ handleError }: Props) => {
 				</div>
 			)}
 			<div className='w-[450px] text-center'>
-				<h2 className='mb-6 font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey'>Register</h2>
+				<h1 className='mb-6 font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey'>Register</h1>
 				<form className='mb-6 flex flex-col text-base' onSubmit={handleFormSubmit}>
 					<InputField
+						className='mb-[21px]'
 						label='Email'
 						htmlFor='email'
+						required
 						type='email'
 						id='email'
-						placeholder='Enter your email'
 						value={email}
-						required={true}
+						placeholder='Enter your email'
 						handleInput={email => setEmail(email)}
 					/>
 					<InputField
+						className='mb-[21px]'
 						label='First name'
 						htmlFor='First name'
+						required
 						type='text'
 						id='firstName'
-						placeholder='Enter your first name'
 						value={firstName}
-						required={true}
+						placeholder='Enter your first name'
 						handleInput={firstName => setFirstName(firstName)}
 					/>
 					<InputField
+						className='mb-[21px]'
 						label='Last name'
 						htmlFor='Last name'
+						required
 						type='text'
 						id='lastName'
-						placeholder='Enter your last name'
 						value={lastName}
-						required={true}
+						placeholder='Enter your last name'
 						handleInput={lastName => setLastName(lastName)}
 					/>
 					<InputField
+						className='mb-[21px]'
 						label='Password'
 						htmlFor='password'
+						required
 						type='password'
 						id='password'
-						placeholder='Enter your password'
 						value={password}
-						required={true}
+						placeholder='Enter your password'
 						handleInput={password => setPassword(password)}
 					/>
 					<div className='flex items-center justify-start gap-4'>
