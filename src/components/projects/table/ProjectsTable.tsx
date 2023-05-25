@@ -42,6 +42,7 @@ type Props = {
 	value: string;
 	handleSearch: (input: string) => void;
 	handleSort: Function;
+	selectedColumn: string;
 };
 
 const columns = [
@@ -90,12 +91,13 @@ const ProjectsTable = ({
 	value,
 	handleSearch,
 	handleSort,
+	selectedColumn,
 }: Props) => {
 	return (
 		<div className='w-full rounded-md border border-ashen-grey bg-white'>
 			<TableHeader label='Projects Table' total={totalNumberOfProjects} value={value} handleSearch={handleSearch} />
 			<table className='w-full border-t border-ashen-grey'>
-				<TableHead columns={columns} handleSort={handleSort} />
+				<TableHead columns={columns} handleSort={handleSort} selectedColumn={selectedColumn} />
 				<tbody>
 					{projects.map(project => {
 						const projectId = project.id;

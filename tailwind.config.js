@@ -38,6 +38,7 @@ export default {
 				'silver-mist': '#CECECE',
 				'light-silver': '#D9D9D9',
 				'ashen-grey': '#DFE3E1',
+				'pale-silver': '#F1F1F1',
 
 				// Purple Tones
 				'mystic-amethyst': '#9D5FF3',

@@ -1,8 +1,9 @@
 import arrow from '../../../assets/svg/arrow.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 type Props = {
 	columns: headObject[];
 	handleSort: Function;
+	selectedColumn: string;
 };
 interface headObject {
 	name: string;
@@ -10,14 +11,16 @@ interface headObject {
 	order: string;
 }
 
-const TableHead = ({ columns, handleSort }: Props) => {
+const TableHead = ({ columns, handleSort, selectedColumn }: Props) => {
 	return (
 		<thead>
 			<tr className='h-[40px] text-left'>
 				{columns.map((column, index) => (
 					<th
 						key={index}
-						className='w-[150px] pl-4 font-gilroy-medium text-sm font-medium leading-[22px] text-slate-mist'
+						className={`w-[150px] pl-4 font-gilroy-medium text-sm font-medium leading-[22px] text-slate-mist ${
+							selectedColumn === column.label ? 'bg-pale-silver' : ''
+						}`}
 					>
 						{column.name}{' '}
 						<img

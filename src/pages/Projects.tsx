@@ -58,6 +58,7 @@ const Projects = () => {
 	const [usersPerProject, setUsersPerProject] = useState<UsersPerProject[]>([]);
 	const [sortBy, setSortBy] = useState('startDate');
 	const [sortOrder, setSortOrder] = useState('desc');
+	const [selectedColumn, setSelectedColumn] = useState('startDate');
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
 	const getProjectsAndUsers = useCallback(async () => {
@@ -104,7 +105,8 @@ const Projects = () => {
 	const handleSort = (sortByLabel: string, sortLabel: string) => {
 		setSortBy(sortByLabel);
 		setSortOrder(sortLabel);
-		console.log(sortByLabel, sortLabel);
+		setSelectedColumn(sortByLabel);
+		console.log(selectedColumn);
 		getProjectsAndUsers();
 	};
 	return (
@@ -142,6 +144,7 @@ const Projects = () => {
 								value={searchTerm}
 								handleSearch={input => setSearchTerm(input)}
 								handleSort={handleSort}
+								selectedColumn={selectedColumn}
 							/>
 						)}
 					</div>
