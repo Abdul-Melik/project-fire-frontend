@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import AuthContext from 'src/shared/context/auth-context';
-import TableHead from 'src/shared/components/table-elements/TableHead';
+import EmployeeTableHead from 'src/shared/components/table-elements/EmployeeTableHead';
 import TableHeader from 'src/shared/components/table-elements/TableHeader';
 import TableRow from 'src/shared/components/table-elements/TableRow';
 import Checkbox from 'src/shared/components/form-elements/Checkbox';
@@ -100,7 +100,7 @@ const EmployeesTable = ({
 						handleSearch={input => setSearchTerm(input)}
 					/>
 					<table className='w-full border-t border-ashen-grey'>
-						<TableHead columns={columns} />
+						<EmployeeTableHead columns={columns} />
 						<tbody>
 							{employees.map(employee => {
 								const employeeId = employee.id;
