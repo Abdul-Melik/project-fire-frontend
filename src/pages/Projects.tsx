@@ -9,6 +9,7 @@ import Navbar from 'src/shared/components/navbar/Navbar';
 import MainLayout from 'src/shared/components/layout/MainLayout';
 import Pagination from 'src/components/projects/pagination/Pagination';
 import ProjectsTable from 'src/components/projects/table/ProjectsTable';
+import { get } from 'http';
 
 interface Project {
 	id: string;
@@ -55,14 +56,15 @@ const Projects = () => {
 	const [lastPage, setLastPage] = useState(1);
 	const [projectsPerPage, setProjectsPerPage] = useState(10);
 	const [usersPerProject, setUsersPerProject] = useState<UsersPerProject[]>([]);
-
+	const [sortBy, setSortBy] = useState('startDate');
+	const [sortOrder, setSortOrder] = useState('desc');
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
 	const getProjectsAndUsers = useCallback(async () => {
 		setIsLoading(true);
 		try {
 			const projectsResponse = await axios.get(
-				`${baseUrl}/api/projects?name=${searchTerm}&projectStatus=${projectStatus}&limit=${projectsPerPage}&page=${currentPage}`,
+				`${baseUrl}/api/projects?name=${searchTerm}&projectStatus=${projectStatus}&limit=${projectsPerPage}&page=${currentPage}&orderBy=${sortBy}&order=${sortOrder}`,
 				{
 					headers: { Authorization: 'Bearer ' + token },
 				}
@@ -79,11 +81,11 @@ const Projects = () => {
 			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
 		}
 		setIsLoading(false);
-	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage]);
+	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage, sortBy, sortOrder]);
 
 	useEffect(() => {
 		if (token) getProjectsAndUsers();
-	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage]);
+	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage, sortBy, sortOrder, getProjectsAndUsers]);
 
 	useEffect(() => {
 		if (activePage === 1) setProjectStatus('');
@@ -99,6 +101,12 @@ const Projects = () => {
 
 	const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
 
+	const handleSort = (sortByLabel: string, sortLabel: string) => {
+		setSortBy(sortByLabel);
+		setSortOrder(sortLabel);
+		console.log(sortByLabel, sortLabel);
+		getProjectsAndUsers();
+	};
 	return (
 		<>
 			<MainLayout activeMenuItem={'projects'}>
@@ -133,6 +141,7 @@ const Projects = () => {
 								usersPerProject={usersPerProject}
 								value={searchTerm}
 								handleSearch={input => setSearchTerm(input)}
+								handleSort={handleSort}
 							/>
 						)}
 					</div>

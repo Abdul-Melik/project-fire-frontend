@@ -41,16 +41,17 @@ type Props = {
 	usersPerProject: UsersPerProject[];
 	value: string;
 	handleSearch: (input: string) => void;
+	handleSort: Function;
 };
 
 const columns = [
-	'Name',
-	'Description',
-	'Duration (from-to)',
-	'Developers',
-	'Hourly rate',
-	'Project value in BAM',
-	'Status',
+	{ name: 'Name', label: 'name', order: 'desc' },
+	{ name: 'Description', label: 'description', order: 'desc' },
+	{ name: 'Duration', label: 'startDate', order: 'desc' },
+	{ name: 'Developers', label: 'employees', order: 'desc' },
+	{ name: 'Hourly rate', label: 'hourlyRate', order: 'desc' },
+	{ name: 'Project value in BAM', label: 'projectValueBAM', order: 'desc' },
+	{ name: 'Status', label: 'projectStatus', order: 'desc' },
 ];
 
 const getProjectDate = (project: Project) => {
@@ -82,12 +83,19 @@ const getProjectColorAndStatus = (project: Project) => {
 	else return { color: 'bg-cerulean-breeze', status: 'Completed' };
 };
 
-const ProjectsTable = ({ totalNumberOfProjects, projects, usersPerProject, value, handleSearch }: Props) => {
+const ProjectsTable = ({
+	totalNumberOfProjects,
+	projects,
+	usersPerProject,
+	value,
+	handleSearch,
+	handleSort,
+}: Props) => {
 	return (
 		<div className='w-full rounded-md border border-ashen-grey bg-white'>
 			<TableHeader label='Projects Table' total={totalNumberOfProjects} value={value} handleSearch={handleSearch} />
 			<table className='w-full border-t border-ashen-grey'>
-				<TableHead columns={columns} />
+				<TableHead columns={columns} handleSort={handleSort} />
 				<tbody>
 					{projects.map(project => {
 						const projectId = project.id;
