@@ -61,7 +61,7 @@ const HamburgerMenu = ({ activeMenuItem }: HamburgerMenuProps) => {
             </div>
           )}
           <div>
-            <SidebarMenu activeMenuItem={activeMenuItem} />
+            <SidebarMenu activeMenuItem={activeMenuItem} isHamburgerMenu={true} /> {/* Dodajemo prop isHamburgerMenu */}
           </div>
         </div>
       )}
