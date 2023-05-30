@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { search } from 'src/assets';
 
 type Props = {
 	label: string;
 	total: number;
+	value: string;
 	handleSearch: (input: string) => void;
 };
 
-const TableHeader = ({ label, total, handleSearch }: Props) => {
-	const [input, setInput] = useState('');
+const TableHeader = ({ label, total, value, handleSearch }: Props) => {
+	const [input, setInput] = useState(value);
 
 	return (
 		<div className='flex items-center justify-between px-4'>

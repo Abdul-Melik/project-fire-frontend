@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import AuthContext from 'src/shared/context/auth-context';
-import TableHead from 'src/shared/components/table-elements/TableHead';
+import EmployeeTableHead from 'src/shared/components/table-elements/EmployeeTableHead';
 import TableHeader from 'src/shared/components/table-elements/TableHeader';
 import TableRow from 'src/shared/components/table-elements/TableRow';
 import Checkbox from 'src/shared/components/form-elements/Checkbox';
@@ -39,7 +39,7 @@ type Props = {
 	handleCheckboxesSelection: (checkboxes: string[]) => void;
 };
 
-const columns = ['First Name', 'Last Name', 'Department', 'Salary', 'Tech Stack', 'Full Time'];
+const columns = ['First Name', 'Last Name', 'Department', 'Salary', 'Tech Stack', 'Part Time'];
 
 const EmployeesTable = ({
 	confirmData,
@@ -79,7 +79,7 @@ const EmployeesTable = ({
 				const checkbox = selectedCheckboxes.find(checkboxId => checkboxId === id);
 				const employee = employees.find(employee => employee.id === id);
 				if (employee) {
-					acc.push({ employee, fullTime: checkbox ? true : false });
+					acc.push({ employee, fullTime: checkbox ? false : true });
 				}
 				return acc;
 			}, []);
@@ -93,9 +93,14 @@ const EmployeesTable = ({
 				<LoadingSpinner />
 			) : (
 				<>
-					<TableHeader label='Employees' total={employees.length} handleSearch={input => setSearchTerm(input)} />
+					<TableHeader
+						label='Employees'
+						total={employees.length}
+						value={searchTerm}
+						handleSearch={input => setSearchTerm(input)}
+					/>
 					<table className='w-full border-t border-ashen-grey'>
-						<TableHead columns={columns} />
+						<EmployeeTableHead columns={columns} />
 						<tbody>
 							{employees.map(employee => {
 								const employeeId = employee.id;
