@@ -8,6 +8,7 @@ import TableHeader from 'src/shared/components/table-elements/TableHeader';
 import TableRow from 'src/shared/components/table-elements/TableRow';
 import Checkbox from 'src/shared/components/form-elements/Checkbox';
 import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
+import { get } from 'http';
 
 interface Employee {
 	id: string;
@@ -53,6 +54,7 @@ const EmployeesTable = ({
 	const [isLoading, setIsLoading] = useState(true);
 	const [employees, setEmployees] = useState<Employee[]>([]);
 	const [searchTerm, setSearchTerm] = useState('');
+	const [allEmployees, setAllEmployees] = useState<Employee[]>([]);
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -69,6 +71,23 @@ const EmployeesTable = ({
 		setIsLoading(false);
 	}, [token, searchTerm]);
 
+	const getAllEmployees = async () => {
+		setIsLoading(true);
+		try {
+			const response = await axios.get(`${baseUrl}/api/employees`, {
+				headers: { Authorization: 'Bearer ' + token },
+			});
+			setAllEmployees(response.data);
+		} catch (error: any) {
+			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
+		}
+		setIsLoading(false);
+	};
+
+	useEffect(() => {
+		if (token) getAllEmployees();
+	}, [token]);
+
 	useEffect(() => {
 		if (token) getEmployees();
 	}, [token, searchTerm]);
@@ -77,12 +96,13 @@ const EmployeesTable = ({
 		if (confirmData && employees.length > 0) {
 			const employeesOnProject: EmployeeOnProject[] = selectedRows.reduce((acc: EmployeeOnProject[], id) => {
 				const checkbox = selectedCheckboxes.find(checkboxId => checkboxId === id);
-				const employee = employees.find(employee => employee.id === id);
+				const employee = allEmployees.find(employee => employee.id === id);
 				if (employee) {
 					acc.push({ employee, fullTime: checkbox ? false : true });
 				}
 				return acc;
 			}, []);
+			console.log(allEmployees, employeesOnProject);
 			handleConfirmation(employeesOnProject);
 		}
 	}, [employees, confirmData]);
@@ -97,7 +117,9 @@ const EmployeesTable = ({
 						label='Employees'
 						total={employees.length}
 						value={searchTerm}
-						handleSearch={input => setSearchTerm(input)}
+						handleSearch={input => {
+							setSearchTerm(input);
+						}}
 					/>
 					<table className='w-full border-t border-ashen-grey'>
 						<EmployeeTableHead columns={columns} />

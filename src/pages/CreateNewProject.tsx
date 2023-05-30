@@ -113,6 +113,7 @@ const CreateNewProject = () => {
 					selectedCheckboxes={selectedCheckboxes}
 					handleConfirmation={(employees: EmployeeOnProject[]) => {
 						setEmployeesOnProject(employees);
+						console.log(employeesOnProject, employees);
 						setOpenModal(false);
 						setConfirmData(false);
 					}}
