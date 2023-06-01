@@ -16,9 +16,11 @@ const TableRow = ({ className, onClick, children }: Props) => {
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "translateX(-4px)";
+        e.currentTarget.style.fontSize = "15px";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = "translateX(0)";
+        e.currentTarget.style.fontSize = "";
       }}
     >
       {children}
