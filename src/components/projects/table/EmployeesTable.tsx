@@ -107,6 +107,10 @@ const EmployeesTable = ({
 		}
 	}, [employees, confirmData]);
 
+	const formatTechStack = (techStack: string[]) => {
+		const result = techStack.join(', ');
+		return result.substring(0, 20) + (result.length > 20 ? '...' : '');
+	};
 	return (
 		<div className='h-[400px] w-full overflow-y-scroll rounded-md border border-ashen-grey bg-white'>
 			{isLoading ? (
@@ -145,7 +149,7 @@ const EmployeesTable = ({
 										<td className='w-[150px] pl-4'>{employee.lastName}</td>
 										<td className='w-[150px] pl-4'>{employee.department}</td>
 										<td className='w-[150px] pl-4'>{employee.salary}</td>
-										<td className='w-[150px] pl-4'>{employee.techStack}</td>
+										<td className='w-[150px] pl-4'>{formatTechStack(employee.techStack)}</td>
 										<td className='w-[150px] pl-4'>
 											<Checkbox
 												className='ml-4'
