@@ -7,22 +7,15 @@ import {
 	velocity,
 	weeksOver,
 	hourlyPrice,
-} from 'src/assets';
+} from 'src/assets/media';
+import { ProjectsInfo } from 'src/types';
 import InfoCard from 'src/shared/components/cards/InfoCard';
 import SalesChannels from 'src/components/home/performance/charts/SalesChannels';
 import ProjectScope from 'src/components/home/performance/charts/ProjectScope';
 import HoursOverview from 'src/components/home/performance/charts/HoursOverview';
 
 type Props = {
-	projectsInfo: {
-		totalProjects: number;
-		totalValue: number;
-		averageValue: number;
-		averageTeamSize: number;
-		averageHourlyRate: number;
-		salesChannelPercentage: { salesChannel: string; percentage: number }[];
-		projectTypeCount: { count: number; projectType: string }[];
-	} | null;
+	projectsInfo: ProjectsInfo | null;
 };
 
 const Performance = ({ projectsInfo }: Props) => {
@@ -100,8 +93,8 @@ const Performance = ({ projectsInfo }: Props) => {
 				/>
 			</div>
 			<div className='flex gap-[30px]'>
-				<SalesChannels chartValues={projectsInfo?.salesChannelPercentage ?? []} />
-				<ProjectScope chartValues={projectsInfo?.projectTypeCount ?? []} />
+				<SalesChannels chartValues={projectsInfo?.salesChannelPercentage ?? {}} />
+				<ProjectScope chartValues={projectsInfo?.projectTypeCount ?? {}} />
 			</div>
 			<HoursOverview />
 		</div>

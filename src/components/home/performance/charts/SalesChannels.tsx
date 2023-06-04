@@ -1,37 +1,12 @@
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
+import { ChartData, SalesChannelCustomLabel, SalesChannelChartValues } from 'src/types';
 import DataCard from 'src/shared/components/cards/DataCard';
-
-interface ChartData {
-	name: string;
-	value: number;
-}
-
-interface CustomizedLabelProps {
-	cx: number;
-	cy: number;
-	midAngle: number;
-	innerRadius: number;
-	outerRadius: number;
-	percent: number;
-	index: number;
-}
-
-type Props = {
-	chartValues: { salesChannel: string; percentage: number }[];
-};
 
 const COLORS = ['#3973F8', '#3491FA', '#9D5FF3', '#FF9F5A', '#7BB99F'];
 const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-	cx,
-	cy,
-	midAngle,
-	innerRadius,
-	outerRadius,
-	percent,
-	index,
-}: CustomizedLabelProps) => {
+
+const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: SalesChannelCustomLabel) => {
 	const radius = innerRadius + (outerRadius - innerRadius) * 0.6;
 	let x = cx + radius * Math.cos(-midAngle * RADIAN);
 	let y = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -57,28 +32,28 @@ const renderCustomizedLabel = ({
 	);
 };
 
-const SalesChannels = ({ chartValues }: Props) => {
+const SalesChannels = ({ chartValues }: SalesChannelChartValues) => {
 	const chartData: ChartData[] = [
 		{
 			name: 'Online',
-			value: chartValues.find(value => value.salesChannel === 'online')?.percentage ?? 0,
+			value: chartValues['Online'] ?? 0,
 		},
 		{
 			name: 'In Person',
-			value: chartValues.find(value => value.salesChannel === 'in-person')?.percentage ?? 0,
+			value: chartValues['InPerson'] ?? 0,
 		},
 		{
 			name: 'Referral',
-			value: chartValues.find(value => value.salesChannel === 'referral')?.percentage ?? 0,
+			value: chartValues['Referral'] ?? 0,
 		},
 		{
 			name: 'Other',
-			value: chartValues.find(value => value.salesChannel === 'other')?.percentage ?? 0,
+			value: chartValues['Other'] ?? 0,
 		},
 	];
 
 	const sum = chartData.reduce((total, entry) => total + entry.value, 0);
-	const shouldRenderChart = sum !== 0;
+	const renderChart = sum !== 0;
 
 	const headerContent = (
 		<div className='flex items-center gap-[10px]'>
@@ -88,14 +63,14 @@ const SalesChannels = ({ chartValues }: Props) => {
 
 	return (
 		<DataCard className='h-[342px] flex-1 rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
-			{shouldRenderChart ? (
+			{renderChart ? (
 				<ResponsiveContainer width='100%' height='100%' className='mt-[38px]'>
 					<PieChart>
 						<Pie
 							dataKey='value'
 							data={chartData}
 							labelLine={false}
-							label={renderCustomizedLabel}
+							label={CustomLabel}
 							isAnimationActive={true}
 							outerRadius={100}
 							cx={100}

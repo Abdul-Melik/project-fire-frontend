@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 
-import { error } from 'src/assets';
+import { error } from 'src/assets/media';
 import AuthContext from 'src/shared/context/auth-context';
 
 const PageNotFound = () => {

@@ -1,37 +1,6 @@
+import { revenuesCostsPerMonthChart } from 'src/data/charts';
 import DataCard from 'src/shared/components/cards/DataCard';
 import RevenuesCostsPerMonthItem from 'src/components/home/development-revenue-costs/charts/RevenuesCostsPerMonthItem';
-
-const data = [
-	[
-		{
-			month: 'January: 1/1/2023',
-			'Grand Total Planned Revenue': 210000,
-			'Grand Total Actual Revenue': 210000,
-			'Grand Total Total Expenses (Planned)': 150000,
-			'Grand Total Total Expenses (Actual)': 260000,
-		},
-	],
-	[
-		{
-			month: 'February: 1/2/2023',
-			'Grand Total Planned Revenue': 210000,
-			'Grand Total Actual Revenue': 210000,
-			'Grand Total Total Expenses (Planned)': 150000,
-			'Grand Total Total Expenses (Actual)': 260000,
-		},
-	],
-	[
-		{
-			month: 'March: 1/3/2023',
-			'Grand Total Planned Revenue': 210000,
-			'Grand Total Actual Revenue': 210000,
-			'Grand Total Total Expenses (Planned)': 150000,
-			'Grand Total Total Expenses (Actual)': 260000,
-		},
-	],
-];
-
-const revenueGaps = ['914.00 KM', '10,000.00 KM', '-15,000.00 KM'];
 
 const RevenuesCostsPerMonth = () => {
 	const headerContent = (
@@ -53,12 +22,20 @@ const RevenuesCostsPerMonth = () => {
 				<RevenuesCostsPerMonthItem
 					className='h-[330px] w-[328px]'
 					wrapperClassName='ml-16'
-					data={data[0]}
-					revenueGap={revenueGaps[0]}
+					data={revenuesCostsPerMonthChart.data[0]}
+					revenueGap={revenuesCostsPerMonthChart.revenueGap[0]}
 					tickNumbers
 				/>
-				<RevenuesCostsPerMonthItem className='h-[330px] w-[262px]' data={data[1]} revenueGap={revenueGaps[1]} />
-				<RevenuesCostsPerMonthItem className='h-[330px] w-[262px]' data={data[2]} revenueGap={revenueGaps[2]} />
+				<RevenuesCostsPerMonthItem
+					className='h-[330px] w-[262px]'
+					data={revenuesCostsPerMonthChart.data[1]}
+					revenueGap={revenuesCostsPerMonthChart.revenueGap[1]}
+				/>
+				<RevenuesCostsPerMonthItem
+					className='h-[330px] w-[262px]'
+					data={revenuesCostsPerMonthChart.data[2]}
+					revenueGap={revenuesCostsPerMonthChart.revenueGap[2]}
+				/>
 			</div>
 		</DataCard>
 	);

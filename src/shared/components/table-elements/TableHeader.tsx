@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { search } from 'src/assets';
+import { search } from 'src/assets/media';
 
 type Props = {
 	label: string;

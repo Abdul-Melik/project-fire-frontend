@@ -1,4 +1,4 @@
-import { avatar, arrow } from 'src/assets';
+import { avatar, arrow } from 'src/assets/media';
 
 type Props = {
 	className: string;
@@ -22,7 +22,7 @@ const UserCard = ({ className, userInfo, isUserMenuOpen, onClick }: Props) => {
 						</span>
 					</div>
 					<span className='font-inter-regular text-[14px] font-normal leading-[18px] text-charcoal-grey'>
-						{userInfo?.role === 'admin' ? 'Admin' : 'Guest'}
+						{userInfo?.role === 'Admin' ? 'Admin' : 'Guest'}
 					</span>
 				</div>
 			</div>

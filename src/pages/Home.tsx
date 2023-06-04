@@ -2,29 +2,20 @@ import { useState, useCallback, useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
+import { ProjectsInfo } from 'src/types';
 import AuthContext from 'src/shared/context/auth-context';
-import YearSelector from 'src/components/home/performance/YearSelector';
 import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import MainLayout from 'src/shared/components/layout/MainLayout';
 import Navbar from 'src/shared/components/navbar/Navbar';
 import Performance from 'src/components/home/performance/Performance';
+import YearSelector from 'src/components/home/performance/YearSelector';
 import DevelopmentRevenueCosts from 'src/components/home/development-revenue-costs/DevelopmentRevenueCosts';
 import Plan from 'src/components/home/plan/Plan';
-
-interface ProjectInfo {
-	totalProjects: number;
-	totalValue: number;
-	averageValue: number;
-	averageTeamSize: number;
-	averageHourlyRate: number;
-	salesChannelPercentage: { salesChannel: string; percentage: number }[];
-	projectTypeCount: { count: number; projectType: string }[];
-}
 
 const Home = () => {
 	const { token } = useContext(AuthContext);
 	const [isLoading, setIsLoading] = useState(true);
-	const [projectsInfo, setProjectsInfo] = useState<ProjectInfo | null>(null);
+	const [projectsInfo, setProjectsInfo] = useState<ProjectsInfo | null>(null);
 	const [selectedYear, setSelectedYear] = useState('2023');
 	const [activePage, setActivePage] = useState(1);
 

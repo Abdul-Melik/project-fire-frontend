@@ -1,19 +1,10 @@
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, LabelList } from 'recharts';
+import { ContentType } from 'recharts/types/component/Label';
 
+import { ChartData, ProjectScopeCustomLabel, ProjectScopeChartValues } from 'src/types';
 import DataCard from 'src/shared/components/cards/DataCard';
 
-interface ChartData {
-	name: string;
-	value: number;
-}
-
-type Props = {
-	chartValues: { count: number; projectType: string }[];
-};
-
-const CustomLabel = (props: any) => {
-	const { x, y, value } = props;
-
+const CustomLabel = ({ x, y, value }: ProjectScopeCustomLabel) => {
 	return (
 		<text
 			x={x}
@@ -31,20 +22,20 @@ const CustomLabel = (props: any) => {
 
 const barColors = ['#DFE3E1', '#7BB99F'];
 
-const ProjectScope = ({ chartValues }: Props) => {
+const ProjectScope = ({ chartValues }: ProjectScopeChartValues) => {
 	const chartData: ChartData[] = [
 		{
 			name: 'Fixed',
-			value: chartValues.find(value => value.projectType === 'fixed')?.count ?? 0,
+			value: chartValues['Fixed'] ?? 0,
 		},
 		{
 			name: 'On-going',
-			value: chartValues.find(value => value.projectType === 'on-going')?.count ?? 0,
+			value: chartValues['OnGoing'] ?? 0,
 		},
 	];
 
 	const maxValue = Math.max(...chartData.map(item => item.value));
-	const shouldRenderChart = maxValue !== 0;
+	const renderChart = maxValue !== 0;
 
 	const headerContent = (
 		<div className='flex items-center gap-[10px]'>
@@ -54,7 +45,7 @@ const ProjectScope = ({ chartValues }: Props) => {
 
 	return (
 		<DataCard className='h-[342px] flex-1 rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
-			{shouldRenderChart ? (
+			{renderChart ? (
 				<ResponsiveContainer width='100%' height='100%' className='mt-[38px]'>
 					<BarChart data={chartData} layout='vertical' barSize={40}>
 						<CartesianGrid
@@ -82,7 +73,7 @@ const ProjectScope = ({ chartValues }: Props) => {
 								const color = entry.name === 'Fixed' ? barColors[1] : barColors[0];
 								return <Cell key={index} fill={color} />;
 							})}
-							<LabelList dataKey='name' content={CustomLabel} />
+							<LabelList dataKey='name' content={CustomLabel as ContentType} />
 						</Bar>
 					</BarChart>
 				</ResponsiveContainer>

@@ -1,5 +1,5 @@
-import arrow from '../../../assets/svg/arrow.svg';
-import { useEffect, useState } from 'react';
+import { arrow } from 'src/assets/media';
+
 type Props = {
 	columns: headObject[];
 	handleSort: Function;

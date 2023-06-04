@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import { gradientBackground } from 'src/assets';
+import { gradientBackground } from 'src/assets/media';
 import AuthContext from 'src/shared/context/auth-context';
 import InputField from 'src/shared/components/form-elements/InputField';
 import ImageUpload from 'src/shared/components/form-elements/ImageUpload';

@@ -1,8 +1,10 @@
-import React, { PureComponent, useState } from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Legend } from 'recharts';
-import DataCard from 'src/shared/components/cards/DataCard';
+import { useState } from 'react';
+import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
+
+import { arrow } from 'src/assets/media';
 import ModalSelector from 'src/shared/components/utils/ModalSelector';
-import arrowSvg from 'src/assets/svg/arrow.svg';
+import DataCard from 'src/shared/components/cards/DataCard';
+
 const data = [
 	{
 		name: 'AudioWolf',
@@ -48,7 +50,7 @@ const ResponsiveRevenuePerProject = (props: Props) => {
 						setShow(true);
 					}}
 				>
-					{project.name} <img src={arrowSvg} className='mt-1'></img>
+					{project.name} <img src={arrow} className='mt-1' />
 				</h1>
 				<ModalSelector
 					show={show}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { avatar } from 'src/assets';
+import { avatar } from 'src/assets/media';
 
 import HoverTooltip from 'src/shared/components/utils/HoverTooltip';
 

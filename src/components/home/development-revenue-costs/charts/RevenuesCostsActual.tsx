@@ -1,51 +1,9 @@
 import { useState } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
+import { revenuesCostsActualChart } from 'src/data/charts';
 import DataCard from 'src/shared/components/cards/DataCard';
 import DataSelector from 'src/shared/components/utils/DataSelector';
-
-const data = [
-	{
-		organisation: 'AlphaBid',
-		'Grand Total Total Billed': 125310,
-		'Grand Total Costs': 434450,
-	},
-	{
-		organisation: 'Audiowolf',
-		'Grand Total Total Billed': 554433,
-		'Grand Total Costs': 233705,
-	},
-	{
-		organisation: 'GIZ',
-		'Grand Total Total Billed': 223000,
-		'Grand Total Costs': 113001,
-	},
-	{
-		organisation: 'HUB71',
-		'Grand Total Total Billed': 334300,
-		'Grand Total Costs': 444225,
-	},
-	{
-		organisation: 'Kutuby',
-		'Grand Total Total Billed': 111080,
-		'Grand Total Costs': 345000,
-	},
-	{
-		organisation: 'Travelspot',
-		'Grand Total Total Billed': 441501,
-		'Grand Total Costs': 111610,
-	},
-	{
-		organisation: 'Virgin Pulse',
-		'Grand Total Total Billed': 111501,
-		'Grand Total Costs': 444610,
-	},
-	{
-		organisation: 'Zeppelin (CAT)',
-		'Grand Total Total Billed': 551501,
-		'Grand Total Costs': 62210,
-	},
-];
 
 const RevenuesCostsActual = () => {
 	const [firstOption, setFirstOption] = useState(true);
@@ -81,7 +39,7 @@ const RevenuesCostsActual = () => {
 	return (
 		<DataCard className='h-[392px] rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
 			<ResponsiveContainer width='100%' height='65%' className='mt-[38px]'>
-				<BarChart data={data}>
+				<BarChart data={revenuesCostsActualChart}>
 					<CartesianGrid strokeDasharray='3 3' vertical={false} />
 					<XAxis
 						dataKey='organisation'

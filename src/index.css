@@ -6,94 +6,94 @@
 /* Font Weight: 400 */
 @font-face {
 	font-family: 'Inter-Regular';
-	src: url('./fonts/static/Inter-Regular.ttf') format('truetype');
+	src: url('src/assets/fonts/Inter-Regular.ttf') format('truetype');
 }
 
 /* Font Weight: 500 */
 @font-face {
 	font-family: 'Inter-Medium';
-	src: url('./fonts/static/Inter-Medium.ttf') format('truetype');
+	src: url('src/assets/fonts/Inter-Medium.ttf') format('truetype');
 }
 
 /* Font Weight: 600 */
 @font-face {
 	font-family: 'Inter-SemiBold';
-	src: url('./fonts/static/Inter-SemiBold.ttf') format('truetype');
+	src: url('src/assets/fonts/Inter-SemiBold.ttf') format('truetype');
 }
 
 /* Font Weight: 700 */
 @font-face {
 	font-family: 'Inter-Bold';
-	src: url('./fonts/static/Inter-Bold.ttf') format('truetype');
+	src: url('src/assets/fonts/Inter-Bold.ttf') format('truetype');
 }
 
 /* GILROY FONT */
 /* Font Weight: 400 */
 @font-face {
 	font-family: 'Gilroy-Regular';
-	src: url('./fonts/static/Gilroy-Regular.ttf') format('truetype');
+	src: url('src/assets/fonts/Gilroy-Regular.ttf') format('truetype');
 }
 
 /* Font Weight: 500 */
 @font-face {
 	font-family: 'Gilroy-Medium';
-	src: url('./fonts/static/Gilroy-Medium.ttf') format('truetype');
+	src: url('src/assets/fonts/Gilroy-Medium.ttf') format('truetype');
 }
 
 /* Font Weight: 600 */
 @font-face {
 	font-family: 'Gilroy-SemiBold';
-	src: url('./fonts/static/Gilroy-SemiBold.ttf') format('truetype');
+	src: url('src/assets/fonts/Gilroy-SemiBold.ttf') format('truetype');
 }
 
 /* Font Weight: 700 */
 @font-face {
 	font-family: 'Gilroy-Bold';
-	src: url('./fonts/static/Gilroy-Bold.ttf') format('truetype');
+	src: url('src/assets/fonts/Gilroy-Bold.ttf') format('truetype');
 }
 
 /* HELVETICA NEUE */
 /* Font Weight: 400 */
 @font-face {
 	font-family: 'HelveticaNeue-Regular';
-	src: url('./fonts/static/HelveticaNeue-Regular.ttf') format('truetype');
+	src: url('src/assets/fonts/HelveticaNeue-Regular.ttf') format('truetype');
 }
 
 /* Font Weight: 500 */
 @font-face {
 	font-family: 'HelveticaNeue-Medium';
-	src: url('./fonts/static/HelveticaNeue-Medium.ttf') format('truetype');
+	src: url('src/assets/fonts/HelveticaNeue-Medium.ttf') format('truetype');
 }
 
 /* Font Weight: 700 */
 @font-face {
 	font-family: 'HelveticaNeue-Bold';
-	src: url('./fonts/static/HelveticaNeue-Bold.ttf') format('truetype');
+	src: url('src/assets/fonts/HelveticaNeue-Bold.ttf') format('truetype');
 }
 
 /* OPENSANS */
 /* Font Weight: 400 */
 @font-face {
 	font-family: 'OpenSans-Regular';
-	src: url('./fonts/static/OpenSans-Regular.ttf') format('truetype');
+	src: url('src/assets/fonts/OpenSans-Regular.ttf') format('truetype');
 }
 
 /* Font Weight: 500 */
 @font-face {
 	font-family: 'OpenSans-Medium';
-	src: url('./fonts/static/OpenSans-Medium.ttf') format('truetype');
+	src: url('src/assets/fonts/OpenSans-Medium.ttf') format('truetype');
 }
 
 /* Font Weight: 600 */
 @font-face {
 	font-family: 'OpenSans-SemiBold';
-	src: url('./fonts/static/OpenSans-SemiBold.ttf') format('truetype');
+	src: url('src/assets/fonts/OpenSans-SemiBold.ttf') format('truetype');
 }
 
 /* Font Weight: 700 */
 @font-face {
 	font-family: 'OpenSans-Bold';
-	src: url('./fonts/static/OpenSans-Bold.ttf') format('truetype');
+	src: url('src/assets/fonts/OpenSans-Bold.ttf') format('truetype');
 }
 
 * {

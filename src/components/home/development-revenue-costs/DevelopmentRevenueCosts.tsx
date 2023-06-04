@@ -1,4 +1,4 @@
-import { revenue, directCosts, margin, avgMargin } from 'src/assets';
+import { revenue, directCosts, margin, avgMargin } from 'src/assets/media';
 
 import InfoCard from 'src/shared/components/cards/InfoCard';
 import SummaryCard from 'src/shared/components/cards/SummaryCard';

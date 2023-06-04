@@ -1,17 +1,9 @@
 import { useState } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
+import { hoursOverviewChart } from 'src/data/charts';
 import DataCard from 'src/shared/components/cards/DataCard';
 import DataSelector from 'src/shared/components/utils/DataSelector';
-
-const data = [
-	{ month: 'January: 1/1/2023', 'Grand Total Hours Available': 3310, 'Grand Total Hours Billed': 450 },
-	{ month: 'March: 1/3/2023', 'Grand Total Hours Available': 4433, 'Grand Total Hours Billed': 705 },
-	{ month: 'May: 1/5/2023', 'Grand Total Hours Available': 3000, 'Grand Total Hours Billed': 3001 },
-	{ month: 'July: 1/7/2023', 'Grand Total Hours Available': 300, 'Grand Total Hours Billed': 4225 },
-	{ month: 'September: 1/9/2023', 'Grand Total Hours Available': 1080, 'Grand Total Hours Billed': 5000 },
-	{ month: 'November: 1/11/2023', 'Grand Total Hours Available': 1501, 'Grand Total Hours Billed': 610 },
-];
 
 const HoursOverview = () => {
 	const [firstOption, setFirstOption] = useState(true);
@@ -45,7 +37,7 @@ const HoursOverview = () => {
 	return (
 		<DataCard className='h-[392px] rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
 			<ResponsiveContainer width='100%' height='65%' className='mt-[38px]'>
-				<BarChart data={data}>
+				<BarChart data={hoursOverviewChart}>
 					<CartesianGrid strokeDasharray='3 3' vertical={false} />
 					<XAxis
 						dataKey='month'
