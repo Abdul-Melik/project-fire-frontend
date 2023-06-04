@@ -1,44 +1,12 @@
-import Avatars from 'src/components/projects/table/Avatars';
+import { Project } from 'src/types';
 import TableHead from 'src/shared/components/table-elements/TableHead';
 import TableRow from 'src/shared/components/table-elements/TableRow';
 import TableHeader from 'src/shared/components/table-elements/TableHeader';
-
-interface Project {
-	id: string;
-	name: string;
-	description: string;
-	startDate: Date;
-	endDate: Date;
-	actualEndDate?: Date;
-	projectType: string;
-	hourlyRate: number;
-	projectValueBAM: number;
-	salesChannel: string;
-	projectStatus: string;
-	finished: boolean;
-	employees: {
-		employee: string;
-		fullTime: boolean;
-	}[];
-}
-
-interface UsersPerProject {
-	id: string;
-	name: string;
-	users: {
-		id: string;
-		firstName: string;
-		lastName: string;
-		role: string;
-		image?: string;
-		employee: string;
-	}[];
-}
+import Avatars from 'src/components/projects/table/Avatars';
 
 type Props = {
 	totalNumberOfProjects: number;
 	projects: Project[];
-	usersPerProject: UsersPerProject[];
 	value: string;
 	handleSearch: (input: string) => void;
 	handleSort: Function;
@@ -78,21 +46,13 @@ const getProjectValueBAM = (project: Project) => {
 
 const getProjectColorAndStatus = (project: Project) => {
 	const projectStatus = project.projectStatus;
-	if (projectStatus === 'active') return { color: 'bg-spring-fern', status: 'Active' };
-	else if (projectStatus === 'on-hold') return { color: 'bg-golden-tangerine', status: 'On hold' };
-	else if (projectStatus === 'inactive') return { color: 'bg-silver-mist', status: 'Inactive' };
+	if (projectStatus === 'Active') return { color: 'bg-spring-fern', status: 'Active' };
+	else if (projectStatus === 'OnHold') return { color: 'bg-golden-tangerine', status: 'On hold' };
+	else if (projectStatus === 'Inactive') return { color: 'bg-silver-mist', status: 'Inactive' };
 	else return { color: 'bg-cerulean-breeze', status: 'Completed' };
 };
 
-const ProjectsTable = ({
-	totalNumberOfProjects,
-	projects,
-	usersPerProject,
-	value,
-	handleSearch,
-	handleSort,
-	selectedColumn,
-}: Props) => {
+const ProjectsTable = ({ totalNumberOfProjects, projects, value, handleSearch, handleSort, selectedColumn }: Props) => {
 	return (
 		<div className='w-full rounded-md border border-ashen-grey bg-white'>
 			<TableHeader label='Projects Table' total={totalNumberOfProjects} value={value} handleSearch={handleSearch} />
@@ -101,8 +61,7 @@ const ProjectsTable = ({
 				<tbody>
 					{projects.map(project => {
 						const projectId = project.id;
-						const usersForProject = usersPerProject.find(userObj => userObj.id === projectId);
-						const users = usersForProject && usersForProject.users ? usersForProject.users : null;
+						const employees = project.employees.map(employeeObj => employeeObj.employee);
 						let names:
 							| {
 									firstName: string;
@@ -110,12 +69,12 @@ const ProjectsTable = ({
 							  }[]
 							| undefined;
 						let images: (string | undefined)[] | undefined;
-						if (users) {
-							names = users.map(user => ({
-								firstName: user.firstName,
-								lastName: user.lastName,
+						if (employees) {
+							names = employees.map(employee => ({
+								firstName: employee.firstName,
+								lastName: employee.lastName,
 							}));
-							images = users.map(user => user.image);
+							images = employees.map(employee => employee.image);
 						} else {
 							names = [];
 							images = [];

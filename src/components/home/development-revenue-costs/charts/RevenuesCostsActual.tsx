@@ -22,12 +22,16 @@ const RevenuesCostsActual = () => {
 			<div className='flex gap-4'>
 				<DataSelector
 					label='Grand Total Total Billed'
+					htmlFor='revneus-costs-actual-1'
+					id='revneus-costs-actual-1'
 					color='#FF9F5A'
 					checked={firstOption}
 					toggle={() => setFirstOption(!firstOption)}
 				/>
 				<DataSelector
 					label='Grand Total Costs'
+					htmlFor='revneus-costs-actual-2'
+					id='revneus-costs-actual-2'
 					color='#7BB99F'
 					checked={secondOption}
 					toggle={() => setSecondOption(!secondOption)}

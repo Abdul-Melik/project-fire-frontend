@@ -22,6 +22,7 @@ const RevenuesCostsPerMonth = () => {
 				<RevenuesCostsPerMonthItem
 					className='h-[330px] w-[328px]'
 					wrapperClassName='ml-16'
+					item={1}
 					data={revenuesCostsPerMonthChart.data[0]}
 					revenueGap={revenuesCostsPerMonthChart.revenueGap[0]}
 					tickNumbers
@@ -29,11 +30,13 @@ const RevenuesCostsPerMonth = () => {
 				<RevenuesCostsPerMonthItem
 					className='h-[330px] w-[262px]'
 					data={revenuesCostsPerMonthChart.data[1]}
+					item={2}
 					revenueGap={revenuesCostsPerMonthChart.revenueGap[1]}
 				/>
 				<RevenuesCostsPerMonthItem
 					className='h-[330px] w-[262px]'
 					data={revenuesCostsPerMonthChart.data[2]}
+					item={3}
 					revenueGap={revenuesCostsPerMonthChart.revenueGap[2]}
 				/>
 			</div>

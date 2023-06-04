@@ -52,8 +52,8 @@ const SalesChannels = ({ chartValues }: SalesChannelChartValues) => {
 		},
 	];
 
-	const sum = chartData.reduce((total, entry) => total + entry.value, 0);
-	const renderChart = sum !== 0;
+	const total = chartData.reduce((result, entry) => result + entry.value, 0);
+	const renderChart = total > 0;
 
 	const headerContent = (
 		<div className='flex items-center gap-[10px]'>

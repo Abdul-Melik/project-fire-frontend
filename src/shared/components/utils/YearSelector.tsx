@@ -14,6 +14,7 @@ const YearSelector = ({ handleYearSelect }: Props) => {
 			</label>
 			<select
 				className='flex justify-between gap-[10px] rounded-md border border-ashen-grey py-2 pl-[12px] pr-[10px] font-gilroy-bold text-base font-bold text-hunter-green'
+				id='years'
 				value={selectedYear}
 				onChange={event => {
 					handleYearSelect(event.target.value);

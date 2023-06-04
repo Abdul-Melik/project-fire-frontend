@@ -35,7 +35,7 @@ const ProjectScope = ({ chartValues }: ProjectScopeChartValues) => {
 	];
 
 	const maxValue = Math.max(...chartData.map(item => item.value));
-	const renderChart = maxValue !== 0;
+	const renderChart = maxValue > 0;
 
 	const headerContent = (
 		<div className='flex items-center gap-[10px]'>

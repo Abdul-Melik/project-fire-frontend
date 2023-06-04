@@ -76,10 +76,10 @@ const RegisterForm = () => {
 					<InputField
 						className='mb-[21px]'
 						label='First name'
-						htmlFor='First name'
+						htmlFor='first-name'
 						required
 						type='text'
-						id='firstName'
+						id='first-name'
 						value={firstName}
 						placeholder='Enter your first name'
 						handleInput={firstName => setFirstName(firstName)}
@@ -87,10 +87,10 @@ const RegisterForm = () => {
 					<InputField
 						className='mb-[21px]'
 						label='Last name'
-						htmlFor='Last name'
+						htmlFor='last-name'
 						required
 						type='text'
-						id='lastName'
+						id='last-name'
 						value={lastName}
 						placeholder='Enter your last name'
 						handleInput={lastName => setLastName(lastName)}

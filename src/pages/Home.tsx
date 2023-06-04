@@ -8,7 +8,7 @@ import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import MainLayout from 'src/shared/components/layout/MainLayout';
 import Navbar from 'src/shared/components/navbar/Navbar';
 import Performance from 'src/components/home/performance/Performance';
-import YearSelector from 'src/components/home/performance/YearSelector';
+import YearSelector from 'src/shared/components/utils/YearSelector';
 import DevelopmentRevenueCosts from 'src/components/home/development-revenue-costs/DevelopmentRevenueCosts';
 import Plan from 'src/components/home/plan/Plan';
 

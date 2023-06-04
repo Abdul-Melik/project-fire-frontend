@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
+import { RevenuesCostsPerMonthItemProps } from 'src/types';
 import DataSelector from 'src/shared/components/utils/DataSelector';
 import SummaryCard from 'src/shared/components/cards/SummaryCard';
 
-type Props = {
-	className?: string;
-	wrapperClassName?: string;
-	data: any[];
-	revenueGap: string;
-	tickNumbers?: boolean;
-};
-
-const RevenuesCostsPerMonthItem = ({ className, wrapperClassName, data, revenueGap, tickNumbers = false }: Props) => {
+const RevenuesCostsPerMonthItem = ({
+	className,
+	wrapperClassName,
+	item,
+	data,
+	revenueGap,
+	tickNumbers = false,
+}: RevenuesCostsPerMonthItemProps) => {
 	const [firstOption, setFirstOption] = useState(true);
 	const [secondOption, setSecondOption] = useState(true);
 	const [thirdOption, setThirdOption] = useState(true);
@@ -65,24 +65,32 @@ const RevenuesCostsPerMonthItem = ({ className, wrapperClassName, data, revenueG
 				<div className='mb-[30px] flex flex-col justify-center gap-4'>
 					<DataSelector
 						label='Grand Total Planned Revenue'
+						htmlFor={`revenues-costs-per-month-${item}-1`}
+						id={`revenues-costs-per-month-${item}-1`}
 						color='#FF9F5A'
 						checked={firstOption}
 						toggle={() => setFirstOption(!firstOption)}
 					/>
 					<DataSelector
 						label='Grand Total Actual Revenue'
+						htmlFor={`revenues-costs-per-month-${item}-2`}
+						id={`revenues-costs-per-month-${item}-2`}
 						color='#7BB99F'
 						checked={secondOption}
 						toggle={() => setSecondOption(!secondOption)}
 					/>
 					<DataSelector
 						label='Grand Total Total Expenses (Planned)'
+						htmlFor={`revenues-costs-per-month-${item}-3`}
+						id={`revenues-costs-per-month-${item}-3`}
 						color='#4C84F2'
 						checked={thirdOption}
 						toggle={() => setThirdOption(!thirdOption)}
 					/>
 					<DataSelector
 						label='Grand Total Total Expenses (Actual)'
+						htmlFor={`revenues-costs-per-month-${item}-4`}
+						id={`revenues-costs-per-month-${item}-4`}
 						color='#FDCA48'
 						checked={fourthOption}
 						toggle={() => setFourthOption(!fourthOption)}

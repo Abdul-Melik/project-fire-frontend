@@ -3,45 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
+import { Project } from 'src/types';
 import AuthContext from 'src/shared/context/auth-context';
 import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import Navbar from 'src/shared/components/navbar/Navbar';
 import MainLayout from 'src/shared/components/layout/MainLayout';
-import Pagination from 'src/components/projects/pagination/Pagination';
 import ProjectsTable from 'src/components/projects/table/ProjectsTable';
-import { get } from 'http';
-
-interface Project {
-	id: string;
-	name: string;
-	description: string;
-	startDate: Date;
-	endDate: Date;
-	actualEndDate?: Date;
-	projectType: string;
-	hourlyRate: number;
-	projectValueBAM: number;
-	salesChannel: string;
-	projectStatus: string;
-	finished: boolean;
-	employees: {
-		employee: string;
-		fullTime: boolean;
-	}[];
-}
-
-interface UsersPerProject {
-	id: string;
-	name: string;
-	users: {
-		id: string;
-		firstName: string;
-		lastName: string;
-		role: string;
-		image?: string;
-		employee: string;
-	}[];
-}
+import Pagination from 'src/components/projects/pagination/Pagination';
 
 const Projects = () => {
 	const { token } = useContext(AuthContext);
@@ -55,45 +23,39 @@ const Projects = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [lastPage, setLastPage] = useState(1);
 	const [projectsPerPage, setProjectsPerPage] = useState(10);
-	const [usersPerProject, setUsersPerProject] = useState<UsersPerProject[]>([]);
-	const [sortBy, setSortBy] = useState('startDate');
-	const [sortOrder, setSortOrder] = useState('desc');
+	const [orderByField, setOrderByField] = useState('startDate');
+	const [orderDirection, setOrderDirection] = useState('desc');
 	const [selectedColumn, setSelectedColumn] = useState('startDate');
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
-	const getProjectsAndUsers = useCallback(async () => {
+	const getProjects = useCallback(async () => {
 		setIsLoading(true);
 		try {
-			const projectsResponse = await axios.get(
-				`${baseUrl}/api/projects?name=${searchTerm}&projectStatus=${projectStatus}&limit=${projectsPerPage}&page=${currentPage}&orderBy=${sortBy}&order=${sortOrder}`,
+			const response = await axios.get(
+				`${baseUrl}/api/projects?name=${searchTerm}&projectStatus=${projectStatus}&orderByField=${orderByField}&orderDirection=${orderDirection}&take=${projectsPerPage}&page=${currentPage}`,
 				{
 					headers: { Authorization: 'Bearer ' + token },
 				}
 			);
-			setProjects(projectsResponse.data.projects);
-			setTotalNumberOfProjects(projectsResponse.data.pageInfo.total);
-			setLastPage(projectsResponse.data.pageInfo.lastPage);
-
-			const usersPerProjectResponse = await axios.get(`${baseUrl}/api/projects/users-per-project`, {
-				headers: { Authorization: 'Bearer ' + token },
-			});
-			setUsersPerProject(usersPerProjectResponse.data);
+			setProjects(response.data.projects);
+			setTotalNumberOfProjects(response.data.pageInfo.total);
+			setLastPage(response.data.pageInfo.lastPage);
 		} catch (error: any) {
 			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
 		}
 		setIsLoading(false);
-	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage, sortBy, sortOrder]);
+	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage, orderByField, orderDirection]);
 
 	useEffect(() => {
-		if (token) getProjectsAndUsers();
-	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage, sortBy, sortOrder, getProjectsAndUsers]);
+		if (token) getProjects();
+	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage, orderByField, orderDirection]);
 
 	useEffect(() => {
 		if (activePage === 1) setProjectStatus('');
-		else if (activePage === 2) setProjectStatus('active');
-		else if (activePage === 3) setProjectStatus('on-hold');
-		else if (activePage === 4) setProjectStatus('inactive');
-		else if (activePage === 5) setProjectStatus('completed');
+		else if (activePage === 2) setProjectStatus('Active');
+		else if (activePage === 3) setProjectStatus('OnHold');
+		else if (activePage === 4) setProjectStatus('Inactive');
+		else if (activePage === 5) setProjectStatus('Completed');
 	}, [activePage]);
 
 	useEffect(() => {
@@ -102,13 +64,6 @@ const Projects = () => {
 
 	const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
 
-	const handleSort = (sortByLabel: string, sortLabel: string) => {
-		setSortBy(sortByLabel);
-		setSortOrder(sortLabel);
-		setSelectedColumn(sortByLabel);
-		console.log(selectedColumn);
-		getProjectsAndUsers();
-	};
 	return (
 		<>
 			<MainLayout activeMenuItem={'projects'}>
@@ -140,10 +95,9 @@ const Projects = () => {
 							<ProjectsTable
 								totalNumberOfProjects={totalNumberOfProjects}
 								projects={projects}
-								usersPerProject={usersPerProject}
 								value={searchTerm}
 								handleSearch={input => setSearchTerm(input)}
-								handleSort={handleSort}
+								handleSort={() => {}}
 								selectedColumn={selectedColumn}
 							/>
 						)}

@@ -39,7 +39,6 @@ const HamburgerMenu = ({ activeMenuItem }: HamburgerMenuProps) => {
 				<div>
 					<img src={logo} className='mx-auto w-2/3 py-[30px] pl-7 pr-0' />
 				</div>
-				<div></div>
 			</div>
 			{isHamburgerMenuOpen && (
 				<div className='h-screen border-b border-ashen-grey bg-gradient-to-b from-frost-white to-seafoam-green px-4 py-2'>
@@ -61,7 +60,7 @@ const HamburgerMenu = ({ activeMenuItem }: HamburgerMenuProps) => {
 						</div>
 					)}
 					<div>
-						<SidebarMenu activeMenuItem={activeMenuItem} isHamburgerMenu={true} /> {/* Dodajemo prop isHamburgerMenu */}
+						<SidebarMenu activeMenuItem={activeMenuItem} isHamburgerMenu={true} />
 					</div>
 				</div>
 			)}

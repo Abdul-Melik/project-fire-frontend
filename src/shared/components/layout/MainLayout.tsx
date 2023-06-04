@@ -27,7 +27,6 @@ const MainLayout = ({ activeMenuItem, children }: Props) => {
 
 	return (
 		<div className='flex min-h-screen'>
-			{/* Main Sidebar Content */}
 			<div
 				className='hidden items-center gap-[10px] border-r border-opal-mist bg-gradient-to-b from-frost-white to-seafoam-green md:block'
 				style={{ minWidth: '300px' }}
@@ -54,9 +53,7 @@ const MainLayout = ({ activeMenuItem, children }: Props) => {
 					<SidebarMenu activeMenuItem={activeMenuItem} />
 				</div>
 			</div>
-			{/* Hamburger Meni */}
 			<HamburgerMenu activeMenuItem={activeMenuItem} />
-			{/* Main Content */}
 			<div className='flex-1'>{children}</div>
 		</div>
 	);

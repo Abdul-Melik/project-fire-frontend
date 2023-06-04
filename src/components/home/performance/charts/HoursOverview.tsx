@@ -20,12 +20,16 @@ const HoursOverview = () => {
 			<div className='flex gap-4'>
 				<DataSelector
 					label='Grand Total Hours Available'
+					htmlFor='hours-overview-1'
+					id='hours-overview-1'
 					color='#FF9F5A'
 					checked={firstOption}
 					toggle={() => setFirstOption(!firstOption)}
 				/>
 				<DataSelector
 					label='Grand Total Hours Billed'
+					htmlFor='hours-overview-2'
+					id='hours-overview-2'
 					color='#7BB99F'
 					checked={secondOption}
 					toggle={() => setSecondOption(!secondOption)}
