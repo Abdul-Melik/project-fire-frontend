@@ -49,7 +49,7 @@ type Project = {
 };
 
 const Projects = () => {
-	const { token } = useContext(AuthContext);
+	const { token, user } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(true);
 	const [activePage, setActivePage] = useState(1);
@@ -106,7 +106,10 @@ const Projects = () => {
 					<div className='mb-[30px] flex items-center justify-between'>
 						<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</h1>
 						<button
-							className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white hover:saturate-[400%]'
+							className={`rounded-md px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white ${
+								user?.role === 'Admin' ? 'bg-deep-teal hover:saturate-[400%]' : 'cursor-not-allowed bg-whispering-gray'
+							}`}
+							disabled={user?.role !== 'Admin'}
 							onClick={() => navigate('/projects/create')}
 						>
 							Create new project
