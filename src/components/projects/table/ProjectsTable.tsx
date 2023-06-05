@@ -1,9 +1,53 @@
-import { Project, ProjectsTableProps } from 'src/types';
-import { projectsTableColumns } from 'src/data';
 import TableHeader from 'src/shared/components/table-elements/TableHeader';
 import TableHead from 'src/shared/components/table-elements/TableHead';
 import TableRow from 'src/shared/components/table-elements/TableRow';
 import Avatars from 'src/components/projects/table/Avatars';
+
+type ProjectType = 'Fixed' | 'OnGoing';
+
+type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
+
+type ProjectStatus = 'Active' | 'OnHold' | 'Inactive' | 'Completed';
+
+type Employee = {
+	id: string;
+	firstName: string;
+	lastName: string;
+	image: string;
+	department: string;
+	salary: number;
+	techStack: string[];
+};
+
+type EmployeesPerProject = {
+	partTime: boolean;
+	employee: Employee;
+};
+
+type Project = {
+	id: string;
+	name: string;
+	description: string;
+	startDate: string;
+	endDate: string;
+	actualEndDate: string;
+	projectType: ProjectType;
+	hourlyRate: number;
+	projectValueBAM: number;
+	salesChannel: SalesChannel;
+	projectStatus: ProjectStatus;
+	employees: EmployeesPerProject[];
+};
+
+type Props = {
+	totalNumberOfProjects: number;
+	projects: Project[];
+	value: string;
+	orderByField: string;
+	orderDirection: string;
+	handleSearch: (input: string) => void;
+	handleSort: (label: string, orderDirection: string) => void;
+};
 
 const getProjectDate = (project: Project) => {
 	const startDate = new Date(project.startDate);
@@ -34,6 +78,16 @@ const getProjectColorAndStatus = (project: Project) => {
 	else return { color: 'bg-cerulean-breeze', status: 'Completed' };
 };
 
+const columns = [
+	{ name: 'Name', label: 'name' },
+	{ name: 'Description', label: 'description' },
+	{ name: 'Duration', label: 'startDate' },
+	{ name: 'Developers', label: 'employeesCount' },
+	{ name: 'Hourly rate', label: 'hourlyRate' },
+	{ name: 'Project value in BAM', label: 'projectValueBAM' },
+	{ name: 'Status', label: 'projectStatus' },
+];
+
 const ProjectsTable = ({
 	totalNumberOfProjects,
 	projects,
@@ -42,13 +96,13 @@ const ProjectsTable = ({
 	orderDirection,
 	handleSearch,
 	handleSort,
-}: ProjectsTableProps) => {
+}: Props) => {
 	return (
 		<div className='w-full rounded-md border border-ashen-grey bg-white'>
 			<TableHeader label='Projects Table' total={totalNumberOfProjects} value={value} handleSearch={handleSearch} />
 			<table className='w-full border-t border-ashen-grey'>
 				<TableHead
-					columns={projectsTableColumns}
+					columns={columns}
 					orderByField={orderByField}
 					orderDirection={orderDirection}
 					handleSort={handleSort}

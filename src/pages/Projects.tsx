@@ -3,14 +3,50 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import { Project } from 'src/types';
-import { projectsTableNavLabels } from 'src/data';
 import AuthContext from 'src/shared/context/auth-context';
 import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import Navbar from 'src/shared/components/navbar/Navbar';
 import MainLayout from 'src/shared/components/layout/MainLayout';
 import ProjectsTable from 'src/components/projects/table/ProjectsTable';
 import Pagination from 'src/components/projects/pagination/Pagination';
+
+const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
+
+type ProjectType = 'Fixed' | 'OnGoing';
+
+type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
+
+type ProjectStatus = 'Active' | 'OnHold' | 'Inactive' | 'Completed';
+
+type Employee = {
+	id: string;
+	firstName: string;
+	lastName: string;
+	image: string;
+	department: string;
+	salary: number;
+	techStack: string[];
+};
+
+type EmployeesPerProject = {
+	partTime: boolean;
+	employee: Employee;
+};
+
+type Project = {
+	id: string;
+	name: string;
+	description: string;
+	startDate: string;
+	endDate: string;
+	actualEndDate: string;
+	projectType: ProjectType;
+	hourlyRate: number;
+	projectValueBAM: number;
+	salesChannel: SalesChannel;
+	projectStatus: ProjectStatus;
+	employees: EmployeesPerProject[];
+};
 
 const Projects = () => {
 	const { token } = useContext(AuthContext);
@@ -79,7 +115,7 @@ const Projects = () => {
 					<div className='flex flex-col'>
 						<div className='mb-[30px]'>
 							<Navbar
-								navLabels={projectsTableNavLabels}
+								navLabels={navLabels}
 								handlePageSelect={pageNumber => {
 									setActivePage(pageNumber);
 									setProjectsPerPage(10);

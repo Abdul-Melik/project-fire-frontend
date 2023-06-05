@@ -1,15 +1,15 @@
 import { useState, useCallback, useEffect } from 'react';
 
-let logoutTimer: ReturnType<typeof setTimeout>;
-
-interface User {
+type User = {
 	id: string;
 	email: string;
 	firstName: string;
 	lastName: string;
-	role: string;
 	image?: string;
-}
+	role: string;
+};
+
+let logoutTimer: ReturnType<typeof setTimeout>;
 
 const useAuth = () => {
 	const [isLoading, setIsLoading] = useState(true);

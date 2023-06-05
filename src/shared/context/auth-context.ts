@@ -1,13 +1,13 @@
 import { createContext } from 'react';
 
-interface User {
+type User = {
 	id: string;
 	email: string;
 	firstName: string;
 	lastName: string;
-	role: string;
 	image?: string;
-}
+	role: string;
+};
 
 interface IAuthContext {
 	token: string | null;

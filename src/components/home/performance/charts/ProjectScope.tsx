@@ -1,8 +1,20 @@
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, LabelList } from 'recharts';
 import { ContentType } from 'recharts/types/component/Label';
 
-import { ChartData, ProjectScopeCustomLabel, ProjectScopeChartValues } from 'src/types';
 import DataCard from 'src/shared/components/cards/DataCard';
+
+type ProjectType = 'Fixed' | 'OnGoing';
+
+type ChartData = {
+	name: string;
+	value: number;
+};
+
+type ProjectScopeCustomLabel = { x: number; y: number; value: number };
+
+type ProjectScopeChartValues = {
+	chartValues: { [key in ProjectType]?: number };
+};
 
 const CustomLabel = ({ x, y, value }: ProjectScopeCustomLabel) => {
 	return (

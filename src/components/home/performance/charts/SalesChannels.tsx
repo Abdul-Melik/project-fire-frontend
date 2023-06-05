@@ -1,7 +1,27 @@
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
-import { ChartData, SalesChannelCustomLabel, SalesChannelChartValues } from 'src/types';
 import DataCard from 'src/shared/components/cards/DataCard';
+
+type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
+
+type ChartData = {
+	name: string;
+	value: number;
+};
+
+type SalesChannelCustomLabel = {
+	cx: number;
+	cy: number;
+	midAngle: number;
+	innerRadius: number;
+	outerRadius: number;
+	percent: number;
+	index: number;
+};
+
+type SalesChannelChartValues = {
+	chartValues: { [key in SalesChannel]?: number };
+};
 
 const COLORS = ['#3973F8', '#3491FA', '#9D5FF3', '#FF9F5A', '#7BB99F'];
 const RADIAN = Math.PI / 180;

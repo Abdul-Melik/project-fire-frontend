@@ -1,9 +1,17 @@
 import { useState } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
-import { RevenuesCostsPerMonthItemProps } from 'src/types';
 import DataSelector from 'src/shared/components/utils/DataSelector';
 import SummaryCard from 'src/shared/components/cards/SummaryCard';
+
+type Props = {
+	className?: string;
+	wrapperClassName?: string;
+	item: number;
+	data: any[];
+	revenueGap: string;
+	tickNumbers?: boolean;
+};
 
 const RevenuesCostsPerMonthItem = ({
 	className,
@@ -12,7 +20,7 @@ const RevenuesCostsPerMonthItem = ({
 	data,
 	revenueGap,
 	tickNumbers = false,
-}: RevenuesCostsPerMonthItemProps) => {
+}: Props) => {
 	const [firstOption, setFirstOption] = useState(true);
 	const [secondOption, setSecondOption] = useState(true);
 	const [thirdOption, setThirdOption] = useState(true);

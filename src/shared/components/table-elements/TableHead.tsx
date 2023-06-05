@@ -1,7 +1,18 @@
 import { arrow } from 'src/assets/media';
-import { TableHeadProps } from 'src/types';
 
-const TableHead = ({ columns, orderByField, orderDirection, handleSort }: TableHeadProps) => {
+type HeadObject = {
+	name: string;
+	label: string;
+};
+
+type Props = {
+	columns: HeadObject[];
+	orderByField: string;
+	orderDirection: string;
+	handleSort: (label: string, orderDirection: string) => void;
+};
+
+const TableHead = ({ columns, orderByField, orderDirection, handleSort }: Props) => {
 	return (
 		<thead>
 			<tr className='h-[40px] text-left'>

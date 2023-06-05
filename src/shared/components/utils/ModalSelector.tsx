@@ -2,15 +2,17 @@ import ReactDOM from 'react-dom';
 import { motion } from 'framer-motion';
 
 import Backdrop from 'src/shared/components/utils/Backdrop';
-interface project {
+
+type Project = {
 	name: string;
-}
+};
+
 type Props = {
 	header: string;
 	show: boolean;
 	isError: boolean;
 	onCancel: () => void;
-	children: project[];
+	children: Project[];
 	selectProject: Function;
 };
 

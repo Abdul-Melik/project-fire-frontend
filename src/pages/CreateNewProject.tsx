@@ -4,7 +4,6 @@ import { DateValueType } from 'react-tailwindcss-datepicker/dist/types';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import { EmployeesPerProject, ProjectType, SalesChannel } from 'src/types';
 import AuthContext from 'src/shared/context/auth-context';
 import MainLayout from 'src/shared/components/layout/MainLayout';
 import InputField from 'src/shared/components/form-elements/InputField';
@@ -14,6 +13,25 @@ import Radio from 'src/shared/components/form-elements/Radio';
 import NumberInput from 'src/shared/components/form-elements/NumberInput';
 import EmployeesTable from 'src/components/projects/table/EmployeesTable';
 import Modal from 'src/shared/components/utils/Modal';
+
+type ProjectType = 'Fixed' | 'OnGoing';
+
+type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
+
+type Employee = {
+	id: string;
+	firstName: string;
+	lastName: string;
+	image: string;
+	department: string;
+	salary: number;
+	techStack: string[];
+};
+
+type EmployeesPerProject = {
+	partTime: boolean;
+	employee: Employee;
+};
 
 const CreateNewProject = () => {
 	const { token } = useContext(AuthContext);

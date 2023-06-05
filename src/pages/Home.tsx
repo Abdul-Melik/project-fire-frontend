@@ -2,7 +2,6 @@ import { useState, useCallback, useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import { ProjectsInfo } from 'src/types';
 import AuthContext from 'src/shared/context/auth-context';
 import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import MainLayout from 'src/shared/components/layout/MainLayout';
@@ -11,6 +10,30 @@ import Performance from 'src/components/home/performance/Performance';
 import YearSelector from 'src/shared/components/utils/YearSelector';
 import DevelopmentRevenueCosts from 'src/components/home/development-revenue-costs/DevelopmentRevenueCosts';
 import Plan from 'src/components/home/plan/Plan';
+
+type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
+
+type ProjectType = 'Fixed' | 'OnGoing';
+
+type ProjectInfo = {
+	name: string;
+	hourlyRate: number;
+	numberOfEmployees: number;
+	revenue: number;
+	cost: number;
+	profit: number;
+};
+
+type ProjectsInfo = {
+	totalProjects: number;
+	totalValue: number;
+	averageValue: number;
+	averageTeamSize: number;
+	averageHourlyRate: number;
+	salesChannelPercentage: { [key in SalesChannel]?: number };
+	projectTypeCount: { [key in ProjectType]?: number };
+	projects: ProjectInfo[];
+};
 
 const Home = () => {
 	const { token } = useContext(AuthContext);

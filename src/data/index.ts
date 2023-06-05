@@ -1,18 +1,3 @@
-// Projects Table Data
-const employeesTableColumns = ['First Name', 'Last Name', 'Department', 'Salary', 'Tech Stack', 'Part Time'];
-
-const projectsTableNavLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
-
-const projectsTableColumns = [
-	{ name: 'Name', label: 'name' },
-	{ name: 'Description', label: 'description' },
-	{ name: 'Duration', label: 'startDate' },
-	{ name: 'Developers', label: 'employeesCount' },
-	{ name: 'Hourly rate', label: 'hourlyRate' },
-	{ name: 'Project value in BAM', label: 'projectValueBAM' },
-	{ name: 'Status', label: 'projectStatus' },
-];
-
 // Chart Data
 const hoursOverviewChart = [
 	{ month: 'January: 1/1/2023', 'Grand Total Hours Available': 3310, 'Grand Total Hours Billed': 450 },
@@ -99,11 +84,4 @@ const revenuesCostsPerMonthChart = {
 	revenueGap: ['914.00 KM', '10,000.00 KM', '-15,000.00 KM'],
 };
 
-export {
-	employeesTableColumns,
-	projectsTableNavLabels,
-	projectsTableColumns,
-	hoursOverviewChart,
-	revenuesCostsActualChart,
-	revenuesCostsPerMonthChart,
-};
+export { hoursOverviewChart, revenuesCostsActualChart, revenuesCostsPerMonthChart };
