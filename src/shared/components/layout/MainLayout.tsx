@@ -6,7 +6,7 @@ import AuthContext from 'src/shared/context/auth-context';
 import UserCard from 'src/shared/components/cards/UserCard';
 import SidebarMenu from 'src/shared/components/menus/sidebar-menu/SidebarMenu';
 import UserMenu from 'src/shared/components/menus/user-menu/UserMenu';
-import HamburgerMenu from '../utils/HamburgerMenu';
+import HamburgerMenu from 'src/shared/components/menus/sidebar-menu/HamburgerMenu';
 
 type Props = {
 	activeMenuItem: string;
@@ -14,16 +14,9 @@ type Props = {
 };
 
 const MainLayout = ({ activeMenuItem, children }: Props) => {
-	const { user, logout } = useContext(AuthContext);
 	const navigate = useNavigate();
+	const { user, logout } = useContext(AuthContext);
 	const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-	const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
-	const [isMenuOpen, setMenuOpen] = useState(false);
-
-	const handleHamburgerMenuToggle = () => {
-		setIsHamburgerMenuOpen(!isHamburgerMenuOpen);
-		setMenuOpen(!isMenuOpen);
-	};
 
 	return (
 		<div className='flex min-h-screen'>
