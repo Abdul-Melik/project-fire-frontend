@@ -1,4 +1,4 @@
-import { revenuesCostsPerMonthChart } from 'src/data/charts';
+import { revenuesCostsPerMonthChart } from 'src/data';
 import DataCard from 'src/shared/components/cards/DataCard';
 import RevenuesCostsPerMonthItem from 'src/components/home/development-revenue-costs/charts/RevenuesCostsPerMonthItem';
 

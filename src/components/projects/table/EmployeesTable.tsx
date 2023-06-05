@@ -2,45 +2,14 @@ import { useState, useEffect, useCallback, useContext } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
+import { Employee, EmployeesPerProject, EmployeesTableProps } from 'src/types';
+import { employeesTableColumns } from 'src/data';
 import AuthContext from 'src/shared/context/auth-context';
 import EmployeeTableHead from 'src/shared/components/table-elements/EmployeeTableHead';
 import TableHeader from 'src/shared/components/table-elements/TableHeader';
 import TableRow from 'src/shared/components/table-elements/TableRow';
 import Checkbox from 'src/shared/components/form-elements/Checkbox';
 import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
-import { get } from 'http';
-
-interface Employee {
-	id: string;
-	firstName: string;
-	lastName: string;
-	department: string;
-	salary: number;
-	techStack: string[];
-}
-
-interface EmployeeOnProject {
-	employee: {
-		id: string;
-		firstName: string;
-		lastName: string;
-		department: string;
-		salary: number;
-		techStack: string[];
-	};
-	fullTime: boolean;
-}
-
-type Props = {
-	confirmData: boolean;
-	selectedRows: string[];
-	selectedCheckboxes: string[];
-	handleConfirmation: (employees: EmployeeOnProject[]) => void;
-	handleRowsSelection: (rows: string[]) => void;
-	handleCheckboxesSelection: (checkboxes: string[]) => void;
-};
-
-const columns = ['First Name', 'Last Name', 'Department', 'Salary', 'Tech Stack', 'Part Time'];
 
 const EmployeesTable = ({
 	confirmData,
@@ -49,7 +18,7 @@ const EmployeesTable = ({
 	handleConfirmation,
 	handleRowsSelection,
 	handleCheckboxesSelection,
-}: Props) => {
+}: EmployeesTableProps) => {
 	const { token } = useContext(AuthContext);
 	const [isLoading, setIsLoading] = useState(true);
 	const [employees, setEmployees] = useState<Employee[]>([]);
@@ -94,15 +63,14 @@ const EmployeesTable = ({
 
 	useEffect(() => {
 		if (confirmData && employees.length > 0) {
-			const employeesOnProject: EmployeeOnProject[] = selectedRows.reduce((acc: EmployeeOnProject[], id) => {
+			const employeesOnProject: EmployeesPerProject[] = selectedRows.reduce((result: EmployeesPerProject[], id) => {
 				const checkbox = selectedCheckboxes.find(checkboxId => checkboxId === id);
 				const employee = allEmployees.find(employee => employee.id === id);
 				if (employee) {
-					acc.push({ employee, fullTime: checkbox ? false : true });
+					result.push({ employee, partTime: checkbox ? true : false });
 				}
-				return acc;
+				return result;
 			}, []);
-			console.log(allEmployees, employeesOnProject);
 			handleConfirmation(employeesOnProject);
 		}
 	}, [employees, confirmData]);
@@ -126,7 +94,7 @@ const EmployeesTable = ({
 						}}
 					/>
 					<table className='w-full border-t border-ashen-grey'>
-						<EmployeeTableHead columns={columns} />
+						<EmployeeTableHead columns={employeesTableColumns} />
 						<tbody>
 							{employees.map(employee => {
 								const employeeId = employee.id;

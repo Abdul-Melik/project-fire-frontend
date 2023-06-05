@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
-import { revenuesCostsActualChart } from 'src/data/charts';
+import { revenuesCostsActualChart } from 'src/data';
 import DataCard from 'src/shared/components/cards/DataCard';
 import DataSelector from 'src/shared/components/utils/DataSelector';
 

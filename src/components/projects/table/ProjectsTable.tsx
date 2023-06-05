@@ -1,27 +1,9 @@
-import { Project } from 'src/types';
+import { Project, ProjectsTableProps } from 'src/types';
+import { projectsTableColumns } from 'src/data';
+import TableHeader from 'src/shared/components/table-elements/TableHeader';
 import TableHead from 'src/shared/components/table-elements/TableHead';
 import TableRow from 'src/shared/components/table-elements/TableRow';
-import TableHeader from 'src/shared/components/table-elements/TableHeader';
 import Avatars from 'src/components/projects/table/Avatars';
-
-type Props = {
-	totalNumberOfProjects: number;
-	projects: Project[];
-	value: string;
-	handleSearch: (input: string) => void;
-	handleSort: Function;
-	selectedColumn: string;
-};
-
-const columns = [
-	{ name: 'Name', label: 'name', order: 'desc' },
-	{ name: 'Description', label: 'description', order: 'desc' },
-	{ name: 'Duration', label: 'startDate', order: 'desc' },
-	{ name: 'Developers', label: 'employees', order: 'desc' },
-	{ name: 'Hourly rate', label: 'hourlyRate', order: 'desc' },
-	{ name: 'Project value in BAM', label: 'projectValueBAM', order: 'desc' },
-	{ name: 'Status', label: 'projectStatus', order: 'desc' },
-];
 
 const getProjectDate = (project: Project) => {
 	const startDate = new Date(project.startDate);
@@ -52,12 +34,25 @@ const getProjectColorAndStatus = (project: Project) => {
 	else return { color: 'bg-cerulean-breeze', status: 'Completed' };
 };
 
-const ProjectsTable = ({ totalNumberOfProjects, projects, value, handleSearch, handleSort, selectedColumn }: Props) => {
+const ProjectsTable = ({
+	totalNumberOfProjects,
+	projects,
+	value,
+	orderByField,
+	orderDirection,
+	handleSearch,
+	handleSort,
+}: ProjectsTableProps) => {
 	return (
 		<div className='w-full rounded-md border border-ashen-grey bg-white'>
 			<TableHeader label='Projects Table' total={totalNumberOfProjects} value={value} handleSearch={handleSearch} />
 			<table className='w-full border-t border-ashen-grey'>
-				<TableHead columns={columns} handleSort={handleSort} selectedColumn={selectedColumn} />
+				<TableHead
+					columns={projectsTableColumns}
+					orderByField={orderByField}
+					orderDirection={orderDirection}
+					handleSort={handleSort}
+				/>
 				<tbody>
 					{projects.map(project => {
 						const projectId = project.id;

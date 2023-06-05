@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import { Project } from 'src/types';
+import { projectsTableNavLabels } from 'src/data';
 import AuthContext from 'src/shared/context/auth-context';
 import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
 import Navbar from 'src/shared/components/navbar/Navbar';
@@ -25,7 +26,7 @@ const Projects = () => {
 	const [projectsPerPage, setProjectsPerPage] = useState(10);
 	const [orderByField, setOrderByField] = useState('startDate');
 	const [orderDirection, setOrderDirection] = useState('desc');
-	const [selectedColumn, setSelectedColumn] = useState('startDate');
+
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
 	const getProjects = useCallback(async () => {
@@ -62,8 +63,6 @@ const Projects = () => {
 		window.scrollTo(0, 0);
 	}, []);
 
-	const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
-
 	return (
 		<>
 			<MainLayout activeMenuItem={'projects'}>
@@ -80,12 +79,14 @@ const Projects = () => {
 					<div className='flex flex-col'>
 						<div className='mb-[30px]'>
 							<Navbar
-								navLabels={navLabels}
+								navLabels={projectsTableNavLabels}
 								handlePageSelect={pageNumber => {
 									setActivePage(pageNumber);
 									setProjectsPerPage(10);
 									setCurrentPage(1);
 									setSearchTerm('');
+									setOrderByField('startDate');
+									setOrderDirection('desc');
 								}}
 							/>
 						</div>
@@ -96,9 +97,13 @@ const Projects = () => {
 								totalNumberOfProjects={totalNumberOfProjects}
 								projects={projects}
 								value={searchTerm}
+								orderByField={orderByField}
+								orderDirection={orderDirection}
 								handleSearch={input => setSearchTerm(input)}
-								handleSort={() => {}}
-								selectedColumn={selectedColumn}
+								handleSort={(label: string, orderDirection: string) => {
+									setOrderByField(label);
+									setOrderDirection(orderDirection);
+								}}
 							/>
 						)}
 					</div>

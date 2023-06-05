@@ -4,6 +4,7 @@ import { DateValueType } from 'react-tailwindcss-datepicker/dist/types';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
+import { EmployeesPerProject, ProjectType, SalesChannel } from 'src/types';
 import AuthContext from 'src/shared/context/auth-context';
 import MainLayout from 'src/shared/components/layout/MainLayout';
 import InputField from 'src/shared/components/form-elements/InputField';
@@ -14,30 +15,6 @@ import NumberInput from 'src/shared/components/form-elements/NumberInput';
 import EmployeesTable from 'src/components/projects/table/EmployeesTable';
 import Modal from 'src/shared/components/utils/Modal';
 
-enum ProjectType {
-	Fixed = 'fixed',
-	OnGoing = 'on-going',
-}
-
-enum SalesChannel {
-	Online = 'online',
-	InPerson = 'in-person',
-	Referral = 'referral',
-	Other = 'other',
-}
-
-interface EmployeeOnProject {
-	employee: {
-		id: string;
-		firstName: string;
-		lastName: string;
-		department: string;
-		salary: number;
-		techStack: string[];
-	};
-	fullTime: boolean;
-}
-
 const CreateNewProject = () => {
 	const { token } = useContext(AuthContext);
 	const navigate = useNavigate();
@@ -45,15 +22,15 @@ const CreateNewProject = () => {
 	const [description, setDescription] = useState('');
 	const [dateRange, setDateRange] = useState<DateValueType | null>(null);
 	const [actualEndDate, setActualEndDate] = useState<DateValueType | null>(null);
-	const [projectType, setProjectType] = useState<ProjectType>(ProjectType.Fixed);
-	const [salesChannel, setSalesChannel] = useState<SalesChannel>(SalesChannel.Online);
+	const [projectType, setProjectType] = useState<ProjectType>('Fixed');
+	const [salesChannel, setSalesChannel] = useState<SalesChannel>('Online');
 	const [hourlyRate, setHourlyRate] = useState(0);
 	const [projectValue, setProjectValue] = useState(0);
 	const [openModal, setOpenModal] = useState(false);
 	const [confirmData, setConfirmData] = useState(false);
 	const [selectedRows, setSelectedRows] = useState<string[]>([]);
 	const [selectedCheckboxes, setSelectedCheckboxes] = useState<string[]>([]);
-	const [employeesOnProject, setEmployeesOnProject] = useState<EmployeeOnProject[]>([]);
+	const [employeesOnProject, setEmployeesOnProject] = useState<EmployeesPerProject[]>([]);
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -72,9 +49,9 @@ const CreateNewProject = () => {
 					hourlyRate,
 					projectValueBAM: projectValue,
 					salesChannel,
-					employees: employeesOnProject.map(employeeObj => ({
-						employee: employeeObj.employee.id,
-						fullTime: employeeObj.fullTime,
+					employeesOnProject: employeesOnProject.map(employeeObj => ({
+						employeeId: employeeObj.employee.id,
+						partTime: employeeObj.partTime,
 					})),
 				},
 				{
@@ -111,9 +88,8 @@ const CreateNewProject = () => {
 					confirmData={confirmData}
 					selectedRows={selectedRows}
 					selectedCheckboxes={selectedCheckboxes}
-					handleConfirmation={(employees: EmployeeOnProject[]) => {
+					handleConfirmation={(employees: EmployeesPerProject[]) => {
 						setEmployeesOnProject(employees);
-						console.log(employeesOnProject, employees);
 						setOpenModal(false);
 						setConfirmData(false);
 					}}
@@ -157,19 +133,19 @@ const CreateNewProject = () => {
 											<Radio
 												htmlFor='fixed'
 												label='Fixed'
-												checked={projectType === ProjectType.Fixed}
+												checked={projectType === 'Fixed'}
 												id='fixed'
 												name='project-type'
-												value={ProjectType.Fixed}
+												value={'Fixed'}
 												handleChange={event => setProjectType(event.target.value as ProjectType)}
 											/>
 											<Radio
 												htmlFor='on-going'
 												label='On-going'
-												checked={projectType === ProjectType.OnGoing}
+												checked={projectType === 'OnGoing'}
 												id='on-going'
 												name='project-type'
-												value={ProjectType.OnGoing}
+												value={'OnGoing'}
 												handleChange={event => setProjectType(event.target.value as ProjectType)}
 											/>
 										</div>
@@ -180,37 +156,37 @@ const CreateNewProject = () => {
 											<Radio
 												htmlFor='online'
 												label='Online'
-												checked={salesChannel === SalesChannel.Online}
+												checked={salesChannel === 'Online'}
 												id='online'
 												name='sales-channel'
-												value={SalesChannel.Online}
+												value={'Online'}
 												handleChange={event => setSalesChannel(event.target.value as SalesChannel)}
 											/>
 											<Radio
 												htmlFor='in-person'
 												label='In-person'
-												checked={salesChannel === SalesChannel.InPerson}
+												checked={salesChannel === 'InPerson'}
 												id='in-person'
 												name='sales-channel'
-												value={SalesChannel.InPerson}
+												value={'InPerson'}
 												handleChange={event => setSalesChannel(event.target.value as SalesChannel)}
 											/>
 											<Radio
 												htmlFor='refferal'
 												label='Refferal'
-												checked={salesChannel === SalesChannel.Referral}
+												checked={salesChannel === 'Referral'}
 												id='refferal'
 												name='sales-channel'
-												value={SalesChannel.Referral}
+												value={'Referral'}
 												handleChange={event => setSalesChannel(event.target.value as SalesChannel)}
 											/>
 											<Radio
 												htmlFor='other'
 												label='Other'
-												checked={salesChannel === SalesChannel.Other}
+												checked={salesChannel === 'Other'}
 												id='other'
 												name='sales-channel'
-												value={SalesChannel.Other}
+												value={'Other'}
 												handleChange={event => setSalesChannel(event.target.value as SalesChannel)}
 											/>
 										</div>

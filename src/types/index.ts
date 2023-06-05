@@ -1,3 +1,16 @@
+// General Types
+type HeadObject = {
+	name: string;
+	label: string;
+};
+
+type TableHeadProps = {
+	columns: HeadObject[];
+	orderByField: string;
+	orderDirection: string;
+	handleSort: (label: string, orderDirection: string) => void;
+};
+
 // Employee Types
 type Employee = {
 	id: string;
@@ -12,6 +25,15 @@ type Employee = {
 type EmployeesPerProject = {
 	partTime: boolean;
 	employee: Employee;
+};
+
+type EmployeesTableProps = {
+	confirmData: boolean;
+	selectedRows: string[];
+	selectedCheckboxes: string[];
+	handleConfirmation: (employees: EmployeesPerProject[]) => void;
+	handleRowsSelection: (rows: string[]) => void;
+	handleCheckboxesSelection: (checkboxes: string[]) => void;
 };
 
 // Project Types
@@ -36,6 +58,15 @@ type Project = {
 	employees: EmployeesPerProject[];
 };
 
+type ProjectInfo = {
+	name: string;
+	hourlyRate: number;
+	numberOfEmployees: number;
+	revenue: number;
+	cost: number;
+	profit: number;
+};
+
 type ProjectsInfo = {
 	totalProjects: number;
 	totalValue: number;
@@ -44,16 +75,17 @@ type ProjectsInfo = {
 	averageHourlyRate: number;
 	salesChannelPercentage: { [key in SalesChannel]?: number };
 	projectTypeCount: { [key in ProjectType]?: number };
-	projects: [
-		{
-			name: string;
-			hourlyRate: number;
-			numberOfEmployees: number;
-			revenue: number;
-			cost: number;
-			profit: number;
-		}
-	];
+	projects: ProjectInfo[];
+};
+
+type ProjectsTableProps = {
+	totalNumberOfProjects: number;
+	projects: Project[];
+	value: string;
+	orderByField: string;
+	orderDirection: string;
+	handleSearch: (input: string) => void;
+	handleSort: (label: string, orderDirection: string) => void;
 };
 
 // Chart Types
@@ -92,13 +124,18 @@ type RevenuesCostsPerMonthItemProps = {
 };
 
 export type {
+	HeadObject,
+	TableHeadProps,
 	Employee,
 	EmployeesPerProject,
+	EmployeesTableProps,
 	SalesChannel,
 	ProjectType,
 	ProjectStatus,
 	Project,
+	ProjectInfo,
 	ProjectsInfo,
+	ProjectsTableProps,
 	ChartData,
 	SalesChannelCustomLabel,
 	SalesChannelChartValues,

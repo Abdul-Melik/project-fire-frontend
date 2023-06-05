@@ -1,17 +1,7 @@
 import { arrow } from 'src/assets/media';
+import { TableHeadProps } from 'src/types';
 
-type Props = {
-	columns: headObject[];
-	handleSort: Function;
-	selectedColumn: string;
-};
-interface headObject {
-	name: string;
-	label: string;
-	order: string;
-}
-
-const TableHead = ({ columns, handleSort, selectedColumn }: Props) => {
+const TableHead = ({ columns, orderByField, orderDirection, handleSort }: TableHeadProps) => {
 	return (
 		<thead>
 			<tr className='h-[40px] text-left'>
@@ -19,17 +9,16 @@ const TableHead = ({ columns, handleSort, selectedColumn }: Props) => {
 					<th
 						key={index}
 						className={`w-[150px] pl-4 font-gilroy-medium text-sm font-medium leading-[22px] text-slate-mist ${
-							selectedColumn === column.label ? 'bg-pale-silver' : ''
+							orderByField === column.label ? 'bg-pale-silver' : ''
 						}`}
 					>
 						{column.name}{' '}
 						<img
 							src={arrow}
-							onClick={() => {
-								column.order === 'asc' ? (column.order = 'desc') : (column.order = 'asc');
-								handleSort(column.label, column.order);
-							}}
-							className={`ml-3 inline cursor-pointer ${column.order === 'asc' ? 'rotate-180' : ''}`}
+							className={`ml-3 inline cursor-pointer ${
+								orderByField === column.label && orderDirection === 'asc' ? 'rotate-180' : ''
+							}`}
+							onClick={() => handleSort(column.label, orderDirection === 'asc' ? 'desc' : 'asc')}
 						/>
 					</th>
 				))}
