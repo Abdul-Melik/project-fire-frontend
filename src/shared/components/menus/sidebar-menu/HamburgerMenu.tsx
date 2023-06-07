@@ -25,7 +25,7 @@ const HamburgerMenu = ({ activeMenuItem }: HamburgerMenuProps) => {
 	};
 
 	return (
-		<div className='fixed left-0 top-0 z-10 w-full bg-frost-white md:hidden'>
+		<div className='fixed left-0 top-0 z-[5] w-full bg-frost-white md:hidden'>
 			<div className='flex items-center justify-between px-4 py-2'>
 				<div>
 					<motion.button
@@ -37,7 +37,7 @@ const HamburgerMenu = ({ activeMenuItem }: HamburgerMenuProps) => {
 					</motion.button>
 				</div>
 				<div>
-					<img src={logo} className='mx-auto w-2/3 py-[30px] pl-7 pr-0' />
+					<img src={logo} className='absolute left-0 right-0 top-0 ml-auto mr-auto w-2/4 py-[20px]' />
 				</div>
 			</div>
 			{isHamburgerMenuOpen && (

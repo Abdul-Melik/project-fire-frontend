@@ -12,6 +12,7 @@ import InfoCard from 'src/shared/components/cards/InfoCard';
 import SalesChannels from 'src/components/home/performance/charts/SalesChannels';
 import ProjectScope from 'src/components/home/performance/charts/ProjectScope';
 import HoursOverview from 'src/components/home/performance/charts/HoursOverview';
+import ResponsiveRevenuePerProject from '../development-revenue-costs/charts/ResponsiveRevenuePerProject';
 
 type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
 
@@ -44,7 +45,7 @@ type Props = {
 const Performance = ({ projectsInfo }: Props) => {
 	return (
 		<div className='flex flex-col gap-[42px]'>
-			<div className='grid auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-[30px]'>
+			<div className='lg:grid-cols-[repeat(auto-fit,minmax(240px,1fr))] lg:gap-[30px] grid max-w-[100%] auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(240px,100%))] justify-center gap-[15px] lg:max-w-none'>
 				<InfoCard
 					className='overflow-hidden rounded-md border border-ashen-grey'
 					description='Number of projects'
@@ -115,11 +116,17 @@ const Performance = ({ projectsInfo }: Props) => {
 					iconAlt='Mini icon'
 				/>
 			</div>
-			<div className='flex gap-[30px]'>
+			<div className='block gap-[30px] md:flex md:flex-row'>
 				<SalesChannels chartValues={projectsInfo?.salesChannelPercentage ?? {}} />
+				<div className='mb-[30px] md:hidden'></div>
 				<ProjectScope chartValues={projectsInfo?.projectTypeCount ?? {}} />
 			</div>
-			<HoursOverview />
+			<div className='hidden lg:block'>
+				<HoursOverview />
+			</div>
+			<div className='block lg:hidden'>
+				<ResponsiveRevenuePerProject />
+			</div>
 		</div>
 	);
 };

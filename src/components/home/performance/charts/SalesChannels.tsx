@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
 import DataCard from 'src/shared/components/cards/DataCard';
@@ -53,6 +54,14 @@ const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, inde
 };
 
 const SalesChannels = ({ chartValues }: SalesChannelChartValues) => {
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	useEffect(() => {
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+	const isMobile = windowWidth < 768;
+
 	const chartData: ChartData[] = [
 		{
 			name: 'Online',
@@ -82,7 +91,10 @@ const SalesChannels = ({ chartValues }: SalesChannelChartValues) => {
 	);
 
 	return (
-		<DataCard className='h-[342px] flex-1 rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
+		<DataCard
+			className={`lg:h-[342px] h-[400px] flex-1 rounded-[6px] border border-ashen-grey bg-white`}
+			header={headerContent}
+		>
 			{renderChart ? (
 				<ResponsiveContainer width='100%' height='100%' className='mt-[38px]'>
 					<PieChart>
@@ -93,7 +105,7 @@ const SalesChannels = ({ chartValues }: SalesChannelChartValues) => {
 							label={CustomLabel}
 							isAnimationActive={true}
 							outerRadius={100}
-							cx={100}
+							cx={isMobile ? '50%' : 100}
 							cy={100}
 							fill='#8884d8'
 							stroke='none'
@@ -104,14 +116,14 @@ const SalesChannels = ({ chartValues }: SalesChannelChartValues) => {
 						</Pie>
 						<Tooltip />
 						<Legend
-							layout='vertical'
+							layout={isMobile ? 'horizontal' : 'vertical'} // Conditionally set the layout based on window width
 							iconType='circle'
 							formatter={(value, entry, index) => (
-								<span className='ml-[7px] font-gilroy-semi-bold font-semibold leading-10 text-deep-forest'>
+								<span className={`ml-[7px] font-gilroy-semi-bold font-semibold leading-10 text-deep-forest`}>
 									{value}
 								</span>
 							)}
-							wrapperStyle={{ top: 0, marginLeft: '6vw' }}
+							wrapperStyle={isMobile ? { marginTop: '10px' } : { top: 0, marginLeft: '6vw' }} // Conditionally set the wrapper style based on window width
 						/>
 					</PieChart>
 				</ResponsiveContainer>

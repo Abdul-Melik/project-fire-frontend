@@ -42,9 +42,7 @@ const MainLayout = ({ activeMenuItem, children }: Props) => {
 						/>
 					)}
 				</div>
-				<div>
-					<SidebarMenu activeMenuItem={activeMenuItem} />
-				</div>
+				<SidebarMenu activeMenuItem={activeMenuItem} />
 			</div>
 			<HamburgerMenu activeMenuItem={activeMenuItem} />
 			<div className='flex-1'>{children}</div>
