@@ -1,12 +1,15 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { logo } from 'src/assets/media';
-import AuthContext from 'src/shared/context/auth-context';
-import UserCard from 'src/shared/components/cards/UserCard';
-import SidebarMenu from 'src/shared/components/menus/sidebar-menu/SidebarMenu';
-import UserMenu from 'src/shared/components/menus/user-menu/UserMenu';
-import HamburgerMenu from 'src/shared/components/menus/sidebar-menu/HamburgerMenu';
+import { useAppSelector, useAppDispatch } from 'src/redux/hooks';
+import { clearCredentials } from 'src/redux/authSlice';
+import { useLogoutMutation } from 'src/redux/usersApiSlice';
+import UserCard from 'src/components/shared/cards/UserCard';
+import SidebarMenu from 'src/components/shared/menus/sidebar-menu/SidebarMenu';
+import UserMenu from 'src/components/shared/menus/user-menu/UserMenu';
+import HamburgerMenu from 'src/components/shared/menus/sidebar-menu/HamburgerMenu';
 
 type Props = {
 	activeMenuItem: string;
@@ -15,8 +18,21 @@ type Props = {
 
 const MainLayout = ({ activeMenuItem, children }: Props) => {
 	const navigate = useNavigate();
-	const { user, logout } = useContext(AuthContext);
+	const dispatch = useAppDispatch();
 	const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+	const { userInfo } = useAppSelector(state => state.auth);
+	const [logout] = useLogoutMutation();
+
+	const logoutHandler = async () => {
+		try {
+			await logout({}).unwrap();
+			dispatch(clearCredentials());
+			navigate('/login');
+		} catch (err: any) {
+			toast.error(err.data.error);
+		}
+	};
 
 	return (
 		<div className='flex min-h-screen'>
@@ -27,7 +43,7 @@ const MainLayout = ({ activeMenuItem, children }: Props) => {
 				<img src={logo} className='w-2/3 py-[30px] pl-7 pr-0' />
 				<UserCard
 					className='mx-[14px] my-[10px] rounded-md border border-ashen-grey'
-					userInfo={user}
+					userInfo={userInfo}
 					isUserMenuOpen={isUserMenuOpen}
 					onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
 				/>
@@ -35,10 +51,7 @@ const MainLayout = ({ activeMenuItem, children }: Props) => {
 					{isUserMenuOpen && (
 						<UserMenu
 							className='right-0 top-0 w-[15vw] overflow-hidden rounded-md border border-ashen-grey bg-seafoam-green shadow-[3px_3px_3px_rgba(0,0,0,0.3)]'
-							onClick={() => {
-								logout();
-								navigate('/login');
-							}}
+							onClick={logoutHandler}
 						/>
 					)}
 				</div>

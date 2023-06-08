@@ -1,12 +1,11 @@
-import { useState, useEffect, useCallback, useContext } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import AuthContext from 'src/shared/context/auth-context';
-import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
-import Navbar from 'src/shared/components/navbar/Navbar';
-import MainLayout from 'src/shared/components/layout/MainLayout';
+import LoadingSpinner from 'src/components/shared/utils/LoadingSpinner';
+import MainLayout from 'src/components/shared/layout/MainLayout';
+import Navbar from 'src/components/shared/navbar/Navbar';
 import ProjectsTable from 'src/components/projects/table/ProjectsTable';
 import Pagination from 'src/components/projects/pagination/Pagination';
 
@@ -49,7 +48,6 @@ type Project = {
 };
 
 const Projects = () => {
-	const { token, user } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(true);
 	const [activePage, setActivePage] = useState(1);
@@ -71,7 +69,7 @@ const Projects = () => {
 			const response = await axios.get(
 				`${baseUrl}/api/projects?name=${searchTerm}&projectStatus=${projectStatus}&orderByField=${orderByField}&orderDirection=${orderDirection}&take=${projectsPerPage}&page=${currentPage}`,
 				{
-					headers: { Authorization: 'Bearer ' + token },
+					headers: { Authorization: 'Bearer ' },
 				}
 			);
 			setProjects(response.data.projects);
@@ -81,11 +79,11 @@ const Projects = () => {
 			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
 		}
 		setIsLoading(false);
-	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage, orderByField, orderDirection]);
+	}, [searchTerm, projectStatus, projectsPerPage, currentPage, orderByField, orderDirection]);
 
 	useEffect(() => {
-		if (token) getProjects();
-	}, [token, searchTerm, projectStatus, projectsPerPage, currentPage, orderByField, orderDirection]);
+		if (false) getProjects();
+	}, [searchTerm, projectStatus, projectsPerPage, currentPage, orderByField, orderDirection]);
 
 	useEffect(() => {
 		if (activePage === 1) setProjectStatus('');
@@ -107,9 +105,9 @@ const Projects = () => {
 						<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</h1>
 						<button
 							className={`rounded-md px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white ${
-								user?.role === 'Admin' ? 'bg-deep-teal hover:saturate-[400%]' : 'cursor-not-allowed bg-whispering-gray'
+								true ? 'bg-deep-teal hover:saturate-[400%]' : 'cursor-not-allowed bg-whispering-gray'
 							}`}
-							disabled={user?.role !== 'Admin'}
+							disabled={false}
 							onClick={() => navigate('/projects/create')}
 						>
 							Create new project

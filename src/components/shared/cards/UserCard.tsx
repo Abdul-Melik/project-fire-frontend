@@ -1,8 +1,19 @@
 import { avatar, arrow } from 'src/assets/media';
 
+type Role = 'Admin' | 'Guest';
+
+type UserInfo = {
+	id: string;
+	email: string;
+	firstName: string;
+	lastName: string;
+	image: string | null;
+	role: Role;
+};
+
 type Props = {
 	className: string;
-	userInfo: any;
+	userInfo: UserInfo | null;
 	isUserMenuOpen: boolean;
 	onClick: () => void;
 };
@@ -22,7 +33,7 @@ const UserCard = ({ className, userInfo, isUserMenuOpen, onClick }: Props) => {
 						</span>
 					</div>
 					<span className='font-inter-regular text-[14px] font-normal leading-[18px] text-charcoal-grey'>
-						{userInfo?.role === 'Admin' ? 'Admin' : 'Guest'}
+						{userInfo?.role}
 					</span>
 				</div>
 			</div>

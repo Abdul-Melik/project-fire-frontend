@@ -1,7 +1,7 @@
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, LabelList } from 'recharts';
 import { ContentType } from 'recharts/types/component/Label';
 
-import DataCard from 'src/shared/components/cards/DataCard';
+import DataCard from 'src/components/shared/cards/DataCard';
 
 type ProjectType = 'Fixed' | 'OnGoing';
 

@@ -2,9 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import AuthContext from 'src/shared/context/auth-context';
-import useAuth from 'src/shared/hooks/auth-hook';
-import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
+import { useAppSelector } from 'src/redux/hooks';
 import Login from 'src/pages/Login';
 import Home from 'src/pages/Home';
 import Projects from 'src/pages/Projects';
@@ -20,11 +18,10 @@ import PageNotFound from 'src/pages/PageNotFound';
 import ResponsiveRevenuePerProject from './components/home/development-revenue-costs/charts/ResponsiveRevenuePerProject';
 
 const App = () => {
-	const { isLoading, token, user, login, logout } = useAuth();
+	const { userInfo } = useAppSelector(state => state.auth);
 
 	const PrivateRoutes = () => {
-		if (isLoading) return <LoadingSpinner />;
-		return !!token ? <Outlet /> : <Navigate to='/login' />;
+		return userInfo ? <Outlet /> : <Navigate to='/login' />;
 	};
 
 	const routes = (
@@ -49,19 +46,12 @@ const App = () => {
 	);
 
 	return (
-		<AuthContext.Provider
-			value={{
-				token,
-				user,
-				login,
-				logout,
-			}}
-		>
+		<>
 			<Router>
 				<Routes>{routes}</Routes>
 			</Router>
 			<ToastContainer />
-		</AuthContext.Provider>
+		</>
 	);
 };
 

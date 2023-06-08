@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import InputField from 'src/shared/components/form-elements/InputField';
-import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
+import LoadingSpinner from 'src/components/shared/utils/LoadingSpinner';
+import InputField from 'src/components/shared/form-elements/InputField';
 
 const ForgotPassword = () => {
 	const [isLoading, setIsLoading] = useState(false);

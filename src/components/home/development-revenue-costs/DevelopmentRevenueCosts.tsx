@@ -1,7 +1,7 @@
 import { revenue, directCosts, margin, avgMargin } from 'src/assets/media';
 
-import InfoCard from 'src/shared/components/cards/InfoCard';
-import SummaryCard from 'src/shared/components/cards/SummaryCard';
+import InfoCard from 'src/components/shared/cards/InfoCard';
+import SummaryCard from 'src/components/shared/cards/SummaryCard';
 import RevenuesCostsActual from 'src/components/home/development-revenue-costs/charts/RevenuesCostsActual';
 import RevenuesCostsPerMonth from 'src/components/home/development-revenue-costs/charts/RevenuesCostsPerMonth';
 

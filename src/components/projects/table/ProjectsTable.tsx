@@ -1,6 +1,6 @@
-import TableHeader from 'src/shared/components/table-elements/TableHeader';
-import TableHead from 'src/shared/components/table-elements/TableHead';
-import TableRow from 'src/shared/components/table-elements/TableRow';
+import TableHeader from 'src/components/shared/table-elements/TableHeader';
+import TableHead from 'src/components/shared/table-elements/TableHead';
+import TableRow from 'src/components/shared/table-elements/TableRow';
 import Avatars from 'src/components/projects/table/Avatars';
 
 type ProjectType = 'Fixed' | 'OnGoing';

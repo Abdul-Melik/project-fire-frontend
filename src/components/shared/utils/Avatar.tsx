@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { avatar } from 'src/assets/media';
-import HoverTooltip from 'src/shared/components/utils/HoverTooltip';
+import HoverTooltip from 'src/components/shared/utils/HoverTooltip';
 
 type Props = {
 	className?: string;

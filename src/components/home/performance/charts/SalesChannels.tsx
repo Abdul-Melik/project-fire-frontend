@@ -1,6 +1,6 @@
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
-import DataCard from 'src/shared/components/cards/DataCard';
+import DataCard from 'src/components/shared/cards/DataCard';
 
 type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
 

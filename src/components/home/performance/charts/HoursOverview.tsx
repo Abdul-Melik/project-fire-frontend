@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 import { hoursOverviewChart } from 'src/data';
-import DataCard from 'src/shared/components/cards/DataCard';
-import DataSelector from 'src/shared/components/utils/DataSelector';
+import DataCard from 'src/components/shared/cards/DataCard';
+import DataSelector from 'src/components/shared/utils/DataSelector';
 
 const HoursOverview = () => {
 	const [firstOption, setFirstOption] = useState(true);

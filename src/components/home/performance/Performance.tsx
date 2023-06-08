@@ -8,7 +8,7 @@ import {
 	weeksOver,
 	hourlyPrice,
 } from 'src/assets/media';
-import InfoCard from 'src/shared/components/cards/InfoCard';
+import InfoCard from 'src/components/shared/cards/InfoCard';
 import SalesChannels from 'src/components/home/performance/charts/SalesChannels';
 import ProjectScope from 'src/components/home/performance/charts/ProjectScope';
 import HoursOverview from 'src/components/home/performance/charts/HoursOverview';

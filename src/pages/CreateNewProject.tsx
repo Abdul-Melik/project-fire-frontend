@@ -4,15 +4,14 @@ import { DateValueType } from 'react-tailwindcss-datepicker/dist/types';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import AuthContext from 'src/shared/context/auth-context';
-import MainLayout from 'src/shared/components/layout/MainLayout';
-import InputField from 'src/shared/components/form-elements/InputField';
-import TextArea from 'src/shared/components/form-elements/TextArea';
-import DateInput from 'src/shared/components/form-elements/DateInput';
-import Radio from 'src/shared/components/form-elements/Radio';
-import NumberInput from 'src/shared/components/form-elements/NumberInput';
+import MainLayout from 'src/components/shared/layout/MainLayout';
+import InputField from 'src/components/shared/form-elements/InputField';
+import TextArea from 'src/components/shared/form-elements/TextArea';
+import DateInput from 'src/components/shared/form-elements/DateInput';
+import Radio from 'src/components/shared/form-elements/Radio';
+import NumberInput from 'src/components/shared/form-elements/NumberInput';
 import EmployeesTable from 'src/components/projects/table/EmployeesTable';
-import Modal from 'src/shared/components/utils/Modal';
+import Modal from 'src/components/shared/utils/Modal';
 
 type ProjectType = 'Fixed' | 'OnGoing';
 
@@ -34,7 +33,6 @@ type EmployeesPerProject = {
 };
 
 const CreateNewProject = () => {
-	const { token } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
@@ -75,7 +73,7 @@ const CreateNewProject = () => {
 				{
 					headers: {
 						'Content-Type': 'application/json',
-						Authorization: 'Bearer ' + token,
+						Authorization: 'Bearer ',
 					},
 				}
 			);

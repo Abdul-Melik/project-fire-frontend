@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 
 import { arrow } from 'src/assets/media';
-import ModalSelector from 'src/shared/components/utils/ModalSelector';
-import DataCard from 'src/shared/components/cards/DataCard';
+import ModalSelector from 'src/components/shared/utils/ModalSelector';
+import DataCard from 'src/components/shared/cards/DataCard';
 
 const data = [
 	{

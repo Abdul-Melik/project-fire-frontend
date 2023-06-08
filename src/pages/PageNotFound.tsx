@@ -1,15 +1,12 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { error } from 'src/assets/media';
-import AuthContext from 'src/shared/context/auth-context';
 
 const PageNotFound = () => {
 	const navigate = useNavigate();
-	const { token } = useContext(AuthContext);
 
 	const handleButtonClick = () => {
-		if (token) {
+		if (true) {
 			navigate('/home');
 		} else {
 			navigate('/login');
@@ -30,7 +27,7 @@ const PageNotFound = () => {
 				className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-xs font-semibold tracking-[-0.015em] text-white hover:saturate-[400%] md:px-5 md:py-2.5 md:text-sm lg:px-6 lg:py-3 lg:text-base xl:px-7 xl:py-3.5 xl:text-lg 2xl:px-8 2xl:py-4 2xl:text-xl'
 				onClick={handleButtonClick}
 			>
-				{token ? 'Back to Home' : 'Back to Login'}
+				{true ? 'Back to Home' : 'Back to Login'}
 			</button>
 		</div>
 	);

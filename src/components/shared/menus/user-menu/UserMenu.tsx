@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import UserMenuItem from 'src/shared/components/menus/user-menu/UserMenuItem';
+import UserMenuItem from 'src/components/shared/menus/user-menu/UserMenuItem';
 
 type Props = {
 	className: string;

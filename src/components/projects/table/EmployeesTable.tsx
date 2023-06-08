@@ -1,13 +1,12 @@
-import { useState, useEffect, useCallback, useContext } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import AuthContext from 'src/shared/context/auth-context';
-import EmployeeTableHead from 'src/shared/components/table-elements/EmployeeTableHead';
-import TableHeader from 'src/shared/components/table-elements/TableHeader';
-import TableRow from 'src/shared/components/table-elements/TableRow';
-import Checkbox from 'src/shared/components/form-elements/Checkbox';
-import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
+import LoadingSpinner from 'src/components/shared/utils/LoadingSpinner';
+import EmployeeTableHead from 'src/components/shared/table-elements/EmployeeTableHead';
+import TableHeader from 'src/components/shared/table-elements/TableHeader';
+import TableRow from 'src/components/shared/table-elements/TableRow';
+import Checkbox from 'src/components/shared/form-elements/Checkbox';
 
 type Employee = {
 	id: string;
@@ -43,7 +42,6 @@ const EmployeesTable = ({
 	handleRowsSelection,
 	handleCheckboxesSelection,
 }: Props) => {
-	const { token } = useContext(AuthContext);
 	const [isLoading, setIsLoading] = useState(true);
 	const [employees, setEmployees] = useState<Employee[]>([]);
 	const [searchTerm, setSearchTerm] = useState('');
@@ -55,20 +53,20 @@ const EmployeesTable = ({
 		setIsLoading(true);
 		try {
 			const response = await axios.get(`${baseUrl}/api/employees?firstName=${searchTerm}`, {
-				headers: { Authorization: 'Bearer ' + token },
+				headers: { Authorization: 'Bearer ' },
 			});
 			setEmployees(response.data);
 		} catch (error: any) {
 			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
 		}
 		setIsLoading(false);
-	}, [token, searchTerm]);
+	}, [searchTerm]);
 
 	const getAllEmployees = async () => {
 		setIsLoading(true);
 		try {
 			const response = await axios.get(`${baseUrl}/api/employees`, {
-				headers: { Authorization: 'Bearer ' + token },
+				headers: { Authorization: 'Bearer ' },
 			});
 			setAllEmployees(response.data);
 		} catch (error: any) {
@@ -78,12 +76,12 @@ const EmployeesTable = ({
 	};
 
 	useEffect(() => {
-		if (token) getAllEmployees();
-	}, [token]);
+		if (false) getAllEmployees();
+	}, []);
 
 	useEffect(() => {
-		if (token) getEmployees();
-	}, [token, searchTerm]);
+		if (false) getEmployees();
+	}, [searchTerm]);
 
 	useEffect(() => {
 		if (confirmData && employees.length > 0) {

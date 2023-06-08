@@ -1,4 +1,4 @@
-import Avatar from 'src/shared/components/utils/Avatar';
+import Avatar from 'src/components/shared/utils/Avatar';
 
 type Props = {
 	images?: (string | undefined)[];

@@ -1,13 +1,12 @@
-import { useState, useCallback, useEffect, useContext } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import AuthContext from 'src/shared/context/auth-context';
-import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
-import MainLayout from 'src/shared/components/layout/MainLayout';
-import Navbar from 'src/shared/components/navbar/Navbar';
+import LoadingSpinner from 'src/components/shared/utils/LoadingSpinner';
+import MainLayout from 'src/components/shared/layout/MainLayout';
+import Navbar from 'src/components/shared/navbar/Navbar';
 import Performance from 'src/components/home/performance/Performance';
-import YearSelector from 'src/shared/components/utils/YearSelector';
+import YearSelector from 'src/components/shared/utils/YearSelector';
 import DevelopmentRevenueCosts from 'src/components/home/development-revenue-costs/DevelopmentRevenueCosts';
 import Plan from 'src/components/home/plan/Plan';
 
@@ -36,7 +35,6 @@ type ProjectsInfo = {
 };
 
 const Home = () => {
-	const { token } = useContext(AuthContext);
 	const [isLoading, setIsLoading] = useState(true);
 	const [projectsInfo, setProjectsInfo] = useState<ProjectsInfo | null>(null);
 	const [selectedYear, setSelectedYear] = useState('2023');
@@ -48,18 +46,18 @@ const Home = () => {
 		setIsLoading(true);
 		try {
 			const response = await axios.get(`${baseUrl}/api/projects/info?year=${selectedYear}`, {
-				headers: { Authorization: 'Bearer ' + token },
+				headers: { Authorization: 'Bearer ' },
 			});
 			setProjectsInfo(response.data);
 		} catch (error: any) {
 			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
 		}
 		setIsLoading(false);
-	}, [token, selectedYear]);
+	}, [selectedYear]);
 
 	useEffect(() => {
-		if (token && selectedYear) getProjectsInfo();
-	}, [token, selectedYear]);
+		if (selectedYear) getProjectsInfo();
+	}, [selectedYear]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);

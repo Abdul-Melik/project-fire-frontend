@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import NavLink from 'src/shared/components/navbar/NavLink';
+import NavLink from 'src/components/shared/navbar/NavLink';
 
 type Props = {
 	navLabels: string[];

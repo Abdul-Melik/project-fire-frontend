@@ -1,15 +1,13 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import { gradientBackground } from 'src/assets/media';
-import AuthContext from 'src/shared/context/auth-context';
-import InputField from 'src/shared/components/form-elements/InputField';
-import ImageUpload from 'src/shared/components/form-elements/ImageUpload';
+import InputField from 'src/components/shared/form-elements/InputField';
+import ImageUpload from 'src/components/shared/form-elements/ImageUpload';
 
 const RegisterForm = () => {
-	const { login } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -34,8 +32,6 @@ const RegisterForm = () => {
 					'Content-Type': 'multipart/form-data',
 				},
 			});
-			const responseData = response.data;
-			login(responseData.token, responseData.expiresIn, responseData.user);
 			navigate('/home');
 		} catch (error: any) {
 			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);

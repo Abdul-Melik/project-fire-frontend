@@ -1,5 +1,5 @@
 import { revenuesCostsPerMonthChart } from 'src/data';
-import DataCard from 'src/shared/components/cards/DataCard';
+import DataCard from 'src/components/shared/cards/DataCard';
 import RevenuesCostsPerMonthItem from 'src/components/home/development-revenue-costs/charts/RevenuesCostsPerMonthItem';
 
 const RevenuesCostsPerMonth = () => {

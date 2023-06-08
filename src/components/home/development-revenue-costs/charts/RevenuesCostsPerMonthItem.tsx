@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
-import DataSelector from 'src/shared/components/utils/DataSelector';
-import SummaryCard from 'src/shared/components/cards/SummaryCard';
+import DataSelector from 'src/components/shared/utils/DataSelector';
+import SummaryCard from 'src/components/shared/cards/SummaryCard';
 
 type Props = {
 	className?: string;

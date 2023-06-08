@@ -1,49 +1,39 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import axios from 'axios';
 
 import { logo, gradientBackground } from 'src/assets/media';
-import AuthContext from 'src/shared/context/auth-context';
-import InputField from 'src/shared/components/form-elements/InputField';
+import { useAppSelector, useAppDispatch } from 'src/redux/hooks';
+import { setCredentials } from 'src/redux/authSlice';
+import { useLoginMutation } from 'src/redux/usersApiSlice';
+import LoadingSpinner from 'src/components/shared/utils/LoadingSpinner';
+import InputField from 'src/components/shared/form-elements/InputField';
 
 const LoginForm = () => {
-	const { token, login } = useContext(AuthContext);
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [rememberMe, setRememberMe] = useState(false);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-	const baseUrl = import.meta.env.VITE_BASE_URL;
+	const { userInfo } = useAppSelector(state => state.auth);
+	const [login, { isLoading }] = useLoginMutation();
 
 	const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		try {
-			const response = await axios.post(
-				`${baseUrl}/api/users/login`,
-				{
-					email,
-					password,
-					rememberMe,
-				},
-				{
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				}
-			);
-			const responseData = response.data;
-			login(responseData.token, responseData.expiresIn, responseData.user);
+			const response = await login({ email, password, rememberMe }).unwrap();
+			dispatch(setCredentials(response));
 			navigate('/home');
-		} catch (error: any) {
-			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
+		} catch (err: any) {
+			toast.error(err.data.error);
 		}
 	};
 
 	useEffect(() => {
-		if (token) navigate('/home');
-	}, [token]);
+		if (userInfo) navigate('/home');
+	}, [navigate, userInfo]);
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -53,6 +43,8 @@ const LoginForm = () => {
 
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
+
+	if (isLoading) return <LoadingSpinner />;
 
 	return (
 		<div className='flex h-screen flex-col items-center justify-center'>
