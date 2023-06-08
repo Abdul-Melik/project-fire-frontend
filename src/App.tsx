@@ -17,7 +17,7 @@ import ForgotPassword from 'src/pages/ForgotPassword';
 import ResetPassword from 'src/pages/ResetPassword';
 import Register from 'src/pages/Register';
 import PageNotFound from 'src/pages/PageNotFound';
-import ResponsiveRevenuePerProject from './components/home/development-revenue-costs/charts/ResponsiveRevenuePerProject';
+import ResponsiveRevenuePerProject from './components/home/performance/charts/ResponsiveHoursOverview';
 
 const App = () => {
 	const { isLoading, token, user, login, logout } = useAuth();

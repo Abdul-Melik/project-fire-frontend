@@ -8,7 +8,7 @@ type Props = {
 
 const SidebarMenu = ({ activeMenuItem, isHamburgerMenu }: Props) => {
 	return (
-		<div className='flex flex-col gap-[8px] px-[14px] py-[10px]'>
+		<div className='z-10 flex flex-col gap-[8px] px-[14px] py-[10px]'>
 			<SidebarMenuItem
 				to='/home'
 				src={home}

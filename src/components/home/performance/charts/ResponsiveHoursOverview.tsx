@@ -7,50 +7,54 @@ import DataCard from 'src/shared/components/cards/DataCard';
 
 const data = [
 	{
-		name: 'AudioWolf',
+		name: 'January 1/1/2023',
 		value: [
-			{ name: 'Grand Total Total Billed', value: 18000 },
-			{ name: 'Grand Total Costs', value: 20000 },
+			{ name: 'Grand Total Hours Available', value: 18000 },
+			{ name: 'Grand Total Hours Billed', value: 20000 },
 		],
 	},
 	{
-		name: 'Project Fire',
+		name: 'February 1/2/2023',
 		value: [
-			{ name: 'Grand Total Total Billed', value: 5000 },
-			{ name: 'Grand Total Costs', value: 1000 },
+			{ name: 'Grand Total Hours Available', value: 5000 },
+			{ name: 'Grand Total Hours Billed', value: 1000 },
 		],
 	},
 	{
-		name: 'Yewno',
+		name: 'March 1/3/2023',
 		value: [
-			{ name: 'Grand Total Total Billed', value: 3000 },
-			{ name: 'Grand Total Costs', value: 7000 },
+			{ name: 'Grand Total Hours Available', value: 3000 },
+			{ name: 'Grand Total Hours Billed', value: 7000 },
 		],
 	},
 ];
 const COLORS = ['#7BB99F', '#FF9F5A'];
 type Props = {};
 
-const ResponsiveRevenuePerProject = (props: Props) => {
+const ResponsiveHoursOverview = (props: Props) => {
 	const [project, setProject] = useState(data[0]);
 	const [show, setShow] = useState(false);
 	const handleNameClick = (index: number) => {
 		setProject(data[index]);
 		setShow(false);
 	};
+	const headerContent = (
+		<div className='flex gap-[10px] self-start'>
+			<h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>Hours Overview</h2>
+		</div>
+	);
 	return (
-		<DataCard
-			header='Revenue & costs (per project) - actual'
-			className='w-full items-center justify-center border border-ashen-grey text-center font-gilroy-medium'
-		>
-			<h1
-				className='absolute z-10 mt-[100px] flex cursor-pointer gap-2 font-gilroy-semi-bold text-2xl'
-				onClick={() => {
-					setShow(true);
-				}}
-			>
-				{project.name} <img src={arrow} className='mt-1' />
-			</h1>
+		<DataCard header={headerContent} className='w-full border border-ashen-grey text-center font-gilroy-medium'>
+			<div className='flex w-full justify-center bg-red-300'>
+				<h1
+					className='absolute z-10 mt-[120px] flex cursor-pointer gap-2 font-gilroy-semi-bold text-2xl'
+					onClick={() => {
+						setShow(true);
+					}}
+				>
+					{project.name} <img src={arrow} className='mt-1' />
+				</h1>
+			</div>
 			<ModalSelector
 				show={show}
 				children={data}
@@ -90,4 +94,4 @@ const ResponsiveRevenuePerProject = (props: Props) => {
 	);
 };
 
-export default ResponsiveRevenuePerProject;
+export default ResponsiveHoursOverview;
