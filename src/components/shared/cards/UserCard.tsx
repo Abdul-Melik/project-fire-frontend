@@ -1,24 +1,17 @@
 import { avatar, arrow } from 'src/assets/media';
+import { useAppSelector } from 'src/redux/hooks';
 
 type Role = 'Admin' | 'Guest';
 
-type UserInfo = {
-	id: string;
-	email: string;
-	firstName: string;
-	lastName: string;
-	image: string | null;
-	role: Role;
-};
-
 type Props = {
 	className: string;
-	userInfo: UserInfo | null;
 	isUserMenuOpen: boolean;
 	onClick: () => void;
 };
 
-const UserCard = ({ className, userInfo, isUserMenuOpen, onClick }: Props) => {
+const UserCard = ({ className, isUserMenuOpen, onClick }: Props) => {
+	const { userInfo } = useAppSelector(state => state.auth);
+
 	return (
 		<div className={`flex items-center justify-between gap-[13px] px-[14px] py-[10px] ${className}`}>
 			<div className='flex flex-wrap items-center gap-[13px]'>
