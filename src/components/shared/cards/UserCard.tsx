@@ -1,8 +1,6 @@
 import { avatar, arrow } from 'src/assets/media';
 import { useAppSelector } from 'src/redux/hooks';
 
-type Role = 'Admin' | 'Guest';
-
 type Props = {
 	className: string;
 	isUserMenuOpen: boolean;

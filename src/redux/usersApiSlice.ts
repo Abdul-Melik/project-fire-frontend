@@ -29,7 +29,27 @@ export const usersApi = apiSlice.injectEndpoints({
 				credentials: 'include',
 			}),
 		}),
+		sendEmail: builder.mutation({
+			query: data => ({
+				url: `${USERS_URL}/reset-password`,
+				method: 'POST',
+				body: data,
+			}),
+		}),
+		resetPassword: builder.mutation({
+			query: ({ userId, token, password }) => ({
+				url: `${USERS_URL}/${userId}/reset-password/${token}`,
+				method: 'POST',
+				body: { password },
+			}),
+		}),
 	}),
 });
 
-export const { useRegisterMutation, useLoginMutation, useLogoutMutation } = usersApi;
+export const {
+	useRegisterMutation,
+	useLoginMutation,
+	useLogoutMutation,
+	useSendEmailMutation,
+	useResetPasswordMutation,
+} = usersApi;
