@@ -45,13 +45,11 @@ const Home = () => {
 	const getProjectsInfo = useCallback(async () => {
 		setIsLoading(true);
 		try {
-			const response = await axios.get(`${baseUrl}/api/projects/info?year=${selectedYear}`, {
-				headers: { Authorization: 'Bearer ' },
-			});
-			setProjectsInfo(response.data);
-		} catch (error: any) {
-			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
-		}
+			// const response = await axios.get(`${baseUrl}/api/projects/info?year=${selectedYear}`, {
+			// 	headers: { Authorization: 'Bearer ' },
+			// });
+			// setProjectsInfo(response.data);
+		} catch (error: any) {}
 		setIsLoading(false);
 	}, [selectedYear]);
 

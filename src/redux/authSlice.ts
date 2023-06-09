@@ -11,10 +11,14 @@ type UserInfo = {
 	role: Role;
 };
 
-const initialState = {
-	userInfo: localStorage.getItem('userInfo')
-		? (JSON.parse(JSON.stringify(localStorage.getItem('userInfo'))) as UserInfo)
-		: null,
+type authState = {
+	userInfo: UserInfo | null;
+};
+
+const userInfoString = localStorage.getItem('userInfo');
+
+const initialState: authState = {
+	userInfo: userInfoString ? JSON.parse(userInfoString) : null,
 };
 
 const authSlice = createSlice({
