@@ -25,9 +25,7 @@ const ResetPassword = () => {
 		try {
 			const response = await resetPassword({ userId, token, password }).unwrap();
 			toast.success(response.message);
-		} catch (err: any) {
-			toast.error(err.data.error);
-		}
+		} catch (error) {}
 	};
 
 	useEffect(() => {

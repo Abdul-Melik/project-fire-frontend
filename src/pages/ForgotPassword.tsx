@@ -19,9 +19,7 @@ const ForgotPassword = () => {
 		try {
 			const response = await sendEmail({ email }).unwrap();
 			toast.success(response.message);
-		} catch (err: any) {
-			toast.error(err.data.error);
-		}
+		} catch (error) {}
 	};
 
 	useEffect(() => {

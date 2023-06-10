@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import { logo, gradientBackground } from 'src/assets/media';
 import { useAppSelector, useAppDispatch } from 'src/redux/hooks';
@@ -26,9 +25,7 @@ const LoginForm = () => {
 			const response = await login({ email, password, rememberMe }).unwrap();
 			dispatch(setCredentials(response));
 			navigate('/home');
-		} catch (err: any) {
-			toast.error(err.data.error);
-		}
+		} catch (error) {}
 	};
 
 	useEffect(() => {

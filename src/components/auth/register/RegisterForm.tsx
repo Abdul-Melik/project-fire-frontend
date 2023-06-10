@@ -35,9 +35,7 @@ const RegisterForm = () => {
 			const response = await register(formData).unwrap();
 			dispatch(setCredentials(response));
 			navigate('/home');
-		} catch (err: any) {
-			toast.error(err.data.error);
-		}
+		} catch (error) {}
 	};
 
 	useEffect(() => {
