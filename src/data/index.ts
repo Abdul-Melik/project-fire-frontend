@@ -1,5 +1,5 @@
 // Chart Data
-const hoursOverviewChart = [
+const hoursOverviewChartData = [
 	{ month: 'January: 1/1/2023', 'Grand Total Hours Available': 3310, 'Grand Total Hours Billed': 450 },
 	{ month: 'March: 1/3/2023', 'Grand Total Hours Available': 4433, 'Grand Total Hours Billed': 705 },
 	{ month: 'May: 1/5/2023', 'Grand Total Hours Available': 3000, 'Grand Total Hours Billed': 3001 },
@@ -8,7 +8,7 @@ const hoursOverviewChart = [
 	{ month: 'November: 1/11/2023', 'Grand Total Hours Available': 1501, 'Grand Total Hours Billed': 610 },
 ];
 
-const revenuesCostsActualChart = [
+const revenuesCostsActualChartData = [
 	{
 		organisation: 'AlphaBid',
 		'Grand Total Total Billed': 125310,
@@ -51,7 +51,7 @@ const revenuesCostsActualChart = [
 	},
 ];
 
-const revenuesCostsPerMonthChart = {
+const revenuesCostsPerMonthChartData = {
 	data: [
 		[
 			{
@@ -84,4 +84,4 @@ const revenuesCostsPerMonthChart = {
 	revenueGap: ['914.00 KM', '10,000.00 KM', '-15,000.00 KM'],
 };
 
-export { hoursOverviewChart, revenuesCostsActualChart, revenuesCostsPerMonthChart };
+export { hoursOverviewChartData, revenuesCostsActualChartData, revenuesCostsPerMonthChartData };

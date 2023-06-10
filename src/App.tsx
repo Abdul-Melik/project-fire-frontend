@@ -2,20 +2,20 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useAppSelector } from 'src/redux/hooks';
-import Login from 'src/pages/Login';
-import Home from 'src/pages/Home';
-import Projects from 'src/pages/Projects';
-import CreateNewProject from 'src/pages/CreateNewProject';
-import Employees from 'src/pages/Employees';
-import FinancialOverview from 'src/pages/FinancialOverview';
-import ProjectReporting from 'src/pages/ProjectReporting';
-import Invoicing from 'src/pages/Invoicing';
-import ForgotPassword from 'src/pages/ForgotPassword';
-import ResetPassword from 'src/pages/ResetPassword';
-import Register from 'src/pages/Register';
-import PageNotFound from 'src/pages/PageNotFound';
-import ResponsiveRevenuePerProject from './components/home/development-revenue-costs/charts/ResponsiveRevenuePerProject';
+import { useAppSelector } from 'store/hooks';
+import Login from 'features/auth/Login';
+import Home from 'features/home/Home';
+import Projects from 'features/projects/Projects';
+import CreateNewProject from 'features/projects/CreateNewProject';
+import Employees from 'features/employees/Employees';
+import FinancialOverview from 'features/financial-overview/FinancialOverview';
+import ProjectReporting from 'features/project-reporting/ProjectReporting';
+import Invoicing from 'features/invoicing/Invoicing';
+import ForgotPassword from 'features/auth/ForgotPassword';
+import ResetPassword from 'features/auth/ResetPassword';
+import Register from 'features/auth/Register';
+import PageNotFound from 'features/other/PageNotFound';
+import ResponsiveRevenuePerProject from 'features/home/ResponsiveRevenuePerProject';
 
 const App = () => {
 	const { userInfo } = useAppSelector(state => state.auth);
