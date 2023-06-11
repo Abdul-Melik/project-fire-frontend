@@ -1,98 +1,103 @@
-import { useState, useCallback, useEffect, useContext } from 'react';
-import { toast } from 'react-toastify';
-import axios from 'axios';
+import { useState, useCallback, useEffect, useContext } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
 
-import AuthContext from 'src/shared/context/auth-context';
-import LoadingSpinner from 'src/shared/components/utils/LoadingSpinner';
-import MainLayout from 'src/shared/components/layout/MainLayout';
-import Navbar from 'src/shared/components/navbar/Navbar';
-import Performance from 'src/components/home/performance/Performance';
-import YearSelector from 'src/shared/components/utils/YearSelector';
-import DevelopmentRevenueCosts from 'src/components/home/development-revenue-costs/DevelopmentRevenueCosts';
-import Plan from 'src/components/home/plan/Plan';
+import AuthContext from "src/shared/context/auth-context";
+import LoadingSpinner from "src/shared/components/utils/LoadingSpinner";
+import MainLayout from "src/shared/components/layout/MainLayout";
+import Navbar from "src/shared/components/navbar/Navbar";
+import Performance from "src/components/home/performance/Performance";
+import YearSelector from "src/shared/components/utils/YearSelector";
+import DevelopmentRevenueCosts from "src/components/home/development-revenue-costs/DevelopmentRevenueCosts";
+import Plan from "src/components/home/plan/Plan";
 
-type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
+type SalesChannel = "Online" | "InPerson" | "Referral" | "Other";
 
-type ProjectType = 'Fixed' | 'OnGoing';
+type ProjectType = "Fixed" | "OnGoing";
 
 type ProjectInfo = {
-	name: string;
-	hourlyRate: number;
-	numberOfEmployees: number;
-	revenue: number;
-	cost: number;
-	profit: number;
+  name: string;
+  hourlyRate: number;
+  numberOfEmployees: number;
+  revenue: number;
+  cost: number;
+  profit: number;
 };
 
 type ProjectsInfo = {
-	totalProjects: number;
-	totalValue: number;
-	averageValue: number;
-	averageTeamSize: number;
-	averageHourlyRate: number;
-	salesChannelPercentage: { [key in SalesChannel]?: number };
-	projectTypeCount: { [key in ProjectType]?: number };
-	projects: ProjectInfo[];
+  totalProjects: number;
+  totalValue: number;
+  averageValue: number;
+  averageTeamSize: number;
+  averageHourlyRate: number;
+  salesChannelPercentage: { [key in SalesChannel]?: number };
+  projectTypeCount: { [key in ProjectType]?: number };
+  projects: ProjectInfo[];
 };
 
 const Home = () => {
-	const { token } = useContext(AuthContext);
-	const [isLoading, setIsLoading] = useState(true);
-	const [projectsInfo, setProjectsInfo] = useState<ProjectsInfo | null>(null);
-	const [selectedYear, setSelectedYear] = useState('2023');
-	const [activePage, setActivePage] = useState(1);
+  const { token } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true);
+  const [projectsInfo, setProjectsInfo] = useState<ProjectsInfo | null>(null);
+  const [selectedYear, setSelectedYear] = useState("2023");
+  const [activePage, setActivePage] = useState(1);
 
-	const baseUrl = import.meta.env.VITE_BASE_URL;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
-	const getProjectsInfo = useCallback(async () => {
-		setIsLoading(true);
-		try {
-			const response = await axios.get(`${baseUrl}/api/projects/info?year=${selectedYear}`, {
-				headers: { Authorization: 'Bearer ' + token },
-			});
-			setProjectsInfo(response.data);
-		} catch (error: any) {
-			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
-		}
-		setIsLoading(false);
-	}, [token, selectedYear]);
+  const getProjectsInfo = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(`${baseUrl}/api/projects/info?year=${selectedYear}`, {
+        headers: { Authorization: "Bearer " + token },
+      });
+      setProjectsInfo(response.data);
+    } catch (error: any) {
+      toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
+    }
+    setIsLoading(false);
+  }, [token, selectedYear]);
 
-	useEffect(() => {
-		if (token && selectedYear) getProjectsInfo();
-	}, [token, selectedYear]);
+  useEffect(() => {
+    if (token && selectedYear) getProjectsInfo();
+  }, [token, selectedYear]);
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-	const navLabels = [`${selectedYear}  Performance`, 'Development Revenue & Costs', `${selectedYear} Plan`];
+  const navLabels = [`${selectedYear}  Performance`, "Development Revenue & Costs", `${selectedYear} Plan`];
 
-	return (
-		<>
-			<MainLayout activeMenuItem={'home'}>
-				<div className='mx-4 my-[34px] lg:mx-14'>
-					<h1 className='mt-24 flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest lg:mt-0'>
-						Home
-					</h1>
-					<div className='mt-[30px] flex flex-col'>
-						<div className='mb-12 flex flex-wrap justify-center gap-4 lg:justify-between'>
-							<Navbar navLabels={navLabels} handlePageSelect={page => setActivePage(page)} />
-							<YearSelector handleYearSelect={year => setSelectedYear(year)} />
-						</div>
-						{isLoading ? (
-							<LoadingSpinner />
-						) : (
-							<>
-								{activePage === 1 && <Performance projectsInfo={projectsInfo} />}
-								{activePage === 2 && <DevelopmentRevenueCosts />}
-								{activePage === 3 && <Plan />}
-							</>
-						)}
-					</div>
-				</div>
-			</MainLayout>
-		</>
-	);
+  return (
+    <>
+      <MainLayout activeMenuItem={"home"}>
+        <div className='mx-4 my-[34px] lg:mx-14'>
+          <h1 className='mt-24 flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest lg:mt-0'>
+            Home
+          </h1>
+          <div className='mt-[30px] flex flex-col'>
+            <div className='mb-12 flex flex-wrap justify-center gap-4 lg:justify-between'>
+              <Navbar navLabels={navLabels} handlePageSelect={(page) => setActivePage(page)} />
+              <YearSelector
+                label='Year'
+                options={["2023", "2022", "2021", "2020"]}
+                defaultValue='2023'
+                handleYearSelect={(year) => setSelectedYear(year)}
+              />
+            </div>
+            {isLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <>
+                {activePage === 1 && <Performance projectsInfo={projectsInfo} />}
+                {activePage === 2 && <DevelopmentRevenueCosts />}
+                {activePage === 3 && <Plan />}
+              </>
+            )}
+          </div>
+        </div>
+      </MainLayout>
+    </>
+  );
 };
 
 export default Home;
