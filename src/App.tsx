@@ -18,6 +18,8 @@ import ResetPassword from 'src/pages/ResetPassword';
 import Register from 'src/pages/Register';
 import PageNotFound from 'src/pages/PageNotFound';
 import ResponsiveRevenuePerProject from './components/home/performance/charts/ResponsiveHoursOverview';
+import ResponsiveCostsPerMonth from './components/home/development-revenue-costs/charts/ResponsiveCostsPerMonth';
+import ResponsiveCostsPerProject from './components/home/development-revenue-costs/charts/ResponsiveCostsPerProject';
 
 const App = () => {
 	const { isLoading, token, user, login, logout } = useAuth();
@@ -30,7 +32,7 @@ const App = () => {
 	const routes = (
 		<>
 			<Route path='/' element={<Login />} />
-			<Route path='/responsive' element={<ResponsiveRevenuePerProject />} />
+			<Route path='/responsive' element={<ResponsiveCostsPerProject />} />
 			<Route path='/login' element={<Login />} />
 			<Route path='/register' element={<Register />} />
 			<Route path='/forgot-password' element={<ForgotPassword />} />

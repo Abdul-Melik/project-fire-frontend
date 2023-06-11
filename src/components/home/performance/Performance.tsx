@@ -116,9 +116,9 @@ const Performance = ({ projectsInfo }: Props) => {
 					iconAlt='Mini icon'
 				/>
 			</div>
-			<div className='block gap-[30px] md:flex md:flex-row'>
+			<div className='block gap-[30px] lg:flex lg:flex-row'>
 				<SalesChannels chartValues={projectsInfo?.salesChannelPercentage ?? {}} />
-				<div className='mb-[30px] md:hidden'></div>
+				<div className='mb-[30px] lg:hidden'></div>
 				<ProjectScope chartValues={projectsInfo?.projectTypeCount ?? {}} />
 			</div>
 			<div className='hidden lg:block'>
