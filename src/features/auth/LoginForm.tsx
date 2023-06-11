@@ -2,35 +2,23 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { logo, gradientBackground } from 'assets/media';
-import { useAppSelector, useAppDispatch } from 'store/hooks';
-import { setCredentials } from 'store/slices/authSlice';
-import { useLoginMutation } from 'store/slices/usersApiSlice';
+import { useLoginMutation } from 'store/slices/authApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import InputField from 'components/form-elements/InputField';
 
 const LoginForm = () => {
 	const navigate = useNavigate();
-	const dispatch = useAppDispatch();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [rememberMe, setRememberMe] = useState(false);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-	const { userInfo } = useAppSelector(state => state.auth);
-	const [login, { isLoading }] = useLoginMutation();
+	const [login, { isLoading, isSuccess }] = useLoginMutation();
 
 	const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		try {
-			const response = await login({ email, password, rememberMe }).unwrap();
-			dispatch(setCredentials(response));
-			navigate('/home');
-		} catch (error) {}
+		await login({ email, password, rememberMe });
 	};
-
-	useEffect(() => {
-		if (userInfo) navigate('/home');
-	}, [navigate, userInfo]);
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -40,6 +28,10 @@ const LoginForm = () => {
 
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
+
+	useEffect(() => {
+		if (isSuccess) navigate('/home');
+	}, [isSuccess]);
 
 	if (isLoading) return <LoadingSpinner />;
 
@@ -67,6 +59,7 @@ const LoginForm = () => {
 						required
 						type='email'
 						id='email'
+						name='email'
 						value={email}
 						placeholder='Enter your email'
 						handleInput={email => setEmail(email)}
@@ -78,6 +71,7 @@ const LoginForm = () => {
 						required
 						type='password'
 						id='password'
+						name='password'
 						value={password}
 						placeholder='Enter your password'
 						handleInput={password => setPassword(password)}
@@ -94,6 +88,7 @@ const LoginForm = () => {
 						<input
 							className=' h-[18px] w-[18px] accent-deep-teal'
 							type='checkbox'
+							id='checkbox'
 							onChange={() => setRememberMe(!rememberMe)}
 						/>
 						<span className='font-gilroy-medium font-medium tracking-[-0.015em] text-midnight-grey'>

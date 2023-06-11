@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { useGetProjectsInfoQuery } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout/MainLayout';
 import Navbar from 'components/navbar/Navbar';
-import Performance from 'features/home/Performance';
 import YearSelector from 'components/utils/YearSelector';
+import Performance from 'features/home/Performance';
 import DevelopmentRevenueCosts from 'features/home/DevelopmentRevenueCosts';
 import Plan from 'features/home/Plan';
 
@@ -13,11 +13,19 @@ const Home = () => {
 	const [selectedYear, setSelectedYear] = useState('2023');
 	const [activePage, setActivePage] = useState(1);
 
-	const { data, isLoading } = useGetProjectsInfoQuery(selectedYear);
-
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
+	const {
+		isLoading,
+		isSuccess,
+		data: projectsInfo,
+	} = useGetProjectsInfoQuery(
+		{ year: selectedYear },
+		{
+			pollingInterval: 60000,
+			refetchOnFocus: true,
+			refetchOnReconnect: true,
+			refetchOnMountOrArgChange: true,
+		}
+	);
 
 	const navLabels = [`${selectedYear}  Performance`, 'Development Revenue & Costs', `${selectedYear} Plan`];
 
@@ -33,11 +41,13 @@ const Home = () => {
 					{isLoading ? (
 						<LoadingSpinner />
 					) : (
-						<>
-							{activePage === 1 && <Performance projectsInfo={data} />}
-							{activePage === 2 && <DevelopmentRevenueCosts />}
-							{activePage === 3 && <Plan />}
-						</>
+						isSuccess && (
+							<>
+								{activePage === 1 && <Performance projectsInfo={projectsInfo} />}
+								{activePage === 2 && <DevelopmentRevenueCosts />}
+								{activePage === 3 && <Plan />}
+							</>
+						)
 					)}
 				</div>
 			</div>

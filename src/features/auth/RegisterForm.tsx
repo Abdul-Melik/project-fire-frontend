@@ -1,18 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import { gradientBackground } from 'assets/media';
-import { useAppSelector, useAppDispatch } from 'store/hooks';
-import { setCredentials } from 'store/slices/authSlice';
-import { useRegisterMutation } from 'store/slices/usersApiSlice';
+import { useRegisterMutation } from 'store/slices/authApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import InputField from 'components/form-elements/InputField';
 import ImageUpload from 'components/form-elements/ImageUpload';
 
 const RegisterForm = () => {
 	const navigate = useNavigate();
-	const dispatch = useAppDispatch();
 	const [email, setEmail] = useState('');
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -20,8 +16,7 @@ const RegisterForm = () => {
 	const [selectedImage, setSelectedImage] = useState<File | null>(null);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-	const { userInfo } = useAppSelector(state => state.auth);
-	const [register, { isLoading }] = useRegisterMutation();
+	const [register, { isLoading, isSuccess }] = useRegisterMutation();
 
 	const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -31,16 +26,8 @@ const RegisterForm = () => {
 		formData.append('lastName', lastName);
 		formData.append('password', password);
 		if (selectedImage) formData.append('image', selectedImage);
-		try {
-			const response = await register(formData).unwrap();
-			dispatch(setCredentials(response));
-			navigate('/home');
-		} catch (error) {}
+		await register(formData);
 	};
-
-	useEffect(() => {
-		if (userInfo) navigate('/home');
-	}, [navigate, userInfo]);
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -50,6 +37,10 @@ const RegisterForm = () => {
 
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
+
+	useEffect(() => {
+		if (isSuccess) navigate('/home');
+	}, [isSuccess]);
 
 	if (isLoading) return <LoadingSpinner />;
 
@@ -70,6 +61,7 @@ const RegisterForm = () => {
 						required
 						type='email'
 						id='email'
+						name='email'
 						value={email}
 						placeholder='Enter your email'
 						handleInput={email => setEmail(email)}
@@ -81,6 +73,7 @@ const RegisterForm = () => {
 						required
 						type='text'
 						id='first-name'
+						name='first-name'
 						value={firstName}
 						placeholder='Enter your first name'
 						handleInput={firstName => setFirstName(firstName)}
@@ -92,6 +85,7 @@ const RegisterForm = () => {
 						required
 						type='text'
 						id='last-name'
+						name='last-name'
 						value={lastName}
 						placeholder='Enter your last name'
 						handleInput={lastName => setLastName(lastName)}
@@ -103,6 +97,7 @@ const RegisterForm = () => {
 						required
 						type='password'
 						id='password'
+						name='password'
 						value={password}
 						placeholder='Enter your password'
 						handleInput={password => setPassword(password)}

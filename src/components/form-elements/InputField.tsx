@@ -5,6 +5,7 @@ type Props = {
 	required?: boolean;
 	type?: string;
 	id: string;
+	name: string;
 	value: string;
 	placeholder: string;
 	handleInput: (input: string) => void;
@@ -17,6 +18,7 @@ const InputField = ({
 	required,
 	type = 'text',
 	id,
+	name,
 	value,
 	placeholder,
 	handleInput,
@@ -31,8 +33,10 @@ const InputField = ({
 				required={required}
 				type={type}
 				id={id}
+				name={name}
 				value={value}
 				placeholder={placeholder}
+				autoComplete='off'
 				onChange={event => handleInput(event.target.value)}
 			/>
 		</div>

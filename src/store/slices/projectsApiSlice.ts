@@ -1,18 +1,14 @@
 import apiSlice from 'store/slices/apiSlice';
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
-const PROJECTS_URL = `${BASE_URL}/api/projects`;
-
-export const projectsApi = apiSlice.injectEndpoints({
+export const projectsApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
 		getProjectsInfo: builder.query({
-			query: year => ({
-				url: `${PROJECTS_URL}/info?year=${year}`,
-				credentials: 'include',
+			query: ({ year }) => ({
+				url: `/projects/info?year=${year}`,
+				method: 'GET',
 			}),
 		}),
 	}),
 });
 
-export const { useGetProjectsInfoQuery } = projectsApi;
+export const { useGetProjectsInfoQuery } = projectsApiSlice;

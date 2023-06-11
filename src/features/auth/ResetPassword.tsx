@@ -1,20 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { useAppSelector } from 'store/hooks';
-import { useResetPasswordMutation } from 'store/slices/usersApiSlice';
+import { useResetPasswordMutation } from 'store/slices/authApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import InputField from 'components/form-elements/InputField';
 
 const ResetPassword = () => {
-	const navigate = useNavigate();
 	const { userId, token } = useParams<{ userId: string; token: string }>();
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 
-	const { userInfo } = useAppSelector(state => state.auth);
-	const [resetPassword, { isLoading }] = useResetPasswordMutation();
+	const [resetPassword, { isLoading, isSuccess, data }] = useResetPasswordMutation();
 
 	const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -22,15 +19,16 @@ const ResetPassword = () => {
 			toast.error('Passwords do not match.');
 			return;
 		}
-		try {
-			const response = await resetPassword({ userId, token, password }).unwrap();
-			toast.success(response.message);
-		} catch (error) {}
+		await resetPassword({ userId, token, password });
 	};
 
 	useEffect(() => {
-		if (userInfo) navigate('/home');
-	}, [navigate, userInfo]);
+		if (isSuccess) {
+			setPassword('');
+			setConfirmPassword('');
+			toast.success(data.message);
+		}
+	}, [isSuccess]);
 
 	if (isLoading) return <LoadingSpinner />;
 
@@ -48,6 +46,7 @@ const ResetPassword = () => {
 						required
 						type='password'
 						id='password'
+						name='password'
 						value={password}
 						placeholder='Enter your password'
 						handleInput={password => setPassword(password)}
@@ -59,6 +58,7 @@ const ResetPassword = () => {
 						required
 						type='password'
 						id='confirm-password'
+						name='confirm-password'
 						value={confirmPassword}
 						placeholder='Confirm your password'
 						handleInput={confirmPassword => setConfirmPassword(confirmPassword)}

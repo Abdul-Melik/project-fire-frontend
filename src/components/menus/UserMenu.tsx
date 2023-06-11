@@ -1,10 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { toast } from 'react-toastify';
 
-import { useAppDispatch } from 'store/hooks';
-import { clearCredentials } from 'store/slices/authSlice';
-import { useLogoutMutation } from 'store/slices/usersApiSlice';
+import { useLogoutMutation } from 'store/slices/authApiSlice';
+import LoadingSpinner from 'components/utils/LoadingSpinner';
 import UserMenuItem from 'components/menus/UserMenuItem';
 
 type Props = {
@@ -13,19 +11,15 @@ type Props = {
 
 const UserMenu = ({ className }: Props) => {
 	const navigate = useNavigate();
-	const dispatch = useAppDispatch();
 
-	const [logout] = useLogoutMutation();
+	const [logout, { isLoading, isSuccess }] = useLogoutMutation();
 
 	const logoutHandler = async () => {
-		try {
-			await logout({}).unwrap();
-			dispatch(clearCredentials());
-			navigate('/login');
-		} catch (err: any) {
-			toast.error(err.data.error);
-		}
+		await logout({});
+		if (isSuccess) navigate('/login');
 	};
+
+	if (isLoading) return <LoadingSpinner />;
 
 	return (
 		<motion.div

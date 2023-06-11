@@ -1,30 +1,27 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { useAppSelector } from 'store/hooks';
-import { useSendEmailMutation } from 'store/slices/usersApiSlice';
+import { useSendResetPasswordEmailMutation } from 'store/slices/authApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import InputField from 'components/form-elements/InputField';
 
 const ForgotPassword = () => {
-	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 
-	const { userInfo } = useAppSelector(state => state.auth);
-	const [sendEmail, { isLoading }] = useSendEmailMutation();
+	const [sendResetPasswordEmail, { isLoading, isSuccess, data }] = useSendResetPasswordEmailMutation();
 
 	const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		try {
-			const response = await sendEmail({ email }).unwrap();
-			toast.success(response.message);
-		} catch (error) {}
+		await sendResetPasswordEmail({ email });
 	};
 
 	useEffect(() => {
-		if (userInfo) navigate('/home');
-	}, [navigate, userInfo]);
+		if (isSuccess) {
+			setEmail('');
+			toast.success(data.message);
+		}
+	}, [isSuccess]);
 
 	if (isLoading) return <LoadingSpinner />;
 
@@ -42,6 +39,7 @@ const ForgotPassword = () => {
 						required
 						type='email'
 						id='email'
+						name='email'
 						value={email}
 						placeholder='Enter your email'
 						handleInput={email => setEmail(email)}

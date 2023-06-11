@@ -3,7 +3,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useAppSelector } from 'store/hooks';
+import { selectIsAuthenticated } from 'store/slices/authSlice';
 import Login from 'features/auth/Login';
+import Register from 'features/auth/Register';
+import ForgotPassword from 'features/auth/ForgotPassword';
+import ResetPassword from 'features/auth/ResetPassword';
 import Home from 'features/home/Home';
 import Projects from 'features/projects/Projects';
 import CreateNewProject from 'features/projects/CreateNewProject';
@@ -11,23 +15,18 @@ import Employees from 'features/employees/Employees';
 import FinancialOverview from 'features/financial-overview/FinancialOverview';
 import ProjectReporting from 'features/project-reporting/ProjectReporting';
 import Invoicing from 'features/invoicing/Invoicing';
-import ForgotPassword from 'features/auth/ForgotPassword';
-import ResetPassword from 'features/auth/ResetPassword';
-import Register from 'features/auth/Register';
 import PageNotFound from 'features/other/PageNotFound';
-import ResponsiveRevenuePerProject from 'features/home/ResponsiveRevenuePerProject';
 
 const App = () => {
-	const { userInfo } = useAppSelector(state => state.auth);
+	const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
 	const PrivateRoutes = () => {
-		return userInfo ? <Outlet /> : <Navigate to='/login' />;
+		return isAuthenticated ? <Outlet /> : <Navigate to='/login' />;
 	};
 
 	const routes = (
 		<>
 			<Route path='/' element={<Login />} />
-			<Route path='/responsive' element={<ResponsiveRevenuePerProject />} />
 			<Route path='/login' element={<Login />} />
 			<Route path='/register' element={<Register />} />
 			<Route path='/forgot-password' element={<ForgotPassword />} />
