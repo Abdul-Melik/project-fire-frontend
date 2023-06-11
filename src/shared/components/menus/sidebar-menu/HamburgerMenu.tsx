@@ -37,7 +37,7 @@ const HamburgerMenu = ({ activeMenuItem }: HamburgerMenuProps) => {
 					</motion.button>
 				</div>
 				<div>
-					<img src={logo} className='absolute left-0 right-0 top-0 ml-auto mr-auto w-2/4 py-[20px]' />
+					<img src={logo} className='absolute left-0 right-0 top-0 ml-auto mr-auto w-[100px] py-[20px]' />
 				</div>
 			</div>
 			{isHamburgerMenuOpen && (

@@ -53,7 +53,7 @@ const DevelopmentRevenueCosts = () => {
 				<RevenuesCostsActual />
 				<RevenuesCostsPerMonth />
 			</div>
-			<div className='block lg:hidden'>
+			<div className='flex flex-col gap-5 lg:hidden'>
 				<ResponsiveCostsPerProject />
 				<ResponsiveCostsPerMonth />
 			</div>
