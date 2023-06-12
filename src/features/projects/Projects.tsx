@@ -51,10 +51,7 @@ const Projects = () => {
 	const [activePage, setActivePage] = useState(1);
 	const [projectStatus, setProjectStatus] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
-	const [projects, setProjects] = useState<Project[]>([]);
-	const [totalNumberOfProjects, setTotalNumberOfProjects] = useState(0);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [lastPage, setLastPage] = useState(1);
 	const [projectsPerPage, setProjectsPerPage] = useState(10);
 	const [orderByField, setOrderByField] = useState('startDate');
 	const [orderDirection, setOrderDirection] = useState('desc');
@@ -72,7 +69,6 @@ const Projects = () => {
 			pollingInterval: 60000,
 			refetchOnFocus: true,
 			refetchOnReconnect: true,
-			refetchOnMountOrArgChange: true,
 		}
 	);
 

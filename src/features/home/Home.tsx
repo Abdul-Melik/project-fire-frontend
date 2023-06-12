@@ -24,7 +24,6 @@ const Home = () => {
 			pollingInterval: 60000,
 			refetchOnFocus: true,
 			refetchOnReconnect: true,
-			refetchOnMountOrArgChange: true,
 		}
 	);
 
