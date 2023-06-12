@@ -15,6 +15,7 @@ const Home = () => {
 
 	const {
 		isLoading,
+		isFetching,
 		isSuccess,
 		data: projectsInfo,
 	} = useGetProjectsInfoQuery(
@@ -38,7 +39,7 @@ const Home = () => {
 						<Navbar navLabels={navLabels} handlePageSelect={page => setActivePage(page)} />
 						<YearSelector handleYearSelect={year => setSelectedYear(year)} />
 					</div>
-					{isLoading ? (
+					{isLoading || isFetching ? (
 						<LoadingSpinner />
 					) : (
 						isSuccess && (

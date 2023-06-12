@@ -1,15 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import axios from 'axios';
 
+import { usePrefetch, useGetProjectsQuery } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout/MainLayout';
 import Navbar from 'components/navbar/Navbar';
 import ProjectsTable from 'features/projects/ProjectsTable';
 import Pagination from 'features/projects/Pagination';
-
-const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
 
 type ProjectType = 'Fixed' | 'OnGoing';
 
@@ -47,9 +44,10 @@ type Project = {
 	employees: EmployeesPerProject[];
 };
 
+const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
+
 const Projects = () => {
 	const navigate = useNavigate();
-	const [isLoading, setIsLoading] = useState(true);
 	const [activePage, setActivePage] = useState(1);
 	const [projectStatus, setProjectStatus] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
@@ -61,29 +59,22 @@ const Projects = () => {
 	const [orderByField, setOrderByField] = useState('startDate');
 	const [orderDirection, setOrderDirection] = useState('desc');
 
-	const baseUrl = import.meta.env.VITE_BASE_URL;
-
-	const getProjects = useCallback(async () => {
-		setIsLoading(true);
-		try {
-			const response = await axios.get(
-				`${baseUrl}/api/projects?name=${searchTerm}&projectStatus=${projectStatus}&orderByField=${orderByField}&orderDirection=${orderDirection}&take=${projectsPerPage}&page=${currentPage}`,
-				{
-					headers: { Authorization: 'Bearer ' },
-				}
-			);
-			setProjects(response.data.projects);
-			setTotalNumberOfProjects(response.data.pageInfo.total);
-			setLastPage(response.data.pageInfo.lastPage);
-		} catch (error: any) {
-			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
+	const { isLoading, isFetching, isSuccess, data } = useGetProjectsQuery(
+		{
+			searchTerm,
+			projectStatus,
+			orderByField,
+			orderDirection,
+			projectsPerPage,
+			currentPage,
+		},
+		{
+			pollingInterval: 60000,
+			refetchOnFocus: true,
+			refetchOnReconnect: true,
+			refetchOnMountOrArgChange: true,
 		}
-		setIsLoading(false);
-	}, [searchTerm, projectStatus, projectsPerPage, currentPage, orderByField, orderDirection]);
-
-	useEffect(() => {
-		if (false) getProjects();
-	}, [searchTerm, projectStatus, projectsPerPage, currentPage, orderByField, orderDirection]);
+	);
 
 	useEffect(() => {
 		if (activePage === 1) setProjectStatus('');
@@ -93,46 +84,42 @@ const Projects = () => {
 		else if (activePage === 5) setProjectStatus('Completed');
 	}, [activePage]);
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
-
 	return (
-		<>
-			<MainLayout activeMenuItem={'projects'}>
-				<div className='mx-14 mb-[17px] mt-[34px]'>
-					<div className='mb-[30px] flex items-center justify-between'>
-						<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</h1>
-						<button
-							className={`rounded-md px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white ${
-								true ? 'bg-deep-teal hover:saturate-[400%]' : 'cursor-not-allowed bg-whispering-gray'
-							}`}
-							disabled={false}
-							onClick={() => navigate('/projects/create')}
-						>
-							Create new project
-						</button>
+		<MainLayout activeMenuItem={'projects'}>
+			<div className='mx-14 mb-[17px] mt-[34px]'>
+				<div className='mb-[30px] flex items-center justify-between'>
+					<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</h1>
+					<button
+						className={`rounded-md px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white ${
+							true ? 'bg-deep-teal hover:saturate-[400%]' : 'cursor-not-allowed bg-whispering-gray'
+						}`}
+						disabled={false}
+						onClick={() => navigate('/projects/create')}
+					>
+						Create new project
+					</button>
+				</div>
+				<div className='flex flex-col'>
+					<div className='mb-[30px]'>
+						<Navbar
+							navLabels={navLabels}
+							handlePageSelect={pageNumber => {
+								setActivePage(pageNumber);
+								setProjectsPerPage(10);
+								setCurrentPage(1);
+								setSearchTerm('');
+								setOrderByField('startDate');
+								setOrderDirection('desc');
+							}}
+						/>
 					</div>
-					<div className='flex flex-col'>
-						<div className='mb-[30px]'>
-							<Navbar
-								navLabels={navLabels}
-								handlePageSelect={pageNumber => {
-									setActivePage(pageNumber);
-									setProjectsPerPage(10);
-									setCurrentPage(1);
-									setSearchTerm('');
-									setOrderByField('startDate');
-									setOrderDirection('desc');
-								}}
-							/>
-						</div>
-						{isLoading ? (
-							<LoadingSpinner />
-						) : (
+					{isLoading || isFetching ? (
+						<LoadingSpinner />
+					) : (
+						isSuccess && (
 							<ProjectsTable
-								totalNumberOfProjects={totalNumberOfProjects}
-								projects={projects}
+								totalNumberOfProjects={data.pageInfo.total}
+								projects={data.projects}
 								value={searchTerm}
 								orderByField={orderByField}
 								orderDirection={orderDirection}
@@ -142,14 +129,16 @@ const Projects = () => {
 									setOrderDirection(orderDirection);
 								}}
 							/>
-						)}
-					</div>
+						)
+					)}
 				</div>
-				<div className='mx-14 mb-[25px]'>
+			</div>
+			<div className='mx-14 mb-[25px]'>
+				{isSuccess && (
 					<Pagination
-						totalNumberOfProjects={totalNumberOfProjects}
+						totalNumberOfProjects={data.pageInfo.total}
 						currentPage={currentPage}
-						lastPage={lastPage}
+						lastPage={data.pageInfo.lastPage}
 						projectsPerPage={projectsPerPage}
 						handleProjectsPerPage={projectsPerPage => {
 							setProjectsPerPage(projectsPerPage);
@@ -158,9 +147,9 @@ const Projects = () => {
 						}}
 						handlePageChange={pageNumber => setCurrentPage(pageNumber)}
 					/>
-				</div>
-			</MainLayout>
-		</>
+				)}
+			</div>
+		</MainLayout>
 	);
 };
 
