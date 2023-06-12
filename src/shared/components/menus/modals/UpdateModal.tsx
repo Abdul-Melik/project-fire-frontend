@@ -171,32 +171,20 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ project, onClose }) => {
 					</button>
 					<div className='mx-14 my-[34px]'>
 						<div className='flex items-center justify-between'>
-							<h1 className='mb-[30px] font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>
-								Edit Project
-							</h1>
-							<div className='mb-[30px] flex items-center'>
-								<label
-									htmlFor='years'
-									className='mr-4 flex font-gilroy-bold text-[22px] font-bold leading-[30px] text-deep-forest'
-								>
-									Status:
-								</label>
-								<select
-									className='flex justify-between gap-[10px] rounded-md border border-ashen-grey py-2 pl-[12px] pr-[10px] font-gilroy-bold text-base font-bold text-hunter-green'
-									id='status'
-									value={projectStatus}
-									onChange={event =>
-										setProjectStatus(event.target.value as 'Active' | 'OnHold' | 'Inactive' | 'Completed')
-									}
-								>
-									<option value='Active'>Active</option>
-									<option value='OnHold'>On Hold</option>
-									<option value='Inactive'>Inactive</option>
-									<option value='Completed'>Completed</option>
-								</select>
+							<div>
+								<h1 className='mb-[30px] font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>
+									Edit Project
+								</h1>
+							</div>
+							<div className='mb-[30px]'>
+								<YearSelector
+									label='Status'
+									options={['Active', 'OnHold', 'Inactive', 'Completed']}
+									defaultValue='Active'
+									handleYearSelect={year => setProjectStatus(year as 'Active' | 'OnHold' | 'Inactive' | 'Completed')}
+								/>
 							</div>
 						</div>
-
 						<form className='flex flex-col items-center justify-center gap-4 text-base' onSubmit={handleFormSubmit}>
 							<div className='flex w-full flex-col gap-4 rounded-md border border-misty-lavender p-3'>
 								<div className='flex h-full w-full gap-4'>
