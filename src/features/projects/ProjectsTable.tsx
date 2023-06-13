@@ -1,5 +1,5 @@
 import TableHeader from 'components/table-elements/TableHeader';
-import TableHead from 'components/table-elements/TableHead';
+import ProjectsTableHead from 'src/features/projects/ProjectsTableHead';
 import TableRow from 'components/table-elements/TableRow';
 import Avatars from 'features/projects/Avatars';
 
@@ -101,7 +101,7 @@ const ProjectsTable = ({
 		<div className='w-full rounded-md border border-ashen-grey bg-white'>
 			<TableHeader label='Projects Table' total={totalNumberOfProjects} value={value} handleSearch={handleSearch} />
 			<table className='w-full border-t border-ashen-grey'>
-				<TableHead
+				<ProjectsTableHead
 					columns={columns}
 					orderByField={orderByField}
 					orderDirection={orderDirection}

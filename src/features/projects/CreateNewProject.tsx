@@ -4,14 +4,14 @@ import { DateValueType } from 'react-tailwindcss-datepicker/dist/types';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
+import Modal from 'components/utils/Modal';
 import MainLayout from 'components/layout/MainLayout';
 import InputField from 'components/form-elements/InputField';
 import TextArea from 'components/form-elements/TextArea';
 import DateInput from 'components/form-elements/DateInput';
 import Radio from 'components/form-elements/Radio';
 import NumberInput from 'components/form-elements/NumberInput';
-import EmployeesTable from 'features/projects/EmployeesTable';
-import Modal from 'components/utils/Modal';
+import EmployeesTable from 'features/employees/EmployeesTable';
 
 type ProjectType = 'Fixed' | 'OnGoing';
 
@@ -128,6 +128,7 @@ const CreateNewProject = () => {
 										htmlFor='name'
 										type='text'
 										id='name'
+										name='name'
 										value={name}
 										placeholder='Enter project name'
 										handleInput={name => setName(name)}

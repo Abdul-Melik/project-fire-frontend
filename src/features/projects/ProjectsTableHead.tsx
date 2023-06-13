@@ -12,7 +12,7 @@ type Props = {
 	handleSort: (label: string, orderDirection: string) => void;
 };
 
-const TableHead = ({ columns, orderByField, orderDirection, handleSort }: Props) => {
+const ProjectsTableHead = ({ columns, orderByField, orderDirection, handleSort }: Props) => {
 	return (
 		<thead>
 			<tr className='h-[40px] text-left'>
@@ -38,4 +38,4 @@ const TableHead = ({ columns, orderByField, orderDirection, handleSort }: Props)
 	);
 };
 
-export default TableHead;
+export default ProjectsTableHead;
