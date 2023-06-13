@@ -14,7 +14,7 @@ const Navbar = ({ navLabels, handlePageSelect }: Props) => {
 
 	return (
 		<div className='flex items-center'>
-			<div className='lg:flex-start flex flex-col lg:flex-row'>
+			<div className='sm:flex-start flex flex-col sm:flex-row'>
 				{navLabels.map((label, index) => (
 					<NavLink
 						key={index}

@@ -1,16 +1,19 @@
 import { useContext, useState } from 'react';
+import axios from 'axios';
 
 import TableHeader from 'src/shared/components/table-elements/TableHeader';
 import TableHead from 'src/shared/components/table-elements/TableHead';
 import TableRow from 'src/shared/components/table-elements/TableRow';
 import Avatars from 'src/components/projects/table/Avatars';
-import DeleteModal from 'src/shared/components/menus/modals/DeleteModal';
+import DeleteModal from 'src/shared/components/menus/modals/AlertModal';
 import ProjectInfoModal from 'src/shared/components/menus/modals/InfoModal';
 import UpdateModal from 'src/shared/components/menus/modals/UpdateModal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import AuthContext from 'src/shared/context/auth-context';
+import AlertModal from 'src/shared/components/menus/modals/AlertModal';
+import { toast } from 'react-toastify';
 
 type ProjectType = 'Fixed' | 'OnGoing';
 type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
@@ -54,7 +57,6 @@ type Props = {
 	orderDirection: string;
 	handleSearch: (input: string) => void;
 	handleSort: (label: string, orderDirection: string) => void;
-	handleDeleteProject: (projectId: string) => void;
 };
 
 const getProjectDate = (project: Project) => {
@@ -94,8 +96,9 @@ const ProjectsTable = ({
 	orderDirection,
 	handleSearch,
 	handleSort,
-	handleDeleteProject,
 }: Props) => {
+	const { token } = useContext(AuthContext);
+	const baseUrl = import.meta.env.VITE_BASE_URL;
 	const { user } = useContext(AuthContext);
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 	const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
@@ -103,8 +106,9 @@ const ProjectsTable = ({
 	const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-	const openDeleteModal = (projectId: string) => {
+	const openDeleteModal = (projectId: string, project: Project) => {
 		setSelectedProjectId(projectId);
+		setSelectedProject(project as Project);
 		setIsDeleteModalOpen(true);
 	};
 
@@ -131,6 +135,20 @@ const ProjectsTable = ({
 	if (user && user.role === 'Admin') {
 		columns.push({ name: 'Actions', label: 'projectActions' });
 	}
+
+	const onDeleteProject = async () => {
+		try {
+			await axios.delete(`${baseUrl}/api/projects/${selectedProjectId}`, {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			window.location.reload();
+		} catch (error: any) {
+			toast.error(axios.isAxiosError(error) ? error.response?.data.error : `Unexpected error: ${error}`);
+		}
+	};
 
 	return (
 		<div className='w-full rounded-md border border-ashen-grey bg-white'>
@@ -200,7 +218,7 @@ const ProjectsTable = ({
 													<FontAwesomeIcon
 														icon={faTrashCan}
 														className='ml-1 mr-1 cursor-pointer text-ellipsis text-lg hover:text-blue-500 group-hover:text-blue-500'
-														onClick={() => openDeleteModal(projectId)}
+														onClick={() => openDeleteModal(projectId, project)}
 													/>
 													<span className='absolute left-1/2 top-full -translate-x-1/2 transform rounded bg-black px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100'>
 														Delete
@@ -227,11 +245,14 @@ const ProjectsTable = ({
 				</tbody>
 			</table>
 			{isDeleteModalOpen && (
-				<DeleteModal
-					isOpen={isDeleteModalOpen}
+				<AlertModal
 					onClose={() => setIsDeleteModalOpen(false)}
-					onDelete={() => handleDeleteProject(selectedProjectId || '')}
-					projectId={selectedProjectId || ''}
+					onDeleteProject={onDeleteProject}
+					alertTitle={`Are you sure you want to delete ${selectedProject?.name}?`}
+					alertDescription={`This will permanently delete ${selectedProject?.name} and all associated data. You cannot undo this action.`}
+					confirmButtonText='Delete'
+					cancelButtonText="Don't delete"
+					color='#FF4D4F'
 				/>
 			)}
 			{isInfoModalOpen && selectedProject && (
