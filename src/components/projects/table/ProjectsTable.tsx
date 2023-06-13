@@ -252,7 +252,7 @@ const ProjectsTable = ({
 					alertDescription={`This will permanently delete ${selectedProject?.name} and all associated data. You cannot undo this action.`}
 					confirmButtonText='Delete'
 					cancelButtonText="Don't delete"
-					color='#FF4D4F'
+					color='bg-[#FF4D4F]'
 				/>
 			)}
 			{isInfoModalOpen && selectedProject && (

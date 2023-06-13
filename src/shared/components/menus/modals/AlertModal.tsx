@@ -52,10 +52,7 @@ const AlertModal = ({
 					>
 						{cancelButtonText || 'Cancel'}
 					</button>
-					<button
-						className={`rounded-md bg-[${color}] px-4 py-2 font-inter-semi-bold text-white`}
-						onClick={handleDelete}
-					>
+					<button className={`rounded-md ${color} px-4 py-2 font-inter-semi-bold text-white`} onClick={handleDelete}>
 						{confirmButtonText || 'Confirm'}
 					</button>
 				</div>
