@@ -3,6 +3,18 @@ import { setCredentials, clearCredentials } from 'store/slices/authSlice';
 
 export const authApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
+		refreshAccessToken: builder.mutation({
+			query: () => ({
+				url: '/auth/refresh',
+				method: 'GET',
+			}),
+			async onQueryStarted(args, { dispatch, queryFulfilled }) {
+				try {
+					const { data } = await queryFulfilled;
+					dispatch(setCredentials(data));
+				} catch (error) {}
+			},
+		}),
 		register: builder.mutation({
 			query: data => ({
 				url: '/auth/register',
@@ -59,6 +71,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
+	useRefreshAccessTokenMutation,
 	useRegisterMutation,
 	useLoginMutation,
 	useLogoutMutation,

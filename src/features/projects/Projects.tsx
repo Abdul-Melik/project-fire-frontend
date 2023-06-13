@@ -1,48 +1,12 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { usePrefetch, useGetProjectsQuery } from 'store/slices/projectsApiSlice';
+import { useGetProjectsQuery } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout/MainLayout';
 import Navbar from 'components/navbar/Navbar';
 import ProjectsTable from 'features/projects/ProjectsTable';
 import Pagination from 'features/projects/Pagination';
-
-type ProjectType = 'Fixed' | 'OnGoing';
-
-type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
-
-type ProjectStatus = 'Active' | 'OnHold' | 'Inactive' | 'Completed';
-
-type Employee = {
-	id: string;
-	firstName: string;
-	lastName: string;
-	image: string;
-	department: string;
-	salary: number;
-	techStack: string[];
-};
-
-type EmployeesPerProject = {
-	partTime: boolean;
-	employee: Employee;
-};
-
-type Project = {
-	id: string;
-	name: string;
-	description: string;
-	startDate: string;
-	endDate: string;
-	actualEndDate: string;
-	projectType: ProjectType;
-	hourlyRate: number;
-	projectValueBAM: number;
-	salesChannel: SalesChannel;
-	projectStatus: ProjectStatus;
-	employees: EmployeesPerProject[];
-};
 
 const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
 

@@ -4,7 +4,9 @@ import { toast } from 'react-toastify';
 
 const errorMiddleware: Middleware = (api: MiddlewareAPI) => next => action => {
 	if (isRejectedWithValue(action)) {
-		toast.error(action.payload.data.error);
+		const endpointName = action.meta.arg.endpointName;
+		const message = action.payload.data.error;
+		if (endpointName !== 'refreshAccessToken') toast.error(message);
 	}
 
 	return next(action);

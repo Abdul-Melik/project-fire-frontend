@@ -1,8 +1,8 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import { useLogoutMutation } from 'store/slices/authApiSlice';
-import LoadingSpinner from 'components/utils/LoadingSpinner';
 import UserMenuItem from 'components/menus/UserMenuItem';
 
 type Props = {
@@ -12,14 +12,17 @@ type Props = {
 const UserMenu = ({ className }: Props) => {
 	const navigate = useNavigate();
 
-	const [logout, { isLoading, isSuccess }] = useLogoutMutation();
+	const [logout, { isSuccess }] = useLogoutMutation();
 
 	const logoutHandler = async () => {
 		await logout({});
-		if (isSuccess) navigate('/login');
 	};
 
-	if (isLoading) return <LoadingSpinner />;
+	useEffect(() => {
+		if (isSuccess) {
+			navigate('/login');
+		}
+	}, [isSuccess, navigate]);
 
 	return (
 		<motion.div

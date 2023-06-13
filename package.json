@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.5",
+		"async-mutex": "^0.4.0",
 		"axios": "^1.4.0",
 		"dayjs": "^1.11.8",
 		"framer-motion": "^10.12.16",

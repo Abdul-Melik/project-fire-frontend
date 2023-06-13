@@ -6,11 +6,14 @@ Package versions:
 
 Depedencies:
 
+    "@reduxjs/toolkit": "^1.9.5",
+    "async-mutex": "^0.4.0",
     "axios": "^1.4.0",
     "dayjs": "^1.11.8",
     "framer-motion": "^10.12.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.7",
     "react-router": "^6.11.2",
     "react-router-dom": "^6.11.2",
     "react-spinners": "^0.13.8",
