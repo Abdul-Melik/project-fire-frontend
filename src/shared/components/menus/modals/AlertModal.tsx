@@ -9,7 +9,7 @@ import Exclamation from 'src/assets/media/svg/Exclamation.svg';
 
 interface AlertModalProps {
 	onClose: () => void;
-	onDeleteProject: () => void;
+	onConfirm: () => void;
 	alertTitle: string;
 	alertDescription: string;
 	confirmButtonText: string;
@@ -19,7 +19,7 @@ interface AlertModalProps {
 
 const AlertModal = ({
 	onClose,
-	onDeleteProject,
+	onConfirm,
 	alertTitle,
 	alertDescription,
 	confirmButtonText,
@@ -30,8 +30,8 @@ const AlertModal = ({
 		onClose();
 	};
 
-	const handleDelete = () => {
-		onDeleteProject(); // Call handleDeleteProject with projectId
+	const handleConfirm = () => {
+		onConfirm(); // Call handleDeleteProject with projectId
 		closeModal();
 	};
 
@@ -52,7 +52,7 @@ const AlertModal = ({
 					>
 						{cancelButtonText || 'Cancel'}
 					</button>
-					<button className={`rounded-md ${color} px-4 py-2 font-inter-semi-bold text-white`} onClick={handleDelete}>
+					<button className={`rounded-md ${color} px-4 py-2 font-inter-semi-bold text-white`} onClick={handleConfirm}>
 						{confirmButtonText || 'Confirm'}
 					</button>
 				</div>

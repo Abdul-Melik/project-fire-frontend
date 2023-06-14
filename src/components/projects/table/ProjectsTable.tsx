@@ -247,7 +247,7 @@ const ProjectsTable = ({
 			{isDeleteModalOpen && (
 				<AlertModal
 					onClose={() => setIsDeleteModalOpen(false)}
-					onDeleteProject={onDeleteProject}
+					onConfirm={onDeleteProject}
 					alertTitle={`Are you sure you want to delete ${selectedProject?.name}?`}
 					alertDescription={`This will permanently delete ${selectedProject?.name} and all associated data. You cannot undo this action.`}
 					confirmButtonText='Delete'
