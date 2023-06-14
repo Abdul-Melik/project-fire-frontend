@@ -36,7 +36,7 @@ const Pagination = ({
 						? currentPage * projectsPerPage
 						: totalNumberOfProjects}
 					{' of '}
-					{totalNumberOfProjects}
+					{totalNumberOfProjects} Projects
 				</span>
 			</div>
 			<div className='flex items-center gap-2'>
