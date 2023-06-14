@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useGetEmployeesQuery } from 'src/store/slices/employeesApiSlice';
@@ -13,10 +13,16 @@ const Employees = () => {
 	const navigate = useNavigate();
 	const [activePage, setActivePage] = useState(1);
 	const [searchTerm, setSearchTerm] = useState('');
+	const [isEmployed, setIsEmployed] = useState('');
+	const [orderByField, setOrderByField] = useState('firstName');
+	const [orderDirection, setOrderDirection] = useState('desc');
 
 	const { isLoading, isFetching, isSuccess, data } = useGetEmployeesQuery(
 		{
 			searchTerm,
+			isEmployed,
+			orderByField,
+			orderDirection,
 		},
 		{
 			pollingInterval: 60000,
@@ -24,6 +30,12 @@ const Employees = () => {
 			refetchOnReconnect: true,
 		}
 	);
+
+	useEffect(() => {
+		if (activePage === 1) setIsEmployed('');
+		else if (activePage === 2) setIsEmployed('true');
+		else if (activePage === 3) setIsEmployed('false');
+	}, [activePage, setIsEmployed]);
 
 	return (
 		<MainLayout activeMenuItem={'employees'}>
@@ -46,6 +58,9 @@ const Employees = () => {
 							navLabels={navLabels}
 							handlePageSelect={pageNumber => {
 								setActivePage(pageNumber);
+								setSearchTerm('');
+								setOrderByField('firstName');
+								setOrderDirection('desc');
 							}}
 						/>
 					</div>
@@ -53,7 +68,17 @@ const Employees = () => {
 						<LoadingSpinner />
 					) : (
 						isSuccess && (
-							<EmployeesTable employees={data} value={searchTerm} handleSearch={input => setSearchTerm(input)} />
+							<EmployeesTable
+								employees={data}
+								value={searchTerm}
+								orderByField={orderByField}
+								orderDirection={orderDirection}
+								handleSearch={input => setSearchTerm(input)}
+								handleSort={(label: string, orderDirection: string) => {
+									setOrderByField(label);
+									setOrderDirection(orderDirection);
+								}}
+							/>
 						)
 					)}
 				</div>
