@@ -13,7 +13,7 @@ const TableHeader = ({ label, total, value, handleSearch }: Props) => {
 	const [input, setInput] = useState(value);
 
 	return (
-		<div className='flex items-center justify-between px-4'>
+		<div className='mb-3 flex flex-col items-center justify-between px-4 sm:flex-row'>
 			<div className='flex items-center gap-4 py-[23px]'>
 				<h2 className='leadin-[26px] font-gilroy-medium text-lg font-medium text-midnight-grey'>{label}</h2>
 				<div className='flex h-[30px] flex-col items-center justify-center rounded-md bg-aqua-haze px-[10px] py-[2px] font-gilroy-medium text-sm font-medium leading-[18px] text-moss-green'>

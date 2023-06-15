@@ -13,6 +13,7 @@ import PlanCardItem from 'src/components/home/plan/PlanCardItem';
 import DataCard from 'src/shared/components/cards/DataCard';
 import arrow from 'src/assets/media/svg/arrow.svg';
 import YearSelector from 'src/shared/components/utils/YearSelector';
+import ResponsiveProjectsTable from 'src/components/projects/table/ResponsiveProjectsTable';
 
 const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
 
@@ -157,23 +158,6 @@ const Projects = () => {
 		}
 	};
 
-	const headerContent = (project: Project) => {
-		return (
-			<div className='flex w-full justify-between'>
-				<img src={arrow} alt='arrow' className='rotate-90 cursor-pointer' onClick={() => handleArrowClick('left')} />
-				<h1 className='font-gilroy-bold text-xl font-bold leading-[40px] text-deep-forest'>
-					{currentProject ? currentProject.name : 'loading'}
-				</h1>
-				<img
-					src={arrow}
-					alt='arrow'
-					className='-rotate-90 transform cursor-pointer'
-					onClick={() => handleArrowClick('right')}
-				/>
-			</div>
-		);
-	};
-
 	return (
 		<>
 			<MainLayout activeMenuItem={'projects'}>
@@ -230,32 +214,28 @@ const Projects = () => {
 						)}
 					</div>
 				</div>
-				{isLoading ? (
-					<LoadingSpinner />
-				) : (
-					<div className='flex w-full justify-center'>
-						<DataCard
-							className='w-[95%] rounded-[6px] border border-ashen-grey bg-white sm:hidden'
-							header={headerContent(currentProject!)}
-						>
-							<div className='mt-[11px] flex flex-col gap-[5px]'>
-								<PlanCardItem text='Name' amount={currentProject!.name} />
-								<PlanCardItem
-									text='Duration'
-									amount={`${getProjectDate(currentProject!).startDateString} - ${
-										getProjectDate(currentProject!).endDateString
-									}`}
-								/>
-								<PlanCardItem text='Developers' amount={currentProject!.employees.length.toString()} />
-								<PlanCardItem text='Hourly Rate' amount={currentProject!.hourlyRate.toString() + ' KM'} />
-								<PlanCardItem text='Project Value' amount={currentProject!.projectValueBAM.toString() + ' KM'} />
-								<PlanCardItem text='Status' amount={currentProject!.projectStatus} />
-							</div>
-						</DataCard>
-					</div>
-				)}
+				<div className='mb-[25px] flex w-full justify-center sm:hidden'>
+					{isLoading ? (
+						<LoadingSpinner />
+					) : (
+						<div className='w-[95%]'>
+							<ResponsiveProjectsTable
+								totalNumberOfProjects={totalNumberOfProjects}
+								projects={projects}
+								value={searchTerm}
+								orderByField={orderByField}
+								orderDirection={orderDirection}
+								handleSearch={input => setSearchTerm(input)}
+								handleSort={(label: string, orderDirection: string) => {
+									setOrderByField(label);
+									setOrderDirection(orderDirection);
+								}}
+							/>
+						</div>
+					)}
+				</div>
 
-				<div className='mx-14 mb-[25px] hidden sm:block'>
+				<div className='mx-3 mb-[25px] block'>
 					<Pagination
 						totalNumberOfProjects={totalNumberOfProjects}
 						currentPage={currentPage}

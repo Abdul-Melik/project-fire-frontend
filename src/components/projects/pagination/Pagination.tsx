@@ -22,7 +22,7 @@ const Pagination = ({
 
 	return (
 		<div className='flex items-center justify-between'>
-			<div className='flex items-center gap-7'>
+			<div className='hidden items-center gap-7 sm:flex'>
 				<div className='flex items-center gap-[9px]'>
 					<span className='font-opensans-semi-bold text-sm font-semibold leading-[30px] tracking-[0.15px] text-nightfall-navy'>
 						Rows per page:
@@ -41,7 +41,9 @@ const Pagination = ({
 			</div>
 			<div className='flex items-center gap-2'>
 				{currentPage > 1 && (
-					<PageNumberButton key='prev' pageNumber='Previous' onClick={() => handlePageChange(currentPage - 1)} />
+					<div className='hidden sm:flex'>
+						<PageNumberButton key='prev' pageNumber='Previous' onClick={() => handlePageChange(currentPage - 1)} />
+					</div>
 				)}
 				{currentPage > 2 && (
 					<>
@@ -76,7 +78,9 @@ const Pagination = ({
 							</>
 						) : null}
 						{pageNumbers.length > 2 && (
-							<PageNumberButton key='last' pageNumber='Next' onClick={() => handlePageChange(currentPage + 1)} />
+							<div className='hidden sm:flex'>
+								<PageNumberButton key='last' pageNumber='Next' onClick={() => handlePageChange(currentPage + 1)} />
+							</div>
 						)}
 					</>
 				)}
