@@ -7,6 +7,14 @@ type Department = 'Administration' | 'Management' | 'Development' | 'Design';
 
 type TechStack = 'AdminNA' | 'MgmtNA' | 'FullStack' | 'Frontend' | 'Backend' | 'UXUI';
 
+type Projects = {
+	project: {
+		id: string;
+		name: string;
+	};
+	partTime: boolean;
+};
+
 type Employee = {
 	id: string;
 	firstName: string;
@@ -15,6 +23,7 @@ type Employee = {
 	department: Department;
 	salary: number;
 	techStack: TechStack;
+	projects: Projects[];
 };
 
 type Props = {
@@ -24,6 +33,7 @@ type Props = {
 	orderDirection: string;
 	handleSearch: (input: string) => void;
 	handleSort: (label: string, orderDirection: string) => void;
+	onClick: (employeeId: string) => void;
 };
 
 const getEmployeeTechStack = (employee: Employee) => {
@@ -44,7 +54,15 @@ const columns = [
 	{ name: 'Actions', label: 'actions' },
 ];
 
-const EmployeesTable = ({ employees, value, orderByField, orderDirection, handleSearch, handleSort }: Props) => {
+const EmployeesTable = ({
+	employees,
+	value,
+	orderByField,
+	orderDirection,
+	handleSearch,
+	handleSort,
+	onClick,
+}: Props) => {
 	return (
 		<div className='h-[400px] w-full overflow-y-scroll rounded-md border border-ashen-grey bg-white'>
 			<TableHeader label='All Employees' total={employees.length} value={value} handleSearch={handleSearch} />
@@ -59,7 +77,7 @@ const EmployeesTable = ({ employees, value, orderByField, orderDirection, handle
 					{employees.map(employee => {
 						const employeeId = employee.id;
 						return (
-							<TableRow key={employeeId}>
+							<TableRow key={employeeId} onClick={() => onClick(employeeId)}>
 								<td className='w-[175px] p-4'>{employee.firstName}</td>
 								<td className='w-[175px] p-4'>{employee.lastName}</td>
 								<td className='w-[175px] p-4'>{employee.department}</td>

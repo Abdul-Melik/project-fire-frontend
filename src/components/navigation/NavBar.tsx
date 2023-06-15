@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import NavLink from 'components/navbar/NavLink';
+import NavLink from 'components/navigation/NavLink';
 
 type Props = {
 	navLabels: string[];
 	handlePageSelect: (page: number) => void;
 };
 
-const Navbar = ({ navLabels, handlePageSelect }: Props) => {
+const NavBar = ({ navLabels, handlePageSelect }: Props) => {
 	const [selectedPage, setSelectedPage] = useState(1);
 	const activeLink = 'bg-aqua-haze text-moss-green font-inter-semi-bold font-semibold';
 	const inactiveLink = 'text-blue-grey font-inter-regular font-normal';
@@ -33,4 +33,4 @@ const Navbar = ({ navLabels, handlePageSelect }: Props) => {
 	);
 };
 
-export default Navbar;
+export default NavBar;

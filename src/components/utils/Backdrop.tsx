@@ -1,14 +1,10 @@
-import ReactDOM from 'react-dom';
-
 type Props = {
+	className?: string;
 	onClick: () => void;
 };
 
-const Backdrop = ({ onClick }: Props) => {
-	return ReactDOM.createPortal(
-		<div className='fixed left-0 top-0 z-10 min-h-full w-full bg-black bg-opacity-40' onClick={() => onClick()}></div>,
-		document.getElementById('backdrop-hook') as HTMLElement
-	);
+const Backdrop = ({ className, onClick }: Props) => {
+	return <div className={`fixed left-0 top-0 z-10 min-h-full w-full ${className}`} onClick={() => onClick()} />;
 };
 
 export default Backdrop;

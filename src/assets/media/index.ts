@@ -3,6 +3,7 @@ import arrow from 'assets/media/svg/arrow.svg';
 import avatar from 'assets/media/svg/avatar.svg';
 import avgMargin from 'assets/media/svg/avg-margin.svg';
 import avgValue from 'assets/media/svg/avg-value.svg';
+import chevronLeft from 'assets/media/svg/chevron-left.svg';
 import clipboard from 'assets/media/svg/clipboard.svg';
 import coins from 'assets/media/svg/coins.svg';
 import directCosts from 'assets/media/svg/direct-costs.svg';
@@ -30,6 +31,7 @@ export {
 	avatar,
 	avgMargin,
 	avgValue,
+	chevronLeft,
 	clipboard,
 	coins,
 	directCosts,

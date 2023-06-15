@@ -26,6 +26,7 @@ export default {
 				'steel-blue': '#242834',
 				'nightfall-navy': '#505475',
 				'blue-grey': '#788489',
+				'blue-ash': '#A5B2B7',
 				'luminous-azure': '#3973F8',
 				'cerulean-breeze': '#3491FA',
 				'winter-mint': '#E9F3F2',
@@ -46,6 +47,7 @@ export default {
 				'misty-moonstone': '#CACCD2',
 				'silvery-sky': '#C3C8CD',
 				'opal-mist': '#EBF4F1',
+				'frosty-mint': '#EBF5F1',
 				'cloudy-pearl': '#F5F6FB',
 
 				// White Tones
@@ -55,6 +57,9 @@ export default {
 				// Orange Tones
 				'spicy-apricot': '#FF9F5A',
 				'golden-tangerine': '#FFB341',
+
+				// Red Tones
+				'crimson-blaze': '#FF4D4F',
 			},
 			fontFamily: {
 				'inter-regular': ['Inter-Regular', 'sans-serif'],

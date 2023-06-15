@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGetProjectsQuery } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout/MainLayout';
-import Navbar from 'components/navbar/Navbar';
+import Navbar from 'src/components/navigation/NavBar';
 import ProjectsTable from 'features/projects/ProjectsTable';
 import Pagination from 'features/projects/Pagination';
 

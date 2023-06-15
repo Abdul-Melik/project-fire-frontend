@@ -8,7 +8,10 @@ export const employeesApiSlice = apiSlice.injectEndpoints({
 				method: 'GET',
 			}),
 		}),
+		getEmployeeById: builder.query({
+			query: employeeId => ({ url: `/employees/${employeeId}`, method: 'GET' }),
+		}),
 	}),
 });
 
-export const { useGetEmployeesQuery } = employeesApiSlice;
+export const { useGetEmployeesQuery, useGetEmployeeByIdQuery } = employeesApiSlice;
