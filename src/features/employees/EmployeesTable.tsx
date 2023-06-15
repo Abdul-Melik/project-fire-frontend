@@ -77,7 +77,7 @@ const EmployeesTable = ({
 					{employees.map(employee => {
 						const employeeId = employee.id;
 						return (
-							<TableRow key={employeeId} onClick={() => onClick(employeeId)}>
+							<TableRow key={employeeId} className='cursor-pointer' onClick={() => onClick(employeeId)}>
 								<td className='w-[175px] p-4'>{employee.firstName}</td>
 								<td className='w-[175px] p-4'>{employee.lastName}</td>
 								<td className='w-[175px] p-4'>{employee.department}</td>

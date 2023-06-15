@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useAppSelector } from 'store/hooks';
+import { selectCurrentUser } from 'store/slices/authSlice';
 import { useGetProjectsQuery } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout/MainLayout';
-import Navbar from 'src/components/navigation/NavBar';
+import Navbar from 'components/navigation/NavBar';
 import ProjectsTable from 'features/projects/ProjectsTable';
 import Pagination from 'features/projects/Pagination';
 
@@ -20,6 +22,7 @@ const Projects = () => {
 	const [orderByField, setOrderByField] = useState('startDate');
 	const [orderDirection, setOrderDirection] = useState('desc');
 
+	const user = useAppSelector(selectCurrentUser);
 	const { isLoading, isFetching, isSuccess, data } = useGetProjectsQuery(
 		{
 			searchTerm,
@@ -49,15 +52,14 @@ const Projects = () => {
 			<div className='mx-14 mb-[17px] mt-[34px]'>
 				<div className='mb-[30px] flex items-center justify-between'>
 					<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</h1>
-					<button
-						className={`rounded-md px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white ${
-							true ? 'bg-deep-teal hover:saturate-[400%]' : 'cursor-not-allowed bg-whispering-gray'
-						}`}
-						disabled={false}
-						onClick={() => navigate('/projects/create')}
-					>
-						Create new project
-					</button>
+					{user?.role === 'Admin' && (
+						<button
+							className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white hover:saturate-[400%]'
+							onClick={() => navigate('/projects/create')}
+						>
+							Create new project
+						</button>
+					)}
 				</div>
 				<div className='flex flex-col'>
 					<div className='mb-[30px]'>

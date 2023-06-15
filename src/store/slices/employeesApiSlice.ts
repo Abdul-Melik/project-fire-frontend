@@ -11,7 +11,10 @@ export const employeesApiSlice = apiSlice.injectEndpoints({
 		getEmployeeById: builder.query({
 			query: employeeId => ({ url: `/employees/${employeeId}`, method: 'GET' }),
 		}),
+		createEmployee: builder.mutation({
+			query: data => ({ url: `/employees`, method: 'POST', body: data, formData: true }),
+		}),
 	}),
 });
 
-export const { useGetEmployeesQuery, useGetEmployeeByIdQuery } = employeesApiSlice;
+export const { useGetEmployeesQuery, useGetEmployeeByIdQuery, useCreateEmployeeMutation } = employeesApiSlice;

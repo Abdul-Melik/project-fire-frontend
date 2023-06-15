@@ -19,9 +19,9 @@ const EmployeesTableHead = ({ columns, orderByField, orderDirection, handleSort 
 				{columns.map((column, index) => (
 					<th
 						key={index}
-						className={`w-[175px] px-4 py-2 font-gilroy-medium text-sm font-medium leading-[22px] text-slate-mist ${
+						className={`px-4 py-2 font-gilroy-medium text-sm font-medium leading-[22px] text-slate-mist ${
 							orderByField === column.label && column.label !== 'actions' ? 'bg-pale-silver' : ''
-						}`}
+						} ${column.label === 'salary' ? 'w-[220px]' : 'w-[175px]'}`}
 					>
 						{column.name}{' '}
 						{column.label !== 'actions' && (

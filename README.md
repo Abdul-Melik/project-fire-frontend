@@ -7,6 +7,7 @@ Package versions:
 Depedencies:
 
     "@reduxjs/toolkit": "^1.9.5",
+    "@tailwindcss/forms": "^0.5.3",
     "async-mutex": "^0.4.0",
     "axios": "^1.4.0",
     "dayjs": "^1.11.8",

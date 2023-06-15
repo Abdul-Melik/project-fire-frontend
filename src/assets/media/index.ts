@@ -3,6 +3,7 @@ import arrow from 'assets/media/svg/arrow.svg';
 import avatar from 'assets/media/svg/avatar.svg';
 import avgMargin from 'assets/media/svg/avg-margin.svg';
 import avgValue from 'assets/media/svg/avg-value.svg';
+import chevronDown from 'assets/media/svg/chevron-down.svg';
 import chevronLeft from 'assets/media/svg/chevron-left.svg';
 import clipboard from 'assets/media/svg/clipboard.svg';
 import coins from 'assets/media/svg/coins.svg';
@@ -18,6 +19,7 @@ import invoice from 'assets/media/svg/invoice.svg';
 import leadClosing from 'assets/media/svg/lead-closing.svg';
 import logo from 'assets/media/svg/logo.svg';
 import margin from 'assets/media/svg/margin.svg';
+import plus from 'assets/media/svg/plus.svg';
 import projectsNumber from 'assets/media/svg/projects-number.svg';
 import revenue from 'assets/media/svg/revenue.svg';
 import search from 'assets/media/svg/search.svg';
@@ -31,6 +33,7 @@ export {
 	avatar,
 	avgMargin,
 	avgValue,
+	chevronDown,
 	chevronLeft,
 	clipboard,
 	coins,
@@ -47,6 +50,7 @@ export {
 	leadClosing,
 	logo,
 	margin,
+	plus,
 	projectsNumber,
 	revenue,
 	search,

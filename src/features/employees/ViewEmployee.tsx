@@ -1,7 +1,9 @@
 import { chevronLeft, avatar } from 'assets/media';
+import { useAppSelector } from 'store/hooks';
+import { selectCurrentUser } from 'store/slices/authSlice';
 import { useGetEmployeeByIdQuery } from 'store/slices/employeesApiSlice';
+import LoadingSpinner from 'components/utils/LoadingSpinner';
 import SideDrawer from 'components/navigation/SideDrawer';
-import LoadingSpinner from 'src/components/utils/LoadingSpinner';
 
 type Department = 'Administration' | 'Management' | 'Development' | 'Design';
 
@@ -41,6 +43,7 @@ const getEmployeeTechStack = (employee: Employee) => {
 };
 
 const ViewEmployee = ({ employeeId, onClick }: Props) => {
+	const user = useAppSelector(selectCurrentUser);
 	const { isLoading, isFetching, isSuccess, data } = useGetEmployeeByIdQuery(employeeId);
 
 	const children = (
@@ -48,7 +51,7 @@ const ViewEmployee = ({ employeeId, onClick }: Props) => {
 			{isSuccess && (
 				<div className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pb-6 pt-[27px]'>
 					<header className='flex flex-col gap-[13px]'>
-						<div className='flex items-center gap-[3px]' onClick={onClick}>
+						<div className='flex cursor-pointer items-center gap-[3px]' onClick={onClick}>
 							<img className='h-4 w-4' src={chevronLeft} alt='Back' />
 							<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>
 								Back
@@ -109,14 +112,16 @@ const ViewEmployee = ({ employeeId, onClick }: Props) => {
 							</div>
 						</div>
 					</main>
-					<footer className='absolute bottom-0 left-0 flex w-full items-center justify-end gap-2 bg-white p-6'>
-						<button className='rounded-md border border-crimson-blaze px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-crimson-blaze'>
-							Delete Employee
-						</button>
-						<button className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white'>
-							Edit Employee
-						</button>
-					</footer>
+					{user?.role === 'Admin' && (
+						<footer className='absolute bottom-0 left-0 flex w-full items-center justify-end gap-2 bg-white p-6'>
+							<button className='rounded-md border border-crimson-blaze px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-crimson-blaze'>
+								Delete Employee
+							</button>
+							<button className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white'>
+								Edit Employee
+							</button>
+						</footer>
+					)}
 				</div>
 			)}
 		</>
