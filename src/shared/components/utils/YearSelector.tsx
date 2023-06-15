@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
+import arrow from 'src/assets/media/svg/arrow.svg';
 
 type Props = {
 	handleYearSelect: (year: string) => void;
@@ -9,19 +10,18 @@ type Props = {
 };
 
 const YearSelector = ({ handleYearSelect, label, options, defaultValue }: Props) => {
-	const [selectedYear, setSelectedYear] = useState<string>('');
+	const [selectedYear, setSelectedYear] = useState<string>(defaultValue);
 
 	const customStyles = {
 		control: (provided: any) => ({
 			...provided,
-			width: '120px',
+			width: '105px',
 			height: '40px',
 			fontFamily: 'Gilroy-Bold',
-			backgroundColor: 'white',
 			border: '1px solid #DFE3E1',
 			borderRadius: '6px',
 			paddingLeft: '8px',
-			paddingRight: '10px',
+			paddingRight: '8px',
 			fontSize: '16px',
 			fontWeight: 'bold',
 			color: 'black',
@@ -41,10 +41,17 @@ const YearSelector = ({ handleYearSelect, label, options, defaultValue }: Props)
 		},
 		menu: (provided: any) => ({
 			...provided,
-			zIndex: 9999,
 			width: '160px',
 			marginLeft: '-40px',
 		}),
+	};
+
+	const CustomDropdownIndicator = (props: any) => {
+		return (
+			<components.DropdownIndicator {...props}>
+				<img src={arrow} alt='Arrow' />
+			</components.DropdownIndicator>
+		);
 	};
 
 	return (
@@ -54,10 +61,11 @@ const YearSelector = ({ handleYearSelect, label, options, defaultValue }: Props)
 			</label>
 			<Select
 				id='years'
-				defaultInputValue='2023'
+				defaultValue={{ value: defaultValue, label: defaultValue }}
 				isSearchable={false}
 				components={{
 					IndicatorSeparator: () => null,
+					DropdownIndicator: CustomDropdownIndicator,
 				}}
 				options={options.map(option => ({ value: option, label: option }))}
 				value={{ value: selectedYear, label: selectedYear }}
