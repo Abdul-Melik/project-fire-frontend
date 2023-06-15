@@ -9,6 +9,10 @@ import Navbar from 'src/shared/components/navbar/Navbar';
 import MainLayout from 'src/shared/components/layout/MainLayout';
 import ProjectsTable from 'src/components/projects/table/ProjectsTable';
 import Pagination from 'src/components/projects/pagination/Pagination';
+import PlanCardItem from 'src/components/home/plan/PlanCardItem';
+import DataCard from 'src/shared/components/cards/DataCard';
+import arrow from 'src/assets/media/svg/arrow.svg';
+import YearSelector from 'src/shared/components/utils/YearSelector';
 
 const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
 
@@ -62,19 +66,36 @@ const Projects = () => {
 	const [projectsPerPage, setProjectsPerPage] = useState(10);
 	const [orderByField, setOrderByField] = useState('startDate');
 	const [orderDirection, setOrderDirection] = useState('desc');
+	const [currentProject, setCurrentProject] = useState<Project | null>(null);
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
+	const getProjectDate = (project: Project) => {
+		const startDate = new Date(project.startDate);
+		const endDate = new Date(project.endDate);
+		const startDateString = startDate.toLocaleDateString('en-US', {
+			year: 'numeric',
+			month: 'short',
+		});
+		const endDateString = endDate.toLocaleDateString('en-US', {
+			year: 'numeric',
+			month: 'short',
+		});
+		return { startDateString, endDateString };
+	};
+
 	const getProjects = useCallback(async () => {
 		setIsLoading(true);
+		let status = projectStatus === 'All Projects' ? '' : projectStatus === 'On Hold' ? 'OnHold' : projectStatus;
 		try {
 			const response = await axios.get(
-				`${baseUrl}/api/projects?name=${searchTerm}&projectStatus=${projectStatus}&orderByField=${orderByField}&orderDirection=${orderDirection}&take=${projectsPerPage}&page=${currentPage}`,
+				`${baseUrl}/api/projects?name=${searchTerm}&projectStatus=${status}&orderByField=${orderByField}&orderDirection=${orderDirection}&take=${projectsPerPage}&page=${currentPage}`,
 				{
 					headers: { Authorization: 'Bearer ' + token },
 				}
 			);
 			setProjects(response.data.projects);
+			setCurrentProject(response.data.projects[0]);
 			setTotalNumberOfProjects(response.data.pageInfo.total);
 			setLastPage(response.data.pageInfo.lastPage);
 		} catch (error: any) {
@@ -99,11 +120,65 @@ const Projects = () => {
 		window.scrollTo(0, 0);
 	}, []);
 
+	const handleArrowClick = (direction: string) => {
+		// if direction is right and current project is not the last one
+		if (direction === 'right' && projects.indexOf(currentProject!) !== projects.length - 1) {
+			setCurrentProject(projects[projects.indexOf(currentProject!) + 1]);
+		}
+		// if direction is left and current project is not the first one
+		else if (direction === 'left' && projects.indexOf(currentProject!) !== 0) {
+			setCurrentProject(projects[projects.indexOf(currentProject!) - 1]);
+		}
+		// if direction is right and current project is the last one set current page to next page and call getProjects
+		else if (direction === 'right' && projects.indexOf(currentProject!) === projects.length - 1) {
+			//check if there is next page
+			if (currentPage !== lastPage) {
+				setCurrentPage(currentPage + 1);
+				setCurrentProject(projects[0]);
+			}
+			//if there is no next page set current page to 1 and call getProjects
+			else {
+				setCurrentPage(1);
+				setCurrentProject(projects[0]);
+			}
+		}
+		// if direction is left and current project is the first one set current page to last page and call getProjects
+		else if (direction === 'left' && projects.indexOf(currentProject!) === 0) {
+			//check if there is previous page
+			if (currentPage !== 1) {
+				setCurrentPage(currentPage - 1);
+				setCurrentProject(projects[projects.length - 1]);
+			}
+			//if there is no previous page set current page to last page and call getProjects
+			else {
+				setCurrentPage(lastPage);
+				setCurrentProject(projects[projects.length - 1]);
+			}
+		}
+	};
+
+	const headerContent = (project: Project) => {
+		return (
+			<div className='flex w-full justify-between'>
+				<img src={arrow} alt='arrow' className='rotate-90 cursor-pointer' onClick={() => handleArrowClick('left')} />
+				<h1 className='font-gilroy-bold text-xl font-bold leading-[40px] text-deep-forest'>
+					{currentProject ? currentProject.name : 'loading'}
+				</h1>
+				<img
+					src={arrow}
+					alt='arrow'
+					className='-rotate-90 transform cursor-pointer'
+					onClick={() => handleArrowClick('right')}
+				/>
+			</div>
+		);
+	};
+
 	return (
 		<>
 			<MainLayout activeMenuItem={'projects'}>
-				<div className='mx-14 mb-[17px] mt-[34px]'>
-					<div className='mb-[30px] flex items-center justify-between'>
+				<div className='mx-14 mb-[17px] mt-14 sm:mt-[34px]'>
+					<div className='mb-[30px] flex flex-col items-center justify-between gap-8 sm:flex-row sm:gap-0'>
 						<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</h1>
 						<button
 							className={`rounded-md px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white ${
@@ -115,7 +190,15 @@ const Projects = () => {
 							Create new project
 						</button>
 					</div>
-					<div className='flex flex-col'>
+					<div className='flex w-full justify-center sm:hidden'>
+						<YearSelector
+							label='Filter'
+							options={['All Projects', 'Active', 'On Hold', 'Inactive', 'Completed']}
+							defaultValue='All Projects'
+							handleYearSelect={status => setProjectStatus(status)}
+						/>
+					</div>
+					<div className='hidden flex-col sm:flex'>
 						<div className='mb-[30px]'>
 							<Navbar
 								navLabels={navLabels}
@@ -147,7 +230,32 @@ const Projects = () => {
 						)}
 					</div>
 				</div>
-				<div className='mx-14 mb-[25px]'>
+				{isLoading ? (
+					<LoadingSpinner />
+				) : (
+					<div className='flex w-full justify-center'>
+						<DataCard
+							className='w-[95%] rounded-[6px] border border-ashen-grey bg-white sm:hidden'
+							header={headerContent(currentProject!)}
+						>
+							<div className='mt-[11px] flex flex-col gap-[5px]'>
+								<PlanCardItem text='Name' amount={currentProject!.name} />
+								<PlanCardItem
+									text='Duration'
+									amount={`${getProjectDate(currentProject!).startDateString} - ${
+										getProjectDate(currentProject!).endDateString
+									}`}
+								/>
+								<PlanCardItem text='Developers' amount={currentProject!.employees.length.toString()} />
+								<PlanCardItem text='Hourly Rate' amount={currentProject!.hourlyRate.toString() + ' KM'} />
+								<PlanCardItem text='Project Value' amount={currentProject!.projectValueBAM.toString() + ' KM'} />
+								<PlanCardItem text='Status' amount={currentProject!.projectStatus} />
+							</div>
+						</DataCard>
+					</div>
+				)}
+
+				<div className='mx-14 mb-[25px] hidden sm:block'>
 					<Pagination
 						totalNumberOfProjects={totalNumberOfProjects}
 						currentPage={currentPage}
