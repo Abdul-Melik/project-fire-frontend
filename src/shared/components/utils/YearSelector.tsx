@@ -42,7 +42,7 @@ const YearSelector = ({ handleYearSelect, label, options, defaultValue }: Props)
 		menu: (provided: any) => ({
 			...provided,
 			width: '160px',
-			marginLeft: '-40px',
+			marginLeft: '-55px',
 		}),
 	};
 
