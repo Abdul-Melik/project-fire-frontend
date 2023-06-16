@@ -71,20 +71,6 @@ const Projects = () => {
 
 	const baseUrl = import.meta.env.VITE_BASE_URL;
 
-	const getProjectDate = (project: Project) => {
-		const startDate = new Date(project.startDate);
-		const endDate = new Date(project.endDate);
-		const startDateString = startDate.toLocaleDateString('en-US', {
-			year: 'numeric',
-			month: 'short',
-		});
-		const endDateString = endDate.toLocaleDateString('en-US', {
-			year: 'numeric',
-			month: 'short',
-		});
-		return { startDateString, endDateString };
-	};
-
 	const getProjects = useCallback(async () => {
 		setIsLoading(true);
 		let status = projectStatus === 'All Projects' ? '' : projectStatus === 'On Hold' ? 'OnHold' : projectStatus;
@@ -120,43 +106,6 @@ const Projects = () => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
-
-	const handleArrowClick = (direction: string) => {
-		// if direction is right and current project is not the last one
-		if (direction === 'right' && projects.indexOf(currentProject!) !== projects.length - 1) {
-			setCurrentProject(projects[projects.indexOf(currentProject!) + 1]);
-		}
-		// if direction is left and current project is not the first one
-		else if (direction === 'left' && projects.indexOf(currentProject!) !== 0) {
-			setCurrentProject(projects[projects.indexOf(currentProject!) - 1]);
-		}
-		// if direction is right and current project is the last one set current page to next page and call getProjects
-		else if (direction === 'right' && projects.indexOf(currentProject!) === projects.length - 1) {
-			//check if there is next page
-			if (currentPage !== lastPage) {
-				setCurrentPage(currentPage + 1);
-				setCurrentProject(projects[0]);
-			}
-			//if there is no next page set current page to 1 and call getProjects
-			else {
-				setCurrentPage(1);
-				setCurrentProject(projects[0]);
-			}
-		}
-		// if direction is left and current project is the first one set current page to last page and call getProjects
-		else if (direction === 'left' && projects.indexOf(currentProject!) === 0) {
-			//check if there is previous page
-			if (currentPage !== 1) {
-				setCurrentPage(currentPage - 1);
-				setCurrentProject(projects[projects.length - 1]);
-			}
-			//if there is no previous page set current page to last page and call getProjects
-			else {
-				setCurrentPage(lastPage);
-				setCurrentProject(projects[projects.length - 1]);
-			}
-		}
-	};
 
 	return (
 		<>

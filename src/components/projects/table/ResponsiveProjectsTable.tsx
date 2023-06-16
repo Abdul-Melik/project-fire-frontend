@@ -4,18 +4,10 @@ import axios from 'axios';
 import TableHeader from 'src/shared/components/table-elements/TableHeader';
 import TableHead from 'src/shared/components/table-elements/TableHead';
 import TableRow from 'src/shared/components/table-elements/TableRow';
-import Avatars from 'src/components/projects/table/Avatars';
-import DeleteModal from 'src/shared/components/menus/modals/AlertModal';
-import ProjectInfoModal from 'src/shared/components/menus/modals/InfoModal';
-import UpdateModal from 'src/shared/components/menus/modals/UpdateModal';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import AuthContext from 'src/shared/context/auth-context';
-import AlertModal from 'src/shared/components/menus/modals/AlertModal';
 import { toast } from 'react-toastify';
 import DataCard from 'src/shared/components/cards/DataCard';
 import PlanCardItem from 'src/components/home/plan/PlanCardItem';
+import arrow from 'src/assets/media/svg/arrow.svg';
 import React from 'react';
 
 type ProjectType = 'Fixed' | 'OnGoing';
@@ -128,8 +120,19 @@ const ResponsiveProjectsTable = ({
 							return (
 								<React.Fragment key={projectId}>
 									<TableRow className='hover:cursor-pointer hover:bg-white' onClick={() => selectProject(projectId)}>
-										<td className='w-[50px] pl-4'>{project.name}</td>
-										<td className='flex h-[60px] w-[150px] items-center gap-2 pl-4'>
+										<td className='pl-4'>
+											<div className='flex w-3/5 items-center justify-between'>
+												<p>{project.name}</p>
+												<img
+													src={arrow}
+													alt='arrow'
+													className={`h-3 w-3 transform transition-transform duration-300 ${
+														projectId === selectedProject ? 'rotate-180' : 'rotate-0'
+													}`}
+												/>
+											</div>
+										</td>
+										<td className='flex h-[60px] items-center gap-2 pl-4'>
 											<div className={`h-[6px] w-[6px] rounded-full ${getProjectColorAndStatus(project).color}`} />
 											<div className='font-gilroy-semi-bold font-semibold'>
 												{getProjectColorAndStatus(project).status}
