@@ -10,6 +10,29 @@ import EmployeesTable from 'features/employees/EmployeesTable';
 import ViewEmployee from 'features/employees/ViewEmployee';
 import AddNewEmployee from 'features/employees/AddNewEmployee';
 
+type Department = 'Administration' | 'Management' | 'Development' | 'Design';
+
+type TechStack = 'AdminNA' | 'MgmtNA' | 'FullStack' | 'Frontend' | 'Backend' | 'UXUI';
+
+type Projects = {
+	project: {
+		id: string;
+		name: string;
+	};
+	partTime: boolean;
+};
+
+type Employee = {
+	id: string;
+	firstName: string;
+	lastName: string;
+	image: string;
+	department: Department;
+	salary: number;
+	techStack: TechStack;
+	projects: Projects[];
+};
+
 const navLabels = ['All Employees', 'Current', 'Past'];
 
 const Employees = () => {
@@ -45,7 +68,12 @@ const Employees = () => {
 
 	return (
 		<MainLayout activeMenuItem={'employees'}>
-			{isViewEmployeeOpen && <ViewEmployee employeeId={employeeId} onClick={() => setIsViewEmployeeOpen(false)} />}
+			{isViewEmployeeOpen && (
+				<ViewEmployee
+					employee={data.find((employee: Employee) => employee.id === employeeId)}
+					onClick={() => setIsViewEmployeeOpen(false)}
+				/>
+			)}
 			{isAddNewEmployeeOpen && <AddNewEmployee onClick={() => setIsAddNewEmployeeOpen(false)} />}
 			<div className='mx-14 mb-[17px] mt-[34px]'>
 				<div className='mb-[30px] flex items-center justify-between'>

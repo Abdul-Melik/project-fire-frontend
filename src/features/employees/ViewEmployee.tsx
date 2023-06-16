@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { skipToken } from '@reduxjs/toolkit/dist/query/react';
+
 import { chevronLeft, avatar } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
@@ -29,7 +32,7 @@ type Employee = {
 };
 
 type Props = {
-	employeeId: string;
+	employee: Employee;
 	onClick: () => void;
 };
 
@@ -42,21 +45,24 @@ const getEmployeeTechStack = (employee: Employee) => {
 	else if (techStack === 'UXUI') return 'UX/UI';
 };
 
-const ViewEmployee = ({ employeeId, onClick }: Props) => {
+const ViewEmployee = ({ employee, onClick }: Props) => {
 	const user = useAppSelector(selectCurrentUser);
-	const { isLoading, isFetching, isSuccess, data } = useGetEmployeeByIdQuery(employeeId);
+	const { isLoading, isFetching, isSuccess, data, refetch } = useGetEmployeeByIdQuery(employee?.id ?? skipToken);
+
+	useEffect(() => {
+		if (employee) refetch();
+	}, [refetch, employee]);
 
 	const children = (
-		<>
-			{isSuccess && (
-				<div className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pb-6 pt-[27px]'>
-					<header className='flex flex-col gap-[13px]'>
-						<div className='flex cursor-pointer items-center gap-[3px]' onClick={onClick}>
-							<img className='h-4 w-4' src={chevronLeft} alt='Back' />
-							<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>
-								Back
-							</span>
-						</div>
+		<div className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pb-6 pt-[27px]'>
+			{(isLoading || isFetching) && <LoadingSpinner />}
+			<div className='flex cursor-pointer items-center gap-[3px]' onClick={onClick}>
+				<img className='h-4 w-4' src={chevronLeft} alt='Back' />
+				<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
+			</div>
+			{isSuccess && data && (
+				<>
+					<header className='mt-[13px]'>
 						<div className='flex gap-4 rounded-lg bg-white p-6'>
 							<img
 								className='h-20 w-20 rounded-[4.61538px] object-cover opacity-80'
@@ -122,11 +128,12 @@ const ViewEmployee = ({ employeeId, onClick }: Props) => {
 							</button>
 						</footer>
 					)}
-				</div>
+				</>
 			)}
-		</>
+		</div>
 	);
-	return <>{isLoading || isFetching ? <LoadingSpinner /> : <SideDrawer onClick={onClick}>{children}</SideDrawer>}</>;
+
+	return <SideDrawer onClick={onClick}>{children}</SideDrawer>;
 };
 
 export default ViewEmployee;
