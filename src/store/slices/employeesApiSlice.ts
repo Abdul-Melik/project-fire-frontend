@@ -9,15 +9,16 @@ export const employeesApiSlice = apiSlice.injectEndpoints({
 			}),
 			providesTags: (result, error, arg) =>
 				result
-					? [...result.map(({ id }: { id: string }) => ({ type: 'Employees' as const, id })), 'Employees']
-					: ['Employees'],
+					? [...result.map(({ id }: { id: string }) => ({ type: 'Employee' as const, id })), 'Employee']
+					: ['Employee'],
 		}),
 		getEmployeeById: builder.query({
 			query: employeeId => ({ url: `/employees/${employeeId}`, method: 'GET' }),
+			keepUnusedDataFor: 0,
 		}),
 		createEmployee: builder.mutation({
 			query: data => ({ url: `/employees`, method: 'POST', body: data, formData: true }),
-			invalidatesTags: ['Employees'],
+			invalidatesTags: ['Employee'],
 		}),
 	}),
 });

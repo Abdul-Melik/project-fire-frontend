@@ -51,7 +51,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
 const apiSlice = createApi({
 	baseQuery: baseQueryWithReauth,
-	tagTypes: ['Users', 'Employees', 'Projects'],
+	tagTypes: ['User', 'Employee', 'Project'],
 	endpoints: () => ({}),
 });
 
