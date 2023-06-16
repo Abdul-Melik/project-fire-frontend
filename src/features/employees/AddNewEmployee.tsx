@@ -53,8 +53,6 @@ const AddNewEmployee = ({ onClick }: Props) => {
 		}
 	}, [department]);
 
-	if (isLoading) return <LoadingSpinner />;
-
 	const children = (
 		<div className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pt-[27px]'>
 			<header className='flex flex-col gap-[13px]'>
