@@ -80,26 +80,28 @@ const EmployeesTable = ({
 						const employeeId = employee.id;
 						return (
 							<TableRow key={employeeId} className='cursor-pointer' onClick={() => openViewEmployee(employeeId)}>
-								<td className='w-[175px] p-4'>{employee.firstName}</td>
-								<td className='w-[175px] p-4'>{employee.lastName}</td>
-								<td className='w-[175px] p-4'>{employee.department}</td>
-								<td className='w-[175px] p-4'>{employee.salary.toFixed(2)}</td>
-								<td className='w-[175px] p-4'>{getEmployeeTechStack(employee)}</td>
-								<td className='flex w-[175px] items-center p-4'>
-									<div
-										className='flex items-center gap-2 px-2 hover:cursor-pointer'
-										onClick={event => {
-											event.stopPropagation();
-											openEditEmployee(employeeId);
-										}}
-									>
-										<img className='h-[14px] w-[14px]' src={editIcon} alt='Edit Icon' />
-										<span>Edit</span>
-									</div>
-									<div className='h-3 border border-ashen-grey' />
-									<div className='flex items-center gap-2 px-2 hover:cursor-pointer'>
-										<img className='h-[14px] w-[14px]' src={deleteIcon} alt='Delete Icon' />
-										<span>Delete</span>
+								<td className='p-4'>{employee.firstName}</td>
+								<td className='p-4'>{employee.lastName}</td>
+								<td className='p-4'>{employee.department}</td>
+								<td className='p-4'>{employee.salary.toFixed(2)}</td>
+								<td className='p-4'>{getEmployeeTechStack(employee)}</td>
+								<td className='p-4'>
+									<div className='flex items-center '>
+										<div
+											className='flex items-center gap-2 px-2 hover:cursor-pointer'
+											onClick={event => {
+												event.stopPropagation();
+												openEditEmployee(employeeId);
+											}}
+										>
+											<img className='h-[14px] w-[14px]' src={editIcon} alt='Edit Icon' />
+											<span>Edit</span>
+										</div>
+										<div className='h-3 border border-ashen-grey' />
+										<div className='flex items-center gap-2 px-2 hover:cursor-pointer'>
+											<img className='h-[14px] w-[14px]' src={deleteIcon} alt='Delete Icon' />
+											<span>Delete</span>
+										</div>
 									</div>
 								</td>
 							</TableRow>

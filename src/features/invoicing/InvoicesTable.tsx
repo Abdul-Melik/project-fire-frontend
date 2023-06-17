@@ -53,11 +53,11 @@ const InvoicesTable = ({ invoices, value, orderByField, orderDirection, handleSe
 						const invoiceId = invoice.id;
 						return (
 							<TableRow key={invoiceId}>
-								<td className='w-[150px] p-4'>{invoice.client}</td>
-								<td className='w-[100px] p-4'>{invoice.industry}</td>
-								<td className='w-[150px] p-4'>{invoice.totalHoursBilled}</td>
-								<td className='w-[160px] p-4'>{invoice.amountBilledBAM}</td>
-								<td className='w-[100px] p-4'>
+								<td className='p-4'>{invoice.client}</td>
+								<td className='p-4'>{invoice.industry}</td>
+								<td className='p-4'>{invoice.totalHoursBilled}</td>
+								<td className='p-4'>{invoice.amountBilledBAM}</td>
+								<td className='p-4'>
 									<div className='flex items-center gap-2'>
 										<div className={`h-[6px] w-[6px] rounded-full ${getInvoiceColorAndStatus(invoice).color}`} />
 										<div className='font-gilroy-semi-bold font-semibold'>
@@ -65,7 +65,7 @@ const InvoicesTable = ({ invoices, value, orderByField, orderDirection, handleSe
 										</div>
 									</div>
 								</td>
-								<td className='w-[180px] p-4'>
+								<td className='p-3'>
 									<div className='flex items-center gap-2'>
 										<button className='flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-ashen-grey'>
 											<img src={download} alt='Download Icon' />

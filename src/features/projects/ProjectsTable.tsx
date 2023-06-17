@@ -130,21 +130,27 @@ const ProjectsTable = ({
 						}
 						return (
 							<TableRow key={projectId}>
-								<td className='w-[150px] p-4'>{project.name}</td>
-								<td className='line-clamp-1 w-[150px] text-ellipsis p-4'>{project.description}</td>
-								<td className='w-[150px] p-4'>
+								<td className='p-4'>{project.name}</td>
+								<td className='p-4'>
+									<div className='max-w-[100px] truncate'>{project.description}</div>
+								</td>
+								<td className='p-4'>
 									{getProjectDate(project).startDateString}
 									{' - '}
 									{getProjectDate(project).endDateString}
 								</td>
-								<td className='w-[150px] p-4'>
+								<td className='py-1 pl-4 pr-2'>
 									<Avatars names={names} images={images} />
 								</td>
-								<td className='w-[150px] p-4'>${project.hourlyRate}</td>
-								<td className='w-[150px] p-4'>${getProjectValueBAM(project)} KM</td>
-								<td className='flex h-[60px] w-[150px] items-center gap-2 p-4'>
-									<div className={`h-[6px] w-[6px] rounded-full ${getProjectColorAndStatus(project).color}`} />
-									<div className='font-gilroy-semi-bold font-semibold'>{getProjectColorAndStatus(project).status}</div>
+								<td className='p-4'>${project.hourlyRate}</td>
+								<td className='p-4'>${getProjectValueBAM(project)} KM</td>
+								<td className='p-4'>
+									<div className='flex items-center gap-2'>
+										<div className={`h-[6px] w-[6px] rounded-full ${getProjectColorAndStatus(project).color}`} />
+										<div className='font-gilroy-semi-bold font-semibold'>
+											{getProjectColorAndStatus(project).status}
+										</div>
+									</div>
 								</td>
 							</TableRow>
 						);
