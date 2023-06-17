@@ -9,6 +9,7 @@ import Navbar from 'src/components/navigation/NavBar';
 import EmployeesTable from 'features/employees/EmployeesTable';
 import ViewEmployee from 'features/employees/ViewEmployee';
 import AddNewEmployee from 'features/employees/AddNewEmployee';
+import EditEmployee from 'features/employees/EditEmployee';
 
 type Department = 'Administration' | 'Management' | 'Development' | 'Design';
 
@@ -39,6 +40,7 @@ const Employees = () => {
 	const [activePage, setActivePage] = useState(1);
 	const [isViewEmployeeOpen, setIsViewEmployeeOpen] = useState(false);
 	const [isAddNewEmployeeOpen, setIsAddNewEmployeeOpen] = useState(false);
+	const [isEditEmployeeOpen, setIsEditEmployeeOpen] = useState(false);
 	const [employeeId, setEmployeeId] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
 	const [isEmployed, setIsEmployed] = useState('');
@@ -66,15 +68,21 @@ const Employees = () => {
 		else if (activePage === 3) setIsEmployed('false');
 	}, [activePage, setIsEmployed]);
 
+	const employee = isSuccess && data.find((employee: Employee) => employee.id === employeeId);
+
 	return (
 		<MainLayout activeMenuItem={'employees'}>
 			{isViewEmployeeOpen && (
 				<ViewEmployee
-					employee={data.find((employee: Employee) => employee.id === employeeId)}
-					onClick={() => setIsViewEmployeeOpen(false)}
+					employee={employee}
+					closeViewEmployee={() => setIsViewEmployeeOpen(false)}
+					openEditEmployee={() => setIsEditEmployeeOpen(true)}
 				/>
 			)}
-			{isAddNewEmployeeOpen && <AddNewEmployee onClick={() => setIsAddNewEmployeeOpen(false)} />}
+			{isAddNewEmployeeOpen && <AddNewEmployee closeAddNewEmployee={() => setIsAddNewEmployeeOpen(false)} />}
+			{isEditEmployeeOpen && (
+				<EditEmployee employee={employee} closeEditEmployee={() => setIsEditEmployeeOpen(false)} />
+			)}
 			<div className='mx-14 mb-[17px] mt-[34px]'>
 				<div className='mb-[30px] flex items-center justify-between'>
 					<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Employees</h1>
@@ -113,8 +121,12 @@ const Employees = () => {
 									setOrderByField(label);
 									setOrderDirection(orderDirection);
 								}}
-								onClick={(employeeId: string) => {
+								openViewEmployee={(employeeId: string) => {
 									setIsViewEmployeeOpen(true);
+									setEmployeeId(employeeId);
+								}}
+								openEditEmployee={(employeeId: string) => {
+									setIsEditEmployeeOpen(true);
 									setEmployeeId(employeeId);
 								}}
 							/>

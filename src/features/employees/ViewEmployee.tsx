@@ -33,7 +33,8 @@ type Employee = {
 
 type Props = {
 	employee: Employee;
-	onClick: () => void;
+	closeViewEmployee: () => void;
+	openEditEmployee: () => void;
 };
 
 const getEmployeeTechStack = (employee: Employee) => {
@@ -45,7 +46,7 @@ const getEmployeeTechStack = (employee: Employee) => {
 	else if (techStack === 'UXUI') return 'UX/UI';
 };
 
-const ViewEmployee = ({ employee, onClick }: Props) => {
+const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) => {
 	const user = useAppSelector(selectCurrentUser);
 	const { isLoading, isFetching, isSuccess, data, refetch } = useGetEmployeeByIdQuery(employee?.id ?? skipToken);
 
@@ -56,11 +57,11 @@ const ViewEmployee = ({ employee, onClick }: Props) => {
 	const children = (
 		<div className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pb-6 pt-[27px]'>
 			{(isLoading || isFetching) && <LoadingSpinner />}
-			<div className='flex cursor-pointer items-center gap-[3px]' onClick={onClick}>
+			<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeViewEmployee}>
 				<img className='h-4 w-4' src={chevronLeft} alt='Back' />
 				<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
 			</div>
-			{isSuccess && data && (
+			{isSuccess && (
 				<>
 					<header className='mt-[13px]'>
 						<div className='flex gap-4 rounded-lg bg-white p-6'>
@@ -123,7 +124,13 @@ const ViewEmployee = ({ employee, onClick }: Props) => {
 							<button className='rounded-md border border-crimson-blaze px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-crimson-blaze'>
 								Delete Employee
 							</button>
-							<button className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white'>
+							<button
+								className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white'
+								onClick={() => {
+									closeViewEmployee();
+									openEditEmployee();
+								}}
+							>
 								Edit Employee
 							</button>
 						</footer>
@@ -133,7 +140,7 @@ const ViewEmployee = ({ employee, onClick }: Props) => {
 		</div>
 	);
 
-	return <SideDrawer onClick={onClick}>{children}</SideDrawer>;
+	return <SideDrawer onClick={closeViewEmployee}>{children}</SideDrawer>;
 };
 
 export default ViewEmployee;

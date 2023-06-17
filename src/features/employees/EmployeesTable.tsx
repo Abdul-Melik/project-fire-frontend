@@ -33,7 +33,8 @@ type Props = {
 	orderDirection: string;
 	handleSearch: (input: string) => void;
 	handleSort: (label: string, orderDirection: string) => void;
-	onClick: (employeeId: string) => void;
+	openViewEmployee: (employeeId: string) => void;
+	openEditEmployee: (employeeId: string) => void;
 };
 
 const getEmployeeTechStack = (employee: Employee) => {
@@ -61,7 +62,8 @@ const EmployeesTable = ({
 	orderDirection,
 	handleSearch,
 	handleSort,
-	onClick,
+	openViewEmployee,
+	openEditEmployee,
 }: Props) => {
 	return (
 		<div className='h-[400px] w-full overflow-y-scroll rounded-md border border-ashen-grey bg-white'>
@@ -77,14 +79,20 @@ const EmployeesTable = ({
 					{employees.map(employee => {
 						const employeeId = employee.id;
 						return (
-							<TableRow key={employeeId} className='cursor-pointer' onClick={() => onClick(employeeId)}>
+							<TableRow key={employeeId} className='cursor-pointer' onClick={() => openViewEmployee(employeeId)}>
 								<td className='w-[175px] p-4'>{employee.firstName}</td>
 								<td className='w-[175px] p-4'>{employee.lastName}</td>
 								<td className='w-[175px] p-4'>{employee.department}</td>
 								<td className='w-[175px] p-4'>{employee.salary.toFixed(2)}</td>
 								<td className='w-[175px] p-4'>{getEmployeeTechStack(employee)}</td>
 								<td className='flex w-[175px] items-center p-4'>
-									<div className='flex items-center gap-2 px-2 hover:cursor-pointer'>
+									<div
+										className='flex items-center gap-2 px-2 hover:cursor-pointer'
+										onClick={event => {
+											event.stopPropagation();
+											openEditEmployee(employeeId);
+										}}
+									>
 										<img className='h-[14px] w-[14px]' src={editIcon} alt='Edit Icon' />
 										<span>Edit</span>
 									</div>
