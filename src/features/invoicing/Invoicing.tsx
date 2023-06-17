@@ -47,7 +47,7 @@ const Invoicing = () => {
 	const [invoiceStatus, setInvoiceStatus] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
 	const [orderByField, setOrderByField] = useState('client');
-	const [orderDirection, setOrderDirection] = useState('desc');
+	const [orderDirection, setOrderDirection] = useState('asc');
 
 	const user = useAppSelector(selectCurrentUser);
 
@@ -79,7 +79,7 @@ const Invoicing = () => {
 								setActivePage(pageNumber);
 								setSearchTerm('');
 								setOrderByField('client');
-								setOrderDirection('desc');
+								setOrderDirection('asc');
 							}}
 						/>
 					</div>

@@ -19,8 +19,8 @@ const Projects = () => {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
 	const [projectsPerPage, setProjectsPerPage] = useState(10);
-	const [orderByField, setOrderByField] = useState('startDate');
-	const [orderDirection, setOrderDirection] = useState('desc');
+	const [orderByField, setOrderByField] = useState('name');
+	const [orderDirection, setOrderDirection] = useState('asc');
 
 	const user = useAppSelector(selectCurrentUser);
 	const { isLoading, isFetching, isSuccess, data } = useGetProjectsQuery(
@@ -70,8 +70,8 @@ const Projects = () => {
 								setProjectsPerPage(10);
 								setCurrentPage(1);
 								setSearchTerm('');
-								setOrderByField('startDate');
-								setOrderDirection('desc');
+								setOrderByField('name');
+								setOrderDirection('asc');
 							}}
 						/>
 					</div>

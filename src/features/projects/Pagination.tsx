@@ -30,7 +30,11 @@ const Pagination = ({
 					<ProjectsPerPageSelector projectsPerPage={projectsPerPage} handleProjectsPerPage={handleProjectsPerPage} />
 				</div>
 				<span className='font-opensans-semi-bold text-sm font-semibold leading-[30px] tracking-[0.15px] text-whispering-gray'>
-					{totalNumberOfProjects === 0 ? 0 : (currentPage - 1) * projectsPerPage + 1}
+					{totalNumberOfProjects === 0
+						? 0
+						: currentPage > totalNumberOfProjects
+						? totalNumberOfProjects
+						: (currentPage - 1) * projectsPerPage + 1}
 					{' - '}
 					{currentPage * projectsPerPage < totalNumberOfProjects
 						? currentPage * projectsPerPage
@@ -45,25 +49,28 @@ const Pagination = ({
 						{pageNumbers.length > 2 && (
 							<PageNumberButton key='first' pageNumber='First' onClick={() => handlePageChange(1)} />
 						)}
-						<PageNumberButton key='prev' pageNumber='Prev' onClick={() => handlePageChange(currentPage - 1)} />
+						{currentPage <= totalNumberOfProjects && (
+							<PageNumberButton key='prev' pageNumber='Prev' onClick={() => handlePageChange(currentPage - 1)} />
+						)}
 					</>
 				)}
 				{pageNumbers
 					.filter(pageNumber => {
-						const firstPage = currentPage - 1;
-						const lastPage = currentPage + 1;
-						return pageNumber >= firstPage && pageNumber <= lastPage;
+						if (currentPage <= totalNumberOfProjects) {
+							const firstPage = currentPage - 1;
+							const lastPage = currentPage + 1;
+							return pageNumber >= firstPage && pageNumber <= lastPage;
+						}
+						return true;
 					})
-					.map(pageNumber => {
-						return (
-							<PageNumberButton
-								key={pageNumber}
-								pageNumber={pageNumber}
-								isActive={currentPage === pageNumber}
-								onClick={() => handlePageChange(pageNumber)}
-							/>
-						);
-					})}
+					.map(pageNumber => (
+						<PageNumberButton
+							key={pageNumber}
+							pageNumber={pageNumber}
+							isActive={currentPage === pageNumber}
+							onClick={() => handlePageChange(pageNumber)}
+						/>
+					))}
 				{currentPage < lastPage && (
 					<>
 						<PageNumberButton key='next' pageNumber='Next' onClick={() => handlePageChange(currentPage + 1)} />

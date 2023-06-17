@@ -45,7 +45,7 @@ const Employees = () => {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [isEmployed, setIsEmployed] = useState('');
 	const [orderByField, setOrderByField] = useState('firstName');
-	const [orderDirection, setOrderDirection] = useState('desc');
+	const [orderDirection, setOrderDirection] = useState('asc');
 
 	const user = useAppSelector(selectCurrentUser);
 	const { isLoading, isFetching, isSuccess, data } = useGetEmployeesQuery(
