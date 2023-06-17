@@ -1,7 +1,7 @@
-import { useContext, useState } from "react";
-import { toast } from "react-toastify";
-import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
-import axios from "axios";
+import { useContext, useState } from 'react';
+import { toast } from 'react-toastify';
+import { DateValueType } from 'react-tailwindcss-datepicker/dist/types';
+import axios from 'axios';
 
 import AuthContext from "src/shared/context/auth-context";
 import InputField from "src/shared/components/form-elements/InputField";
@@ -19,52 +19,52 @@ import PageHeader from "../po-createnewproject/PageHeader";
 import BackButton from "../po-createnewproject/BackButton";
 import ModalContent from "../po-createnewproject/ModalContent";
 
-type ProjectType = "Fixed" | "OnGoing";
+type ProjectType = 'Fixed' | 'OnGoing';
 
-type SalesChannel = "Online" | "InPerson" | "Referral" | "Other";
+type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
 
 type Employee = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  image: string;
-  department: string;
-  salary: number;
-  techStack: string[];
+	id: string;
+	firstName: string;
+	lastName: string;
+	image: string;
+	department: string;
+	salary: number;
+	techStack: string[];
 };
 
 type EmployeesPerProject = {
-  partTime: boolean;
-  employee: Employee;
+	partTime: boolean;
+	employee: Employee;
 };
 
 type UpdateModalProps = {
-  project: {
-    id: string;
-    name: string;
-    description: string;
-    startDate: string;
-    endDate: string;
-    actualEndDate: string;
-    projectType: "Fixed" | "OnGoing";
-    hourlyRate: number;
-    projectValueBAM: number;
-    salesChannel: "Online" | "InPerson" | "Referral" | "Other";
-    projectStatus: "Active" | "OnHold" | "Inactive" | "Completed";
-    employees: {
-      partTime: boolean;
-      employee: {
-        id: string;
-        firstName: string;
-        lastName: string;
-        image: string;
-        department: string;
-        salary: number;
-        techStack: string[];
-      };
-    }[];
-  };
-  onClose: () => void;
+	project: {
+		id: string;
+		name: string;
+		description: string;
+		startDate: string;
+		endDate: string;
+		actualEndDate: string;
+		projectType: 'Fixed' | 'OnGoing';
+		hourlyRate: number;
+		projectValueBAM: number;
+		salesChannel: 'Online' | 'InPerson' | 'Referral' | 'Other';
+		projectStatus: 'Active' | 'OnHold' | 'Inactive' | 'Completed';
+		employees: {
+			partTime: boolean;
+			employee: {
+				id: string;
+				firstName: string;
+				lastName: string;
+				image: string;
+				department: string;
+				salary: number;
+				techStack: string[];
+			};
+		}[];
+	};
+	onClose: () => void;
 };
 
 const UpdateModal: React.FC<UpdateModalProps> = ({ project, onClose }) => {
@@ -109,7 +109,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ project, onClose }) => {
   );
   const [employees, setEmployees] = useState<Employee[]>([]);
 
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+	const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const handleFormSubmit = async () => {
     try {

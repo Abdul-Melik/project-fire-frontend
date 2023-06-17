@@ -13,14 +13,14 @@ const PlanCardItem = ({ text, amount, footer = false, className }: Props) => {
 					footer
 						? 'font-gilroy-semi-bold font-semibold text-deep-teal'
 						: 'font-gilroy-regular font-normal text-deep-forest'
-				} text-lg leading-10 md:text-xl`}
+				} text-md leading-10 md:text-xl`}
 			>
 				{text}
 			</div>
 			<div
 				className={`${
 					footer ? 'font-gilroy-bold font-bold text-deep-teal' : 'font-gilroy-regular font-normal text-deep-forest'
-				} text-lg leading-6 md:text-xl`}
+				} text-md leading-6 md:text-xl`}
 			>
 				{amount}
 			</div>
