@@ -9,6 +9,7 @@ import Navbar from "src/shared/components/navbar/Navbar";
 import MainLayout from "src/shared/components/layout/MainLayout";
 import ProjectsTable from "src/components/projects/table/ProjectsTable";
 import Pagination from "src/components/projects/pagination/Pagination";
+import NewProject from "./NewProject";
 
 const navLabels = ["All Projects", "Active", "On hold", "Inactive", "Completed"];
 
@@ -62,6 +63,7 @@ const Projects = () => {
   const [projectsPerPage, setProjectsPerPage] = useState(10);
   const [orderByField, setOrderByField] = useState("startDate");
   const [orderDirection, setOrderDirection] = useState("desc");
+  const [openModal, setOpenModal] = useState(false);
 
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -99,6 +101,10 @@ const Projects = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const openModalHandler = () => {
+    setOpenModal(true);
+  };
+
   return (
     <>
       <MainLayout activeMenuItem={"projects"}>
@@ -110,7 +116,7 @@ const Projects = () => {
                 user?.role === "Admin" ? "bg-deep-teal hover:saturate-[400%]" : "cursor-not-allowed bg-whispering-gray"
               }`}
               disabled={user?.role !== "Admin"}
-              onClick={() => navigate("/projects/create")}
+              onClick={openModalHandler}
             >
               Create new project
             </button>
@@ -163,6 +169,13 @@ const Projects = () => {
           />
         </div>
       </MainLayout>
+      {openModal && (
+        <NewProject
+          onClose={() => setOpenModal(false)}
+          handleConfirmation={(employees: EmployeesPerProject[]) => {}}
+          children={undefined}
+        />
+      )}
     </>
   );
 };

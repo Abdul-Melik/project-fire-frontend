@@ -4,22 +4,20 @@ import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 type Props = {
   className?: string;
   label: string;
-  asSingle?: boolean;
-  seperator?: string;
   value: DateValueType | null;
   placeholder: string;
   handleChange: (value: DateValueType | null) => void;
 };
 
-const DateInput = ({ className, label, asSingle, seperator, value, placeholder, handleChange }: Props) => {
+const EndDateInput = ({ className, label, value, placeholder, handleChange }: Props) => {
   return (
-    <div className={`flex flex-col gap-[10px] ${className}`}>
-      <div className='font-gilroy-medium font-medium text-midnight-grey'>{label}</div>
+    <div className={`flex w-full flex-col items-start gap-[5px] ${className}`}>
+      <div className='font-gilroy-medium text-base font-medium leading-5 text-[#292929]'>{label}</div>
       <Datepicker
-        inputClassName='w-full border border-misty-lavender rounded-md p-3 outline-none text-dark-indigo focus:shadow-md'
+        inputClassName='w-full content-center rounded-md border border-[#CACCD2] px-3 py-2 font-gilroy-regular text-sm font-normal leading-5 text-[#6C6D75]'
         primaryColor='emerald'
-        asSingle={asSingle}
-        separator={seperator}
+        asSingle={true}
+        separator=''
         startWeekOn='mon'
         displayFormat={"DD/MM/YYYY"}
         placeholder={placeholder}
@@ -31,4 +29,4 @@ const DateInput = ({ className, label, asSingle, seperator, value, placeholder, 
   );
 };
 
-export default DateInput;
+export default EndDateInput;

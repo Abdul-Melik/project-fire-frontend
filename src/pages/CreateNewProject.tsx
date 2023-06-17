@@ -4,7 +4,6 @@ import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-import { arrow } from "src/assets/media";
 import AuthContext from "src/shared/context/auth-context";
 import MainLayout from "src/shared/components/layout/MainLayout";
 import InputField from "src/shared/components/form-elements/InputField";
@@ -218,8 +217,7 @@ const CreateNewProject = () => {
                       htmlFor='hourly-rate'
                       required
                       id='hourly-rate'
-                      step={0.01}
-                      min={0}
+                      placeholder=''
                       value={hourlyRate}
                       handleInput={(e) => setHourlyRate(Number(e.target.value))}
                     />
@@ -229,8 +227,7 @@ const CreateNewProject = () => {
                       htmlFor='project-value'
                       required
                       id='project-value'
-                      step={0.01}
-                      min={0}
+                      placeholder=''
                       value={projectValue}
                       handleInput={(e) => setProjectValue(Number(e.target.value))}
                     />
@@ -262,25 +259,6 @@ const CreateNewProject = () => {
                 onClick={() => setOpenModal(true)}
               >
                 Add employees{" "}
-                {employeesOnProject.length > 0 && (
-                  <img
-                    src={arrow}
-                    className='absolute right-0 mr-3'
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      setShowEmployeeList(!showEmployeeList);
-                    }}
-                  />
-                )}
-                {showEmployeeList && employeesOnProject.length > 0 && (
-                  <div className='absolute left-0 right-0 top-full mt-2  max-h-40 overflow-y-auto rounded-md bg-gray-100 text-center shadow-md'>
-                    {employeesOnProject.map((employeeObj) => (
-                      <div key={employeeObj.employee.id} className='cursor-default p-2 hover:bg-gray-100'>
-                        {employeeObj.employee.firstName} {employeeObj.employee.lastName}
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
 
               <button

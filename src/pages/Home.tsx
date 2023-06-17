@@ -78,7 +78,7 @@ const Home = () => {
             <div className='mb-12 flex flex-wrap justify-center gap-4 lg:justify-between'>
               <Navbar navLabels={navLabels} handlePageSelect={(page) => setActivePage(page)} />
               <YearSelector
-                label='Year'
+                label='Year:'
                 options={["2023", "2022", "2021", "2020"]}
                 defaultValue='2023'
                 handleYearSelect={(year) => setSelectedYear(year)}

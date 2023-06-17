@@ -1,154 +1,166 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookOpenReader, faTimes } from "@fortawesome/free-solid-svg-icons";
 
-type UpdateModalProps = {
-  project: {
-    id: string;
-    name: string;
-    description: string;
-    startDate: string;
-    endDate: string;
-    actualEndDate: string;
-    projectType: "Fixed" | "OnGoing";
-    hourlyRate: number;
-    projectValueBAM: number;
-    salesChannel: "Online" | "InPerson" | "Referral" | "Other";
-    projectStatus: "Active" | "OnHold" | "Inactive" | "Completed";
-    employees: {
-      partTime: boolean;
-      employee: {
-        id: string;
-        firstName: string;
-        lastName: string;
-        image: string;
-        department: string;
-        salary: number;
-        techStack: string[];
-      };
-    }[];
-  };
-  onClose: () => void;
+import InfoSelector from "../../utils/InfoSelector";
+import StatusSelector from "../../utils/StatusSelector";
+import DeleteModal from "./DeleteModal";
+import UpdateModal from "./UpdateModal";
+import BackdropFilter from "../po-createnewproject/BackdropFilter";
+import BackButton from "../po-createnewproject/BackButton";
+import PageHeader from "../po-createnewproject/PageHeader";
+import ProjectForm from "../po-createnewproject/ProjectForm";
+import FormButtons from "../po-createnewproject/FormButtons";
+import ButtonType from "../po-createnewproject/ButtonType";
+import ModalContent from "../po-createnewproject/ModalContent";
+
+type Project = {
+  id: string;
+  name: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  actualEndDate: string;
+  projectType: ProjectType;
+  hourlyRate: number;
+  projectValueBAM: number;
+  salesChannel: SalesChannel;
+  projectStatus: ProjectStatus;
+  employees: EmployeesPerProject[];
 };
 
-const UpdateModal: React.FC<UpdateModalProps> = ({ project, onClose }) => {
+type ProjectType = "Fixed" | "OnGoing";
+type SalesChannel = "Online" | "InPerson" | "Referral" | "Other";
+type ProjectStatus = "Active" | "OnHold" | "Inactive" | "Completed";
+
+type Employee = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  image: string;
+  department: string;
+  salary: number;
+  techStack: string[];
+};
+
+type EmployeesPerProject = {
+  partTime: boolean;
+  employee: Employee;
+};
+
+type InfoModalProps = {
+  onClose: () => void;
+  project: Project;
+  handleDeleteProject: (projectId: string) => void;
+};
+
+const InfoModal: React.FC<InfoModalProps> = ({ onClose, project, handleDeleteProject }) => {
   const [expandedEmployee, setExpandedEmployee] = useState<string | null>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   const handleExpand = (employeeId: string) => {
     setExpandedEmployee(employeeId === expandedEmployee ? null : employeeId);
   };
 
+  const openDeleteModal = (projectId: string) => {
+    setSelectedProjectId(projectId);
+    setIsDeleteModalOpen(true);
+  };
+
+  const openUpdateModal = () => {
+    setSelectedProject(project);
+    setIsUpdateModalOpen(true);
+  };
+
   return (
-    <div className='absolute inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-30'>
-      <div className='absolute w-4/5 max-w-full rounded border-black bg-gray-100 p-9 shadow-lg md:w-3/4 lg:w-2/3 xl:w-1/2'>
-        <button className='absolute right-0 top-0 p-4 pr-6 hover:text-red-900'>
-          <FontAwesomeIcon className='text-xl' icon={faTimes} onClick={onClose} />
-        </button>
-        <header className='mb-4 font-gilroy-regular text-3xl'>
-          <span className='font-bold'>Project:</span> {project.name}
-        </header>
-
-        <div className='flex flex-col justify-between font-gilroy-regular md:flex-row'>
-          <div className='md:w-1/2'>
-            <p className='text-base'>
-              <span className='font-inter-regular font-bold'>Project Type:</span> {project.projectType}
-            </p>
-            <p className='text-base'>
-              <span className='font-inter-regular font-bold'>Hourly Rate:</span> ${project.hourlyRate} KM
-            </p>
-            <p className='text-base'>
-              <span className='font-inter-regular font-bold'>Project Value:</span> $
-              {project.projectValueBAM.toLocaleString("en-US", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-              KM
-            </p>
-            <p className='text-base'>
-              <span className='font-inter-regular font-bold'>Sales Channel:</span> {project.salesChannel}
-            </p>
-          </div>
-          <div className='relative md:flex md:w-1/2 md:items-start'>
-            <div className='md:ml-auto'>
-              <p className='text-base'>
-                <span className='font-inter-regular font-bold'>Start Date:</span>{" "}
-                {new Date(project.startDate).toLocaleDateString()}
-              </p>
-              <p className='text-base'>
-                <span className='font-inter-regular font-bold'>End Date:</span>{" "}
-                {new Date(project.endDate).toLocaleDateString()}
-              </p>
-              <p className='text-base'>
-                <span className='font-inter-regular font-bold'>Actual End Date:</span>{" "}
-                {new Date(project.actualEndDate).toLocaleDateString()}
-              </p>
-              <p className='text-base'>
-                <span className='font-inter-regular font-bold'>Project Status:</span> {project.projectStatus}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <p className='mt-5 font-gilroy-regular text-base'>
-          <span className=' font-inter-regular font-bold'>Description:</span> {project.description}
-        </p>
-        <h3 className='mt-4 flex justify-center font-inter-regular text-xl font-bold'>Employees on Project:</h3>
-        <ul className='flex flex-wrap justify-center'>
-          {project.employees.map((employeeObj) => (
-            <li key={employeeObj.employee.id} className='relative my-2 px-2 py-2 text-sm'>
-              <div className='flex flex-col items-center rounded-xl border bg-white px-4 py-4'>
-                <div className='mb-2 flex-shrink-0'>
-                  <img
-                    className='h-[70px] w-[70px] rounded-full object-cover'
-                    src={employeeObj.employee.image}
-                    alt={`${employeeObj.employee.firstName} ${employeeObj.employee.lastName}`}
-                  />
-                </div>
-                <div className='px-3'>
-                  <div className='flex items-center font-inter-regular'>
-                    <p className=' text-base font-bold'>{employeeObj.employee.firstName}</p>
-                    <p className='ml-2  text-base font-bold'>{employeeObj.employee.lastName}</p>
-                  </div>
-                  <p className='text-center'>
-                    <span className='items-center font-gilroy-regular font-bold'>Department:</span>{" "}
-                    {employeeObj.employee.department}
-                  </p>
-
-                  {expandedEmployee === employeeObj.employee.id && (
-                    <div className='details absolute left-1/2 top-52 z-20 flex w-72 -translate-x-1/2 -translate-y-2 transform flex-col items-center justify-center rounded border-gray-900 bg-seafoam-green px-4 py-2 shadow-lg'>
-                      <p className='text-base'>
-                        <span className='flex-nowrap font-bold'>Salary:</span> {employeeObj.employee.salary} KM
-                      </p>
-                      <p className='text-base'>
-                        <span className='flex-nowrap font-bold'>Part-Time:</span> {employeeObj.partTime ? "Yes" : "No"}
-                      </p>
-                      <p className='text-base'>
-                        <span className='flex-nowrap font-bold'>Tech Stack:</span>{" "}
-                        {employeeObj.employee.techStack.join(", ")}
-                      </p>
-                    </div>
-                  )}
-
-                  <button
-                    className='mt-2 flex w-full items-center justify-center rounded bg-pale-jade px-4 py-2 font-gilroy-semi-bold text-deep-teal'
-                    onMouseEnter={() => handleExpand(employeeObj.employee.id)}
-                    onMouseLeave={() => handleExpand(employeeObj.employee.id)}
-                  >
-                    <FontAwesomeIcon icon={faBookOpenReader} className='mr-2' />
-                    View
-                  </button>
-                </div>
+    <>
+      <BackdropFilter bgColor='bg-[#142E2B]' backdropBlur='backdrop-blur-[6px]'>
+        <ModalContent>
+          <BackButton onClick={onClose} text='Back' />
+          <div className='w-full'>
+            <PageHeader title='Add New Project' />
+            <ProjectForm>
+              <div>
+                <InfoSelector label='Name' p={[project.name]} />
+                <hr className='my-3 w-full border-[#DFE3E1]' />
+                <InfoSelector label='Description' p={[project.description]} />
+                <hr className='my-3 w-full border-[#DFE3E1]' />
+                <InfoSelector
+                  label='Duration'
+                  p={[
+                    `${new Date(project.startDate).toLocaleString("en-US", {
+                      month: "long",
+                      year: "numeric",
+                    })} - ${new Date(project.endDate).toLocaleString("en-US", { month: "long", year: "numeric" })}`,
+                  ]}
+                />
+                <hr className='my-3 w-full border-[#DFE3E1]' />
+                <InfoSelector
+                  label='Team members'
+                  p={[
+                    project.employees
+                      .map((employeeObj) => `${employeeObj.employee.firstName} ${employeeObj.employee.lastName}`)
+                      .join(", "),
+                  ]}
+                />
+                <hr className='my-3 w-full border-[#DFE3E1]' />
+                <InfoSelector label='Hourly Rate (USD)' p={[project.hourlyRate.toFixed(2)]} />
+                <hr className='my-3 w-full border-[#DFE3E1]' />
+                <InfoSelector
+                  label='Project Value (BAM)'
+                  p={[
+                    project.projectValueBAM.toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }),
+                  ]}
+                />
+                <hr className='my-3 w-full border-[#DFE3E1]' />
+                <StatusSelector label='Status' p={[project.projectStatus]} />
               </div>
-            </li>
-          ))}
-        </ul>
-
-        <button className='mt-6 rounded bg-slate-mist px-12 py-2 text-white hover:bg-opacity-80' onClick={onClose}>
-          Close
-        </button>
-      </div>
-    </div>
+            </ProjectForm>
+          </div>
+          <div className='absolute bottom-0 w-full'>
+            <FormButtons>
+              <ButtonType
+                bgColor='bg-white'
+                textColor='text-[#FF4D4F]'
+                borderColor='border-[#FF4D4F]'
+                label='Delete Project'
+                onClick={() => openDeleteModal(project.id)}
+                type='button'
+              />
+              <ButtonType
+                bgColor='bg-deep-teal'
+                textColor='text-white'
+                borderColor='border-deep-teal'
+                label='Edit Project'
+                type='submit'
+                onClick={() => openUpdateModal()}
+              />
+            </FormButtons>
+          </div>
+        </ModalContent>
+        {isDeleteModalOpen && (
+          <DeleteModal
+            color='bg-[#FF4D4F]'
+            confirmButtonText='Delete'
+            alertDescription={`This will permanently delete ${selectedProject?.name} and all associated data. You cannot undo this action.`}
+            alertTitle={`Are you sure you want to delete ${selectedProject?.name}?`}
+            isOpen={isDeleteModalOpen}
+            cancelButtonText="Don't delete"
+            onClose={() => setIsDeleteModalOpen(false)}
+            onDelete={() => handleDeleteProject(selectedProjectId || "")}
+            projectId={selectedProjectId || ""}
+          />
+        )}
+        {isUpdateModalOpen && selectedProject && (
+          <UpdateModal project={selectedProject} onClose={() => setIsUpdateModalOpen(false)} />
+        )}
+      </BackdropFilter>
+    </>
   );
 };
 
-export default UpdateModal;
+export default InfoModal;
