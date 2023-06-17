@@ -16,7 +16,7 @@ const PageNotFound = () => {
 	return (
 		<div className='flex h-screen w-full flex-col items-center justify-start gap-10 p-16'>
 			<div className='flex w-1/4 flex-col items-center'>
-				<img src={error} alt='404 Error' />
+				<img src={error} alt='404 error' />
 			</div>
 			<div className='text-center font-gilroy-semi-bold text-lg font-semibold md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl'>
 				This page cannot be found.

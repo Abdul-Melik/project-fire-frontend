@@ -68,16 +68,16 @@ const InvoicesTable = ({ invoices, value, orderByField, orderDirection, handleSe
 								<td className='p-3'>
 									<div className='flex items-center gap-2'>
 										<button className='flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-ashen-grey'>
-											<img src={download} alt='Download Icon' />
+											<img src={download} alt='Download icon' />
 										</button>
 										<button className='flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-ashen-grey'>
-											<img src={dollar} alt='Dollar Icon' />
+											<img src={dollar} alt='Dollar icon' />
 										</button>
 										<button className='flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-ashen-grey'>
-											<img src={email} alt='Email Icon' />
+											<img src={email} alt='Email icon' />
 										</button>
 										<button className='flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-ashen-grey'>
-											<img src={trash} alt='Trash Icon' />
+											<img src={trash} alt='Trash icon' />
 										</button>
 									</div>
 								</td>

@@ -105,7 +105,7 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 			className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pt-[27px]'
 		>
 			<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeEditEmployee}>
-				<img className='h-4 w-4' src={chevronLeft} alt='Back' />
+				<img className='h-4 w-4' src={chevronLeft} alt='Back icon' />
 				<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
 			</div>
 			{employee && (
@@ -162,11 +162,11 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 								>
 									{!image ? (
 										<>
-											<img className='h-[14px] w-[14px]' src={plus} alt='Upload Icon' />
+											<img className='h-[14px] w-[14px]' src={plus} alt='Upload icon' />
 											<span className='font-gilroy-regular text-sm font-normal leading-6 text-evergreen'>Upload</span>
 										</>
 									) : (
-										<img className='h-full w-full object-cover' src={URL.createObjectURL(image)} alt='Profile Image' />
+										<img className='h-full w-full object-cover' src={URL.createObjectURL(image)} alt='Profile image' />
 									)}
 									<input
 										className='hidden'
@@ -198,7 +198,7 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 										<img
 											className={`transition ${isDepartmentMenuOpen ? 'rotate-180' : ''}`}
 											src={chevronDown}
-											alt='Down Icon'
+											alt='Down icon'
 										/>
 									</div>
 									{isDepartmentMenuOpen && (
@@ -301,7 +301,7 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 										<img
 											className={`transition ${isCurrencyMenuOpen ? 'rotate-180' : ''}`}
 											src={chevronDown}
-											alt='Down Icon'
+											alt='Down icon'
 										/>
 									</div>
 								</div>
@@ -321,7 +321,7 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 										<img
 											className={`transition ${isTechStackMenuOpen ? 'rotate-180' : ''}`}
 											src={chevronDown}
-											alt='Down Icon'
+											alt='Down icon'
 										/>
 									</div>
 									{isTechStackMenuOpen && (

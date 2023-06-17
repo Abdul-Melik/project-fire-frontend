@@ -48,7 +48,7 @@ const RegisterForm = () => {
 		<div className='flex h-full flex-col items-center justify-center'>
 			{windowWidth < 1024 && (
 				<div className='fixed inset-0 z-[-1]'>
-					<img src={gradientBackground} alt='Background' className='h-full w-full object-cover' />
+					<img src={gradientBackground} alt='Background image' className='h-full w-full object-cover' />
 				</div>
 			)}
 			<div className='w-[450px] text-center'>

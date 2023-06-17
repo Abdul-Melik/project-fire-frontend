@@ -15,28 +15,28 @@ const DevelopmentRevenueCosts = () => {
 						description='Actual revenue'
 						amount={'1,615,341.00 KM'}
 						iconSrc={revenue}
-						iconAlt='Mini icon'
+						iconAlt='Actual revenue icon'
 					/>
 					<InfoCard
 						className='overflow-hidden rounded-md border border-ashen-grey'
 						description='Planned direct costs'
 						amount={'1,890,000.00 KM'}
 						iconSrc={directCosts}
-						iconAlt='Mini icon'
+						iconAlt='Planned direct costs icon'
 					/>
 					<InfoCard
 						className='overflow-hidden rounded-md border border-ashen-grey'
 						description='Actual margin %'
 						amount={'40%'}
 						iconSrc={margin}
-						iconAlt='Mini icon'
+						iconAlt='Actual margin icon'
 					/>
 					<InfoCard
 						className='overflow-hidden rounded-md border border-ashen-grey'
 						description='Actual avg. margin'
 						amount={'102,382.00 KM'}
 						iconSrc={avgMargin}
-						iconAlt='Mini icon'
+						iconAlt='Actual average margin icon'
 					/>
 				</div>
 				<SummaryCard

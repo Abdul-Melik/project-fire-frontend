@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { search } from 'assets/media';
+import SearchBar from '../utils/SearchBar';
 
 type Props = {
 	label: string;
@@ -20,23 +20,13 @@ const TableHeader = ({ label, total, value, handleSearch }: Props) => {
 					{total} total
 				</div>
 			</div>
-			<form
-				className='relative'
-				onSubmit={event => {
-					event.preventDefault();
-					handleSearch(input);
-				}}
-			>
-				<input
-					className='h-10 w-[315px] rounded-sm border border-ashen-grey pl-[46px] font-inter-regular text-sm font-normal leading-[22px] text-charcoal-grey outline-none placeholder:font-inter-regular placeholder:text-sm placeholder:font-normal placeholder:leading-[22px] placeholder:text-charcoal-grey focus:shadow-md'
-					id='search'
-					name='search'
-					placeholder='Search'
-					value={input}
-					onChange={event => setInput(event.target.value)}
-				/>
-				<img src={search} className='absolute left-3 top-2 h-6 w-6 cursor-pointer' alt='Search icon' />
-			</form>
+			<SearchBar
+				placeholder='Search'
+				value={input}
+				onChange={event => setInput(event.target.value)}
+				onClick={() => setInput('')}
+				handleSearch={handleSearch}
+			/>
 		</div>
 	);
 };

@@ -50,7 +50,7 @@ const Performance = ({ projectsInfo }: Props) => {
 					description='Number of projects'
 					amount={`${projectsInfo?.totalProjects ?? 0}`}
 					iconSrc={projectsNumber}
-					iconAlt='Mini icon'
+					iconAlt='Number of projects icon'
 				/>
 				<InfoCard
 					className='overflow-hidden rounded-md border border-ashen-grey'
@@ -62,7 +62,7 @@ const Performance = ({ projectsInfo }: Props) => {
 						}) + ' KM'
 					}
 					iconSrc={totalValue}
-					iconAlt='Mini icon'
+					iconAlt='Total project value icon'
 				/>
 				<InfoCard
 					className='overflow-hidden rounded-md border border-ashen-grey'
@@ -74,35 +74,35 @@ const Performance = ({ projectsInfo }: Props) => {
 						}) + ' KM'
 					}
 					iconSrc={avgValue}
-					iconAlt='Mini icon'
+					iconAlt='Average project value icon'
 				/>
 				<InfoCard
 					className='overflow-hidden rounded-md border border-ashen-grey'
 					description='Avg. lead closing (d)'
 					amount={'12'}
 					iconSrc={leadClosing}
-					iconAlt='Mini icon'
+					iconAlt='Average lead closing icon'
 				/>
 				<InfoCard
 					className='overflow-hidden rounded-md border border-ashen-grey'
 					description='Avg. team size'
 					amount={(projectsInfo?.averageTeamSize ?? 0).toFixed(1).toString()}
 					iconSrc={teamSize}
-					iconAlt='Mini icon'
+					iconAlt='Average team size icon'
 				/>
 				<InfoCard
 					className='overflow-hidden rounded-md border border-ashen-grey'
 					description='Avg. velocity'
 					amount={'64'}
 					iconSrc={velocity}
-					iconAlt='Mini icon'
+					iconAlt='Average velocity icon'
 				/>
 				<InfoCard
 					className='overflow-hidden rounded-md border border-ashen-grey'
 					description='Weeks over deadline'
 					amount={'7'}
 					iconSrc={weeksOver}
-					iconAlt='Mini icon'
+					iconAlt='Weeks over deadline icon'
 				/>
 				<InfoCard
 					className='overflow-hidden rounded-md border border-ashen-grey'
@@ -112,7 +112,7 @@ const Performance = ({ projectsInfo }: Props) => {
 						maximumFractionDigits: 2,
 					})}`}
 					iconSrc={hourlyPrice}
-					iconAlt='Mini icon'
+					iconAlt='Average hourly price icon'
 				/>
 			</div>
 			<div className='flex gap-[30px]'>

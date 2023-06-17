@@ -6,6 +6,7 @@ import avgValue from 'assets/media/svg/avg-value.svg';
 import chevronDown from 'assets/media/svg/chevron-down.svg';
 import chevronLeft from 'assets/media/svg/chevron-left.svg';
 import clipboard from 'assets/media/svg/clipboard.svg';
+import close from 'assets/media/svg/close.svg';
 import coins from 'assets/media/svg/coins.svg';
 import deleteIcon from 'assets/media/svg/delete-icon.svg';
 import directCosts from 'assets/media/svg/direct-costs.svg';
@@ -16,6 +17,7 @@ import editIcon from 'assets/media/svg/edit-icon.svg';
 import email from 'assets/media/svg/email.svg';
 import employees from 'assets/media/svg/employees.svg';
 import gradientBackground from 'assets/media/svg/gradient-background.svg';
+import hamburger from 'assets/media/svg/hamburger.svg';
 import home from 'assets/media/svg/home.svg';
 import hourlyPrice from 'assets/media/svg/hourly-price.svg';
 import invoice from 'assets/media/svg/invoice.svg';
@@ -40,6 +42,7 @@ export {
 	chevronDown,
 	chevronLeft,
 	clipboard,
+	close,
 	coins,
 	deleteIcon,
 	directCosts,
@@ -51,6 +54,7 @@ export {
 	employees,
 	error,
 	gradientBackground,
+	hamburger,
 	home,
 	hourlyPrice,
 	invoice,

@@ -41,6 +41,7 @@ const Pagination = ({
 						: totalNumberOfProjects}
 					{' of '}
 					{totalNumberOfProjects}
+					{' Projects'}
 				</span>
 			</div>
 			<div className='flex gap-2'>

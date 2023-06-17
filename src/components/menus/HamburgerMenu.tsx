@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import { logo } from 'assets/media';
+import { logo, close, hamburger } from 'assets/media';
 import UserCard from 'components/cards/UserCard';
 import SidebarMenu from 'components/menus/SidebarMenu';
 import UserMenu from 'components/menus/UserMenu';
@@ -31,7 +31,11 @@ const HamburgerMenu = ({ activeMenuItem }: HamburgerMenuProps) => {
 						onClick={handleHamburgerMenuToggle}
 						animate={{ rotate: isMenuOpen ? 90 : 0 }}
 					>
-						{isMenuOpen ? '✕' : '☰'}
+						{isMenuOpen ? (
+							<img className='h-8 w-8' src={close} alt='Close icon' />
+						) : (
+							<img src={hamburger} alt='Hamburger menu icon' />
+						)}
 					</motion.button>
 				</div>
 				<div>

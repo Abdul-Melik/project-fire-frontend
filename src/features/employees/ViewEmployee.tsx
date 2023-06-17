@@ -54,7 +54,7 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 			className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pb-6 pt-[27px]'
 		>
 			<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeViewEmployee}>
-				<img className='h-4 w-4' src={chevronLeft} alt='Back' />
+				<img className='h-4 w-4' src={chevronLeft} alt='Back icon' />
 				<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
 			</div>
 			{employee && (
@@ -64,7 +64,7 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 							<img
 								className='h-20 w-20 rounded-[4.61538px] object-cover opacity-80'
 								src={employee.image ? employee.image : avatar}
-								alt='Employee Image'
+								alt='Employee image'
 							/>
 							<div className='flex flex-1 flex-col justify-center'>
 								<span className='font-gilroy-bold text-[21px] font-bold leading-6 text-midnight-grey'>

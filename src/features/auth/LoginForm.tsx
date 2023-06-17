@@ -39,12 +39,12 @@ const LoginForm = () => {
 		<div className='flex h-screen flex-col items-center justify-center'>
 			{windowWidth < 1024 && (
 				<div className='fixed inset-0 z-[-1]'>
-					<img src={gradientBackground} alt='Background' className='h-full w-full object-cover' />
+					<img src={gradientBackground} alt='Background image' className='h-full w-full object-cover' />
 				</div>
 			)}
 			{windowWidth < 1024 && (
 				<div className='h-20'>
-					<img src={logo} alt='Logo' className='mx-auto mb-3 h-[150px] w-[300px] pb-20' />
+					<img src={logo} alt='Logo image' className='mx-auto mb-3 h-[150px] w-[300px] pb-20' />
 				</div>
 			)}
 			<div className='w-[450px] text-center'>
