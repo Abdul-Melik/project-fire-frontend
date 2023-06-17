@@ -84,4 +84,95 @@ const revenuesCostsPerMonthChartData = {
 	revenueGap: ['914.00 KM', '10,000.00 KM', '-15,000.00 KM'],
 };
 
-export { hoursOverviewChartData, revenuesCostsActualChartData, revenuesCostsPerMonthChartData };
+const invoicesData = [
+	{
+		id: '1',
+		client: 'Gerlach - Mills',
+		industry: 'Tools',
+		totalHoursBilled: 1863,
+		amountBilledBAM: 126000.45,
+		status: 'Sent',
+	},
+	{
+		id: '2',
+		client: 'Cartwright - Veum',
+		industry: 'Garden',
+		totalHoursBilled: 32103,
+		amountBilledBAM: 160000.08,
+		status: 'Paid',
+	},
+	{
+		id: '3',
+		client: 'Donnelly - Heidenreich',
+		industry: 'Health',
+		totalHoursBilled: 89384,
+		amountBilledBAM: 319000.76,
+		status: 'Paid',
+	},
+	{
+		id: '4',
+		client: 'Hyatt - Trantow',
+		industry: 'Health',
+		totalHoursBilled: 87105,
+		amountBilledBAM: 823000.26,
+		status: 'Paid',
+	},
+	{
+		id: '5',
+		client: 'Lind Inc',
+		industry: 'Electronics',
+		totalHoursBilled: 39883,
+		amountBilledBAM: 273000.42,
+		status: 'Sent',
+	},
+	{
+		id: '6',
+		client: 'Hartmann LLC',
+		industry: 'Baby',
+		totalHoursBilled: 24919,
+		amountBilledBAM: 532000.6,
+		status: 'Sent',
+	},
+	{
+		id: '7',
+		client: 'Gottlieb Group',
+		industry: 'Home',
+		totalHoursBilled: 21828,
+		amountBilledBAM: 685000.33,
+		status: 'Paid',
+	},
+	{
+		id: '8',
+		client: 'Metz - Schmitt',
+		industry: 'Clothing',
+		totalHoursBilled: 76945,
+		amountBilledBAM: 890000.3,
+		status: 'NotSent',
+	},
+	{
+		id: '9',
+		client: 'Monahan and Sons',
+		industry: 'Home',
+		totalHoursBilled: 42348,
+		amountBilledBAM: 284000.82,
+		status: 'NotSent',
+	},
+	{
+		id: '10',
+		client: 'Gerlach - VonRueden',
+		industry: 'Outdoors',
+		totalHoursBilled: 413,
+		amountBilledBAM: 405000.2,
+		status: 'Sent',
+	},
+	{
+		id: '11',
+		client: 'Breitenberg Inc',
+		industry: 'Books',
+		totalHoursBilled: 28729,
+		amountBilledBAM: 762000.62,
+		status: 'NotSent',
+	},
+];
+
+export { hoursOverviewChartData, revenuesCostsActualChartData, revenuesCostsPerMonthChartData, invoicesData };

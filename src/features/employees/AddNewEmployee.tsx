@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 import { chevronDown, chevronLeft, plus } from 'assets/media';
 import { useCreateEmployeeMutation } from 'store/slices/employeesApiSlice';
@@ -53,7 +54,12 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 	}, [department]);
 
 	const children = (
-		<div className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pt-[27px]'>
+		<motion.div
+			initial={{ opacity: 0, x: '100%' }}
+			animate={{ opacity: 1, x: 0 }}
+			transition={{ duration: 0.4, ease: 'easeInOut' }}
+			className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pt-[27px]'
+		>
 			<header className='flex flex-col gap-[13px]'>
 				<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeAddNewEmployee}>
 					<img className='h-4 w-4' src={chevronLeft} alt='Back' />
@@ -370,7 +376,7 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 					Add Employee
 				</button>
 			</footer>
-		</div>
+		</motion.div>
 	);
 
 	return <SideDrawer onClick={closeAddNewEmployee}>{children}</SideDrawer>;

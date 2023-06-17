@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useGetProjectsInfoQuery } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout/MainLayout';
-import Navbar from 'src/components/navigation/NavBar';
+import Navbar from 'components/navigation/NavBar';
 import YearSelector from 'components/utils/YearSelector';
 import Performance from 'features/home/Performance';
 import DevelopmentRevenueCosts from 'features/home/DevelopmentRevenueCosts';

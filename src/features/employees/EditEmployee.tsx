@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion';
 
 import { chevronDown, chevronLeft, plus } from 'assets/media';
 import { useUpdateEmployeeMutation } from 'store/slices/employeesApiSlice';
@@ -97,7 +98,12 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 	}, [department]);
 
 	const children = (
-		<div className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pt-[27px]'>
+		<motion.div
+			initial={{ opacity: 0, x: '100%' }}
+			animate={{ opacity: 1, x: 0 }}
+			transition={{ duration: 0.4, ease: 'easeInOut' }}
+			className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pt-[27px]'
+		>
 			<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeEditEmployee}>
 				<img className='h-4 w-4' src={chevronLeft} alt='Back' />
 				<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
@@ -424,7 +430,7 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 					</footer>
 				</>
 			)}
-		</div>
+		</motion.div>
 	);
 
 	return <SideDrawer onClick={closeEditEmployee}>{children}</SideDrawer>;

@@ -12,7 +12,7 @@ type Props = {
 	handleSort: (label: string, orderDirection: string) => void;
 };
 
-const EmployeesTableHead = ({ columns, orderByField, orderDirection, handleSort }: Props) => {
+const InvoicesTableHead = ({ columns, orderByField, orderDirection, handleSort }: Props) => {
 	return (
 		<thead>
 			<tr className='h-[40px] text-left'>
@@ -21,7 +21,7 @@ const EmployeesTableHead = ({ columns, orderByField, orderDirection, handleSort 
 						key={index}
 						className={`px-4 py-2 font-gilroy-medium text-sm font-medium leading-[22px] text-slate-mist ${
 							orderByField === column.label && column.label !== 'actions' ? 'bg-pale-silver' : ''
-						} ${column.label === 'salary' ? 'w-[220px]' : 'w-[175px]'}`}
+						}`}
 						onClick={() =>
 							column.label !== 'actions' && handleSort(column.label, orderDirection === 'asc' ? 'desc' : 'asc')
 						}
@@ -42,4 +42,4 @@ const EmployeesTableHead = ({ columns, orderByField, orderDirection, handleSort 
 	);
 };
 
-export default EmployeesTableHead;
+export default InvoicesTableHead;

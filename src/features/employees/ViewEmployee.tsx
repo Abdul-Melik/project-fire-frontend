@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import { chevronLeft, avatar } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
@@ -45,7 +47,12 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 	const user = useAppSelector(selectCurrentUser);
 
 	const children = (
-		<div className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pb-6 pt-[27px]'>
+		<motion.div
+			initial={{ opacity: 0, x: '100%' }}
+			animate={{ opacity: 1, x: 0 }}
+			transition={{ duration: 0.4, ease: 'easeInOut' }}
+			className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pb-6 pt-[27px]'
+		>
 			<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeViewEmployee}>
 				<img className='h-4 w-4' src={chevronLeft} alt='Back' />
 				<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
@@ -126,7 +133,7 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 					)}
 				</>
 			)}
-		</div>
+		</motion.div>
 	);
 
 	return <SideDrawer onClick={closeViewEmployee}>{children}</SideDrawer>;

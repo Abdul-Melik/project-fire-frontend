@@ -29,7 +29,7 @@ const InputField = ({
 				{label}
 			</label>
 			<input
-				className='w-full rounded-md border border-misty-lavender p-3 text-dark-indigo outline-none focus:shadow-md'
+				className='w-full rounded-md border border-misty-lavender p-3 text-dark-indigo focus:border-misty-lavender focus:shadow-md focus:ring-transparent'
 				required={required}
 				type={type}
 				id={id}

@@ -22,6 +22,7 @@ const ProjectsTableHead = ({ columns, orderByField, orderDirection, handleSort }
 						className={`w-[150px] pl-4 font-gilroy-medium text-sm font-medium leading-[22px] text-slate-mist ${
 							orderByField === column.label ? 'bg-pale-silver' : ''
 						}`}
+						onClick={() => handleSort(column.label, orderDirection === 'asc' ? 'desc' : 'asc')}
 					>
 						{column.name}{' '}
 						<img
@@ -29,7 +30,6 @@ const ProjectsTableHead = ({ columns, orderByField, orderDirection, handleSort }
 							className={`ml-3 inline cursor-pointer ${
 								orderByField === column.label && orderDirection === 'asc' ? 'rotate-180' : ''
 							}`}
-							onClick={() => handleSort(column.label, orderDirection === 'asc' ? 'desc' : 'asc')}
 						/>
 					</th>
 				))}

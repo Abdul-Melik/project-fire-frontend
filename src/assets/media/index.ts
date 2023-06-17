@@ -7,10 +7,13 @@ import chevronDown from 'assets/media/svg/chevron-down.svg';
 import chevronLeft from 'assets/media/svg/chevron-left.svg';
 import clipboard from 'assets/media/svg/clipboard.svg';
 import coins from 'assets/media/svg/coins.svg';
+import deleteIcon from 'assets/media/svg/delete-icon.svg';
 import directCosts from 'assets/media/svg/direct-costs.svg';
 import document from 'assets/media/svg/document.svg';
-import deleteIcon from 'assets/media/svg/delete-icon.svg';
+import dollar from 'assets/media/svg/dollar.svg';
+import download from 'assets/media/svg/download.svg';
 import editIcon from 'assets/media/svg/edit-icon.svg';
+import email from 'assets/media/svg/email.svg';
 import employees from 'assets/media/svg/employees.svg';
 import gradientBackground from 'assets/media/svg/gradient-background.svg';
 import home from 'assets/media/svg/home.svg';
@@ -25,6 +28,7 @@ import revenue from 'assets/media/svg/revenue.svg';
 import search from 'assets/media/svg/search.svg';
 import teamSize from 'assets/media/svg/team-size.svg';
 import totalValue from 'assets/media/svg/total-value.svg';
+import trash from 'assets/media/svg/trash.svg';
 import velocity from 'assets/media/svg/velocity.svg';
 import weeksOver from 'assets/media/svg/weeks-over.svg';
 
@@ -37,10 +41,13 @@ export {
 	chevronLeft,
 	clipboard,
 	coins,
+	deleteIcon,
 	directCosts,
 	document,
-	deleteIcon,
+	dollar,
+	download,
 	editIcon,
+	email,
 	employees,
 	error,
 	gradientBackground,
@@ -56,6 +63,7 @@ export {
 	search,
 	teamSize,
 	totalValue,
+	trash,
 	velocity,
 	weeksOver,
 };

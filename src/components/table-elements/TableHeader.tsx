@@ -28,7 +28,7 @@ const TableHeader = ({ label, total, value, handleSearch }: Props) => {
 				}}
 			>
 				<input
-					className='h-10 w-[315px] rounded-sm border border-ashen-grey pl-[46px] font-inter-regular text-sm font-normal leading-[22px] text-charcoal-grey placeholder:font-inter-regular placeholder:text-sm placeholder:font-normal placeholder:leading-[22px] placeholder:text-charcoal-grey'
+					className='h-10 w-[315px] rounded-sm border border-ashen-grey pl-[46px] font-inter-regular text-sm font-normal leading-[22px] text-charcoal-grey outline-none placeholder:font-inter-regular placeholder:text-sm placeholder:font-normal placeholder:leading-[22px] placeholder:text-charcoal-grey focus:shadow-md'
 					id='search'
 					name='search'
 					placeholder='Search'

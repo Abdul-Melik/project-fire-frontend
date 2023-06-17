@@ -5,7 +5,7 @@ import { selectCurrentUser } from 'store/slices/authSlice';
 import { useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout/MainLayout';
-import Navbar from 'src/components/navigation/NavBar';
+import Navbar from 'components/navigation/NavBar';
 import EmployeesTable from 'features/employees/EmployeesTable';
 import ViewEmployee from 'features/employees/ViewEmployee';
 import AddNewEmployee from 'features/employees/AddNewEmployee';
@@ -66,7 +66,7 @@ const Employees = () => {
 		if (activePage === 1) setIsEmployed('');
 		else if (activePage === 2) setIsEmployed('true');
 		else if (activePage === 3) setIsEmployed('false');
-	}, [activePage, setIsEmployed]);
+	}, [activePage]);
 
 	const employee = isSuccess && data.find((employee: Employee) => employee.id === employeeId);
 

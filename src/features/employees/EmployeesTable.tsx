@@ -40,10 +40,10 @@ type Props = {
 const getEmployeeTechStack = (employee: Employee) => {
 	const techStack = employee.techStack;
 	if (techStack === 'AdminNA' || techStack === 'MgmtNA') return 'N/A';
-	else if (techStack === 'FullStack') return 'Full stack';
-	else if (techStack === 'Frontend') return 'Front end';
-	else if (techStack === 'Backend') return 'Back end';
-	else if (techStack === 'UXUI') return 'UX/UI';
+	if (techStack === 'FullStack') return 'Full stack';
+	if (techStack === 'Frontend') return 'Front end';
+	if (techStack === 'Backend') return 'Back end';
+	if (techStack === 'UXUI') return 'UX/UI';
 };
 
 const columns = [

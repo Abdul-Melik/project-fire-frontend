@@ -73,9 +73,9 @@ const getProjectValueBAM = (project: Project) => {
 const getProjectColorAndStatus = (project: Project) => {
 	const projectStatus = project.projectStatus;
 	if (projectStatus === 'Active') return { color: 'bg-spring-fern', status: 'Active' };
-	else if (projectStatus === 'OnHold') return { color: 'bg-golden-tangerine', status: 'On hold' };
-	else if (projectStatus === 'Inactive') return { color: 'bg-silver-mist', status: 'Inactive' };
-	else return { color: 'bg-cerulean-breeze', status: 'Completed' };
+	if (projectStatus === 'OnHold') return { color: 'bg-golden-tangerine', status: 'On hold' };
+	if (projectStatus === 'Inactive') return { color: 'bg-silver-mist', status: 'Inactive' };
+	return { color: 'bg-cerulean-breeze', status: 'Completed' };
 };
 
 const columns = [
@@ -130,19 +130,19 @@ const ProjectsTable = ({
 						}
 						return (
 							<TableRow key={projectId}>
-								<td className='w-[150px] pl-4'>{project.name}</td>
-								<td className='line-clamp-1 w-[150px] text-ellipsis pl-4'>{project.description}</td>
-								<td className='w-[150px] pl-4'>
+								<td className='w-[150px] p-4'>{project.name}</td>
+								<td className='line-clamp-1 w-[150px] text-ellipsis p-4'>{project.description}</td>
+								<td className='w-[150px] p-4'>
 									{getProjectDate(project).startDateString}
 									{' - '}
 									{getProjectDate(project).endDateString}
 								</td>
-								<td className='w-[150px] pl-4'>
+								<td className='w-[150px] p-4'>
 									<Avatars names={names} images={images} />
 								</td>
-								<td className='w-[150px] pl-4'>${project.hourlyRate}</td>
-								<td className='w-[150px] pl-4'>${getProjectValueBAM(project)} KM</td>
-								<td className='flex h-[60px] w-[150px] items-center gap-2 pl-4'>
+								<td className='w-[150px] p-4'>${project.hourlyRate}</td>
+								<td className='w-[150px] p-4'>${getProjectValueBAM(project)} KM</td>
+								<td className='flex h-[60px] w-[150px] items-center gap-2 p-4'>
 									<div className={`h-[6px] w-[6px] rounded-full ${getProjectColorAndStatus(project).color}`} />
 									<div className='font-gilroy-semi-bold font-semibold'>{getProjectColorAndStatus(project).status}</div>
 								</td>
