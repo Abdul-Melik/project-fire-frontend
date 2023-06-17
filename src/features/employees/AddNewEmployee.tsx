@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { chevronDown, chevronLeft, plus } from 'assets/media';
 import { useCreateEmployeeMutation } from 'store/slices/employeesApiSlice';
@@ -6,6 +6,14 @@ import SideDrawer from 'components/navigation/SideDrawer';
 
 type Props = {
 	closeAddNewEmployee: () => void;
+};
+
+const getTechStack = (techStack: string) => {
+	if (techStack === 'AdminNA' || techStack === 'MgmtNA') return 'N/A';
+	if (techStack === 'FullStack') return 'Full Stack';
+	if (techStack === 'Backend') return 'Back End';
+	if (techStack === 'Frontend') return 'Front End';
+	if (techStack === 'UXUI') return 'UX/UI';
 };
 
 const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
@@ -33,14 +41,6 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 		await createEmployee(formData);
 	};
 
-	const getTechStack = useCallback((techStack: string) => {
-		if (techStack === 'AdminNA' || techStack === 'MgmtNA') return 'N/A';
-		if (techStack === 'FullStack') return 'Full Stack';
-		if (techStack === 'Backend') return 'Back End';
-		if (techStack === 'Frontend') return 'Front End';
-		if (techStack === 'UXUI') return 'UX/UI';
-	}, []);
-
 	useEffect(() => {
 		if (isSuccess) closeAddNewEmployee();
 	}, [isSuccess]);
@@ -59,9 +59,9 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 					<img className='h-4 w-4' src={chevronLeft} alt='Back' />
 					<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
 				</div>
-				<span className='rounded-lg bg-white px-6 py-4 font-gilroy-bold text-[21px] font-bold leading-6 text-midnight-grey'>
+				<h2 className='rounded-lg bg-white px-6 py-4 font-gilroy-bold text-[21px] font-bold leading-6 text-midnight-grey'>
 					Add New Employee
-				</span>
+				</h2>
 			</header>
 			<main className='mt-4 rounded-lg bg-white p-6'>
 				<form className='flex flex-col gap-4'>

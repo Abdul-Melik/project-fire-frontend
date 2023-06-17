@@ -1,11 +1,6 @@
-import { useEffect } from 'react';
-import { skipToken } from '@reduxjs/toolkit/dist/query/react';
-
 import { chevronLeft, avatar } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
-import { useGetEmployeeByIdQuery } from 'store/slices/employeesApiSlice';
-import LoadingSpinner from 'components/utils/LoadingSpinner';
 import SideDrawer from 'components/navigation/SideDrawer';
 
 type Department = 'Administration' | 'Management' | 'Development' | 'Design';
@@ -48,33 +43,27 @@ const getEmployeeTechStack = (employee: Employee) => {
 
 const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) => {
 	const user = useAppSelector(selectCurrentUser);
-	const { isLoading, isFetching, isSuccess, data, refetch } = useGetEmployeeByIdQuery(employee?.id ?? skipToken);
-
-	useEffect(() => {
-		if (employee) refetch();
-	}, [refetch, employee]);
 
 	const children = (
 		<div className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pb-6 pt-[27px]'>
-			{(isLoading || isFetching) && <LoadingSpinner />}
 			<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeViewEmployee}>
 				<img className='h-4 w-4' src={chevronLeft} alt='Back' />
 				<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
 			</div>
-			{isSuccess && (
+			{employee && (
 				<>
 					<header className='mt-[13px]'>
 						<div className='flex gap-4 rounded-lg bg-white p-6'>
 							<img
 								className='h-20 w-20 rounded-[4.61538px] object-cover opacity-80'
-								src={data.image ? data.image : avatar}
+								src={employee.image ? employee.image : avatar}
 								alt='Employee Image'
 							/>
 							<div className='flex flex-1 flex-col justify-center'>
 								<span className='font-gilroy-bold text-[21px] font-bold leading-6 text-midnight-grey'>
-									{data.firstName} {data.lastName}
+									{employee.firstName} {employee.lastName}
 								</span>
-								<span className='font-gilroy-regular text-base font-normal text-slate-mist'>{data.department}</span>
+								<span className='font-gilroy-regular text-base font-normal text-slate-mist'>{employee.department}</span>
 							</div>
 						</div>
 					</header>
@@ -85,25 +74,25 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 									Monthly Salary (BAM)
 								</span>
 								<span className='font-gilroy-regular text-base font-normal text-slate-mist'>
-									{data.salary.toFixed(2)}
+									{employee.salary.toFixed(2)}
 								</span>
 							</div>
 							<div className='h-[1px] w-full bg-ashen-grey' />
 							<div className='flex flex-col'>
 								<span className='font-gilroy-medium text-base font-medium text-midnight-grey'>Tech Stack</span>
 								<span className='font-gilroy-regular text-base font-normal text-slate-mist'>
-									{getEmployeeTechStack(data)}
+									{getEmployeeTechStack(employee)}
 								</span>
 							</div>
 						</div>
 						<div className='flex flex-col rounded-lg bg-white p-6'>
 							<span className='font-gilroy-medium text-base font-medium text-midnight-grey'>Assigned to projects</span>
 							<div className='mt-2 flex flex-col gap-1'>
-								{data.projects.map(({ project, partTime }: Projects, index: number) => (
+								{employee.projects.map(({ project, partTime }: Projects, index: number) => (
 									<div
 										key={project.id}
 										className={`flex items-center justify-between gap-4 p-2 ${
-											index < data.projects.length - 1 ? 'border-b border-ashen-grey' : ''
+											index < employee.projects.length - 1 ? 'border-b border-ashen-grey' : ''
 										}`}
 									>
 										<span className='font-gilroy-regular text-base font-normal text-slate-mist'>{project.name}</span>

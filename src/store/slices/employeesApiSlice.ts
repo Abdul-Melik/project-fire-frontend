@@ -12,9 +12,6 @@ export const employeesApiSlice = apiSlice.injectEndpoints({
 					? [...result.map(({ id }: { id: string }) => ({ type: 'Employee' as const, id })), 'Employee']
 					: ['Employee'],
 		}),
-		getEmployeeById: builder.query({
-			query: employeeId => ({ url: `/employees/${employeeId}`, method: 'GET' }),
-		}),
 		createEmployee: builder.mutation({
 			query: data => ({ url: '/employees', method: 'POST', body: data, formData: true }),
 			invalidatesTags: ['Employee'],
@@ -31,5 +28,4 @@ export const employeesApiSlice = apiSlice.injectEndpoints({
 	}),
 });
 
-export const { useGetEmployeesQuery, useGetEmployeeByIdQuery, useCreateEmployeeMutation, useUpdateEmployeeMutation } =
-	employeesApiSlice;
+export const { useGetEmployeesQuery, useCreateEmployeeMutation, useUpdateEmployeeMutation } = employeesApiSlice;
