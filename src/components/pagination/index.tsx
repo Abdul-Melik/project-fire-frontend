@@ -6,11 +6,12 @@ type Props = {
 	currentPage: number;
 	lastPage: number;
 	perPage: number;
+	items: string;
 	handlePerPage: (perPage: number) => void;
 	handlePageChange: (pageNumber: number) => void;
 };
 
-const Pagination = ({ total, currentPage, lastPage, perPage, handlePerPage, handlePageChange }: Props) => {
+const Pagination = ({ total, currentPage, lastPage, perPage, items, handlePerPage, handlePageChange }: Props) => {
 	const pageNumbers = Array.from({ length: lastPage }, (_, index) => index + 1);
 
 	return (
@@ -27,8 +28,7 @@ const Pagination = ({ total, currentPage, lastPage, perPage, handlePerPage, hand
 					{' - '}
 					{currentPage * perPage < total ? currentPage * perPage : total}
 					{' of '}
-					{total}
-					{' Projects'}
+					{total} {items}
 				</span>
 			</div>
 			<div className='flex gap-2'>

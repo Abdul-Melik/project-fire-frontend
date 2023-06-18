@@ -149,6 +149,7 @@ const Employees = () => {
 						currentPage={currentPage}
 						lastPage={data.pageInfo.lastPage}
 						perPage={employeesPerPage}
+						items='Employees'
 						handlePerPage={employeesPerPage => {
 							setEmployeesPerPage(employeesPerPage);
 							setCurrentPage(1);

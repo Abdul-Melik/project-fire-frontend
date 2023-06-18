@@ -100,6 +100,7 @@ const Projects = () => {
 						currentPage={currentPage}
 						lastPage={data.pageInfo.lastPage}
 						perPage={projectsPerPage}
+						items='Projects'
 						handlePerPage={projectsPerPage => {
 							setProjectsPerPage(projectsPerPage);
 							setCurrentPage(1);
