@@ -27,6 +27,7 @@ type Employee = {
 };
 
 type Props = {
+	totalNumberOfEmployees: number;
 	employees: Employee[];
 	value: string;
 	orderByField: string;
@@ -56,6 +57,7 @@ const columns = [
 ];
 
 const EmployeesTable = ({
+	totalNumberOfEmployees,
 	employees,
 	value,
 	orderByField,
@@ -66,8 +68,8 @@ const EmployeesTable = ({
 	openEditEmployee,
 }: Props) => {
 	return (
-		<div className='h-[400px] w-full overflow-y-scroll rounded-md border border-ashen-grey bg-white'>
-			<TableHeader label='All Employees' total={employees.length} value={value} handleSearch={handleSearch} />
+		<div className='w-full rounded-md border border-ashen-grey bg-white'>
+			<TableHeader label='All Employees' total={totalNumberOfEmployees} value={value} handleSearch={handleSearch} />
 			<table className='w-full border-t border-ashen-grey'>
 				<EmployeesTableHead
 					columns={columns}

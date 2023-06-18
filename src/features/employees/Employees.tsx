@@ -6,6 +6,7 @@ import { useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout/MainLayout';
 import Navbar from 'components/navigation/NavBar';
+import Pagination from 'components/table-elements/Pagination';
 import EmployeesTable from 'features/employees/EmployeesTable';
 import ViewEmployee from 'features/employees/ViewEmployee';
 import AddNewEmployee from 'features/employees/AddNewEmployee';
@@ -44,6 +45,8 @@ const Employees = () => {
 	const [employeeId, setEmployeeId] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
 	const [isEmployed, setIsEmployed] = useState('');
+	const [currentPage, setCurrentPage] = useState(1);
+	const [employeesPerPage, setEmployeesPerPage] = useState(10);
 	const [orderByField, setOrderByField] = useState('firstName');
 	const [orderDirection, setOrderDirection] = useState('asc');
 
@@ -54,6 +57,8 @@ const Employees = () => {
 			isEmployed,
 			orderByField,
 			orderDirection,
+			employeesPerPage,
+			currentPage,
 		},
 		{
 			pollingInterval: 60000,
@@ -68,7 +73,7 @@ const Employees = () => {
 		else if (activePage === 3) setIsEmployed('false');
 	}, [activePage]);
 
-	const employee = isSuccess && data.find((employee: Employee) => employee.id === employeeId);
+	const employee = isSuccess && data.employees.find((employee: Employee) => employee.id === employeeId);
 
 	return (
 		<MainLayout activeMenuItem={'employees'}>
@@ -101,6 +106,8 @@ const Employees = () => {
 							navLabels={navLabels}
 							handlePageSelect={pageNumber => {
 								setActivePage(pageNumber);
+								setEmployeesPerPage(10);
+								setCurrentPage(1);
 								setSearchTerm('');
 								setOrderByField('firstName');
 								setOrderDirection('desc');
@@ -112,7 +119,8 @@ const Employees = () => {
 					) : (
 						isSuccess && (
 							<EmployeesTable
-								employees={data}
+								totalNumberOfEmployees={data.pageInfo.total}
+								employees={data.employees}
 								value={searchTerm}
 								orderByField={orderByField}
 								orderDirection={orderDirection}
@@ -133,6 +141,22 @@ const Employees = () => {
 						)
 					)}
 				</div>
+			</div>
+			<div className='mx-14 mb-[25px]'>
+				{isSuccess && (
+					<Pagination
+						total={data.pageInfo.total}
+						currentPage={currentPage}
+						lastPage={data.pageInfo.lastPage}
+						perPage={employeesPerPage}
+						handlePerPage={employeesPerPage => {
+							setEmployeesPerPage(employeesPerPage);
+							setCurrentPage(1);
+							setSearchTerm('');
+						}}
+						handlePageChange={pageNumber => setCurrentPage(pageNumber)}
+					/>
+				)}
 			</div>
 		</MainLayout>
 	);

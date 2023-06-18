@@ -1,15 +1,15 @@
 type Props = {
-	projectsPerPage: number;
-	handleProjectsPerPage: (projectsPerPage: number) => void;
+	perPage: number;
+	handlePerPage: (perPage: number) => void;
 };
 
-const ProjectsPerPageSelector = ({ projectsPerPage, handleProjectsPerPage }: Props) => {
+const PerPageSelector = ({ perPage, handlePerPage }: Props) => {
 	return (
 		<div className='h-8 w-[54px] overflow-hidden rounded-md border border-misty-moonstone text-center'>
 			<select
 				className='h-full w-3/4 font-opensans-semi-bold text-sm font-semibold leading-[30px] tracking-[0.15px] text-midnight-steel outline-none'
-				value={projectsPerPage}
-				onChange={event => handleProjectsPerPage(Number(event.target.value))}
+				value={perPage}
+				onChange={event => handlePerPage(Number(event.target.value))}
 			>
 				<option value='1'>1</option>
 				<option value='2'>2</option>
@@ -26,4 +26,4 @@ const ProjectsPerPageSelector = ({ projectsPerPage, handleProjectsPerPage }: Pro
 	);
 };
 
-export default ProjectsPerPageSelector;
+export default PerPageSelector;

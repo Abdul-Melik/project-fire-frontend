@@ -3,13 +3,13 @@ import apiSlice from 'store/slices/apiSlice';
 export const employeesApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
 		getEmployees: builder.query({
-			query: ({ searchTerm, isEmployed, orderByField, orderDirection }) => ({
-				url: `/employees?searchTerm=${searchTerm}&isEmployed=${isEmployed}&orderByField=${orderByField}&orderDirection=${orderDirection}`,
+			query: ({ searchTerm, isEmployed, orderByField, orderDirection, employeesPerPage, currentPage }) => ({
+				url: `/employees?searchTerm=${searchTerm}&isEmployed=${isEmployed}&orderByField=${orderByField}&orderDirection=${orderDirection}&take=${employeesPerPage}&page=${currentPage}`,
 				method: 'GET',
 			}),
 			providesTags: (result, error, arg) =>
 				result
-					? [...result.map(({ id }: { id: string }) => ({ type: 'Employee' as const, id })), 'Employee']
+					? [...result.employees.map(({ id }: { id: string }) => ({ type: 'Employee' as const, id })), 'Employee']
 					: ['Employee'],
 		}),
 		createEmployee: builder.mutation({

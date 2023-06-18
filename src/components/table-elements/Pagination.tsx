@@ -1,23 +1,16 @@
-import ProjectsPerPageSelector from 'features/projects/ProjectsPerPageSelector';
-import PageNumberButton from 'features/projects/PageNumberButton';
+import PerPageSelector from 'components/table-elements/PerPageSelector';
+import PageNumberButton from 'components/table-elements/PageNumberButton';
 
 type Props = {
-	totalNumberOfProjects: number;
+	total: number;
 	currentPage: number;
 	lastPage: number;
-	projectsPerPage: number;
-	handleProjectsPerPage: (projectsPerPage: number) => void;
+	perPage: number;
+	handlePerPage: (perPage: number) => void;
 	handlePageChange: (pageNumber: number) => void;
 };
 
-const Pagination = ({
-	totalNumberOfProjects,
-	currentPage,
-	lastPage,
-	projectsPerPage,
-	handleProjectsPerPage,
-	handlePageChange,
-}: Props) => {
+const Pagination = ({ total, currentPage, lastPage, perPage, handlePerPage, handlePageChange }: Props) => {
 	const pageNumbers = Array.from({ length: lastPage }, (_, index) => index + 1);
 
 	return (
@@ -27,20 +20,14 @@ const Pagination = ({
 					<span className='font-opensans-semi-bold text-sm font-semibold leading-[30px] tracking-[0.15px] text-nightfall-navy'>
 						Rows per page:
 					</span>
-					<ProjectsPerPageSelector projectsPerPage={projectsPerPage} handleProjectsPerPage={handleProjectsPerPage} />
+					<PerPageSelector perPage={perPage} handlePerPage={handlePerPage} />
 				</div>
 				<span className='font-opensans-semi-bold text-sm font-semibold leading-[30px] tracking-[0.15px] text-whispering-gray'>
-					{totalNumberOfProjects === 0
-						? 0
-						: currentPage > totalNumberOfProjects
-						? totalNumberOfProjects
-						: (currentPage - 1) * projectsPerPage + 1}
+					{total === 0 ? 0 : currentPage > total ? total : (currentPage - 1) * perPage + 1}
 					{' - '}
-					{currentPage * projectsPerPage < totalNumberOfProjects
-						? currentPage * projectsPerPage
-						: totalNumberOfProjects}
+					{currentPage * perPage < total ? currentPage * perPage : total}
 					{' of '}
-					{totalNumberOfProjects}
+					{total}
 					{' Projects'}
 				</span>
 			</div>
@@ -50,14 +37,14 @@ const Pagination = ({
 						{pageNumbers.length > 2 && (
 							<PageNumberButton key='first' pageNumber='First' onClick={() => handlePageChange(1)} />
 						)}
-						{currentPage <= totalNumberOfProjects && (
+						{currentPage <= total && (
 							<PageNumberButton key='prev' pageNumber='Prev' onClick={() => handlePageChange(currentPage - 1)} />
 						)}
 					</>
 				)}
 				{pageNumbers
 					.filter(pageNumber => {
-						if (currentPage <= totalNumberOfProjects) {
+						if (currentPage <= total) {
 							const firstPage = currentPage - 1;
 							const lastPage = currentPage + 1;
 							return pageNumber >= firstPage && pageNumber <= lastPage;
