@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logo, gradientBackground } from 'assets/media';
 import { useLoginMutation } from 'store/slices/authApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
-import InputField from 'components/form-elements/InputField';
+import InputField from 'src/components/formElements/InputField';
 
 const LoginForm = () => {
 	const navigate = useNavigate();

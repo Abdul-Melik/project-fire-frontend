@@ -1,6 +1,6 @@
-import TableHeader from 'components/table-elements/TableHeader';
+import TableHeader from 'src/components/tableElements/TableHeader';
 import ProjectsTableHead from 'src/features/projects/ProjectsTableHead';
-import TableRow from 'components/table-elements/TableRow';
+import TableRow from 'src/components/tableElements/TableRow';
 import Avatars from 'features/projects/Avatars';
 
 type ProjectType = 'Fixed' | 'OnGoing';

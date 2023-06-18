@@ -7,7 +7,7 @@ import { useGetProjectsQuery } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout/MainLayout';
 import Navbar from 'components/navigation/NavBar';
-import Pagination from 'components/table-elements/Pagination';
+import Pagination from 'src/components/tableElements/Pagination';
 import ProjectsTable from 'features/projects/ProjectsTable';
 
 const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];

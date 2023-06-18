@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import { useResetPasswordMutation } from 'store/slices/authApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
-import InputField from 'components/form-elements/InputField';
+import InputField from 'src/components/formElements/InputField';
 
 const ResetPassword = () => {
 	const { userId, token } = useParams<{ userId: string; token: string }>();

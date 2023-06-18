@@ -11,8 +11,8 @@ import Home from 'features/home/Home';
 import Projects from 'features/projects/Projects';
 import CreateNewProject from 'features/projects/CreateNewProject';
 import Employees from 'features/employees/Employees';
-import FinancialOverview from 'features/financial-overview/FinancialOverview';
-import ProjectReporting from 'features/project-reporting/ProjectReporting';
+import FinancialOverview from 'src/features/financialOverview/FinancialOverview';
+import ProjectReporting from 'src/features/projectReporting/ProjectReporting';
 import Invoicing from 'features/invoicing/Invoicing';
 import PageNotFound from 'features/other/PageNotFound';
 

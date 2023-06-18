@@ -1,7 +1,7 @@
 import { download, dollar, email, trash } from 'assets/media';
 import InvoicesTableHead from 'features/invoicing/InvoicesTableHead';
-import TableHeader from 'components/table-elements/TableHeader';
-import TableRow from 'components/table-elements/TableRow';
+import TableHeader from 'src/components/tableElements/TableHeader';
+import TableRow from 'src/components/tableElements/TableRow';
 
 type Invoice = {
 	id: string;

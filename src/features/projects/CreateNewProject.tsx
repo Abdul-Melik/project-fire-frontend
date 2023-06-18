@@ -6,11 +6,11 @@ import axios from 'axios';
 
 import Modal from 'components/utils/Modal';
 import MainLayout from 'components/layout/MainLayout';
-import InputField from 'components/form-elements/InputField';
-import TextArea from 'components/form-elements/TextArea';
-import DateInput from 'components/form-elements/DateInput';
-import Radio from 'components/form-elements/Radio';
-import NumberInput from 'components/form-elements/NumberInput';
+import InputField from 'src/components/formElements/InputField';
+import TextArea from 'src/components/formElements/TextArea';
+import DateInput from 'src/components/formElements/DateInput';
+import Radio from 'src/components/formElements/Radio';
+import NumberInput from 'src/components/formElements/NumberInput';
 import EmployeesTable from 'features/employees/EmployeesTable';
 
 type ProjectType = 'Fixed' | 'OnGoing';
