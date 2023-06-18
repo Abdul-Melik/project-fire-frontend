@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import { useSendResetPasswordEmailMutation } from 'store/slices/authApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
-import InputField from 'src/components/formElements/InputField';
+import InputField from 'components/formElements/InputField';
 
 const ForgotPassword = () => {
 	const [email, setEmail] = useState('');

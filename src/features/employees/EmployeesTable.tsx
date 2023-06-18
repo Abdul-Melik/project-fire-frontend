@@ -1,7 +1,7 @@
 import { editIcon, deleteIcon } from 'assets/media';
-import EmployeesTableHead from 'src/features/employees/EmployeesTableHead';
-import TableHeader from 'src/components/tableElements/TableHeader';
-import TableRow from 'src/components/tableElements/TableRow';
+import EmployeesTableHead from 'features/employees/EmployeesTableHead';
+import TableHeader from 'components/tableElements/TableHeader';
+import TableRow from 'components/tableElements/TableRow';
 
 type Department = 'Administration' | 'Management' | 'Development' | 'Design';
 

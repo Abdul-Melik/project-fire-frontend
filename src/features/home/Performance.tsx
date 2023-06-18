@@ -9,9 +9,9 @@ import {
 	hourlyPrice,
 } from 'assets/media';
 import InfoCard from 'components/cards/InfoCard';
-import SalesChannelsChart from 'src/features/home/SalesChannelsChart';
-import ProjectScopeChart from 'src/features/home/ProjectScopeChart';
-import HoursOverviewChart from 'src/features/home/HoursOverviewChart';
+import SalesChannelsChart from 'features/home/SalesChannelsChart';
+import ProjectScopeChart from 'features/home/ProjectScopeChart';
+import HoursOverviewChart from 'features/home/HoursOverviewChart';
 
 type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
 

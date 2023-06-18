@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
@@ -7,13 +6,12 @@ import { useGetProjectsQuery } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout/MainLayout';
 import Navbar from 'components/navigation/NavBar';
-import Pagination from 'src/components/tableElements/Pagination';
+import Pagination from 'components/pagination';
 import ProjectsTable from 'features/projects/ProjectsTable';
 
 const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
 
 const Projects = () => {
-	const navigate = useNavigate();
 	const [activePage, setActivePage] = useState(1);
 	const [projectStatus, setProjectStatus] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
@@ -55,7 +53,7 @@ const Projects = () => {
 					{user?.role === 'Admin' && (
 						<button
 							className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white hover:saturate-[400%]'
-							onClick={() => navigate('/projects/create')}
+							onClick={() => {}}
 						>
 							Create new project
 						</button>

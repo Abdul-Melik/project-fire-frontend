@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import SearchBar from '../utils/SearchBar';
+import SearchBar from 'components/utils/SearchBar';
 
 type Props = {
 	label: string;

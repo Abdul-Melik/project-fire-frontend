@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { gradientBackground } from 'assets/media';
 import { useRegisterMutation } from 'store/slices/authApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
-import InputField from 'src/components/formElements/InputField';
-import ImageUpload from 'src/components/formElements/ImageUpload';
+import InputField from 'components/formElements/InputField';
+import ImageUpload from 'components/formElements/ImageUpload';
 
 const RegisterForm = () => {
 	const navigate = useNavigate();

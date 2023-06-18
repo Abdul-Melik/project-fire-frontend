@@ -6,7 +6,7 @@ import { useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout/MainLayout';
 import Navbar from 'components/navigation/NavBar';
-import Pagination from 'src/components/tableElements/Pagination';
+import Pagination from 'components/pagination';
 import EmployeesTable from 'features/employees/EmployeesTable';
 import ViewEmployee from 'features/employees/ViewEmployee';
 import AddNewEmployee from 'features/employees/AddNewEmployee';

@@ -1,12 +1,27 @@
+import { useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { error } from 'assets/media';
+import { useAppSelector } from 'store/hooks';
+import { selectIsAuthenticated } from 'store/slices/authSlice';
+import { useRefreshAccessTokenMutation } from 'store/slices/authApiSlice';
 
 const PageNotFound = () => {
 	const navigate = useNavigate();
 
+	const isAuthenticated = useAppSelector(selectIsAuthenticated);
+	const [refreshAccessToken] = useRefreshAccessTokenMutation();
+
+	const reauth = useCallback(async () => {
+		await refreshAccessToken({});
+	}, [refreshAccessToken]);
+
+	useEffect(() => {
+		if (!isAuthenticated) reauth();
+	}, [isAuthenticated, reauth]);
+
 	const handleButtonClick = () => {
-		if (true) {
+		if (isAuthenticated) {
 			navigate('/home');
 		} else {
 			navigate('/login');
@@ -27,7 +42,7 @@ const PageNotFound = () => {
 				className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-xs font-semibold tracking-[-0.015em] text-white hover:saturate-[400%] md:px-5 md:py-2.5 md:text-sm lg:px-6 lg:py-3 lg:text-base xl:px-7 xl:py-3.5 xl:text-lg 2xl:px-8 2xl:py-4 2xl:text-xl'
 				onClick={handleButtonClick}
 			>
-				{true ? 'Back to Home' : 'Back to Login'}
+				{isAuthenticated ? 'Back to Home' : 'Back to Login'}
 			</button>
 		</div>
 	);

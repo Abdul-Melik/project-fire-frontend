@@ -1,5 +1,5 @@
-import PerPageSelector from 'src/components/tableElements/PerPageSelector';
-import PageNumberButton from 'src/components/tableElements/PageNumberButton';
+import PerPageSelector from 'components/pagination/PerPageSelector';
+import PageNumberButton from 'components/pagination/PageNumberButton';
 
 type Props = {
 	total: number;

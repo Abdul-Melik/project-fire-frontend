@@ -2,7 +2,7 @@ import { revenue, directCosts, margin, avgMargin } from 'assets/media';
 
 import InfoCard from 'components/cards/InfoCard';
 import SummaryCard from 'components/cards/SummaryCard';
-import RevenuesCostsActualChart from 'src/features/home/RevenuesCostsActualChart';
+import RevenuesCostsActualChart from 'features/home/RevenuesCostsActualChart';
 import RevenuesCostsPerMonthChart from 'features/home/RevenuesCostsPerMonthChart';
 
 const DevelopmentRevenueCosts = () => {

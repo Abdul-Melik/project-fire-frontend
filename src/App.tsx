@@ -7,13 +7,12 @@ import Register from 'features/auth/Register';
 import ForgotPassword from 'features/auth/ForgotPassword';
 import ResetPassword from 'features/auth/ResetPassword';
 import PrivateRoutes from 'features/auth/PrivateRoutes';
-import Home from 'features/home/Home';
-import Projects from 'features/projects/Projects';
-import CreateNewProject from 'features/projects/CreateNewProject';
-import Employees from 'features/employees/Employees';
-import FinancialOverview from 'src/features/financialOverview/FinancialOverview';
-import ProjectReporting from 'src/features/projectReporting/ProjectReporting';
-import Invoicing from 'features/invoicing/Invoicing';
+import Home from 'features/home';
+import Projects from 'features/projects';
+import Employees from 'features/employees';
+import FinancialOverview from 'features/financialOverview';
+import ProjectReporting from 'features/projectReporting';
+import Invoicing from 'features/invoicing';
 import PageNotFound from 'features/other/PageNotFound';
 
 const App = () => {
@@ -29,7 +28,6 @@ const App = () => {
 					<Route element={<PrivateRoutes />}>
 						<Route path='/home' element={<Home />} />
 						<Route path='/projects' element={<Projects />} />
-						<Route path='/projects/create' element={<CreateNewProject />} />
 						<Route path='/employees' element={<Employees />} />
 						<Route path='/financial-overview' element={<FinancialOverview />} />
 						<Route path='/project-reporting' element={<ProjectReporting />} />
