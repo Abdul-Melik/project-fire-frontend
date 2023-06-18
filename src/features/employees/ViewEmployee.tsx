@@ -7,7 +7,6 @@ import { selectCurrentUser } from 'store/slices/authSlice';
 import { useDeleteEmployeeMutation } from 'store/slices/employeesApiSlice';
 import SideDrawer from 'components/navigation/SideDrawer';
 import AlertModal from 'components/modals/AlertModal';
-import ViewFooter from 'components/utils/ViewFooter';
 
 type Department = 'Administration' | 'Management' | 'Development' | 'Design';
 
@@ -149,13 +148,23 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 							</div>
 						</main>
 						{user?.role === 'Admin' && (
-							<ViewFooter
-								handleDelete={() => setIsAlertModalOpen(true)}
-								handleEdit={() => {
-									closeViewEmployee();
-									openEditEmployee();
-								}}
-							/>
+							<footer className='absolute bottom-0 left-0 flex w-full items-center justify-end gap-2 bg-white p-6'>
+								<button
+									className='rounded-md border border-crimson-blaze px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-crimson-blaze'
+									onClick={() => setIsAlertModalOpen(true)}
+								>
+									Delete Employee
+								</button>
+								<button
+									className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white'
+									onClick={() => {
+										closeViewEmployee();
+										openEditEmployee();
+									}}
+								>
+									Edit Employee
+								</button>
+							</footer>
 						)}
 					</>
 				)}

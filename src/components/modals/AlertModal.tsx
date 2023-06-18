@@ -1,5 +1,6 @@
-import { alert } from 'assets/media';
 import { motion } from 'framer-motion';
+
+import { alert } from 'assets/media';
 
 type Props = {
 	alertTitle: string;
@@ -22,7 +23,7 @@ const AlertModal = ({
 }: Props) => {
 	return (
 		<motion.div
-			initial={{ opacity: 0, x: '-50%', y: '-150%' }}
+			initial={{ opacity: 0, x: '-50%', y: '-100%' }}
 			animate={{ opacity: 1, x: '0%', y: '0%', translateX: '-50%', translateY: '-50%' }}
 			transition={{ duration: 0.3, ease: 'easeInOut' }}
 			className='fixed left-1/2 top-1/2 z-20 flex w-[424px] -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-md shadow-[0_3px_6px_-4px_rgba(0,0,0,0.12),0_6px_16px_rgba(0,0,0,0.08),0_9px_28px_8px_rgba(0,0,0,0.05)]'

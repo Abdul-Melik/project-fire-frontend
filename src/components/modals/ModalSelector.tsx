@@ -16,7 +16,7 @@ type Props = {
 	selectProject: Function;
 };
 
-const ModalSelector = ({ show, header, onCancel, isError, children, selectProject }: Props) => {
+const ModalSelector = ({ show, onCancel, isError, children, selectProject }: Props) => {
 	const content = (
 		<>
 			{show && <Backdrop onClick={() => onCancel()} />}
