@@ -177,7 +177,7 @@ const Employees = () => {
 				{isEmployeesSuccess && (
 					<Pagination
 						total={data.pageInfo.total}
-						currentPage={currentPage}
+						currentPage={data.pageInfo.currentPage}
 						lastPage={data.pageInfo.lastPage}
 						perPage={employeesPerPage}
 						items='Employees'

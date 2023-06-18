@@ -97,7 +97,7 @@ const Projects = () => {
 				{isSuccess && (
 					<Pagination
 						total={data.pageInfo.total}
-						currentPage={currentPage}
+						currentPage={data.pageInfo.currentPage}
 						lastPage={data.pageInfo.lastPage}
 						perPage={projectsPerPage}
 						items='Projects'
