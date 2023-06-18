@@ -1,31 +1,67 @@
 import { useState } from 'react';
 
+import { chevronDown } from 'assets/media';
+
 type Props = {
 	handleYearSelect: (year: string) => void;
 };
 
 const YearSelector = ({ handleYearSelect }: Props) => {
-	const [selectedYear, setSelectedYear] = useState<string>('2023');
+	const [selectedYear, setSelectedYear] = useState('2023');
+	const [isYearMenuOpen, setIsYearMenuOpen] = useState(false);
 
 	return (
 		<div className='flex items-center'>
 			<label htmlFor='years' className='mr-4 font-gilroy-bold text-[22px] font-bold leading-[30px] text-deep-forest'>
 				Year:
 			</label>
-			<select
-				className='flex justify-between gap-[10px] rounded-md border border-ashen-grey py-2 pl-[12px] pr-[10px] font-gilroy-bold text-base font-bold text-hunter-green'
-				id='years'
-				value={selectedYear}
-				onChange={event => {
-					handleYearSelect(event.target.value);
-					setSelectedYear(event.target.value);
-				}}
+			<div
+				className='relative flex w-[110px] cursor-pointer items-center justify-between gap-[10px] rounded-md border border-ashen-grey py-2 pl-[12px] pr-[10px]'
+				onClick={() => setIsYearMenuOpen(!isYearMenuOpen)}
 			>
-				<option value='2023'>2023</option>
-				<option value='2022'>2022</option>
-				<option value='2021'>2021</option>
-				<option value='2020'>2020</option>
-			</select>
+				<span className='font-gilroy-bold text-base font-bold text-hunter-green'>{selectedYear}</span>
+				<img className={`transition ${isYearMenuOpen ? 'rotate-180' : ''}`} src={chevronDown} alt='Down icon' />
+				{isYearMenuOpen && (
+					<div className='absolute left-0 top-[41px] z-10 flex w-[110px] flex-col gap-2 overflow-hidden rounded-md border border-t-0 border-ashen-grey bg-white'>
+						<div
+							className='py-2 pl-[12px] pr-[10px] font-gilroy-bold text-base font-bold text-hunter-green hover:bg-ashen-grey'
+							onClick={() => {
+								setSelectedYear('2023');
+								handleYearSelect('2023');
+							}}
+						>
+							2023
+						</div>
+						<div
+							className='py-2 pl-[12px] pr-[10px] font-gilroy-bold text-base font-bold text-hunter-green hover:bg-ashen-grey'
+							onClick={() => {
+								setSelectedYear('2022');
+								handleYearSelect('2022');
+							}}
+						>
+							2022
+						</div>
+						<div
+							className='py-2 pl-[12px] pr-[10px] font-gilroy-bold text-base font-bold text-hunter-green hover:bg-ashen-grey'
+							onClick={() => {
+								setSelectedYear('2021');
+								handleYearSelect('2021');
+							}}
+						>
+							2021
+						</div>
+						<div
+							className='py-2 pl-[12px] pr-[10px] font-gilroy-bold text-base font-bold text-hunter-green hover:bg-ashen-grey'
+							onClick={() => {
+								setSelectedYear('2020');
+								handleYearSelect('2020');
+							}}
+						>
+							2020
+						</div>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };

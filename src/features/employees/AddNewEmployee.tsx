@@ -255,21 +255,21 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 									alt='Down icon'
 								/>
 								{isCurrencyMenuOpen && (
-									<div className='absolute left-0 top-10 z-10 flex w-[80px] flex-col items-center justify-center gap-2 rounded-md border border-t-0 border-misty-moonstone bg-white py-2'>
+									<div className='absolute left-0 top-10 z-10 flex w-[80px] flex-col overflow-hidden rounded-md border border-t-0 border-misty-moonstone bg-white text-center'>
 										<div
-											className='font-gilroy-regular text-sm font-normal text-slate-mist'
+											className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
 											onClick={() => setCurrency('USD')}
 										>
 											USD
 										</div>
 										<div
-											className='font-gilroy-regular text-sm font-normal text-slate-mist'
+											className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
 											onClick={() => setCurrency('EUR')}
 										>
 											EUR
 										</div>
 										<div
-											className='font-gilroy-regular text-sm font-normal text-slate-mist'
+											className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
 											onClick={() => setCurrency('BAM')}
 										>
 											BAM
