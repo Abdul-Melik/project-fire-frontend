@@ -1,15 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-import { chevronLeft } from 'assets/media';
+import { chevronLeft, avatar } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
 import { useDeleteEmployeeMutation } from 'store/slices/employeesApiSlice';
 import SideDrawer from 'components/navigation/SideDrawer';
 import AlertModal from 'components/modals/AlertModal';
-import EmployeeCard from 'components/cards/EmployeeCard';
-import EmployeeInfoCard from 'components/cards/EmployeeInfoCard';
-import AssignedProjectsCard from 'components/cards/AssignedProjectsCard';
 import ViewFooter from 'components/utils/ViewFooter';
 
 type Department = 'Administration' | 'Management' | 'Development' | 'Design';
@@ -39,6 +36,14 @@ type Props = {
 	employee: Employee;
 	closeViewEmployee: () => void;
 	openEditEmployee: () => void;
+};
+
+const getEmployeeTechStack = (techStack: TechStack) => {
+	if (techStack === 'AdminNA' || techStack === 'MgmtNA') return 'N/A';
+	else if (techStack === 'FullStack') return 'Full stack';
+	else if (techStack === 'Frontend') return 'Front end';
+	else if (techStack === 'Backend') return 'Back end';
+	else if (techStack === 'UXUI') return 'UX/UI';
 };
 
 const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) => {
@@ -84,16 +89,64 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 				{employee && (
 					<>
 						<header className='mt-[13px]'>
-							<EmployeeCard
-								firstName={employee.firstName}
-								lastName={employee.lastName}
-								image={employee.image}
-								department={employee.department}
-							/>
+							<div className='flex gap-4 rounded-lg bg-white p-6'>
+								<img
+									className='h-20 w-20 rounded-[4.61538px] object-cover opacity-80'
+									src={employee.image ? employee.image : avatar}
+									alt='Employee image'
+								/>
+								<div className='flex flex-1 flex-col justify-center'>
+									<span className='font-gilroy-bold text-[21px] font-bold leading-6 text-midnight-grey'>
+										{employee.firstName} {employee.lastName}
+									</span>
+									<span className='font-gilroy-regular text-base font-normal text-slate-mist'>
+										{employee.department}
+									</span>
+								</div>
+							</div>
 						</header>
 						<main className='mt-4 flex flex-col gap-5'>
-							<EmployeeInfoCard salary={employee.salary} techStack={employee.techStack} />
-							<AssignedProjectsCard projects={employee.projects} />
+							<div className='flex flex-col gap-4 rounded-lg bg-white p-6'>
+								<div className='flex flex-col'>
+									<span className='font-gilroy-medium text-base font-medium text-midnight-grey'>
+										Monthly Salary (BAM)
+									</span>
+									<span className='font-gilroy-regular text-base font-normal text-slate-mist'>
+										{employee.salary.toFixed(2)}
+									</span>
+								</div>
+								<div className='h-[1px] w-full bg-ashen-grey' />
+								<div className='flex flex-col'>
+									<span className='font-gilroy-medium text-base font-medium text-midnight-grey'>Tech Stack</span>
+									<span className='font-gilroy-regular text-base font-normal text-slate-mist'>
+										{getEmployeeTechStack(employee.techStack)}
+									</span>
+								</div>
+							</div>
+							<div className='flex max-h-[500px] flex-col overflow-scroll rounded-lg bg-white p-6'>
+								<span className='font-gilroy-medium text-base font-medium text-midnight-grey'>
+									Assigned to projects
+								</span>
+								<div className='mt-2 flex flex-col gap-1'>
+									{employee.projects.map(({ project, partTime }: Projects, index: number) => (
+										<div
+											key={project.id}
+											className={`flex items-center justify-between gap-4 p-2 ${
+												index < employee.projects.length - 1 ? 'border-b border-ashen-grey' : ''
+											}`}
+										>
+											<span className='font-gilroy-regular text-base font-normal text-slate-mist'>{project.name}</span>
+											<span
+												className={`h-5 w-[68px] rounded-xl px-2 py-[2px] text-center font-gilroy-regular text-xs font-normal tracking-[0.16px] text-white ${
+													partTime ? 'bg-blue-ash' : 'bg-sage-green'
+												}`}
+											>
+												{partTime ? 'Part time' : 'Full time'}
+											</span>
+										</div>
+									))}
+								</div>
+							</div>
 						</main>
 						{user?.role === 'Admin' && (
 							<ViewFooter
