@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useGetProjectsInfoQuery } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
-import MainLayout from 'components/layout/MainLayout';
+import MainLayout from 'components/layout';
 import Navbar from 'components/navigation/NavBar';
 import YearSelector from 'components/utils/YearSelector';
 import Performance from 'features/home/Performance';

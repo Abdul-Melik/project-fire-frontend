@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { invoicesData } from 'src/data/index';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
-import MainLayout from 'components/layout/MainLayout';
+import MainLayout from 'components/layout';
 import Navbar from 'components/navigation/NavBar';
 import InvoicesTable from 'features/invoicing/InvoicesTable';
 
