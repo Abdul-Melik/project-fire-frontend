@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
-import { useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
+import { useDeleteEmployeeMutation, useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout';
 import Navbar from 'components/navigation/NavBar';
 import Pagination from 'components/pagination';
+import AlertModal from 'components/modals/AlertModal';
 import EmployeesTable from 'features/employees/EmployeesTable';
 import ViewEmployee from 'features/employees/ViewEmployee';
 import AddNewEmployee from 'features/employees/AddNewEmployee';
@@ -49,9 +50,15 @@ const Employees = () => {
 	const [employeesPerPage, setEmployeesPerPage] = useState(10);
 	const [orderByField, setOrderByField] = useState('firstName');
 	const [orderDirection, setOrderDirection] = useState('asc');
+	const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
 	const user = useAppSelector(selectCurrentUser);
-	const { isLoading, isFetching, isSuccess, data } = useGetEmployeesQuery(
+	const {
+		isLoading,
+		isFetching,
+		isSuccess: isEmployeesSuccess,
+		data,
+	} = useGetEmployeesQuery(
 		{
 			searchTerm,
 			isEmployed,
@@ -66,6 +73,11 @@ const Employees = () => {
 			refetchOnReconnect: true,
 		}
 	);
+	const [deleteEmployee, { isSuccess: isDeleteSuccess }] = useDeleteEmployeeMutation();
+
+	const onConfirm = async () => {
+		await deleteEmployee({ employeeId });
+	};
 
 	useEffect(() => {
 		if (activePage === 1) setIsEmployed('');
@@ -73,10 +85,25 @@ const Employees = () => {
 		else if (activePage === 3) setIsEmployed('false');
 	}, [activePage]);
 
-	const employee = isSuccess && data.employees.find((employee: Employee) => employee.id === employeeId);
+	useEffect(() => {
+		if (isDeleteSuccess) setIsAlertModalOpen(false);
+	}, [isDeleteSuccess]);
+
+	const employee = isEmployeesSuccess && data.employees.find((employee: Employee) => employee.id === employeeId);
 
 	return (
 		<MainLayout activeMenuItem={'employees'}>
+			{isAlertModalOpen && (
+				<AlertModal
+					alertTitle={`Are you sure you want to delete ${employee.firstName} ${employee.lastName}?`}
+					alertDescription={`This will permanently delete ${employee.firstName} ${employee.lastName} and all associated data. You cannot undo this action.`}
+					cancelButtonText="Don't Delete"
+					confirmButtonText='Delete'
+					confirmButtoncolor='#FF4D4F'
+					onCancel={() => setIsAlertModalOpen(false)}
+					onConfirm={onConfirm}
+				/>
+			)}
 			{isViewEmployeeOpen && (
 				<ViewEmployee
 					employee={employee}
@@ -117,7 +144,7 @@ const Employees = () => {
 					{isLoading || isFetching ? (
 						<LoadingSpinner />
 					) : (
-						isSuccess && (
+						isEmployeesSuccess && (
 							<EmployeesTable
 								totalNumberOfEmployees={data.pageInfo.total}
 								employees={data.employees}
@@ -128,6 +155,10 @@ const Employees = () => {
 								handleSort={(label: string, orderDirection: string) => {
 									setOrderByField(label);
 									setOrderDirection(orderDirection);
+								}}
+								handleDelete={employeeId => {
+									setIsAlertModalOpen(true);
+									setEmployeeId(employeeId);
 								}}
 								openViewEmployee={(employeeId: string) => {
 									setIsViewEmployeeOpen(true);
@@ -143,7 +174,7 @@ const Employees = () => {
 				</div>
 			</div>
 			<div className='mx-14 mb-[25px]'>
-				{isSuccess && (
+				{isEmployeesSuccess && (
 					<Pagination
 						total={data.pageInfo.total}
 						currentPage={currentPage}

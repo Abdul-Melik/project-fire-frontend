@@ -34,6 +34,7 @@ type Props = {
 	orderDirection: string;
 	handleSearch: (input: string) => void;
 	handleSort: (label: string, orderDirection: string) => void;
+	handleDelete: (employeeId: string) => void;
 	openViewEmployee: (employeeId: string) => void;
 	openEditEmployee: (employeeId: string) => void;
 };
@@ -64,6 +65,7 @@ const EmployeesTable = ({
 	orderDirection,
 	handleSearch,
 	handleSort,
+	handleDelete,
 	openViewEmployee,
 	openEditEmployee,
 }: Props) => {
@@ -100,7 +102,13 @@ const EmployeesTable = ({
 											<span>Edit</span>
 										</div>
 										<div className='h-3 border border-ashen-grey' />
-										<div className='flex items-center gap-2 px-2 hover:cursor-pointer'>
+										<div
+											className='flex items-center gap-2 px-2 hover:cursor-pointer'
+											onClick={event => {
+												event.stopPropagation();
+												handleDelete(employeeId);
+											}}
+										>
 											<img className='h-[14px] w-[14px]' src={deleteIcon} alt='Delete icon' />
 											<span>Delete</span>
 										</div>

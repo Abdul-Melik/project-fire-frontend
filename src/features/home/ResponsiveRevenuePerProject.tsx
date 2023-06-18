@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 
 import { arrow } from 'assets/media';
-import ModalSelector from 'components/utils/ModalSelector';
+import ModalSelector from 'components/modals/ModalSelector';
 import DataCard from 'components/cards/DataCard';
 
 const data = [

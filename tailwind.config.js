@@ -10,8 +10,9 @@ export default {
 			colors: {
 				// Green Tones
 				'deep-forest': '#0C221F',
-				'hunter-green': '#232F2D',
 				evergreen: '#142E2B',
+				'deep-teal': '#1A3835',
+				'hunter-green': '#232F2D',
 				'moss-green': '#43A57C',
 				'sage-green': '#7BB99F',
 				'spring-fern': '#32C653',
@@ -20,13 +21,13 @@ export default {
 
 				//Blue Tones
 				'dark-indigo': '#272934',
-				'deep-teal': '#1A3835',
 				'midnight-steel': '#404B57',
 				'slate-mist': '#6C6D75',
 				'steel-blue': '#242834',
 				'nightfall-navy': '#505475',
 				'blue-grey': '#788489',
 				'blue-ash': '#A5B2B7',
+				'inky-twilight': '#1D2138',
 				'luminous-azure': '#3973F8',
 				'cerulean-breeze': '#3491FA',
 				'winter-mint': '#E9F3F2',
