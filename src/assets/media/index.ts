@@ -4,11 +4,13 @@ import arrow from 'assets/media/svg/arrow.svg';
 import avatar from 'assets/media/svg/avatar.svg';
 import avgMargin from 'assets/media/svg/avgMargin.svg';
 import avgValue from 'assets/media/svg/avgValue.svg';
+import cancel from 'assets/media/svg/cancel.svg';
 import chevronDown from 'assets/media/svg/chevronDown.svg';
 import chevronLeft from 'assets/media/svg/chevronLeft.svg';
 import clipboard from 'assets/media/svg/clipboard.svg';
 import close from 'assets/media/svg/close.svg';
 import coins from 'assets/media/svg/coins.svg';
+import date from 'assets/media/svg/date.svg';
 import deleteIcon from 'assets/media/svg/deleteIcon.svg';
 import directCosts from 'assets/media/svg/directCosts.svg';
 import document from 'assets/media/svg/document.svg';
@@ -43,11 +45,13 @@ export {
 	avatar,
 	avgMargin,
 	avgValue,
+	cancel,
 	chevronDown,
 	chevronLeft,
 	clipboard,
 	close,
 	coins,
+	date,
 	deleteIcon,
 	directCosts,
 	document,
