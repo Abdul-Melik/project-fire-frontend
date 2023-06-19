@@ -7,6 +7,10 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
 				url: `/projects?name=${searchTerm}&projectStatus=${projectStatus}&orderByField=${orderByField}&orderDirection=${orderDirection}&take=${projectsPerPage}&page=${currentPage}`,
 				method: 'GET',
 			}),
+			providesTags: (result, error, arg) =>
+				result
+					? [...result.projects.map(({ id }: { id: string }) => ({ type: 'Project' as const, id })), 'Project']
+					: ['Project'],
 		}),
 		getProjectsInfo: builder.query({
 			query: ({ year }) => ({
@@ -14,7 +18,14 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
 				method: 'GET',
 			}),
 		}),
+		deleteProject: builder.mutation({
+			query: ({ projectId }) => ({
+				url: `/projects/${projectId}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['Project'],
+		}),
 	}),
 });
 
-export const { usePrefetch, useGetProjectsQuery, useGetProjectsInfoQuery } = projectsApiSlice;
+export const { useGetProjectsQuery, useGetProjectsInfoQuery, useDeleteProjectMutation } = projectsApiSlice;

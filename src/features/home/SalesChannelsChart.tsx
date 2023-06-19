@@ -1,8 +1,7 @@
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
+import { SalesChannel } from 'src/types';
 import DataCard from 'components/cards/DataCard';
-
-type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
 
 type ChartData = {
 	name: string;

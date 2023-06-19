@@ -1,44 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
+import { Employee } from 'src/types';
+import { getEmployeeTechStack } from 'src/helpers';
 import { chevronDown, chevronLeft, plus } from 'assets/media';
 import { useUpdateEmployeeMutation } from 'store/slices/employeesApiSlice';
 import SideDrawer from 'components/navigation/SideDrawer';
 
-type Department = 'Administration' | 'Management' | 'Development' | 'Design';
-
-type TechStack = 'AdminNA' | 'MgmtNA' | 'FullStack' | 'Frontend' | 'Backend' | 'UXUI';
-
-type Projects = {
-	project: {
-		id: string;
-		name: string;
-	};
-	partTime: boolean;
-};
-
-type Employee = {
-	id: string;
-	firstName: string;
-	lastName: string;
-	image: string;
-	department: Department;
-	salary: number;
-	techStack: TechStack;
-	projects: Projects[];
-};
-
 type Props = {
 	employee: Employee;
 	closeEditEmployee: () => void;
-};
-
-const getTechStack = (techStack: string) => {
-	if (techStack === 'AdminNA' || techStack === 'MgmtNA') return 'N/A';
-	if (techStack === 'FullStack') return 'Full Stack';
-	if (techStack === 'Backend') return 'Back End';
-	if (techStack === 'Frontend') return 'Front End';
-	if (techStack === 'UXUI') return 'UX/UI';
 };
 
 const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
@@ -316,7 +287,7 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 										onClick={() => setIsTechStackMenuOpen(!isTechStackMenuOpen)}
 									>
 										<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>
-											{!techStack ? 'Select stack' : getTechStack(techStack)}
+											{!techStack ? 'Select stack' : getEmployeeTechStack(employee.techStack)}
 										</span>
 										<img
 											className={`transition ${isTechStackMenuOpen ? 'rotate-180' : ''}`}

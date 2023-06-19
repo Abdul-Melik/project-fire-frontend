@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+import { Project } from 'src/types';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
 import { useGetProjectsQuery } from 'store/slices/projectsApiSlice';
@@ -8,17 +9,22 @@ import MainLayout from 'components/layout';
 import Navbar from 'components/navigation/NavBar';
 import Pagination from 'components/pagination';
 import ProjectsTable from 'features/projects/ProjectsTable';
+import ViewProject from 'features/projects/ViewProject';
 
 const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
 
 const Projects = () => {
 	const [activePage, setActivePage] = useState(1);
-	const [projectStatus, setProjectStatus] = useState('');
+	const [isViewProjectOpen, setIsViewProjectOpen] = useState(false);
+	const [isAddNewProjectOpen, setIsAddNewProjectOpen] = useState(false);
+	const [isEditProjectOpen, setIsEditProjectOpen] = useState(false);
+	const [projectId, setProjectId] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
-	const [currentPage, setCurrentPage] = useState(1);
-	const [projectsPerPage, setProjectsPerPage] = useState(10);
+	const [projectStatus, setProjectStatus] = useState('');
 	const [orderByField, setOrderByField] = useState('name');
 	const [orderDirection, setOrderDirection] = useState('asc');
+	const [projectsPerPage, setProjectsPerPage] = useState(10);
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const user = useAppSelector(selectCurrentUser);
 	const { isLoading, isFetching, isSuccess, data } = useGetProjectsQuery(
@@ -45,8 +51,17 @@ const Projects = () => {
 		else if (activePage === 5) setProjectStatus('Completed');
 	}, [activePage]);
 
+	const project = isSuccess && data.projects.find((project: Project) => project.id === projectId);
+
 	return (
 		<MainLayout activeMenuItem={'projects'}>
+			{isViewProjectOpen && (
+				<ViewProject
+					project={project}
+					closeViewProject={() => setIsViewProjectOpen(false)}
+					openEditProject={() => setIsEditProjectOpen(true)}
+				/>
+			)}
 			<div className='mx-14 mb-[17px] mt-[34px]'>
 				<div className='mb-[30px] flex items-center justify-between'>
 					<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</h1>
@@ -87,6 +102,10 @@ const Projects = () => {
 								handleSort={(label: string, orderDirection: string) => {
 									setOrderByField(label);
 									setOrderDirection(orderDirection);
+								}}
+								openViewProject={(projectId: string) => {
+									setIsViewProjectOpen(true);
+									setProjectId(projectId);
 								}}
 							/>
 						)

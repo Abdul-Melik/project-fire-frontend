@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { Employee } from 'src/types';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
 import { useDeleteEmployeeMutation, useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
@@ -12,29 +13,6 @@ import EmployeesTable from 'features/employees/EmployeesTable';
 import ViewEmployee from 'features/employees/ViewEmployee';
 import AddNewEmployee from 'features/employees/AddNewEmployee';
 import EditEmployee from 'features/employees/EditEmployee';
-
-type Department = 'Administration' | 'Management' | 'Development' | 'Design';
-
-type TechStack = 'AdminNA' | 'MgmtNA' | 'FullStack' | 'Frontend' | 'Backend' | 'UXUI';
-
-type Projects = {
-	project: {
-		id: string;
-		name: string;
-	};
-	partTime: boolean;
-};
-
-type Employee = {
-	id: string;
-	firstName: string;
-	lastName: string;
-	image: string;
-	department: Department;
-	salary: number;
-	techStack: TechStack;
-	projects: Projects[];
-};
 
 const navLabels = ['All Employees', 'Current', 'Past'];
 

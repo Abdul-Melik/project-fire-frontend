@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
+import { Employee, Projects } from 'src/types';
+import { getEmployeeTechStack } from 'src/helpers';
 import { chevronLeft, avatar } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
@@ -8,59 +10,28 @@ import { useDeleteEmployeeMutation } from 'store/slices/employeesApiSlice';
 import SideDrawer from 'components/navigation/SideDrawer';
 import AlertModal from 'components/modals/AlertModal';
 
-type Department = 'Administration' | 'Management' | 'Development' | 'Design';
-
-type TechStack = 'AdminNA' | 'MgmtNA' | 'FullStack' | 'Frontend' | 'Backend' | 'UXUI';
-
-type Projects = {
-	project: {
-		id: string;
-		name: string;
-	};
-	partTime: boolean;
-};
-
-type Employee = {
-	id: string;
-	firstName: string;
-	lastName: string;
-	image: string;
-	department: Department;
-	salary: number;
-	techStack: TechStack;
-	projects: Projects[];
-};
-
 type Props = {
 	employee: Employee;
 	closeViewEmployee: () => void;
 	openEditEmployee: () => void;
 };
 
-const getEmployeeTechStack = (techStack: TechStack) => {
-	if (techStack === 'AdminNA' || techStack === 'MgmtNA') return 'N/A';
-	else if (techStack === 'FullStack') return 'Full stack';
-	else if (techStack === 'Frontend') return 'Front end';
-	else if (techStack === 'Backend') return 'Back end';
-	else if (techStack === 'UXUI') return 'UX/UI';
-};
-
 const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) => {
 	const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
 	const user = useAppSelector(selectCurrentUser);
-	const [deleteEmployee, { isSuccess: isDeleteSuccess }] = useDeleteEmployeeMutation();
+	const [deleteEmployee, { isSuccess }] = useDeleteEmployeeMutation();
 
 	const onConfirm = async () => {
 		await deleteEmployee({ employeeId: employee.id });
 	};
 
 	useEffect(() => {
-		if (isDeleteSuccess) {
+		if (isSuccess) {
 			setIsAlertModalOpen(false);
 			closeViewEmployee();
 		}
-	}, [isDeleteSuccess]);
+	}, [isSuccess]);
 
 	const children = (
 		<>
@@ -122,7 +93,13 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 									</span>
 								</div>
 							</div>
-							<div className='flex max-h-[500px] flex-col overflow-scroll rounded-lg bg-white p-6'>
+							<div
+								className={`flex max-h-[240px] flex-col ${
+									employee.projects.length > 0
+										? 'overflow-y-scroll scrollbar-thin scrollbar-track-ashen-grey scrollbar-thumb-blue-ash'
+										: ''
+								} rounded-lg bg-white p-6`}
+							>
 								<span className='font-gilroy-medium text-base font-medium text-midnight-grey'>
 									Assigned to projects
 								</span>

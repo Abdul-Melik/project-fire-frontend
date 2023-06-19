@@ -1,9 +1,8 @@
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, LabelList } from 'recharts';
 import { ContentType } from 'recharts/types/component/Label';
 
+import { ProjectType } from 'src/types';
 import DataCard from 'components/cards/DataCard';
-
-type ProjectType = 'Fixed' | 'OnGoing';
 
 type ChartData = {
 	name: string;

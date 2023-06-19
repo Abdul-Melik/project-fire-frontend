@@ -1,44 +1,12 @@
 import { useState, useEffect } from 'react';
 
-import { invoicesData } from 'src/data/index';
+import { handleInvoicesData } from 'src/helpers';
+import { invoicesData } from 'src/data';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
 import MainLayout from 'components/layout';
 import Navbar from 'components/navigation/NavBar';
 import InvoicesTable from 'features/invoicing/InvoicesTable';
-
-type Invoice = {
-	id: string;
-	client: string;
-	industry: string;
-	totalHoursBilled: number;
-	amountBilledBAM: number;
-	status: string;
-};
-
-const handleData = (
-	invoicesData: Invoice[],
-	invoiceStatus: string,
-	searchTerm: string,
-	orderByField: string,
-	orderDirection: string
-) => {
-	return invoicesData
-		.filter(invoice => (invoiceStatus ? invoice.status === invoiceStatus : true))
-		.filter(invoice => (searchTerm ? invoice.client.toLowerCase().includes(searchTerm.toLowerCase()) : true))
-		.sort((a, b) => {
-			const sortValueA =
-				orderByField === 'client' || orderByField === 'industry'
-					? a[orderByField].localeCompare(b[orderByField])
-					: orderByField === 'totalHoursBilled'
-					? a.totalHoursBilled - b.totalHoursBilled
-					: orderByField === 'amountBilledBAM'
-					? a.amountBilledBAM - b.amountBilledBAM
-					: ['Paid', 'Sent', 'NotSent'].indexOf(a.status) - ['Paid', 'Sent', 'NotSent'].indexOf(b.status);
-
-			return orderDirection === 'asc' ? sortValueA : -sortValueA;
-		});
-};
 
 const navLabels = ['All Invoices', 'Sent', 'Paid'];
 
@@ -84,7 +52,7 @@ const Invoicing = () => {
 						/>
 					</div>
 					<InvoicesTable
-						invoices={handleData(invoicesData, invoiceStatus, searchTerm, orderByField, orderDirection)}
+						invoices={handleInvoicesData(invoicesData, invoiceStatus, searchTerm, orderByField, orderDirection)}
 						value={searchTerm}
 						orderByField={orderByField}
 						orderDirection={orderDirection}

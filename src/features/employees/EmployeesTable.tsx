@@ -1,30 +1,9 @@
+import { Employee } from 'src/types';
+import { getEmployeeTechStack } from 'src/helpers';
 import { editIcon, deleteIcon } from 'assets/media';
 import EmployeesTableHead from 'features/employees/EmployeesTableHead';
 import TableHeader from 'components/tableElements/TableHeader';
 import TableRow from 'components/tableElements/TableRow';
-
-type Department = 'Administration' | 'Management' | 'Development' | 'Design';
-
-type TechStack = 'AdminNA' | 'MgmtNA' | 'FullStack' | 'Frontend' | 'Backend' | 'UXUI';
-
-type Projects = {
-	project: {
-		id: string;
-		name: string;
-	};
-	partTime: boolean;
-};
-
-type Employee = {
-	id: string;
-	firstName: string;
-	lastName: string;
-	image: string;
-	department: Department;
-	salary: number;
-	techStack: TechStack;
-	projects: Projects[];
-};
 
 type Props = {
 	totalNumberOfEmployees: number;
@@ -37,15 +16,6 @@ type Props = {
 	handleDelete: (employeeId: string) => void;
 	openViewEmployee: (employeeId: string) => void;
 	openEditEmployee: (employeeId: string) => void;
-};
-
-const getEmployeeTechStack = (employee: Employee) => {
-	const techStack = employee.techStack;
-	if (techStack === 'AdminNA' || techStack === 'MgmtNA') return 'N/A';
-	if (techStack === 'FullStack') return 'Full stack';
-	if (techStack === 'Frontend') return 'Front end';
-	if (techStack === 'Backend') return 'Back end';
-	if (techStack === 'UXUI') return 'UX/UI';
 };
 
 const columns = [
@@ -88,7 +58,7 @@ const EmployeesTable = ({
 								<td className='p-4'>{employee.lastName}</td>
 								<td className='p-4'>{employee.department}</td>
 								<td className='p-4'>{employee.salary.toFixed(2)}</td>
-								<td className='p-4'>{getEmployeeTechStack(employee)}</td>
+								<td className='p-4'>{getEmployeeTechStack(employee.techStack)}</td>
 								<td className='p-4'>
 									<div className='flex items-center '>
 										<div

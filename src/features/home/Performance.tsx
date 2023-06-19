@@ -1,3 +1,4 @@
+import { ProjectsInfo } from 'src/types';
 import {
 	projectsNumber,
 	totalValue,
@@ -12,30 +13,6 @@ import InfoCard from 'components/cards/InfoCard';
 import SalesChannelsChart from 'features/home/SalesChannelsChart';
 import ProjectScopeChart from 'features/home/ProjectScopeChart';
 import HoursOverviewChart from 'features/home/HoursOverviewChart';
-
-type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
-
-type ProjectType = 'Fixed' | 'OnGoing';
-
-type ProjectInfo = {
-	name: string;
-	hourlyRate: number;
-	numberOfEmployees: number;
-	revenue: number;
-	cost: number;
-	profit: number;
-};
-
-type ProjectsInfo = {
-	totalProjects: number;
-	totalValue: number;
-	averageValue: number;
-	averageTeamSize: number;
-	averageHourlyRate: number;
-	salesChannelPercentage: { [key in SalesChannel]?: number };
-	projectTypeCount: { [key in ProjectType]?: number };
-	projects: ProjectInfo[];
-};
 
 type Props = {
 	projectsInfo: ProjectsInfo | null;
@@ -107,7 +84,7 @@ const Performance = ({ projectsInfo }: Props) => {
 				<InfoCard
 					className='overflow-hidden rounded-md border border-ashen-grey'
 					description='Avg. hourly price'
-					amount={`$${(projectsInfo?.averageHourlyRate ?? 0).toLocaleString('en-US', {
+					amount={`$${(projectsInfo?.averageRate ?? 0).toLocaleString('en-US', {
 						minimumFractionDigits: 2,
 						maximumFractionDigits: 2,
 					})}`}

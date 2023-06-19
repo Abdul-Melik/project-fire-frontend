@@ -1,16 +1,9 @@
+import { Invoice } from 'src/types';
+import { getInvoiceColorAndStatus } from 'src/helpers';
 import { download, dollar, email, trash } from 'assets/media';
 import InvoicesTableHead from 'features/invoicing/InvoicesTableHead';
 import TableHeader from 'components/tableElements/TableHeader';
 import TableRow from 'components/tableElements/TableRow';
-
-type Invoice = {
-	id: string;
-	client: string;
-	industry: string;
-	totalHoursBilled: number;
-	amountBilledBAM: number;
-	status: string;
-};
 
 type Props = {
 	invoices: Invoice[];
@@ -19,13 +12,6 @@ type Props = {
 	orderDirection: string;
 	handleSearch: (input: string) => void;
 	handleSort: (label: string, orderDirection: string) => void;
-};
-
-const getInvoiceColorAndStatus = (invoice: Invoice) => {
-	const invoiceStatus = invoice.status;
-	if (invoiceStatus === 'Paid') return { color: 'bg-spring-fern', status: 'Paid' };
-	if (invoiceStatus === 'Sent') return { color: 'bg-golden-tangerine', status: 'Sent' };
-	return { color: 'bg-silver-mist', status: 'Not sent' };
 };
 
 const columns = [
@@ -39,8 +25,8 @@ const columns = [
 
 const InvoicesTable = ({ invoices, value, orderByField, orderDirection, handleSearch, handleSort }: Props) => {
 	return (
-		<div className='h-[400px] w-full overflow-y-scroll rounded-md border border-ashen-grey bg-white'>
-			<TableHeader label='All Employees' total={invoices.length} value={value} handleSearch={handleSearch} />
+		<div className='relative w-full rounded-md border border-ashen-grey bg-white'>
+			<TableHeader label='All Invoices' total={invoices.length} value={value} handleSearch={handleSearch} />
 			<table className='w-full border-t border-ashen-grey'>
 				<InvoicesTableHead
 					columns={columns}
@@ -59,9 +45,13 @@ const InvoicesTable = ({ invoices, value, orderByField, orderDirection, handleSe
 								<td className='p-4'>{invoice.amountBilledBAM}</td>
 								<td className='p-4'>
 									<div className='flex items-center gap-2'>
-										<div className={`h-[6px] w-[6px] rounded-full ${getInvoiceColorAndStatus(invoice).color}`} />
+										<div
+											className={`h-[6px] w-[6px] rounded-full ${
+												getInvoiceColorAndStatus(invoice.invoiceStatus)?.color
+											}`}
+										/>
 										<div className='font-gilroy-semi-bold font-semibold'>
-											{getInvoiceColorAndStatus(invoice).status}
+											{getInvoiceColorAndStatus(invoice.invoiceStatus)?.status}
 										</div>
 									</div>
 								</td>

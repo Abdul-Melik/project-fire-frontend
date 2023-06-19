@@ -22,7 +22,7 @@ const YearSelector = ({ handleYearSelect }: Props) => {
 				<span className='font-gilroy-bold text-base font-bold text-hunter-green'>{selectedYear}</span>
 				<img className={`transition ${isYearMenuOpen ? 'rotate-180' : ''}`} src={chevronDown} alt='Down icon' />
 				{isYearMenuOpen && (
-					<div className='absolute left-0 top-[41px] z-10 flex w-[110px] flex-col gap-2 overflow-hidden rounded-md border border-t-0 border-ashen-grey bg-white'>
+					<div className='absolute left-0 top-[42px] z-10 flex w-[110px] flex-col gap-2 overflow-hidden rounded-md border border-t-0 border-ashen-grey bg-white'>
 						<div
 							className='py-2 pl-[12px] pr-[10px] font-gilroy-bold text-base font-bold text-hunter-green hover:bg-ashen-grey'
 							onClick={() => {

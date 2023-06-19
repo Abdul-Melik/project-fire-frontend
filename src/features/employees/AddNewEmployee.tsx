@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
+import { TechStack } from 'src/types';
+import { getEmployeeTechStack } from 'src/helpers';
 import { chevronDown, chevronLeft, plus } from 'assets/media';
 import { useCreateEmployeeMutation } from 'store/slices/employeesApiSlice';
 import SideDrawer from 'components/navigation/SideDrawer';
 
 type Props = {
 	closeAddNewEmployee: () => void;
-};
-
-const getTechStack = (techStack: string) => {
-	if (techStack === 'AdminNA' || techStack === 'MgmtNA') return 'N/A';
-	if (techStack === 'FullStack') return 'Full Stack';
-	if (techStack === 'Backend') return 'Back End';
-	if (techStack === 'Frontend') return 'Front End';
-	if (techStack === 'UXUI') return 'UX/UI';
 };
 
 const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
@@ -289,7 +283,7 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 								onClick={() => setIsTechStackMenuOpen(!isTechStackMenuOpen)}
 							>
 								<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>
-									{!techStack ? 'Select stack' : getTechStack(techStack)}
+									{!techStack ? 'Select stack' : getEmployeeTechStack(techStack as TechStack)}
 								</span>
 								<img
 									className={`transition ${isTechStackMenuOpen ? 'rotate-180' : ''}`}

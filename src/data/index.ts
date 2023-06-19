@@ -84,6 +84,7 @@ const revenuesCostsPerMonthChartData = {
 	revenueGap: ['914.00 KM', '10,000.00 KM', '-15,000.00 KM'],
 };
 
+// Invoices Data
 const invoicesData = [
 	{
 		id: '1',
@@ -91,7 +92,7 @@ const invoicesData = [
 		industry: 'Tools',
 		totalHoursBilled: 1863,
 		amountBilledBAM: 126000.45,
-		status: 'Sent',
+		invoiceStatus: 'Sent',
 	},
 	{
 		id: '2',
@@ -99,7 +100,7 @@ const invoicesData = [
 		industry: 'Garden',
 		totalHoursBilled: 32103,
 		amountBilledBAM: 160000.08,
-		status: 'Paid',
+		invoiceStatus: 'Paid',
 	},
 	{
 		id: '3',
@@ -107,7 +108,7 @@ const invoicesData = [
 		industry: 'Health',
 		totalHoursBilled: 89384,
 		amountBilledBAM: 319000.76,
-		status: 'Paid',
+		invoiceStatus: 'Paid',
 	},
 	{
 		id: '4',
@@ -115,7 +116,7 @@ const invoicesData = [
 		industry: 'Health',
 		totalHoursBilled: 87105,
 		amountBilledBAM: 823000.26,
-		status: 'Paid',
+		invoiceStatus: 'Paid',
 	},
 	{
 		id: '5',
@@ -123,7 +124,7 @@ const invoicesData = [
 		industry: 'Electronics',
 		totalHoursBilled: 39883,
 		amountBilledBAM: 273000.42,
-		status: 'Sent',
+		invoiceStatus: 'Sent',
 	},
 	{
 		id: '6',
@@ -131,7 +132,7 @@ const invoicesData = [
 		industry: 'Baby',
 		totalHoursBilled: 24919,
 		amountBilledBAM: 532000.6,
-		status: 'Sent',
+		invoiceStatus: 'Sent',
 	},
 	{
 		id: '7',
@@ -139,7 +140,7 @@ const invoicesData = [
 		industry: 'Home',
 		totalHoursBilled: 21828,
 		amountBilledBAM: 685000.33,
-		status: 'Paid',
+		invoiceStatus: 'Paid',
 	},
 	{
 		id: '8',
@@ -147,7 +148,7 @@ const invoicesData = [
 		industry: 'Clothing',
 		totalHoursBilled: 76945,
 		amountBilledBAM: 890000.3,
-		status: 'NotSent',
+		invoiceStatus: 'NotSent',
 	},
 	{
 		id: '9',
@@ -155,7 +156,7 @@ const invoicesData = [
 		industry: 'Home',
 		totalHoursBilled: 42348,
 		amountBilledBAM: 284000.82,
-		status: 'NotSent',
+		invoiceStatus: 'NotSent',
 	},
 	{
 		id: '10',
@@ -163,7 +164,7 @@ const invoicesData = [
 		industry: 'Outdoors',
 		totalHoursBilled: 413,
 		amountBilledBAM: 405000.2,
-		status: 'Sent',
+		invoiceStatus: 'Sent',
 	},
 	{
 		id: '11',
@@ -171,7 +172,7 @@ const invoicesData = [
 		industry: 'Books',
 		totalHoursBilled: 28729,
 		amountBilledBAM: 762000.62,
-		status: 'NotSent',
+		invoiceStatus: 'NotSent',
 	},
 ];
 
