@@ -1,4 +1,4 @@
-import { TechStack, ProjectStatus, Invoice } from 'src/types';
+import { TechStack, ProjectStatus, InvoiceStatus, Employees, Employee } from 'src/types';
 
 export const getEmployeeTechStack = (techStack: TechStack) => {
 	if (techStack === 'AdminNA' || techStack === 'MgmtNA') return 'N/A';
@@ -7,6 +7,27 @@ export const getEmployeeTechStack = (techStack: TechStack) => {
 	if (techStack === 'Frontend') return 'Front End';
 	if (techStack === 'UXUI') return 'UX/UI';
 	return null;
+};
+
+export const getEmployeeNamesAndImages = (employees: Employees[]) => {
+	let names:
+		| {
+				firstName: string;
+				lastName: string;
+		  }[]
+		| undefined;
+	let images: (string | undefined)[] | undefined;
+	if (employees) {
+		names = employees.map(({ employee }: { employee: Employee }) => ({
+			firstName: employee.firstName,
+			lastName: employee.lastName,
+		}));
+		images = employees.map(({ employee }: { employee: Employee }) => employee.image);
+	} else {
+		names = [];
+		images = [];
+	}
+	return { names, images };
 };
 
 export const getProjectDate = (startDateString: string, endDateString: string) => {
@@ -38,7 +59,7 @@ export const getProjectColorAndStatus = (projectStatus: ProjectStatus) => {
 	return null;
 };
 
-export const getInvoiceColorAndStatus = (invoiceStatus: string) => {
+export const getInvoiceColorAndStatus = (invoiceStatus: InvoiceStatus) => {
 	if (invoiceStatus === 'Paid') return { color: 'bg-spring-fern', status: 'Paid' };
 	if (invoiceStatus === 'Sent') return { color: 'bg-golden-tangerine', status: 'Sent' };
 	if (invoiceStatus === 'NotSent') return { color: 'bg-silver-mist', status: 'Not sent' };

@@ -16,6 +16,8 @@ type Props = {
 const Avatar = ({ className, src, alt, names }: Props) => {
 	const [showNames, setShowNames] = useState(false);
 
+	const formattedNames = names?.map(({ firstName, lastName }) => `${firstName} ${lastName}`).join(', ');
+
 	return (
 		<div
 			className='relative hover:cursor-pointer'
@@ -27,7 +29,7 @@ const Avatar = ({ className, src, alt, names }: Props) => {
 				src={src ? src : avatar}
 				alt={alt}
 			/>
-			{showNames && <HoverTooltip names={names} />}
+			{showNames && formattedNames && <HoverTooltip content={formattedNames} />}
 		</div>
 	);
 };

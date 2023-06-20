@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { Employee, Project } from 'src/types';
-import { getProjectDate, getProjectValueBAM, getProjectColorAndStatus } from 'src/helpers';
+import { Project } from 'src/types';
+import { getEmployeeNamesAndImages, getProjectDate, getProjectValueBAM, getProjectColorAndStatus } from 'src/helpers';
 import Table from 'components/tableElements/Table';
 import TableRow from 'components/tableElements/TableRow';
 import Avatars from 'features/projects/Avatars';
@@ -40,23 +40,7 @@ const ProjectsTable = ({
 	const getProjectsTableRow = useCallback(
 		(project: Project) => {
 			const projectId = project.id;
-			let names:
-				| {
-						firstName: string;
-						lastName: string;
-				  }[]
-				| undefined;
-			let images: (string | undefined)[] | undefined;
-			if (project.employees) {
-				names = project.employees.map(({ employee }: { employee: Employee }) => ({
-					firstName: employee.firstName,
-					lastName: employee.lastName,
-				}));
-				images = project.employees.map(({ employee }: { employee: Employee }) => employee.image);
-			} else {
-				names = [];
-				images = [];
-			}
+			const { names, images } = getEmployeeNamesAndImages(project.employees);
 			return (
 				<TableRow key={projectId} onClick={() => openViewProject(projectId)}>
 					<td className='p-4'>{project.name}</td>

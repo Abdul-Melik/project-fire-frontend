@@ -2,9 +2,9 @@ import { useCallback } from 'react';
 
 import { Invoice } from 'src/types';
 import { getInvoiceColorAndStatus } from 'src/helpers';
-import { download, dollar, email, trash } from 'assets/media';
 import Table from 'components/tableElements/Table';
 import TableRow from 'components/tableElements/TableRow';
+import InvoiceActions from 'features/invoicing/InvoiceActions';
 
 type Props = {
 	totalNumberOfInvoices: number;
@@ -51,20 +51,7 @@ const InvoicesTable = ({
 					</div>
 				</td>
 				<td className='p-3'>
-					<div className='flex items-center gap-2'>
-						<button className='flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-ashen-grey'>
-							<img src={download} alt='Download icon' />
-						</button>
-						<button className='flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-ashen-grey'>
-							<img src={dollar} alt='Dollar icon' />
-						</button>
-						<button className='flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-ashen-grey'>
-							<img src={email} alt='Email icon' />
-						</button>
-						<button className='flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-ashen-grey'>
-							<img src={trash} alt='Trash icon' />
-						</button>
-					</div>
+					<InvoiceActions />
 				</td>
 			</TableRow>
 		);

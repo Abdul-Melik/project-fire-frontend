@@ -8,6 +8,8 @@ type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
 
 type ProjectStatus = 'Active' | 'OnHold' | 'Inactive' | 'Completed';
 
+type InvoiceStatus = 'Paid' | 'Sent' | 'NotSent';
+
 type Employee = {
 	id: string;
 	firstName: string;
@@ -73,7 +75,7 @@ type Invoice = {
 	industry: string;
 	totalHoursBilled: number;
 	amountBilledBAM: number;
-	invoiceStatus: string;
+	invoiceStatus: InvoiceStatus;
 };
 
 export type {
@@ -82,6 +84,7 @@ export type {
 	ProjectType,
 	SalesChannel,
 	ProjectStatus,
+	InvoiceStatus,
 	Employee,
 	Employees,
 	Project,
