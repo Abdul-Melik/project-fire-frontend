@@ -38,30 +38,6 @@ export const getProjectColorAndStatus = (projectStatus: ProjectStatus) => {
 	return null;
 };
 
-export const handleInvoicesData = (
-	invoicesData: Invoice[],
-	invoiceStatus: string,
-	searchTerm: string,
-	orderByField: string,
-	orderDirection: string
-) => {
-	return invoicesData
-		.filter(invoice => (invoiceStatus ? invoice.invoiceStatus === invoiceStatus : true))
-		.filter(invoice => (searchTerm ? invoice.client.toLowerCase().includes(searchTerm.toLowerCase()) : true))
-		.sort((a, b) => {
-			const sortValueA =
-				orderByField === 'client' || orderByField === 'industry'
-					? a[orderByField].localeCompare(b[orderByField])
-					: orderByField === 'totalHoursBilled'
-					? a.totalHoursBilled - b.totalHoursBilled
-					: orderByField === 'amountBilledBAM'
-					? a.amountBilledBAM - b.amountBilledBAM
-					: ['Paid', 'Sent', 'NotSent'].indexOf(a.invoiceStatus) - ['Paid', 'Sent', 'NotSent'].indexOf(b.invoiceStatus);
-
-			return orderDirection === 'asc' ? sortValueA : -sortValueA;
-		});
-};
-
 export const getInvoiceColorAndStatus = (invoiceStatus: string) => {
 	if (invoiceStatus === 'Paid') return { color: 'bg-spring-fern', status: 'Paid' };
 	if (invoiceStatus === 'Sent') return { color: 'bg-golden-tangerine', status: 'Sent' };
