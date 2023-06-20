@@ -1,9 +1,9 @@
 import { Employee, Project } from 'src/types';
 import { getProjectDate, getProjectValueBAM, getProjectColorAndStatus } from 'src/helpers';
 import TableHeader from 'components/tableElements/TableHeader';
+import TableHead from 'src/components/tableElements/TableHead';
 import TableRow from 'components/tableElements/TableRow';
 import Avatars from 'features/projects/Avatars';
-import ProjectsTableHead from 'features/projects/ProjectsTableHead';
 
 type Props = {
 	totalNumberOfProjects: number;
@@ -40,7 +40,7 @@ const ProjectsTable = ({
 		<div className='w-full rounded-md border border-ashen-grey bg-white'>
 			<TableHeader label='Projects Table' total={totalNumberOfProjects} value={value} handleSearch={handleSearch} />
 			<table className='w-full border-t border-ashen-grey'>
-				<ProjectsTableHead
+				<TableHead
 					columns={columns}
 					orderByField={orderByField}
 					orderDirection={orderDirection}
@@ -82,11 +82,11 @@ const ProjectsTable = ({
 									<div className='flex items-center gap-2'>
 										<div
 											className={`h-[6px] w-[6px] rounded-full ${
-												getProjectColorAndStatus(project.projectStatus).color
+												getProjectColorAndStatus(project.projectStatus)?.color
 											}`}
 										/>
 										<div className='font-gilroy-semi-bold font-semibold'>
-											{getProjectColorAndStatus(project.projectStatus).status}
+											{getProjectColorAndStatus(project.projectStatus)?.status}
 										</div>
 									</div>
 								</td>

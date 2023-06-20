@@ -24,10 +24,10 @@ const Employees = () => {
 	const [employeeId, setEmployeeId] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
 	const [isEmployed, setIsEmployed] = useState('');
-	const [currentPage, setCurrentPage] = useState(1);
-	const [employeesPerPage, setEmployeesPerPage] = useState(10);
 	const [orderByField, setOrderByField] = useState('firstName');
 	const [orderDirection, setOrderDirection] = useState('asc');
+	const [currentPage, setCurrentPage] = useState(1);
+	const [employeesPerPage, setEmployeesPerPage] = useState(10);
 	const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
 	const user = useAppSelector(selectCurrentUser);

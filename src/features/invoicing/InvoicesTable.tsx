@@ -1,11 +1,12 @@
 import { Invoice } from 'src/types';
 import { getInvoiceColorAndStatus } from 'src/helpers';
 import { download, dollar, email, trash } from 'assets/media';
-import InvoicesTableHead from 'features/invoicing/InvoicesTableHead';
 import TableHeader from 'components/tableElements/TableHeader';
+import TableHead from 'src/components/tableElements/TableHead';
 import TableRow from 'components/tableElements/TableRow';
 
 type Props = {
+	totalNumberOfInvoices: number;
 	invoices: Invoice[];
 	value: string;
 	orderByField: string;
@@ -19,16 +20,24 @@ const columns = [
 	{ name: 'Industry', label: 'industry' },
 	{ name: 'Totall Hours Billed', label: 'totalHoursBilled' },
 	{ name: 'Amount Billed (BAM)', label: 'amountBilledBAM' },
-	{ name: 'Status', label: 'status' },
+	{ name: 'Status', label: 'invoiceStatus' },
 	{ name: 'Actions', label: 'actions' },
 ];
 
-const InvoicesTable = ({ invoices, value, orderByField, orderDirection, handleSearch, handleSort }: Props) => {
+const InvoicesTable = ({
+	totalNumberOfInvoices,
+	invoices,
+	value,
+	orderByField,
+	orderDirection,
+	handleSearch,
+	handleSort,
+}: Props) => {
 	return (
 		<div className='relative w-full rounded-md border border-ashen-grey bg-white'>
-			<TableHeader label='All Invoices' total={invoices.length} value={value} handleSearch={handleSearch} />
+			<TableHeader label='All Invoices' total={totalNumberOfInvoices} value={value} handleSearch={handleSearch} />
 			<table className='w-full border-t border-ashen-grey'>
-				<InvoicesTableHead
+				<TableHead
 					columns={columns}
 					orderByField={orderByField}
 					orderDirection={orderDirection}

@@ -1,23 +1,41 @@
 import { useState, useEffect } from 'react';
 
-import { handleInvoicesData } from 'src/helpers';
-import { invoicesData } from 'src/data';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
+import { useGetInvoicesQuery } from 'store/slices/invoicingApiSlice';
+import LoadingSpinner from 'components/utils/LoadingSpinner';
 import MainLayout from 'components/layout';
 import Navbar from 'components/navigation/NavBar';
+import Pagination from 'components/pagination';
 import InvoicesTable from 'features/invoicing/InvoicesTable';
 
 const navLabels = ['All Invoices', 'Sent', 'Paid'];
 
 const Invoicing = () => {
 	const [activePage, setActivePage] = useState(1);
+	const [client, setClient] = useState('');
 	const [invoiceStatus, setInvoiceStatus] = useState('');
-	const [searchTerm, setSearchTerm] = useState('');
 	const [orderByField, setOrderByField] = useState('client');
 	const [orderDirection, setOrderDirection] = useState('asc');
+	const [currentPage, setCurrentPage] = useState(1);
+	const [invoicesPerPage, setInvoicesPerPage] = useState(10);
 
 	const user = useAppSelector(selectCurrentUser);
+	const { isLoading, isFetching, isSuccess, data } = useGetInvoicesQuery(
+		{
+			client,
+			invoiceStatus,
+			orderByField,
+			orderDirection,
+			invoicesPerPage,
+			currentPage,
+		},
+		{
+			pollingInterval: 60000,
+			refetchOnFocus: true,
+			refetchOnReconnect: true,
+		}
+	);
 
 	useEffect(() => {
 		if (activePage === 1) setInvoiceStatus('');
@@ -45,24 +63,50 @@ const Invoicing = () => {
 							navLabels={navLabels}
 							handlePageSelect={pageNumber => {
 								setActivePage(pageNumber);
-								setSearchTerm('');
+								setInvoicesPerPage(10);
+								setCurrentPage(1);
+								setClient('');
 								setOrderByField('client');
 								setOrderDirection('asc');
 							}}
 						/>
 					</div>
-					<InvoicesTable
-						invoices={handleInvoicesData(invoicesData, invoiceStatus, searchTerm, orderByField, orderDirection)}
-						value={searchTerm}
-						orderByField={orderByField}
-						orderDirection={orderDirection}
-						handleSearch={input => setSearchTerm(input)}
-						handleSort={(label: string, orderDirection: string) => {
-							setOrderByField(label);
-							setOrderDirection(orderDirection);
-						}}
-					/>
+					{isLoading || isFetching ? (
+						<LoadingSpinner />
+					) : (
+						isSuccess && (
+							<InvoicesTable
+								totalNumberOfInvoices={data.pageInfo.total}
+								invoices={data.invoices}
+								value={client}
+								orderByField={orderByField}
+								orderDirection={orderDirection}
+								handleSearch={input => setClient(input)}
+								handleSort={(label: string, orderDirection: string) => {
+									setOrderByField(label);
+									setOrderDirection(orderDirection);
+								}}
+							/>
+						)
+					)}
 				</div>
+			</div>
+			<div className='mx-14 mb-[25px]'>
+				{isSuccess && (
+					<Pagination
+						total={data.pageInfo.total}
+						currentPage={data.pageInfo.currentPage}
+						lastPage={data.pageInfo.lastPage}
+						perPage={invoicesPerPage}
+						items='Invoices'
+						handlePerPage={invoicesPerPage => {
+							setInvoicesPerPage(invoicesPerPage);
+							setCurrentPage(1);
+							setClient('');
+						}}
+						handlePageChange={pageNumber => setCurrentPage(pageNumber)}
+					/>
+				)}
 			</div>
 		</MainLayout>
 	);

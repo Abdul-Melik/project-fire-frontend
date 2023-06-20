@@ -1,8 +1,8 @@
 import { Employee } from 'src/types';
 import { getEmployeeTechStack } from 'src/helpers';
 import { editIcon, deleteIcon } from 'assets/media';
-import EmployeesTableHead from 'features/employees/EmployeesTableHead';
 import TableHeader from 'components/tableElements/TableHeader';
+import TableHead from 'src/components/tableElements/TableHead';
 import TableRow from 'components/tableElements/TableRow';
 
 type Props = {
@@ -43,7 +43,7 @@ const EmployeesTable = ({
 		<div className='w-full rounded-md border border-ashen-grey bg-white'>
 			<TableHeader label='All Employees' total={totalNumberOfEmployees} value={value} handleSearch={handleSearch} />
 			<table className='w-full border-t border-ashen-grey'>
-				<EmployeesTableHead
+				<TableHead
 					columns={columns}
 					orderByField={orderByField}
 					orderDirection={orderDirection}
