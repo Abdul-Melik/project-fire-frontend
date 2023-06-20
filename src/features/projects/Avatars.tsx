@@ -1,4 +1,7 @@
+import { useState, useRef, useLayoutEffect } from 'react';
+
 import Avatar from 'components/utils/Avatar';
+import HoverTooltip from 'components/utils/HoverTooltip';
 
 type Props = {
 	images?: (string | undefined)[];
@@ -6,24 +9,40 @@ type Props = {
 		firstName: string;
 		lastName: string;
 	}[];
+	maxVisibleAvatars?: number;
 };
 
-const Avatars = ({ images = [], names = [] }: Props) => {
-	const maxVisibleAvatars = 3;
-	const overflowCount = Math.max(0, images.length - maxVisibleAvatars);
+const Avatars = ({ images = [], names = [], maxVisibleAvatars }: Props) => {
+	const ref = useRef<HTMLDivElement | null>(null);
+	const [showNames, setShowNames] = useState(false);
+	const [containerWidth, setContainerWidth] = useState(0);
+	const [containerHeight, setContainerHeight] = useState(0);
+
+	const overflowCount = Math.max(0, images.length - (maxVisibleAvatars ? maxVisibleAvatars : images.length));
+	const formattedNames = names?.map(({ firstName, lastName }) => `${firstName} ${lastName}`).join(', ');
+
+	useLayoutEffect(() => {
+		const adjustWidth = 24; // Adjustment in width due to -space-x-3
+		setContainerWidth(ref.current ? ref.current.offsetWidth + adjustWidth : 0);
+		setContainerHeight(ref.current?.offsetHeight ?? 0);
+	}, [ref, images]);
 
 	return (
-		<div className='relative flex flex-wrap -space-x-3'>
+		<div
+			ref={ref}
+			className='relative inline-flex -space-x-3'
+			onMouseEnter={() => setShowNames(true)}
+			onMouseLeave={() => setShowNames(false)}
+		>
 			{images.slice(0, maxVisibleAvatars).map((image, index) => (
 				<Avatar key={index} src={image} alt='Employee icon' names={names} />
 			))}
 			{overflowCount > 0 && (
-				<div className=''>
-					<div className='absolute flex h-[35px] w-[35px] items-center justify-center rounded-full bg-deep-teal font-gilroy-semi-bold text-sm font-semibold leading-[22px] text-white'>
-						{overflowCount}+
-					</div>
+				<div className='h-[35px] w-[35px] rounded-full bg-deep-teal font-gilroy-semi-bold text-sm font-semibold leading-[22px] text-white'>
+					<div className='flex h-full w-full items-center justify-center'>{overflowCount}+</div>
 				</div>
 			)}
+			{showNames && <HoverTooltip content={formattedNames} position={{ containerWidth, containerHeight }} />}
 		</div>
 	);
 };

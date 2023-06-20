@@ -49,7 +49,7 @@ const ProjectsTable = ({
 					</td>
 					<td className='p-4'>{getProjectDate(project.startDate, project.endDate)}</td>
 					<td className='py-1 pl-4 pr-2'>
-						<Avatars names={names} images={images} />
+						<Avatars names={names} images={images} maxVisibleAvatars={3} />
 					</td>
 					<td className='p-4'>${project.hourlyRate}</td>
 					<td className='p-4'>${getProjectValueBAM(project.projectValueBAM)} KM</td>
