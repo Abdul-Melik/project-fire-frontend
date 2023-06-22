@@ -1,5 +1,5 @@
 import { Employee } from 'src/types';
-import { getEmployeeTechStack } from 'src/helpers';
+import { getEmployeeSalaryInBAM, getEmployeeTechStack } from 'src/helpers';
 import { useAppSelector } from 'store/hooks';
 import { selectUserRole } from 'store/slices/authSlice';
 import TableRow from 'components/tableElements/TableRow';
@@ -27,7 +27,7 @@ const EmployeesTableRow = ({
 			<td className='p-4'>{employee.firstName}</td>
 			<td className='p-4'>{employee.lastName}</td>
 			<td className='p-4'>{employee.department}</td>
-			<td className='p-4'>{employee.salary.toFixed(2)}</td>
+			<td className='p-4'>{getEmployeeSalaryInBAM(employee.salary, employee.currency)}</td>
 			<td className='p-4'>{getEmployeeTechStack(employee.techStack)}</td>
 			{userRole === 'Admin' && (
 				<td className='p-4'>

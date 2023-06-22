@@ -33,6 +33,7 @@ const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
 		if (image) formData.append('image', image);
 		formData.append('department', department);
 		formData.append('salary', salary);
+		formData.append('currency', currency);
 		formData.append('techStack', techStack);
 		await createEmployee(formData);
 	};

@@ -72,7 +72,7 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 
 	const handleUpdate = async (event: React.MouseEvent<HTMLElement>) => {
 		event.preventDefault();
-		const employeesOnProject = selectedEmployees.map(({ partTime, employee }) => ({
+		const employees = selectedEmployees.map(({ partTime, employee }) => ({
 			partTime,
 			employeeId: employee.id,
 		}));
@@ -86,7 +86,7 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 			projectValueBAM: Number(projectValueBAM),
 			salesChannel,
 			projectStatus,
-			employeesOnProject,
+			employees,
 		};
 		await updateProject({ projectId: project.id, data });
 	};

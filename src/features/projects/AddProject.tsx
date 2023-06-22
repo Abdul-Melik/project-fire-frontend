@@ -78,7 +78,7 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
 
 	const handleCreate = async (event: React.MouseEvent<HTMLElement>) => {
 		event.preventDefault();
-		const employeesOnProject = selectedEmployees.map(({ partTime, employee }) => ({
+		const employees = selectedEmployees.map(({ partTime, employee }) => ({
 			partTime,
 			employeeId: employee.id,
 		}));
@@ -92,7 +92,7 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
 			projectValueBAM: Number(projectValueBAM),
 			salesChannel,
 			projectStatus,
-			employeesOnProject,
+			employees,
 		});
 	};
 

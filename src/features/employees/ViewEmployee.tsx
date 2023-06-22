@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 import { Employee, Projects } from 'src/types';
-import { getEmployeeTechStack } from 'src/helpers';
+import { getEmployeeSalaryInBAM, getEmployeeTechStack } from 'src/helpers';
 import { chevronLeft, avatar } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
 import { selectUserRole } from 'store/slices/authSlice';
@@ -82,7 +82,7 @@ const ViewEmployee = ({ employee, closeViewEmployeeSideDrawer, openEditEmployeeS
 										Monthly Salary (BAM)
 									</span>
 									<span className='font-gilroy-regular text-base font-normal text-slate-mist'>
-										{employee.salary.toFixed(2)}
+										{getEmployeeSalaryInBAM(employee.salary, employee.currency)}
 									</span>
 								</div>
 								<div className='h-[1px] w-full bg-ashen-grey' />

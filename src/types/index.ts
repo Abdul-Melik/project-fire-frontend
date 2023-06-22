@@ -1,3 +1,5 @@
+type Currency = 'USD' | 'EUR' | 'BAM';
+
 type Department = 'Administration' | 'Management' | 'Development' | 'Design';
 
 type TechStack = 'AdminNA' | 'MgmtNA' | 'FullStack' | 'Frontend' | 'Backend' | 'UXUI';
@@ -17,6 +19,7 @@ type Employee = {
 	image?: string;
 	department: Department;
 	salary: number;
+	currency: Currency;
 	techStack: TechStack;
 	projects: Projects[];
 };

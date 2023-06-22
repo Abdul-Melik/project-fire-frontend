@@ -1,5 +1,12 @@
 import { TechStack, ProjectStatus, InvoiceStatus, Employees, Employee } from 'src/types';
 
+export const getEmployeeSalaryInBAM = (salary: number, currency: string) => {
+	let conversionFactor = 1;
+	if (currency === 'USD') conversionFactor = 1.78;
+	else if (currency === 'EUR') conversionFactor = 1.95;
+	return (salary * conversionFactor).toFixed(2);
+};
+
 export const getEmployeeTechStack = (techStack: TechStack) => {
 	if (techStack === 'AdminNA' || techStack === 'MgmtNA') return 'N/A';
 	if (techStack === 'FullStack') return 'Full Stack';

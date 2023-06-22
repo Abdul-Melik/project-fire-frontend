@@ -21,6 +21,7 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 	const [image, setImage] = useState<File | undefined>();
 	const [department, setDepartment] = useState('');
 	const [salary, setSalary] = useState('');
+	const [currency, setCurrency] = useState('');
 	const [techStack, setTechStack] = useState('');
 
 	const [updateEmployee, { isSuccess }] = useUpdateEmployeeMutation();
@@ -40,6 +41,7 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 			setLastName(employee.lastName);
 			setDepartment(employee.department);
 			setSalary(employee.salary.toString());
+			setCurrency(employee.currency);
 			setTechStack(employee.techStack);
 			fetchImage();
 		}
@@ -53,6 +55,7 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 		if (image) formData.append('image', image);
 		formData.append('department', department);
 		formData.append('salary', salary);
+		formData.append('currency', currency);
 		formData.append('techStack', techStack);
 		await updateEmployee({ employeeId: employee.id, data: formData });
 	};
@@ -268,12 +271,36 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 										className='relative flex cursor-pointer items-center justify-between gap-2 rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'
 										onClick={() => setIsCurrencyMenuOpen(!isCurrencyMenuOpen)}
 									>
-										<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>BAM</span>
+										<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>
+											{currency}
+										</span>
 										<img
 											className={`transition ${isCurrencyMenuOpen ? 'rotate-180' : ''}`}
 											src={chevronDown}
 											alt='Down icon'
 										/>
+										{isCurrencyMenuOpen && (
+											<div className='absolute left-0 top-10 z-10 flex w-[80px] flex-col overflow-hidden rounded-md border border-t-0 border-misty-moonstone bg-white text-center'>
+												<div
+													className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
+													onClick={() => setCurrency('USD')}
+												>
+													USD
+												</div>
+												<div
+													className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
+													onClick={() => setCurrency('EUR')}
+												>
+													EUR
+												</div>
+												<div
+													className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
+													onClick={() => setCurrency('BAM')}
+												>
+													BAM
+												</div>
+											</div>
+										)}
 									</div>
 								</div>
 							</div>
