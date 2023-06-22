@@ -7,7 +7,7 @@ import SummaryCard from 'components/cards/SummaryCard';
 type Props = {
 	className?: string;
 	wrapperClassName?: string;
-	item: number;
+	item: string;
 	data: any[];
 	revenueGap: string;
 	tickNumbers?: boolean;
@@ -73,32 +73,36 @@ const RevenuesCostsPerMonthChartItem = ({
 				<div className='mb-[30px] flex flex-col justify-center gap-4'>
 					<DataSelector
 						label='Grand Total Planned Revenue'
-						htmlFor={`revenues-costs-per-month-${item}-1`}
-						id={`revenues-costs-per-month-${item}-1`}
+						htmlFor={`revenuesCostsPerMonthFirstOption${item}`}
+						id={`revenuesCostsPerMonthFirstOption${item}`}
+						name={`revenuesCostsPerMonthFirstOption${item}`}
 						color='#FF9F5A'
 						checked={firstOption}
 						toggle={() => setFirstOption(!firstOption)}
 					/>
 					<DataSelector
 						label='Grand Total Actual Revenue'
-						htmlFor={`revenues-costs-per-month-${item}-2`}
-						id={`revenues-costs-per-month-${item}-2`}
+						htmlFor={`revenuesCostsPerMonthSecondOption${item}`}
+						id={`revenuesCostsPerMonthSecondOption${item}`}
+						name={`revenuesCostsPerMonthSecondOption${item}`}
 						color='#7BB99F'
 						checked={secondOption}
 						toggle={() => setSecondOption(!secondOption)}
 					/>
 					<DataSelector
 						label='Grand Total Total Expenses (Planned)'
-						htmlFor={`revenues-costs-per-month-${item}-3`}
-						id={`revenues-costs-per-month-${item}-3`}
+						htmlFor={`revenuesCostsPerMonthThirdOption${item}`}
+						id={`revenuesCostsPerMonthThirdOption${item}`}
+						name={`revenuesCostsPerMonthThirdOption${item}`}
 						color='#4C84F2'
 						checked={thirdOption}
 						toggle={() => setThirdOption(!thirdOption)}
 					/>
 					<DataSelector
 						label='Grand Total Total Expenses (Actual)'
-						htmlFor={`revenues-costs-per-month-${item}-4`}
-						id={`revenues-costs-per-month-${item}-4`}
+						htmlFor={`revenuesCostsPerMonthFourthOption${item}`}
+						id={`revenuesCostsPerMonthFourthOption${item}`}
+						name={`revenuesCostsPerMonthFourthOption${item}`}
 						color='#FDCA48'
 						checked={fourthOption}
 						toggle={() => setFourthOption(!fourthOption)}

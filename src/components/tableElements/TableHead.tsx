@@ -21,9 +21,7 @@ const TableHead = ({ columns, orderByField, orderDirection, handleSort }: Props)
 						key={index}
 						className={`px-4 py-2 font-gilroy-medium text-sm font-medium leading-[22px] text-slate-mist ${
 							column.label !== 'actions' ? 'cursor-pointer hover:bg-pale-silver' : ''
-						} ${orderByField === column.label && column.label !== 'actions' ? 'bg-pale-silver' : ''} ${
-							column.label === 'salary' ? 'w-[220px]' : 'w-[175px]'
-						}`}
+						} ${orderByField === column.label && column.label !== 'actions' ? 'bg-pale-silver' : ''}`}
 						onClick={() =>
 							column.label !== 'actions' && handleSort(column.label, orderDirection === 'asc' ? 'desc' : 'asc')
 						}

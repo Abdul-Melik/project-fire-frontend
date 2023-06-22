@@ -31,9 +31,8 @@ const UserMenu = ({ className }: Props) => {
 			animate={{ opacity: 1, y: '0' }}
 			transition={{ duration: 0.2, ease: 'easeInOut' }}
 		>
-			<UserMenuItem label='Placeholder text 1' />
-			<UserMenuItem label='Placeholder text 2' />
-			<UserMenuItem label='Placeholder text 3' />
+			<UserMenuItem label='Account Settings' className='border-b border-misty-moonstone' />
+			<UserMenuItem label='Edit profile' className='border-b border-misty-moonstone' />
 			<UserMenuItem label='Logout' onClick={logoutHandler} />
 		</motion.div>
 	);

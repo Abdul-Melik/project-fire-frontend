@@ -8,10 +8,10 @@ import { useCreateEmployeeMutation } from 'store/slices/employeesApiSlice';
 import SideDrawer from 'components/navigation/SideDrawer';
 
 type Props = {
-	closeAddNewEmployee: () => void;
+	closeAddEmployeeSideDrawer: () => void;
 };
 
-const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
+const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
 	const [isDepartmentMenuOpen, setIsDepartmentMenuOpen] = useState(false);
 	const [isCurrencyMenuOpen, setIsCurrencyMenuOpen] = useState(false);
 	const [isTechStackMenuOpen, setIsTechStackMenuOpen] = useState(false);
@@ -38,7 +38,7 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 	};
 
 	useEffect(() => {
-		if (isSuccess) closeAddNewEmployee();
+		if (isSuccess) closeAddEmployeeSideDrawer();
 	}, [isSuccess]);
 
 	useEffect(() => {
@@ -56,7 +56,7 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 			className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pt-[27px]'
 		>
 			<header className='flex flex-col gap-[13px]'>
-				<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeAddNewEmployee}>
+				<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeAddEmployeeSideDrawer}>
 					<img className='h-4 w-4' src={chevronLeft} alt='Back icon' />
 					<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
 				</div>
@@ -69,15 +69,16 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 					<div className='flex flex-col'>
 						<label
 							className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
-							htmlFor='first-name'
+							htmlFor='firstName'
 						>
 							First Name
 						</label>
 						<input
 							className='rounded-md border border-misty-moonstone px-4 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist focus:border-misty-moonstone focus:ring-transparent'
+							required
 							type='text'
-							id='first-name'
-							name='first-name'
+							id='firstName'
+							name='firstName'
 							placeholder='First Name'
 							autoComplete='off'
 							value={firstName}
@@ -87,15 +88,16 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 					<div className='flex flex-col'>
 						<label
 							className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
-							htmlFor='last-name'
+							htmlFor='lastName'
 						>
 							Last Name
 						</label>
 						<input
 							className='rounded-md border border-misty-moonstone px-4 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist focus:border-misty-moonstone focus:ring-transparent'
+							required
 							type='text'
-							id='last-name'
-							name='last-name'
+							id='lastName'
+							name='lastName'
 							placeholder='Last Name'
 							value={lastName}
 							onChange={event => setLastName(event.target.value)}
@@ -107,7 +109,7 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 						</span>
 						<label
 							className='flex h-[104px] w-[104px] cursor-pointer flex-col items-center justify-center gap-[10px] overflow-hidden rounded-md border border-dashed border-ashen-grey bg-frosty-mint'
-							htmlFor='profile-image'
+							htmlFor='profileImage'
 						>
 							{!image ? (
 								<>
@@ -121,8 +123,8 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 								className='hidden'
 								type='file'
 								accept='image/*'
-								id='profile-image'
-								name='profile-image'
+								id='profileImage'
+								name='profileImage'
 								onChange={event => {
 									const file = event.target.files?.[0];
 									if (file) {
@@ -227,6 +229,7 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 						<div className='flex gap-2'>
 							<input
 								className='flex-1 rounded-md border border-misty-moonstone px-4 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist focus:border-misty-moonstone focus:ring-transparent'
+								required
 								type='number'
 								id='salary'
 								name='salary'
@@ -384,7 +387,7 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 			<footer className='absolute bottom-0 left-0 flex w-full items-center justify-end gap-2 bg-white p-6'>
 				<button
 					className='rounded-md border border-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'
-					onClick={closeAddNewEmployee}
+					onClick={closeAddEmployeeSideDrawer}
 				>
 					Cancel
 				</button>
@@ -398,7 +401,7 @@ const AddNewEmployee = ({ closeAddNewEmployee }: Props) => {
 		</motion.div>
 	);
 
-	return <SideDrawer onClick={closeAddNewEmployee}>{children}</SideDrawer>;
+	return <SideDrawer onClick={closeAddEmployeeSideDrawer}>{children}</SideDrawer>;
 };
 
-export default AddNewEmployee;
+export default AddEmployee;

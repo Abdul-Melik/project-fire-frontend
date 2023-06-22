@@ -11,24 +11,24 @@ import Pagination from 'components/pagination';
 import AlertModal from 'components/modals/AlertModal';
 import EmployeesTable from 'features/employees/EmployeesTable';
 import ViewEmployee from 'features/employees/ViewEmployee';
-import AddNewEmployee from 'features/employees/AddNewEmployee';
+import AddEmployee from 'src/features/employees/AddEmployee';
 import EditEmployee from 'features/employees/EditEmployee';
 
 const navLabels = ['All Employees', 'Current', 'Past'];
 
 const Employees = () => {
+	const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 	const [activePage, setActivePage] = useState(1);
-	const [isViewEmployeeOpen, setIsViewEmployeeOpen] = useState(false);
-	const [isAddNewEmployeeOpen, setIsAddNewEmployeeOpen] = useState(false);
-	const [isEditEmployeeOpen, setIsEditEmployeeOpen] = useState(false);
-	const [employeeId, setEmployeeId] = useState('');
+	const [isViewEmployeeSideDrawerOpen, setIsViewEmployeeSideDrawerOpen] = useState(false);
+	const [isAddEmployeeSideDrawerOpen, setIsAddEmployeeSideDrawerOpen] = useState(false);
+	const [isEditEmployeeSideDrawerOpen, setIsEditEmployeeSideDrawerOpen] = useState(false);
 	const [searchTerm, setSearchTerm] = useState('');
+	const [employeeId, setEmployeeId] = useState('');
 	const [isEmployed, setIsEmployed] = useState('');
 	const [orderByField, setOrderByField] = useState('firstName');
 	const [orderDirection, setOrderDirection] = useState('asc');
 	const [currentPage, setCurrentPage] = useState(1);
 	const [employeesPerPage, setEmployeesPerPage] = useState(10);
-	const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
 	const user = useAppSelector(selectCurrentUser);
 	const {
@@ -82,16 +82,18 @@ const Employees = () => {
 					onConfirm={onConfirm}
 				/>
 			)}
-			{isViewEmployeeOpen && (
+			{isViewEmployeeSideDrawerOpen && (
 				<ViewEmployee
 					employee={employee}
-					closeViewEmployee={() => setIsViewEmployeeOpen(false)}
-					openEditEmployee={() => setIsEditEmployeeOpen(true)}
+					closeViewEmployeeSideDrawer={() => setIsViewEmployeeSideDrawerOpen(false)}
+					openEditEmployeeSideDrawer={() => setIsEditEmployeeSideDrawerOpen(true)}
 				/>
 			)}
-			{isAddNewEmployeeOpen && <AddNewEmployee closeAddNewEmployee={() => setIsAddNewEmployeeOpen(false)} />}
-			{isEditEmployeeOpen && (
-				<EditEmployee employee={employee} closeEditEmployee={() => setIsEditEmployeeOpen(false)} />
+			{isAddEmployeeSideDrawerOpen && (
+				<AddEmployee closeAddEmployeeSideDrawer={() => setIsAddEmployeeSideDrawerOpen(false)} />
+			)}
+			{isEditEmployeeSideDrawerOpen && (
+				<EditEmployee employee={employee} closeEditEmployeeSideDrawer={() => setIsEditEmployeeSideDrawerOpen(false)} />
 			)}
 			<div className='mx-14 mb-[17px] mt-[34px]'>
 				<div className='mb-[30px] flex items-center justify-between'>
@@ -99,7 +101,7 @@ const Employees = () => {
 					{user?.role === 'Admin' && (
 						<button
 							className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white hover:saturate-[400%]'
-							onClick={() => setIsAddNewEmployeeOpen(true)}
+							onClick={() => setIsAddEmployeeSideDrawerOpen(true)}
 						>
 							Add New Employee
 						</button>
@@ -138,12 +140,12 @@ const Employees = () => {
 									setIsAlertModalOpen(true);
 									setEmployeeId(employeeId);
 								}}
-								openViewEmployee={(employeeId: string) => {
-									setIsViewEmployeeOpen(true);
+								openViewEmployeeSideDrawer={(employeeId: string) => {
+									setIsViewEmployeeSideDrawerOpen(true);
 									setEmployeeId(employeeId);
 								}}
-								openEditEmployee={(employeeId: string) => {
-									setIsEditEmployeeOpen(true);
+								openEditEmployeeSideDrawer={(employeeId: string) => {
+									setIsEditEmployeeSideDrawerOpen(true);
 									setEmployeeId(employeeId);
 								}}
 							/>

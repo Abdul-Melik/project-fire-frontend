@@ -9,10 +9,10 @@ import SideDrawer from 'components/navigation/SideDrawer';
 
 type Props = {
 	employee: Employee;
-	closeEditEmployee: () => void;
+	closeEditEmployeeSideDrawer: () => void;
 };
 
-const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
+const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 	const [isDepartmentMenuOpen, setIsDepartmentMenuOpen] = useState(false);
 	const [isCurrencyMenuOpen, setIsCurrencyMenuOpen] = useState(false);
 	const [isTechStackMenuOpen, setIsTechStackMenuOpen] = useState(false);
@@ -45,7 +45,7 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 		}
 	}, [employee]);
 
-	const handleSubmit = async (event: React.MouseEvent<HTMLElement>) => {
+	const handleUpdate = async (event: React.MouseEvent<HTMLElement>) => {
 		event.preventDefault();
 		const formData = new FormData();
 		formData.append('firstName', firstName);
@@ -58,7 +58,7 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 	};
 
 	useEffect(() => {
-		if (isSuccess) closeEditEmployee();
+		if (isSuccess) closeEditEmployeeSideDrawer();
 	}, [isSuccess]);
 
 	useEffect(() => {
@@ -75,7 +75,7 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 			transition={{ duration: 0.4, ease: 'easeInOut' }}
 			className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pt-[27px]'
 		>
-			<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeEditEmployee}>
+			<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeEditEmployeeSideDrawer}>
 				<img className='h-4 w-4' src={chevronLeft} alt='Back icon' />
 				<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
 			</div>
@@ -91,15 +91,15 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 							<div className='flex flex-col'>
 								<label
 									className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
-									htmlFor='first-name'
+									htmlFor='firstName'
 								>
 									First Name
 								</label>
 								<input
 									className='rounded-md border border-misty-moonstone px-4 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist focus:border-misty-moonstone focus:ring-transparent'
 									type='text'
-									id='first-name'
-									name='first-name'
+									id='firstName'
+									name='firstName'
 									placeholder='First Name'
 									autoComplete='off'
 									value={firstName}
@@ -109,15 +109,15 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 							<div className='flex flex-col'>
 								<label
 									className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
-									htmlFor='last-name'
+									htmlFor='lastName'
 								>
 									Last Name
 								</label>
 								<input
 									className='rounded-md border border-misty-moonstone px-4 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist focus:border-misty-moonstone focus:ring-transparent'
 									type='text'
-									id='last-name'
-									name='last-name'
+									id='lastName'
+									name='lastName'
 									placeholder='Last Name'
 									value={lastName}
 									onChange={event => setLastName(event.target.value)}
@@ -129,7 +129,7 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 								</span>
 								<label
 									className='flex h-[104px] w-[104px] cursor-pointer flex-col items-center justify-center gap-[10px] overflow-hidden rounded-md border border-dashed border-ashen-grey bg-frosty-mint'
-									htmlFor='profile-image'
+									htmlFor='profileImage'
 								>
 									{!image ? (
 										<>
@@ -143,8 +143,8 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 										className='hidden'
 										type='file'
 										accept='image/*'
-										id='profile-image'
-										name='profile-image'
+										id='profileImage'
+										name='profileImage'
 										onChange={event => {
 											const file = event.target.files?.[0];
 											if (file) {
@@ -388,13 +388,13 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 					<footer className='absolute bottom-0 left-0 flex w-full items-center justify-end gap-2 bg-white p-6'>
 						<button
 							className='rounded-md border border-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'
-							onClick={closeEditEmployee}
+							onClick={closeEditEmployeeSideDrawer}
 						>
 							Cancel
 						</button>
 						<button
 							className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white'
-							onClick={handleSubmit}
+							onClick={handleUpdate}
 						>
 							Edit Employee
 						</button>
@@ -404,7 +404,7 @@ const EditEmployee = ({ employee, closeEditEmployee }: Props) => {
 		</motion.div>
 	);
 
-	return <SideDrawer onClick={closeEditEmployee}>{children}</SideDrawer>;
+	return <SideDrawer onClick={closeEditEmployeeSideDrawer}>{children}</SideDrawer>;
 };
 
 export default EditEmployee;

@@ -35,7 +35,13 @@ const Avatars = ({ images = [], names = [], maxVisibleAvatars }: Props) => {
 			onMouseLeave={() => setShowNames(false)}
 		>
 			{images.slice(0, maxVisibleAvatars).map((image, index) => (
-				<Avatar key={index} src={image} alt='Employee icon' names={names} />
+				<Avatar
+					key={index}
+					className='h-[35px] w-[35px] rounded-full border-2 border-white'
+					src={image}
+					alt='Employee icon'
+					names={names}
+				/>
 			))}
 			{overflowCount > 0 && (
 				<div className='h-[35px] w-[35px] rounded-full bg-deep-teal font-gilroy-semi-bold text-sm font-semibold leading-[22px] text-white'>

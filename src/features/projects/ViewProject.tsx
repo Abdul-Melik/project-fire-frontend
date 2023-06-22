@@ -5,21 +5,21 @@ import { Project } from 'src/types';
 import { getProjectDate, getProjectValueBAM, getProjectColorAndStatus } from 'src/helpers';
 import { chevronLeft } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
-import { selectCurrentUser } from 'store/slices/authSlice';
+import { selectUserRole } from 'store/slices/authSlice';
 import { useDeleteProjectMutation } from 'store/slices/projectsApiSlice';
 import SideDrawer from 'components/navigation/SideDrawer';
 import AlertModal from 'components/modals/AlertModal';
 
 type Props = {
 	project: Project;
-	closeViewProject: () => void;
-	openEditProject: () => void;
+	closeViewProjectSideDrawer: () => void;
+	openEditProjectSideDrawer: () => void;
 };
 
-const ViewProject = ({ project, closeViewProject, openEditProject }: Props) => {
+const ViewProject = ({ project, closeViewProjectSideDrawer, openEditProjectSideDrawer }: Props) => {
 	const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
-	const user = useAppSelector(selectCurrentUser);
+	const userRole = useAppSelector(selectUserRole);
 	const [deleteProject, { isSuccess }] = useDeleteProjectMutation();
 
 	const onConfirm = async () => {
@@ -29,7 +29,7 @@ const ViewProject = ({ project, closeViewProject, openEditProject }: Props) => {
 	useEffect(() => {
 		if (isSuccess) {
 			setIsAlertModalOpen(false);
-			closeViewProject();
+			closeViewProjectSideDrawer();
 		}
 	}, [isSuccess]);
 
@@ -52,7 +52,7 @@ const ViewProject = ({ project, closeViewProject, openEditProject }: Props) => {
 				transition={{ duration: 0.4, ease: 'easeInOut' }}
 				className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pb-6 pt-[27px]'
 			>
-				<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeViewProject}>
+				<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeViewProjectSideDrawer}>
 					<img className='h-4 w-4' src={chevronLeft} alt='Back icon' />
 					<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
 				</div>
@@ -106,17 +106,17 @@ const ViewProject = ({ project, closeViewProject, openEditProject }: Props) => {
 									<div className='flex items-center gap-2'>
 										<div
 											className={`h-[6px] w-[6px] rounded-full ${
-												getProjectColorAndStatus(project.projectStatus).color
+												getProjectColorAndStatus(project.projectStatus)?.color
 											}`}
 										/>
 										<div className='font-gilroy-regular font-normal text-slate-mist'>
-											{getProjectColorAndStatus(project.projectStatus).status}
+											{getProjectColorAndStatus(project.projectStatus)?.status}
 										</div>
 									</div>
 								</div>
 							</div>
 						</main>
-						{user?.role === 'Admin' && (
+						{userRole === 'Admin' && (
 							<footer className='absolute bottom-0 left-0 flex w-full items-center justify-end gap-2 bg-white p-6'>
 								<button
 									className='rounded-md border border-crimson-blaze px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-crimson-blaze'
@@ -127,8 +127,8 @@ const ViewProject = ({ project, closeViewProject, openEditProject }: Props) => {
 								<button
 									className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white'
 									onClick={() => {
-										closeViewProject();
-										openEditProject();
+										closeViewProjectSideDrawer();
+										openEditProjectSideDrawer();
 									}}
 								>
 									Edit Project
@@ -141,7 +141,7 @@ const ViewProject = ({ project, closeViewProject, openEditProject }: Props) => {
 		</>
 	);
 
-	return <SideDrawer onClick={closeViewProject}>{children}</SideDrawer>;
+	return <SideDrawer onClick={closeViewProjectSideDrawer}>{children}</SideDrawer>;
 };
 
 export default ViewProject;

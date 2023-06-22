@@ -1,9 +1,15 @@
 import { useState, useEffect } from 'react';
 
+import { Invoice } from 'src/types';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
-import { useGetInvoicesQuery } from 'store/slices/invoicingApiSlice';
+import {
+	useGetInvoicesQuery,
+	useUpdateInvoiceMutation,
+	useDeleteInvoiceMutation,
+} from 'store/slices/invoicingApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
+import AlertModal from 'components/modals/AlertModal';
 import MainLayout from 'components/layout';
 import Navbar from 'components/navigation/NavBar';
 import Pagination from 'components/pagination';
@@ -12,7 +18,9 @@ import InvoicesTable from 'features/invoicing/InvoicesTable';
 const navLabels = ['All Invoices', 'Sent', 'Paid'];
 
 const Invoicing = () => {
+	const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 	const [activePage, setActivePage] = useState(1);
+	const [invoiceId, setInvoiceId] = useState('');
 	const [client, setClient] = useState('');
 	const [invoiceStatus, setInvoiceStatus] = useState('');
 	const [orderByField, setOrderByField] = useState('client');
@@ -21,7 +29,12 @@ const Invoicing = () => {
 	const [invoicesPerPage, setInvoicesPerPage] = useState(10);
 
 	const user = useAppSelector(selectCurrentUser);
-	const { isLoading, isFetching, isSuccess, data } = useGetInvoicesQuery(
+	const {
+		isLoading,
+		isFetching,
+		isSuccess: isInvoicesSuccess,
+		data,
+	} = useGetInvoicesQuery(
 		{
 			client,
 			invoiceStatus,
@@ -36,6 +49,8 @@ const Invoicing = () => {
 			refetchOnReconnect: true,
 		}
 	);
+	const [updateInvoice, { isSuccess: isUpdateSuccess }] = useUpdateInvoiceMutation();
+	const [deleteInvoice, { isSuccess: isDeleteSuccess }] = useDeleteInvoiceMutation();
 
 	useEffect(() => {
 		if (activePage === 1) setInvoiceStatus('');
@@ -43,8 +58,33 @@ const Invoicing = () => {
 		else if (activePage === 3) setInvoiceStatus('Paid');
 	}, [activePage]);
 
+	const updateInvoiceStatus = async (invoiceId: string, invoiceStatus: string) => {
+		await updateInvoice({ invoiceId, data: { invoiceStatus } });
+	};
+
+	const onConfirm = async () => {
+		await deleteInvoice({ invoiceId });
+	};
+
+	useEffect(() => {
+		if (isDeleteSuccess) setIsAlertModalOpen(false);
+	}, [isDeleteSuccess]);
+
+	const invoice = isInvoicesSuccess && data.invoices.find((invoice: Invoice) => invoice.id === invoiceId);
+
 	return (
 		<MainLayout activeMenuItem={'invoicing'}>
+			{isAlertModalOpen && (
+				<AlertModal
+					alertTitle={`Are you sure you want to delete ${invoice.client}?`}
+					alertDescription={`This will permanently delete ${invoice.client} and all associated data. You cannot undo this action.`}
+					cancelButtonText="Don't Delete"
+					confirmButtonText='Delete'
+					confirmButtoncolor='#FF4D4F'
+					onCancel={() => setIsAlertModalOpen(false)}
+					onConfirm={onConfirm}
+				/>
+			)}
 			<div className='mx-14 mb-[17px] mt-[34px]'>
 				<div className='mb-[30px] flex items-center justify-between'>
 					<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Invoicing</h1>
@@ -74,7 +114,7 @@ const Invoicing = () => {
 					{isLoading || isFetching ? (
 						<LoadingSpinner />
 					) : (
-						isSuccess && (
+						(isInvoicesSuccess || isUpdateSuccess) && (
 							<InvoicesTable
 								totalNumberOfInvoices={data.pageInfo.total}
 								invoices={data.invoices}
@@ -86,13 +126,20 @@ const Invoicing = () => {
 									setOrderByField(label);
 									setOrderDirection(orderDirection);
 								}}
+								handleUpdate={(invoiceId, invoiceStatus) => {
+									updateInvoiceStatus(invoiceId, invoiceStatus);
+								}}
+								handleDelete={invoiceId => {
+									setIsAlertModalOpen(true);
+									setInvoiceId(invoiceId);
+								}}
 							/>
 						)
 					)}
 				</div>
 			</div>
 			<div className='mx-14 mb-[25px]'>
-				{isSuccess && (
+				{isInvoicesSuccess && (
 					<Pagination
 						total={data.pageInfo.total}
 						currentPage={data.pageInfo.currentPage}

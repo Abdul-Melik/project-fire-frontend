@@ -2,7 +2,7 @@ import DataCard from 'components/cards/DataCard';
 import PlanCardItem from 'features/home/PlanCardItem';
 
 const Plan = () => {
-	const headerContent1 = (
+	const firstHeader = (
 		<div className='flex items-center gap-[10px]'>
 			<h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>
 				Revenues & costs (per project) - per month
@@ -10,7 +10,7 @@ const Plan = () => {
 		</div>
 	);
 
-	const headerContent2 = (
+	const secondHeader = (
 		<div className='flex items-center gap-[10px]'>
 			<h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>Expenses</h2>
 		</div>
@@ -18,7 +18,7 @@ const Plan = () => {
 
 	return (
 		<div className='flex flex-col gap-[30px]'>
-			<DataCard className='rounded-[6px] border border-ashen-grey bg-white' header={headerContent1}>
+			<DataCard className='rounded-[6px] border border-ashen-grey bg-white' header={firstHeader}>
 				<div className='mt-[11px] flex flex-col gap-[5px]'>
 					<PlanCardItem text='Development' amount='2,400,000.00 KM' />
 					<PlanCardItem text='Design' amount='7,800,000.00 KM' />
@@ -32,7 +32,7 @@ const Plan = () => {
 					/>
 				</div>
 			</DataCard>
-			<DataCard className='rounded-[6px] border border-ashen-grey bg-white' header={headerContent2}>
+			<DataCard className='rounded-[6px] border border-ashen-grey bg-white' header={secondHeader}>
 				<div className='mt-[11px] flex flex-col gap-[5px]'>
 					<PlanCardItem text='Direct' amount='4,400,000.00 KM' />
 					<PlanCardItem text='Indirect' amount='1,400,000.00 KM' />

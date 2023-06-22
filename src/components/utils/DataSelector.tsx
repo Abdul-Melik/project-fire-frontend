@@ -2,12 +2,13 @@ type Props = {
 	label: string;
 	htmlFor: string;
 	id: string;
+	name: string;
 	color?: string;
 	checked: boolean;
 	toggle: () => void;
 };
 
-const DataSelector = ({ label, htmlFor, id, color, checked, toggle }: Props) => {
+const DataSelector = ({ label, htmlFor, id, name, color, checked, toggle }: Props) => {
 	return (
 		<div className='flex gap-2'>
 			<input
@@ -15,6 +16,7 @@ const DataSelector = ({ label, htmlFor, id, color, checked, toggle }: Props) => 
 				style={{ borderColor: color, backgroundColor: checked ? color : '' }}
 				type='checkbox'
 				id={id}
+				name={name}
 				checked={checked}
 				onChange={() => toggle()}
 			/>

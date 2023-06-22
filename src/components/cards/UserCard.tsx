@@ -1,6 +1,7 @@
 import { avatar, arrow } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
+import Avatar from 'components/utils/Avatar';
 
 type Props = {
 	className: string;
@@ -14,7 +15,7 @@ const UserCard = ({ className, isUserMenuOpen, onClick }: Props) => {
 	return (
 		<div className={`flex items-center justify-between gap-[13px] px-[14px] py-[10px] ${className}`}>
 			<div className='flex flex-wrap items-center gap-[13px]'>
-				<img className='h-[54px] w-[54px] rounded-lg object-cover' src={user?.image ? user.image : avatar} />
+				<Avatar className='h-[54px] w-[54px] rounded-lg' src={user?.image} alt='User image' />
 				<div className='flex flex-col gap-[3px]'>
 					<div className='flex flex-wrap gap-[3px]'>
 						<span className='whitespace-nowrap font-inter-medium text-base font-medium text-steel-blue'>

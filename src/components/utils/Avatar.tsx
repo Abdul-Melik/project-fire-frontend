@@ -11,15 +11,7 @@ type Props = {
 };
 
 const Avatar = ({ className, src, alt }: Props) => {
-	return (
-		<div>
-			<img
-				className={`h-[35px] w-[35px] rounded-full border-2 border-white object-cover ${className}`}
-				src={src ? src : avatar}
-				alt={alt}
-			/>
-		</div>
-	);
+	return <img className={`object-cover ${className}`} src={src ? src : avatar} alt={alt} />;
 };
 
 export default Avatar;

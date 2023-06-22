@@ -54,11 +54,11 @@ const ResetPassword = () => {
 					<InputField
 						className='mb-[34px]'
 						label='Confirm Password'
-						htmlFor='confirm-password'
+						htmlFor='confirmPassword'
 						required
 						type='password'
-						id='confirm-password'
-						name='confirm-password'
+						id='confirmPassword'
+						name='confirmPassword'
 						value={confirmPassword}
 						placeholder='Confirm your password'
 						handleInput={confirmPassword => setConfirmPassword(confirmPassword)}

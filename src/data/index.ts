@@ -1,5 +1,5 @@
-// Chart Data
-const hoursOverviewChartData = [
+// Charts Data
+export const hoursOverviewChartData = [
 	{ month: 'January: 1/1/2023', 'Grand Total Hours Available': 3310, 'Grand Total Hours Billed': 450 },
 	{ month: 'March: 1/3/2023', 'Grand Total Hours Available': 4433, 'Grand Total Hours Billed': 705 },
 	{ month: 'May: 1/5/2023', 'Grand Total Hours Available': 3000, 'Grand Total Hours Billed': 3001 },
@@ -8,7 +8,7 @@ const hoursOverviewChartData = [
 	{ month: 'November: 1/11/2023', 'Grand Total Hours Available': 1501, 'Grand Total Hours Billed': 610 },
 ];
 
-const revenuesCostsActualChartData = [
+export const revenuesCostsActualChartData = [
 	{
 		organisation: 'AlphaBid',
 		'Grand Total Total Billed': 125310,
@@ -51,7 +51,7 @@ const revenuesCostsActualChartData = [
 	},
 ];
 
-const revenuesCostsPerMonthChartData = {
+export const revenuesCostsPerMonthChartData = {
 	data: [
 		[
 			{
@@ -84,4 +84,31 @@ const revenuesCostsPerMonthChartData = {
 	revenueGap: ['914.00 KM', '10,000.00 KM', '-15,000.00 KM'],
 };
 
-export { hoursOverviewChartData, revenuesCostsActualChartData, revenuesCostsPerMonthChartData };
+// Table Columns Data
+export const employeesTableColumnsData = [
+	{ name: 'First Name', label: 'firstName' },
+	{ name: 'Last Name', label: 'lastName' },
+	{ name: 'Department', label: 'department' },
+	{ name: 'Monthly Salary (BAM)', label: 'salary' },
+	{ name: 'Tech Stack', label: 'techStack' },
+	{ name: 'Actions', label: 'actions' },
+];
+
+export const projectsTableColumnsData = [
+	{ name: 'Name', label: 'name' },
+	{ name: 'Description', label: 'description' },
+	{ name: 'Duration', label: 'startDate' },
+	{ name: 'Developers', label: 'employeesCount' },
+	{ name: 'Hourly rate', label: 'hourlyRate' },
+	{ name: 'Project value in BAM', label: 'projectValueBAM' },
+	{ name: 'Status', label: 'projectStatus' },
+];
+
+export const invoicesTableColumnsData = [
+	{ name: 'Client', label: 'client' },
+	{ name: 'Industry', label: 'industry' },
+	{ name: 'Totall Hours Billed', label: 'totalHoursBilled' },
+	{ name: 'Amount Billed (BAM)', label: 'amountBilledBAM' },
+	{ name: 'Status', label: 'invoiceStatus' },
+	{ name: 'Actions', label: 'actions' },
+];

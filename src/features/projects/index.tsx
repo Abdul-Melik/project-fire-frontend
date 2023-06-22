@@ -10,14 +10,16 @@ import Navbar from 'components/navigation/NavBar';
 import Pagination from 'components/pagination';
 import ProjectsTable from 'features/projects/ProjectsTable';
 import ViewProject from 'features/projects/ViewProject';
+import AddProject from 'features/projects/AddProject';
+import EditProject from 'features/projects/EditProject';
 
 const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
 
 const Projects = () => {
 	const [activePage, setActivePage] = useState(1);
-	const [isViewProjectOpen, setIsViewProjectOpen] = useState(false);
-	const [isAddNewProjectOpen, setIsAddNewProjectOpen] = useState(false);
-	const [isEditProjectOpen, setIsEditProjectOpen] = useState(false);
+	const [isViewProjectSideDrawerOpen, setIsViewProjectSideDrawerOpen] = useState(false);
+	const [isAddProjectSideDrawerOpen, setIsAddProjectSideDrawerOpen] = useState(false);
+	const [isEditProjectSideDrawerOpen, setIsEditProjectSideDrawerOpen] = useState(false);
 	const [projectId, setProjectId] = useState('');
 	const [searchTerm, setSearchTerm] = useState('');
 	const [projectStatus, setProjectStatus] = useState('');
@@ -55,12 +57,18 @@ const Projects = () => {
 
 	return (
 		<MainLayout activeMenuItem={'projects'}>
-			{isViewProjectOpen && (
+			{isViewProjectSideDrawerOpen && (
 				<ViewProject
 					project={project}
-					closeViewProject={() => setIsViewProjectOpen(false)}
-					openEditProject={() => setIsEditProjectOpen(true)}
+					closeViewProjectSideDrawer={() => setIsViewProjectSideDrawerOpen(false)}
+					openEditProjectSideDrawer={() => setIsEditProjectSideDrawerOpen(true)}
 				/>
+			)}
+			{isAddProjectSideDrawerOpen && (
+				<AddProject closeAddProjectSideDrawer={() => setIsAddProjectSideDrawerOpen(false)} />
+			)}
+			{isEditProjectSideDrawerOpen && (
+				<EditProject project={project} closeEditProjectSideDrawer={() => setIsEditProjectSideDrawerOpen(false)} />
 			)}
 			<div className='mx-14 mb-[17px] mt-[34px]'>
 				<div className='mb-[30px] flex items-center justify-between'>
@@ -68,7 +76,7 @@ const Projects = () => {
 					{user?.role === 'Admin' && (
 						<button
 							className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white hover:saturate-[400%]'
-							onClick={() => {}}
+							onClick={() => setIsAddProjectSideDrawerOpen(true)}
 						>
 							Create new project
 						</button>
@@ -103,8 +111,8 @@ const Projects = () => {
 									setOrderByField(label);
 									setOrderDirection(orderDirection);
 								}}
-								openViewProject={(projectId: string) => {
-									setIsViewProjectOpen(true);
+								openViewProjectSideDrawer={(projectId: string) => {
+									setIsViewProjectSideDrawerOpen(true);
 									setProjectId(projectId);
 								}}
 							/>

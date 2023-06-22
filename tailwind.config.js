@@ -17,6 +17,7 @@ export default {
 				'sage-green': '#7BB99F',
 				'spring-fern': '#32C653',
 				'pale-jade': '#B3DFC9',
+				'frosty-lagoon': '#EFF8F7',
 				'seafoam-green': '#E6F2ED',
 
 				//Blue Tones
@@ -81,5 +82,5 @@ export default {
 			},
 		},
 	},
-	plugins: [require('@tailwindcss/forms'), require('tailwind-scrollbar')],
+	plugins: [require('@tailwindcss/forms'), require('tailwind-scrollbar')({ nocompatible: true })],
 };

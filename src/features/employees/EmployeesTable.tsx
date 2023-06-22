@@ -1,10 +1,9 @@
-import { useCallback } from 'react';
-
 import { Employee } from 'src/types';
-import { getEmployeeTechStack } from 'src/helpers';
+import { employeesTableColumnsData as columns } from 'src/data';
+import { useAppSelector } from 'store/hooks';
+import { selectUserRole } from 'store/slices/authSlice';
 import Table from 'components/tableElements/Table';
-import TableRow from 'components/tableElements/TableRow';
-import EmployeeActions from 'features/employees/EmployeeActions';
+import EmployeesTableRow from 'features/employees/EmployeesTableRow';
 
 type Props = {
 	totalNumberOfEmployees: number;
@@ -15,18 +14,9 @@ type Props = {
 	handleSearch: (input: string) => void;
 	handleSort: (label: string, orderDirection: string) => void;
 	handleDelete: (employeeId: string) => void;
-	openViewEmployee: (employeeId: string) => void;
-	openEditEmployee: (employeeId: string) => void;
+	openViewEmployeeSideDrawer: (employeeId: string) => void;
+	openEditEmployeeSideDrawer: (employeeId: string) => void;
 };
-
-const columns = [
-	{ name: 'First Name', label: 'firstName' },
-	{ name: 'Last Name', label: 'lastName' },
-	{ name: 'Department', label: 'department' },
-	{ name: 'Monthly Salary (BAM)', label: 'salary' },
-	{ name: 'Tech Stack', label: 'techStack' },
-	{ name: 'Actions', label: 'actions' },
-];
 
 const EmployeesTable = ({
 	totalNumberOfEmployees,
@@ -37,39 +27,30 @@ const EmployeesTable = ({
 	handleSearch,
 	handleSort,
 	handleDelete,
-	openViewEmployee,
-	openEditEmployee,
+	openViewEmployeeSideDrawer,
+	openEditEmployeeSideDrawer,
 }: Props) => {
-	const getEmployeesTableRow = useCallback(
-		(employee: Employee) => {
-			const employeeId = employee.id;
-			return (
-				<TableRow key={employeeId} className='cursor-pointer' onClick={() => openViewEmployee(employeeId)}>
-					<td className='p-4'>{employee.firstName}</td>
-					<td className='p-4'>{employee.lastName}</td>
-					<td className='p-4'>{employee.department}</td>
-					<td className='p-4'>{employee.salary.toFixed(2)}</td>
-					<td className='p-4'>{getEmployeeTechStack(employee.techStack)}</td>
-					<td className='p-4'>
-						<EmployeeActions employeeId={employeeId} openEditEmployee={openEditEmployee} handleDelete={handleDelete} />
-					</td>
-				</TableRow>
-			);
-		},
-		[openViewEmployee, getEmployeeTechStack, openEditEmployee, handleDelete]
-	);
+	const userRole = useAppSelector(selectUserRole);
 
 	return (
 		<Table
 			label='All Employees'
 			total={totalNumberOfEmployees}
 			value={value}
-			columns={columns}
+			columns={userRole === 'Admin' ? columns : columns.filter(column => column.label !== 'actions')}
 			orderByField={orderByField}
 			orderDirection={orderDirection}
 			handleSearch={handleSearch}
 			handleSort={handleSort}
-			rows={employees.map(employee => getEmployeesTableRow(employee))}
+			rows={employees.map(employee => (
+				<EmployeesTableRow
+					key={employee.id}
+					employee={employee}
+					handleDelete={handleDelete}
+					openViewEmployeeSideDrawer={openViewEmployeeSideDrawer}
+					openEditEmployeeSideDrawer={openEditEmployeeSideDrawer}
+				/>
+			))}
 		/>
 	);
 };

@@ -5,21 +5,21 @@ import { Employee, Projects } from 'src/types';
 import { getEmployeeTechStack } from 'src/helpers';
 import { chevronLeft, avatar } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
-import { selectCurrentUser } from 'store/slices/authSlice';
+import { selectUserRole } from 'store/slices/authSlice';
 import { useDeleteEmployeeMutation } from 'store/slices/employeesApiSlice';
 import SideDrawer from 'components/navigation/SideDrawer';
 import AlertModal from 'components/modals/AlertModal';
 
 type Props = {
 	employee: Employee;
-	closeViewEmployee: () => void;
-	openEditEmployee: () => void;
+	closeViewEmployeeSideDrawer: () => void;
+	openEditEmployeeSideDrawer: () => void;
 };
 
-const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) => {
+const ViewEmployee = ({ employee, closeViewEmployeeSideDrawer, openEditEmployeeSideDrawer }: Props) => {
 	const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
-	const user = useAppSelector(selectCurrentUser);
+	const userRole = useAppSelector(selectUserRole);
 	const [deleteEmployee, { isSuccess }] = useDeleteEmployeeMutation();
 
 	const onConfirm = async () => {
@@ -29,7 +29,7 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 	useEffect(() => {
 		if (isSuccess) {
 			setIsAlertModalOpen(false);
-			closeViewEmployee();
+			closeViewEmployeeSideDrawer();
 		}
 	}, [isSuccess]);
 
@@ -52,7 +52,7 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 				transition={{ duration: 0.4, ease: 'easeInOut' }}
 				className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pb-6 pt-[27px]'
 			>
-				<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeViewEmployee}>
+				<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeViewEmployeeSideDrawer}>
 					<img className='h-4 w-4' src={chevronLeft} alt='Back icon' />
 					<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
 				</div>
@@ -96,7 +96,7 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 							<div
 								className={`flex max-h-[240px] flex-col ${
 									employee.projects.length > 0
-										? 'overflow-y-scroll scrollbar-thin scrollbar-track-ashen-grey scrollbar-thumb-blue-ash'
+										? 'overflow-y-scroll scrollbar-thin scrollbar-track-ashen-grey scrollbar-thumb-misty-moonstone scrollbar-track-rounded-full scrollbar-thumb-rounded-full'
 										: ''
 								} rounded-lg bg-white p-6`}
 							>
@@ -124,7 +124,7 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 								</div>
 							</div>
 						</main>
-						{user?.role === 'Admin' && (
+						{userRole === 'Admin' && (
 							<footer className='absolute bottom-0 left-0 flex w-full items-center justify-end gap-2 bg-white p-6'>
 								<button
 									className='rounded-md border border-crimson-blaze px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-crimson-blaze'
@@ -135,8 +135,8 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 								<button
 									className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white'
 									onClick={() => {
-										closeViewEmployee();
-										openEditEmployee();
+										closeViewEmployeeSideDrawer();
+										openEditEmployeeSideDrawer();
 									}}
 								>
 									Edit Employee
@@ -149,7 +149,7 @@ const ViewEmployee = ({ employee, closeViewEmployee, openEditEmployee }: Props) 
 		</>
 	);
 
-	return <SideDrawer onClick={closeViewEmployee}>{children}</SideDrawer>;
+	return <SideDrawer onClick={closeViewEmployeeSideDrawer}>{children}</SideDrawer>;
 };
 
 export default ViewEmployee;
