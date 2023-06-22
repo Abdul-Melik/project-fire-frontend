@@ -16,7 +16,6 @@ type Props = {
 };
 
 const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
-	const [isCurrencyMenuOpen, setIsCurrencyMenuOpen] = useState(false);
 	const [isEmployeesMenuOpen, setIsEmployeesMenuOpen] = useState(false);
 	const [isProjectStatusMenuOpen, setIsProjectStatusMenuOpen] = useState(false);
 	const [openPartTimeMenus, setOpenPartTimeMenus] = useState<string[]>([]);
@@ -26,7 +25,6 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
 	const [endDate, setEndDate] = useState<Date | null>(new Date(new Date().getFullYear(), 11, 31));
 	const [projectType, setProjectType] = useState('Fixed');
 	const [hourlyRate, setHourlyRate] = useState('');
-	const [currency, setCurrency] = useState('BAM');
 	const [projectValueBAM, setProjectValueBAM] = useState('');
 	const [salesChannel, setSalesChannel] = useState('Online');
 	const [projectStatus, setProjectStatus] = useState('');
@@ -186,41 +184,6 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
 								value={hourlyRate}
 								onChange={event => setHourlyRate(event.target.value)}
 							/>
-							<div
-								className='relative flex cursor-pointer items-center justify-between gap-2 rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'
-								onClick={() => setIsCurrencyMenuOpen(!isCurrencyMenuOpen)}
-							>
-								<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>
-									{currency}
-								</span>
-								<img
-									className={`transition ${isCurrencyMenuOpen ? 'rotate-180' : ''}`}
-									src={chevronDown}
-									alt='Down icon'
-								/>
-								{isCurrencyMenuOpen && (
-									<div className='absolute left-0 top-10 z-10 flex w-[80px] flex-col overflow-hidden rounded-md border border-t-0 border-misty-moonstone bg-white text-center'>
-										<div
-											className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
-											onClick={() => setCurrency('USD')}
-										>
-											USD
-										</div>
-										<div
-											className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
-											onClick={() => setCurrency('EUR')}
-										>
-											EUR
-										</div>
-										<div
-											className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
-											onClick={() => setCurrency('BAM')}
-										>
-											BAM
-										</div>
-									</div>
-								)}
-							</div>
 						</div>
 					</div>
 					<div className='flex flex-col'>

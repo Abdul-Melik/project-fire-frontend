@@ -26,19 +26,6 @@ const YearSelector = ({ handleYearSelect }: Props) => {
 				{isYearMenuOpen && (
 					<div className='absolute right-0 top-12 z-10 flex w-[150px] flex-col overflow-hidden rounded-md border border-ashen-grey bg-white'>
 						<div
-							className={`border-b border-ashen-grey py-2 pl-[12px] pr-[10px] text-base text-hunter-green ${
-								selectedYear === '2020'
-									? 'bg-frosty-lagoon font-gilroy-semi-bold font-semibold'
-									: 'bg-white font-gilroy-medium font-medium'
-							}`}
-							onClick={() => {
-								setSelectedYear('2020');
-								handleYearSelect('2020');
-							}}
-						>
-							2020
-						</div>
-						<div
 							className={`border-b border-ashen-grey py-2 pl-[12px] pr-[10px] font-gilroy-medium text-base font-medium text-hunter-green ${
 								selectedYear === '2021'
 									? 'bg-frosty-lagoon font-gilroy-semi-bold font-semibold'
