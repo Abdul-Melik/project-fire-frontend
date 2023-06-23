@@ -1,22 +1,26 @@
 type Props = {
-	className?: string;
-	label: string;
-	htmlFor: string;
+	containerClassName?: string;
+	labelClassName?: string;
+	inputClassName?: string;
 	required?: boolean;
 	type?: string;
+	label: string;
+	htmlFor: string;
 	id: string;
 	name: string;
 	value: string;
-	placeholder: string;
+	placeholder?: string;
 	handleInput: (input: string) => void;
 };
 
 const InputField = ({
-	className,
-	label,
-	htmlFor,
+	containerClassName,
+	labelClassName,
+	inputClassName,
 	required,
 	type = 'text',
+	label,
+	htmlFor,
 	id,
 	name,
 	value,
@@ -24,19 +28,22 @@ const InputField = ({
 	handleInput,
 }: Props) => {
 	return (
-		<div className={`flex w-full flex-col items-start gap-[10px] ${className}`}>
-			<label className='font-gilroy-medium font-medium text-midnight-grey' htmlFor={htmlFor}>
+		<div className={`flex w-full flex-col items-start ${containerClassName}`}>
+			<label
+				className={`font-gilroy-medium text-base font-medium text-midnight-grey ${labelClassName}`}
+				htmlFor={htmlFor}
+			>
 				{label}
 			</label>
 			<input
-				className='w-full rounded-md border border-misty-lavender p-3 text-dark-indigo focus:border-misty-lavender focus:shadow-md focus:ring-transparent'
+				className={`w-full rounded-md border font-gilroy-regular font-normal focus:shadow-md focus:ring-transparent ${inputClassName}`}
 				required={required}
 				type={type}
 				id={id}
 				name={name}
-				value={value}
 				placeholder={placeholder}
 				autoComplete='off'
+				value={value}
 				onChange={event => handleInput(event.target.value)}
 			/>
 		</div>

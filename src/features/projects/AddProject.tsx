@@ -10,6 +10,7 @@ import { useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
 import { useCreateProjectMutation } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import SideDrawer from 'components/navigation/SideDrawer';
+import InputField from 'components/formElements/InputField';
 
 type Props = {
 	closeAddProjectSideDrawer: () => void;
@@ -129,44 +130,34 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
 			</header>
 			<main className='mt-4 rounded-lg bg-white p-6'>
 				<form className='flex flex-col gap-4'>
-					<div className='flex flex-col gap-1'>
-						<label
-							className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
-							htmlFor='name'
-						>
-							Name
-						</label>
-						<input
-							className='rounded-md border border-misty-moonstone px-4 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist focus:border-misty-moonstone focus:ring-transparent'
-							required
-							type='text'
-							id='name'
-							name='name'
-							placeholder='Project name'
-							autoComplete='off'
-							value={name}
-							onChange={event => setName(event.target.value)}
-						/>
-					</div>
-					<div className='flex flex-col gap-1'>
-						<label
-							className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
-							htmlFor='description'
-						>
-							Description
-						</label>
-						<input
-							className='rounded-md border border-misty-moonstone px-4 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist focus:border-misty-moonstone focus:ring-transparent'
-							required
-							type='text'
-							id='description'
-							name='description'
-							placeholder='Project description'
-							autoComplete='off'
-							value={description}
-							onChange={event => setDescription(event.target.value)}
-						/>
-					</div>
+					<InputField
+						containerClassName='gap-1'
+						labelClassName='leading-[22px]'
+						inputClassName='border-misty-moonstone px-4 py-2 text-sm leading-[22px] text-slate-mist focus:border-misty-moonstone'
+						required
+						type='text'
+						label='Name'
+						htmlFor='name'
+						id='name'
+						name='name'
+						placeholder='Project name'
+						value={name}
+						handleInput={name => setName(name)}
+					/>
+					<InputField
+						containerClassName='gap-1'
+						labelClassName='leading-[22px]'
+						inputClassName='border-misty-moonstone px-4 py-2 text-sm leading-[22px] text-slate-mist focus:border-misty-moonstone'
+						required
+						type='text'
+						label='Description'
+						htmlFor='description'
+						id='description'
+						name='description'
+						placeholder='Project description'
+						value={description}
+						handleInput={description => setDescription(description)}
+					/>
 					<div className='flex flex-col gap-1'>
 						<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
 							Hourly Rate

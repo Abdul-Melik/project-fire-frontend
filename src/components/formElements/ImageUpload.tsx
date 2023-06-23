@@ -3,19 +3,25 @@ import { plus } from 'assets/media';
 type Props = {
 	containerClassName?: string;
 	labelClassName?: string;
+	inputClassName?: string;
 	label: string;
 	image: File | undefined;
-	onChange: (image: File) => void;
+	handleImageUpload: (image: File) => void;
 };
 
-const ImageUpload = ({ containerClassName, labelClassName, label, image, onChange }: Props) => {
+const ImageUpload = ({
+	containerClassName,
+	labelClassName,
+	inputClassName,
+	label,
+	image,
+	handleImageUpload,
+}: Props) => {
 	return (
-		<div className={`flex flex-col ${containerClassName}`}>
-			<span className='self-start font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
-				{label}
-			</span>
+		<div className={`flex flex-col items-start ${containerClassName}`}>
+			<span className={`font-gilroy-medium text-base font-medium text-midnight-grey ${labelClassName}`}>{label}</span>
 			<label
-				className={`flex cursor-pointer flex-col items-center justify-center gap-[10px] overflow-hidden rounded-md border border-dashed ${labelClassName}`}
+				className={`flex cursor-pointer flex-col items-center justify-center gap-[10px] overflow-hidden rounded-md border border-dashed ${inputClassName}`}
 				htmlFor='profileImage'
 			>
 				{!image ? (
@@ -35,7 +41,7 @@ const ImageUpload = ({ containerClassName, labelClassName, label, image, onChang
 					onChange={event => {
 						const file = event.target.files?.[0];
 						if (file) {
-							onChange(file);
+							handleImageUpload(file);
 						}
 					}}
 				/>

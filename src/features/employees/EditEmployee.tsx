@@ -5,6 +5,7 @@ import { Employee } from 'src/types';
 import { getEmployeeTechStack } from 'src/helpers';
 import { chevronDown, chevronLeft } from 'assets/media';
 import { useUpdateEmployeeMutation } from 'store/slices/employeesApiSlice';
+import InputField from 'components/formElements/InputField';
 import ImageUpload from 'components/formElements/ImageUpload';
 import SideDrawer from 'components/navigation/SideDrawer';
 
@@ -92,47 +93,41 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 					</header>
 					<main className='mt-4 rounded-lg bg-white p-6'>
 						<form className='flex flex-col gap-4'>
-							<div className='flex flex-col gap-1'>
-								<label
-									className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
-									htmlFor='firstName'
-								>
-									First Name
-								</label>
-								<input
-									className='rounded-md border border-misty-moonstone px-4 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist focus:border-misty-moonstone focus:ring-transparent'
-									type='text'
-									id='firstName'
-									name='firstName'
-									placeholder='First Name'
-									autoComplete='off'
-									value={firstName}
-									onChange={event => setFirstName(event.target.value)}
-								/>
-							</div>
-							<div className='flex flex-col gap-1'>
-								<label
-									className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
-									htmlFor='lastName'
-								>
-									Last Name
-								</label>
-								<input
-									className='rounded-md border border-misty-moonstone px-4 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist focus:border-misty-moonstone focus:ring-transparent'
-									type='text'
-									id='lastName'
-									name='lastName'
-									placeholder='Last Name'
-									value={lastName}
-									onChange={event => setLastName(event.target.value)}
-								/>
-							</div>
+							<InputField
+								containerClassName='gap-1'
+								labelClassName='leading-[22px]'
+								inputClassName='border-misty-moonstone px-4 py-2 text-sm leading-[22px] text-slate-mist focus:border-misty-moonstone'
+								required
+								type='text'
+								label='First Name'
+								htmlFor='firstName'
+								id='firstName'
+								name='firstName'
+								placeholder='First Name'
+								value={firstName}
+								handleInput={firstName => setFirstName(firstName)}
+							/>
+							<InputField
+								containerClassName='gap-1'
+								labelClassName='leading-[22px]'
+								inputClassName='border-misty-moonstone px-4 py-2 text-sm leading-[22px] text-slate-mist focus:border-misty-moonstone'
+								required
+								type='text'
+								label='Last Name'
+								htmlFor='lastName'
+								id='lastName'
+								name='lastName'
+								placeholder='Last Name'
+								value={lastName}
+								handleInput={lastName => setLastName(lastName)}
+							/>
 							<ImageUpload
 								containerClassName='gap-1'
-								labelClassName='h-[104px] w-[104px] border-ashen-grey bg-frosty-mint'
+								labelClassName='leading-[22px]'
+								inputClassName='h-[104px] w-[104px] border-ashen-grey bg-frosty-mint'
 								label='Profile Image'
 								image={image}
-								onChange={file => setImage(file)}
+								handleImageUpload={file => setImage(file)}
 							/>
 							<div className='flex flex-col gap-1'>
 								<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>

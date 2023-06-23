@@ -14,7 +14,6 @@ const RegisterForm = () => {
 	const [lastName, setLastName] = useState('');
 	const [image, setImage] = useState<File | undefined>();
 	const [password, setPassword] = useState('');
-	const [selectedImage, setSelectedImage] = useState<File | null>(null);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
 	const [register, { isLoading, isSuccess }] = useRegisterMutation();
@@ -27,7 +26,7 @@ const RegisterForm = () => {
 		if (image) formData.append('image', image);
 		formData.append('lastName', lastName);
 		formData.append('password', password);
-		if (selectedImage) formData.append('image', selectedImage);
+		if (image) formData.append('image', image);
 		await register(formData);
 	};
 
@@ -57,7 +56,8 @@ const RegisterForm = () => {
 				<h1 className='mb-6 font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey'>Register</h1>
 				<form className='mb-6 flex flex-col text-base' onSubmit={handleFormSubmit}>
 					<InputField
-						className='mb-[21px]'
+						containerClassName='mb-[21px] gap-[10px]'
+						inputClassName='border-misty-lavender p-3 text-dark-indigo focus:border-misty-lavender text-base'
 						label='Email'
 						htmlFor='email'
 						required
@@ -71,7 +71,8 @@ const RegisterForm = () => {
 					<div className='flex gap-5'>
 						<div className='flex flex-col'>
 							<InputField
-								className='mb-[21px]'
+								containerClassName='mb-[21px] gap-[10px]'
+								inputClassName='border-misty-lavender p-3 text-dark-indigo focus:border-misty-lavender text-base'
 								label='First name'
 								htmlFor='firstName'
 								required
@@ -84,7 +85,8 @@ const RegisterForm = () => {
 							/>
 
 							<InputField
-								className='mb-[21px]'
+								containerClassName='mb-[21px] gap-[10px]'
+								inputClassName='border-misty-lavender p-3 text-dark-indigo focus:border-misty-lavender text-base'
 								label='Last name'
 								htmlFor='lastName'
 								required
@@ -98,14 +100,15 @@ const RegisterForm = () => {
 						</div>
 						<ImageUpload
 							containerClassName='mb-[21px] flex-1 gap-[10px]'
-							labelClassName='w-full h-full bg-white border-misty-lavender'
+							inputClassName='w-full h-full bg-white border-misty-lavender'
 							label='Profile Image'
 							image={image}
-							onChange={file => setImage(file)}
+							handleImageUpload={file => setImage(file)}
 						/>
 					</div>
 					<InputField
-						className='mb-[21px]'
+						containerClassName='mb-[21px] gap-[10px]'
+						inputClassName='border-misty-lavender p-3 text-dark-indigo focus:border-misty-lavender text-base'
 						label='Password'
 						htmlFor='password'
 						required

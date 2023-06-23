@@ -51,29 +51,31 @@ const LoginForm = () => {
 				<h1 className='mb-[42px] font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey'>
 					Log in
 				</h1>
-				<form className='mb-4 flex flex-col items-center justify-center text-base' onSubmit={handleFormSubmit}>
+				<form className='mb-4 flex flex-col items-center justify-center' onSubmit={handleFormSubmit}>
 					<InputField
-						className='mb-[21px]'
-						label='Email'
-						htmlFor='email'
+						containerClassName='mb-[21px] gap-[10px]'
+						inputClassName='border-misty-lavender p-3 text-dark-indigo focus:border-misty-lavender text-base'
 						required
 						type='email'
+						label='Email'
+						htmlFor='email'
 						id='email'
 						name='email'
-						value={email}
 						placeholder='Enter your email'
+						value={email}
 						handleInput={email => setEmail(email)}
 					/>
 					<InputField
-						className='mb-[34px]'
-						label='Password'
-						htmlFor='password'
+						containerClassName='mb-[34px] gap-[10px]'
+						inputClassName='border-misty-lavender p-3 text-dark-indigo focus:border-misty-lavender text-base'
 						required
 						type='password'
+						label='Password'
+						htmlFor='password'
 						id='password'
 						name='password'
-						value={password}
 						placeholder='Enter your password'
+						value={password}
 						handleInput={password => setPassword(password)}
 					/>
 					<button
