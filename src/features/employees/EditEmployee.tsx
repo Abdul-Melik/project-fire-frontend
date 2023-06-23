@@ -9,6 +9,7 @@ import SideDrawer from 'components/navigation/SideDrawer';
 import Footer from 'components/layout/Footer';
 import InputField from 'components/formElements/InputField';
 import ImageUpload from 'components/formElements/ImageUpload';
+import CurrencySelector from 'components/selectors/CurrencySelector';
 
 type Props = {
 	employee: Employee;
@@ -17,11 +18,8 @@ type Props = {
 
 const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 	const salaryRef = useRef<HTMLInputElement | null>(null);
-	const currencyRef = useRef<HTMLDivElement | null>(null);
-	const [currencyContainerWidth, setCurrencyContainerWidth] = useState(0);
 	const [salaryInputFieldHeight, setSalaryInputFieldHeight] = useState(0);
 	const [isDepartmentMenuOpen, setIsDepartmentMenuOpen] = useState(false);
-	const [isCurrencyMenuOpen, setIsCurrencyMenuOpen] = useState(false);
 	const [isTechStackMenuOpen, setIsTechStackMenuOpen] = useState(false);
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -80,7 +78,6 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 
 	useLayoutEffect(() => {
 		setSalaryInputFieldHeight(salaryRef.current?.offsetHeight ?? 0);
-		setCurrencyContainerWidth(currencyRef.current?.offsetWidth ?? 0);
 	}, []);
 
 	const children = (
@@ -252,46 +249,11 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 									value={salary}
 									handleInput={salary => setSalary(salary)}
 								/>
-								<div
-									ref={currencyRef}
-									className='relative flex cursor-pointer items-center justify-between gap-2 self-end rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'
-									style={{ height: salaryInputFieldHeight }}
-									onClick={() => setIsCurrencyMenuOpen(!isCurrencyMenuOpen)}
-								>
-									<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>
-										{currency}
-									</span>
-									<img
-										className={`transition ${isCurrencyMenuOpen ? 'rotate-180' : ''}`}
-										src={chevronDown}
-										alt='Down icon'
-									/>
-									{isCurrencyMenuOpen && (
-										<div
-											className='absolute left-0 top-10 z-10 flex flex-col overflow-hidden rounded-md border border-t-0 border-misty-moonstone bg-white text-center'
-											style={{ width: currencyContainerWidth }}
-										>
-											<div
-												className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
-												onClick={() => setCurrency('USD')}
-											>
-												USD
-											</div>
-											<div
-												className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
-												onClick={() => setCurrency('EUR')}
-											>
-												EUR
-											</div>
-											<div
-												className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
-												onClick={() => setCurrency('BAM')}
-											>
-												BAM
-											</div>
-										</div>
-									)}
-								</div>
+								<CurrencySelector
+									height={salaryInputFieldHeight}
+									currency={currency}
+									handleCurrencySelection={currency => setCurrency(currency)}
+								/>
 							</div>
 							<div className='flex flex-col gap-1'>
 								<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>

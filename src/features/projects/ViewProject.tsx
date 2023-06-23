@@ -121,8 +121,8 @@ const ViewProject = ({ project, closeViewProjectSideDrawer, openEditProjectSideD
 							<Footer
 								firstButtonClassName='border border-crimson-blaze text-crimson-blaze'
 								secondButtonClassName='bg-deep-teal text-white'
-								firstButtonText='Delete Employee'
-								secondButtonText='Edit Employee'
+								firstButtonText='Delete Project'
+								secondButtonText='Edit Project'
 								handleFirstButtonClick={() => setIsAlertModalOpen(true)}
 								handleSecondButtonClick={() => {
 									closeViewProjectSideDrawer();
