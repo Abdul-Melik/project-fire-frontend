@@ -15,12 +15,12 @@ const CurrencySelector = ({ height, currency, handleCurrencySelection }: Props) 
 
 	useLayoutEffect(() => {
 		setWidth(ref.current?.offsetWidth ?? 0);
-	}, []);
+	}, [isCurrencySelectorOpen]);
 
 	return (
 		<div
 			ref={ref}
-			className='relative flex cursor-pointer items-center justify-between gap-2 self-end rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'
+			className='relative flex cursor-pointer items-center justify-between gap-2 self-end rounded-md border border-misty-moonstone px-4 py-2'
 			style={{ height }}
 			onClick={() => setIsCurrencySelectorOpen(!isCurrencySelectorOpen)}
 		>
