@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 import { TechStack } from 'src/types';
@@ -14,6 +14,10 @@ type Props = {
 };
 
 const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
+	const salaryRef = useRef<HTMLInputElement | null>(null);
+	const currencyRef = useRef<HTMLDivElement | null>(null);
+	const [salaryInputFieldHeight, setSalaryInputFieldHeight] = useState(0);
+	const [currencyContainerWidth, setCurrencyContainerWidth] = useState(0);
 	const [isDepartmentMenuOpen, setIsDepartmentMenuOpen] = useState(false);
 	const [isCurrencyMenuOpen, setIsCurrencyMenuOpen] = useState(false);
 	const [isTechStackMenuOpen, setIsTechStackMenuOpen] = useState(false);
@@ -50,6 +54,11 @@ const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
 			else if (department === 'Management' && techStack === 'AdminNA') setTechStack('MgmtNA');
 		}
 	}, [department]);
+
+	useLayoutEffect(() => {
+		setSalaryInputFieldHeight(salaryRef.current?.offsetHeight ?? 0);
+		setCurrencyContainerWidth(currencyRef.current?.offsetWidth ?? 0);
+	}, []);
 
 	const children = (
 		<motion.div
@@ -193,58 +202,62 @@ const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
 							)}
 						</div>
 					</div>
-					<div className='flex flex-col gap-1'>
-						<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
-							Monthly Salary
-						</span>
-						<div className='flex gap-2'>
-							<input
-								className='flex-1 rounded-md border border-misty-moonstone px-4 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist focus:border-misty-moonstone focus:ring-transparent'
-								required
-								type='number'
-								id='salary'
-								name='salary'
-								min={0}
-								step={0.01}
-								placeholder='Enter the amount'
-								value={salary}
-								onChange={event => setSalary(event.target.value)}
+					<div className='flex gap-2'>
+						<InputField
+							ref={salaryRef}
+							containerClassName='gap-1'
+							labelClassName='leading-[22px]'
+							inputContainerClassName='flex gap-2 w-full'
+							inputClassName='border-misty-moonstone px-4 py-2 text-sm leading-[22px] text-slate-mist focus:border-misty-moonstone'
+							required
+							type='number'
+							label='Monthly Salary'
+							htmlFor='salary'
+							id='salary'
+							name='salary'
+							min={0}
+							step={0.01}
+							placeholder='Enter the amount'
+							value={salary}
+							handleInput={salary => setSalary(salary)}
+						/>
+						<div
+							ref={currencyRef}
+							className='relative flex cursor-pointer items-center justify-between gap-2 self-end rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'
+							style={{ height: salaryInputFieldHeight }}
+							onClick={() => setIsCurrencyMenuOpen(!isCurrencyMenuOpen)}
+						>
+							<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>{currency}</span>
+							<img
+								className={`transition ${isCurrencyMenuOpen ? 'rotate-180' : ''}`}
+								src={chevronDown}
+								alt='Down icon'
 							/>
-							<div
-								className='relative flex cursor-pointer items-center justify-between gap-2 rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'
-								onClick={() => setIsCurrencyMenuOpen(!isCurrencyMenuOpen)}
-							>
-								<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>
-									{currency}
-								</span>
-								<img
-									className={`transition ${isCurrencyMenuOpen ? 'rotate-180' : ''}`}
-									src={chevronDown}
-									alt='Down icon'
-								/>
-								{isCurrencyMenuOpen && (
-									<div className='absolute left-0 top-10 z-10 flex w-[80px] flex-col overflow-hidden rounded-md border border-t-0 border-misty-moonstone bg-white text-center'>
-										<div
-											className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
-											onClick={() => setCurrency('USD')}
-										>
-											USD
-										</div>
-										<div
-											className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
-											onClick={() => setCurrency('EUR')}
-										>
-											EUR
-										</div>
-										<div
-											className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
-											onClick={() => setCurrency('BAM')}
-										>
-											BAM
-										</div>
+							{isCurrencyMenuOpen && (
+								<div
+									className='absolute left-0 top-10 z-10 flex flex-col overflow-hidden rounded-md border border-t-0 border-misty-moonstone bg-white text-center'
+									style={{ width: currencyContainerWidth }}
+								>
+									<div
+										className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
+										onClick={() => setCurrency('USD')}
+									>
+										USD
 									</div>
-								)}
-							</div>
+									<div
+										className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
+										onClick={() => setCurrency('EUR')}
+									>
+										EUR
+									</div>
+									<div
+										className='py-2 font-gilroy-regular text-sm font-normal text-slate-mist hover:bg-misty-moonstone'
+										onClick={() => setCurrency('BAM')}
+									>
+										BAM
+									</div>
+								</div>
+							)}
 						</div>
 					</div>
 					<div className='flex flex-col gap-1'>

@@ -1,16 +1,15 @@
-import React, { useState, useEffect, forwardRef } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 import { Employee, Employees, ProjectStatus } from 'src/types';
 import { getProjectColorAndStatus } from 'src/helpers';
-import { chevronDown, chevronLeft, date, cancel } from 'assets/media';
+import { chevronDown, chevronLeft, cancel } from 'assets/media';
 import { useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
 import { useCreateProjectMutation } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import SideDrawer from 'components/navigation/SideDrawer';
 import InputField from 'components/formElements/InputField';
+import DateInputs from 'components/formElements/DateInputs';
 
 type Props = {
 	closeAddProjectSideDrawer: () => void;
@@ -52,28 +51,6 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
 		}
 	);
 	const [createProject, { isSuccess: isCreateSuccess }] = useCreateProjectMutation();
-
-	const CustomDateInput = forwardRef<HTMLDivElement>(
-		(
-			{
-				value,
-				onClick,
-			}: {
-				value?: any;
-				onClick?: any;
-			},
-			ref
-		) => (
-			<div
-				className='flex w-[175px] items-center rounded-md border border-misty-moonstone px-3 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist hover:cursor-pointer focus:border-misty-moonstone focus:ring-transparent'
-				onClick={onClick}
-				ref={ref}
-			>
-				<span className='flex-1'>{value}</span>
-				<img src={date} alt='Date icon' />
-			</div>
-		)
-	);
 
 	const handleCreate = async (event: React.MouseEvent<HTMLElement>) => {
 		event.preventDefault();
@@ -158,77 +135,46 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
 						value={description}
 						handleInput={description => setDescription(description)}
 					/>
-					<div className='flex flex-col gap-1'>
-						<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
-							Hourly Rate
-						</span>
-						<div className='flex gap-2'>
-							<input
-								className='flex-1 rounded-md border border-misty-moonstone px-4 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist focus:border-misty-moonstone focus:ring-transparent'
-								required
-								type='number'
-								id='hourlyRate'
-								name='hourlyRate'
-								min={0}
-								step={0.01}
-								placeholder='Enter the amount'
-								value={hourlyRate}
-								onChange={event => setHourlyRate(event.target.value)}
-							/>
-						</div>
-					</div>
-					<div className='flex flex-col gap-1'>
-						<label
-							className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
-							htmlFor='projectValueBAM'
-						>
-							Project Value (BAM)
-						</label>
-						<input
-							className='flex-1 rounded-md border border-misty-moonstone px-4 py-2 font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist focus:border-misty-moonstone focus:ring-transparent'
-							required
-							type='number'
-							id='projectValueBAM'
-							name='projectValueBAM'
-							min={0}
-							step={0.01}
-							placeholder='Enter the amount in BAM'
-							value={projectValueBAM}
-							onChange={event => setProjectValueBAM(event.target.value)}
-						/>
-					</div>
-					<div className='flex flex-col gap-1'>
-						<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>Duration</span>
-						<div className='flex w-full items-center gap-4'>
-							<div>
-								<DatePicker
-									required
-									customInput={<CustomDateInput />}
-									placeholderText={startDate?.toLocaleDateString('en-US', {
-										year: 'numeric',
-										month: '2-digit',
-										day: '2-digit',
-									})}
-									selected={startDate}
-									onChange={date => setStartDate(date)}
-								/>
-							</div>
-							<span className='font-gilroy-regular text-lg font-normal leading-6 text-black'>to</span>
-							<div>
-								<DatePicker
-									required
-									customInput={<CustomDateInput />}
-									placeholderText={endDate?.toLocaleDateString('en-US', {
-										year: 'numeric',
-										month: '2-digit',
-										day: '2-digit',
-									})}
-									selected={endDate}
-									onChange={date => setEndDate(date)}
-								/>
-							</div>
-						</div>
-					</div>
+					<InputField
+						containerClassName='gap-1'
+						labelClassName='leading-[22px]'
+						inputContainerClassName='flex gap-2 w-full'
+						inputClassName='border-misty-moonstone px-4 py-2 text-sm leading-[22px] text-slate-mist focus:border-misty-moonstone'
+						required
+						type='number'
+						label='Hourly Rate'
+						htmlFor='hourlyRate'
+						id='hourlyRate'
+						name='hourlyRate'
+						min={0}
+						step={0.01}
+						placeholder='Enter the amount'
+						value={hourlyRate}
+						handleInput={hourlyRate => setHourlyRate(hourlyRate)}
+					/>
+					<InputField
+						containerClassName='gap-1'
+						labelClassName='leading-[22px]'
+						inputContainerClassName='flex gap-2 w-full'
+						inputClassName='border-misty-moonstone px-4 py-2 text-sm leading-[22px] text-slate-mist focus:border-misty-moonstone'
+						required
+						type='number'
+						label='Project Value (BAM)'
+						htmlFor='projectValueBAM'
+						id='projectValueBAM'
+						name='projectValueBAM'
+						min={0}
+						step={0.01}
+						placeholder='Enter the amount in BAM'
+						value={projectValueBAM}
+						handleInput={projectValueBAM => setProjectValueBAM(projectValueBAM)}
+					/>
+					<DateInputs
+						startDate={startDate}
+						endDate={endDate}
+						handleStartDateInput={startDate => setStartDate(startDate)}
+						handleEndDateInput={endDate => setEndDate(endDate)}
+					/>
 					<div className='flex flex-col gap-1'>
 						<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
 							Assign developers

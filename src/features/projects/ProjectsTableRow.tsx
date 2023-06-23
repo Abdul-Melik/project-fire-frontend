@@ -22,7 +22,7 @@ const ProjectsTableRow = ({ project, openViewProjectSideDrawer }: Props) => {
 				<Avatars names={names} images={images} maxVisibleAvatars={3} />
 			</td>
 			<td className='p-4'>${project.hourlyRate}</td>
-			<td className='p-4'>${getProjectValueBAM(project.projectValueBAM)} KM</td>
+			<td className='p-4'>{getProjectValueBAM(project.projectValueBAM)} KM</td>
 			<td className='p-4'>
 				<div className='flex items-center gap-2'>
 					<div className={`h-[6px] w-[6px] rounded-full ${getProjectColorAndStatus(project.projectStatus)?.color}`} />
