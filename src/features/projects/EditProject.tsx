@@ -133,9 +133,9 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 			</header>
 			<main className='mt-4 rounded-lg bg-white p-6'>
 				<form className='flex flex-col gap-4'>
-					<div className='flex flex-col'>
+					<div className='flex flex-col gap-1'>
 						<label
-							className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
+							className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
 							htmlFor='name'
 						>
 							Name
@@ -152,9 +152,9 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 							onChange={event => setName(event.target.value)}
 						/>
 					</div>
-					<div className='flex flex-col'>
+					<div className='flex flex-col gap-1'>
 						<label
-							className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
+							className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
 							htmlFor='description'
 						>
 							Description
@@ -171,8 +171,8 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 							onChange={event => setDescription(event.target.value)}
 						/>
 					</div>
-					<div className='flex flex-col'>
-						<span className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
+					<div className='flex flex-col gap-1'>
+						<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
 							Hourly Rate
 						</span>
 						<div className='flex gap-2'>
@@ -190,9 +190,9 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 							/>
 						</div>
 					</div>
-					<div className='flex flex-col'>
+					<div className='flex flex-col gap-1'>
 						<label
-							className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
+							className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
 							htmlFor='projectValueBAM'
 						>
 							Project Value (BAM)
@@ -210,10 +210,8 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 							onChange={event => setProjectValueBAM(event.target.value)}
 						/>
 					</div>
-					<div className='flex flex-col'>
-						<span className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
-							Duration
-						</span>
+					<div className='flex flex-col gap-1'>
+						<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>Duration</span>
 						<div className='flex w-full items-center gap-4'>
 							<div>
 								<DatePicker
@@ -244,8 +242,8 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 							</div>
 						</div>
 					</div>
-					<div className='flex flex-col'>
-						<span className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
+					<div className='flex flex-col gap-1'>
+						<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
 							Assign developers
 						</span>
 						<div className='relative rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'>
@@ -396,10 +394,8 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 							</div>
 						)}
 					</div>
-					<div className='flex flex-col'>
-						<span className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
-							Status
-						</span>
+					<div className='flex flex-col gap-1'>
+						<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>Status</span>
 						<div className='relative rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'>
 							<div
 								className='flex cursor-pointer items-center justify-between'

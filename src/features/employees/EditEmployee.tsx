@@ -3,8 +3,9 @@ import { motion } from 'framer-motion';
 
 import { Employee } from 'src/types';
 import { getEmployeeTechStack } from 'src/helpers';
-import { chevronDown, chevronLeft, plus } from 'assets/media';
+import { chevronDown, chevronLeft } from 'assets/media';
 import { useUpdateEmployeeMutation } from 'store/slices/employeesApiSlice';
+import ImageUpload from 'components/formElements/ImageUpload';
 import SideDrawer from 'components/navigation/SideDrawer';
 
 type Props = {
@@ -91,9 +92,9 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 					</header>
 					<main className='mt-4 rounded-lg bg-white p-6'>
 						<form className='flex flex-col gap-4'>
-							<div className='flex flex-col'>
+							<div className='flex flex-col gap-1'>
 								<label
-									className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
+									className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
 									htmlFor='firstName'
 								>
 									First Name
@@ -109,9 +110,9 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 									onChange={event => setFirstName(event.target.value)}
 								/>
 							</div>
-							<div className='flex flex-col'>
+							<div className='flex flex-col gap-1'>
 								<label
-									className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
+									className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'
 									htmlFor='lastName'
 								>
 									Last Name
@@ -126,39 +127,15 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 									onChange={event => setLastName(event.target.value)}
 								/>
 							</div>
-							<div className='flex flex-col'>
-								<span className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
-									Profile Image
-								</span>
-								<label
-									className='flex h-[104px] w-[104px] cursor-pointer flex-col items-center justify-center gap-[10px] overflow-hidden rounded-md border border-dashed border-ashen-grey bg-frosty-mint'
-									htmlFor='profileImage'
-								>
-									{!image ? (
-										<>
-											<img className='h-[14px] w-[14px]' src={plus} alt='Upload icon' />
-											<span className='font-gilroy-regular text-sm font-normal leading-6 text-evergreen'>Upload</span>
-										</>
-									) : (
-										<img className='h-full w-full object-cover' src={URL.createObjectURL(image)} alt='Profile image' />
-									)}
-									<input
-										className='hidden'
-										type='file'
-										accept='image/*'
-										id='profileImage'
-										name='profileImage'
-										onChange={event => {
-											const file = event.target.files?.[0];
-											if (file) {
-												setImage(file);
-											}
-										}}
-									/>
-								</label>
-							</div>
-							<div className='flex flex-col'>
-								<span className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
+							<ImageUpload
+								containerClassName='gap-1'
+								labelClassName='h-[104px] w-[104px] border-ashen-grey bg-frosty-mint'
+								label='Profile Image'
+								image={image}
+								onChange={file => setImage(file)}
+							/>
+							<div className='flex flex-col gap-1'>
+								<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
 									Department
 								</span>
 								<div className='relative rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'>
@@ -251,8 +228,8 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 									)}
 								</div>
 							</div>
-							<div className='flex flex-col'>
-								<span className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
+							<div className='flex flex-col gap-1'>
+								<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
 									Monthly Salary
 								</span>
 								<div className='flex gap-2'>
@@ -304,8 +281,8 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 									</div>
 								</div>
 							</div>
-							<div className='flex flex-col'>
-								<span className='pb-1 font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
+							<div className='flex flex-col gap-1'>
+								<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
 									Tech Stack
 								</span>
 								<div className='relative rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'>

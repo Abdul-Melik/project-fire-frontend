@@ -12,6 +12,7 @@ const RegisterForm = () => {
 	const [email, setEmail] = useState('');
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
+	const [image, setImage] = useState<File | undefined>();
 	const [password, setPassword] = useState('');
 	const [selectedImage, setSelectedImage] = useState<File | null>(null);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -23,6 +24,7 @@ const RegisterForm = () => {
 		const formData = new FormData();
 		formData.append('email', email);
 		formData.append('firstName', firstName);
+		if (image) formData.append('image', image);
 		formData.append('lastName', lastName);
 		formData.append('password', password);
 		if (selectedImage) formData.append('image', selectedImage);
@@ -66,30 +68,42 @@ const RegisterForm = () => {
 						placeholder='Enter your email'
 						handleInput={email => setEmail(email)}
 					/>
-					<InputField
-						className='mb-[21px]'
-						label='First name'
-						htmlFor='firstName'
-						required
-						type='text'
-						id='firstName'
-						name='firstName'
-						value={firstName}
-						placeholder='Enter your first name'
-						handleInput={firstName => setFirstName(firstName)}
-					/>
-					<InputField
-						className='mb-[21px]'
-						label='Last name'
-						htmlFor='lastName'
-						required
-						type='text'
-						id='lastName'
-						name='lastName'
-						value={lastName}
-						placeholder='Enter your last name'
-						handleInput={lastName => setLastName(lastName)}
-					/>
+					<div className='flex gap-5'>
+						<div className='flex flex-col'>
+							<InputField
+								className='mb-[21px]'
+								label='First name'
+								htmlFor='firstName'
+								required
+								type='text'
+								id='firstName'
+								name='firstName'
+								value={firstName}
+								placeholder='Enter your first name'
+								handleInput={firstName => setFirstName(firstName)}
+							/>
+
+							<InputField
+								className='mb-[21px]'
+								label='Last name'
+								htmlFor='lastName'
+								required
+								type='text'
+								id='lastName'
+								name='lastName'
+								value={lastName}
+								placeholder='Enter your last name'
+								handleInput={lastName => setLastName(lastName)}
+							/>
+						</div>
+						<ImageUpload
+							containerClassName='mb-[21px] flex-1 gap-[10px]'
+							labelClassName='w-full h-full bg-white border-misty-lavender'
+							label='Profile Image'
+							image={image}
+							onChange={file => setImage(file)}
+						/>
+					</div>
 					<InputField
 						className='mb-[21px]'
 						label='Password'
@@ -103,10 +117,6 @@ const RegisterForm = () => {
 						handleInput={password => setPassword(password)}
 					/>
 					<div className='flex items-center justify-start gap-4'>
-						<ImageUpload
-							label={selectedImage ? 'Image uploaded' : 'Choose an image'}
-							onChange={image => setSelectedImage(image)}
-						/>
 						<button
 							className='flex-1 rounded-md bg-deep-teal px-4 py-2 font-gilroy-semi-bold font-semibold text-white hover:saturate-[400%]'
 							type='submit'

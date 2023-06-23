@@ -1,29 +1,46 @@
+import { plus } from 'assets/media';
+
 type Props = {
+	containerClassName?: string;
+	labelClassName?: string;
 	label: string;
+	image: File | undefined;
 	onChange: (image: File) => void;
 };
 
-const ImageUpload = ({ label, onChange }: Props) => {
+const ImageUpload = ({ containerClassName, labelClassName, label, image, onChange }: Props) => {
 	return (
-		<label
-			className='rounded-md bg-golden-tangerine px-4 py-2 text-midnight-grey hover:cursor-pointer hover:saturate-150'
-			htmlFor='imageUpload'
-		>
-			<span className='font-gilroy-semi-bold font-semibold'>{label}</span>
-			<input
-				className='hidden'
-				type='file'
-				id='imageUpload'
-				name='imageUpload'
-				accept='image/*'
-				onChange={event => {
-					const selectedFile = event.target.files && event.target.files[0];
-					if (selectedFile) {
-						onChange(selectedFile);
-					}
-				}}
-			/>
-		</label>
+		<div className={`flex flex-col ${containerClassName}`}>
+			<span className='self-start font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
+				{label}
+			</span>
+			<label
+				className={`flex cursor-pointer flex-col items-center justify-center gap-[10px] overflow-hidden rounded-md border border-dashed ${labelClassName}`}
+				htmlFor='profileImage'
+			>
+				{!image ? (
+					<>
+						<img className='h-[14px] w-[14px]' src={plus} alt='Upload icon' />
+						<span className='font-gilroy-regular text-sm font-normal leading-6 text-evergreen'>Upload</span>
+					</>
+				) : (
+					<img className='h-full w-full object-cover' src={URL.createObjectURL(image)} alt='Profile image' />
+				)}
+				<input
+					className='hidden'
+					type='file'
+					accept='image/*'
+					id='profileImage'
+					name='profileImage'
+					onChange={event => {
+						const file = event.target.files?.[0];
+						if (file) {
+							onChange(file);
+						}
+					}}
+				/>
+			</label>
+		</div>
 	);
 };
 
