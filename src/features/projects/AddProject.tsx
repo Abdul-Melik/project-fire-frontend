@@ -8,6 +8,7 @@ import { useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
 import { useCreateProjectMutation } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import SideDrawer from 'components/navigation/SideDrawer';
+import Footer from 'components/layout/Footer';
 import InputField from 'components/formElements/InputField';
 import DateInputs from 'components/formElements/DateInputs';
 
@@ -52,7 +53,7 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
 	);
 	const [createProject, { isSuccess: isCreateSuccess }] = useCreateProjectMutation();
 
-	const handleCreate = async (event: React.MouseEvent<HTMLElement>) => {
+	const addProject = async (event: React.MouseEvent<HTMLElement>) => {
 		event.preventDefault();
 		const employees = selectedEmployees.map(({ partTime, employee }) => ({
 			partTime,
@@ -417,20 +418,14 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
 					</div>
 				</form>
 			</main>
-			<footer className='absolute bottom-0 left-0 flex w-full items-center justify-end gap-2 bg-white p-6'>
-				<button
-					className='rounded-md border border-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'
-					onClick={closeAddProjectSideDrawer}
-				>
-					Cancel
-				</button>
-				<button
-					className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white'
-					onClick={handleCreate}
-				>
-					Add Project
-				</button>
-			</footer>
+			<Footer
+				firstButtonClassName='border border-deep-teal text-evergreen'
+				secondButtonClassName='bg-deep-teal text-white'
+				firstButtonText='Cancel'
+				secondButtonText='Add Project'
+				handleFirstButtonClick={closeAddProjectSideDrawer}
+				handleSecondButtonClick={addProject}
+			/>
 		</motion.div>
 	);
 

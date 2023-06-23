@@ -5,9 +5,10 @@ import { Employee } from 'src/types';
 import { getEmployeeTechStack } from 'src/helpers';
 import { chevronDown, chevronLeft } from 'assets/media';
 import { useUpdateEmployeeMutation } from 'store/slices/employeesApiSlice';
+import SideDrawer from 'components/navigation/SideDrawer';
+import Footer from 'components/layout/Footer';
 import InputField from 'components/formElements/InputField';
 import ImageUpload from 'components/formElements/ImageUpload';
-import SideDrawer from 'components/navigation/SideDrawer';
 
 type Props = {
 	employee: Employee;
@@ -53,7 +54,7 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 		}
 	}, [employee]);
 
-	const handleUpdate = async (event: React.MouseEvent<HTMLElement>) => {
+	const editEmployee = async (event: React.MouseEvent<HTMLElement>) => {
 		event.preventDefault();
 		const formData = new FormData();
 		formData.append('firstName', firstName);
@@ -400,20 +401,14 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 							</div>
 						</form>
 					</main>
-					<footer className='absolute bottom-0 left-0 flex w-full items-center justify-end gap-2 bg-white p-6'>
-						<button
-							className='rounded-md border border-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'
-							onClick={closeEditEmployeeSideDrawer}
-						>
-							Cancel
-						</button>
-						<button
-							className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white'
-							onClick={handleUpdate}
-						>
-							Edit Employee
-						</button>
-					</footer>
+					<Footer
+						firstButtonClassName='border border-deep-teal text-evergreen'
+						secondButtonClassName='bg-deep-teal text-white'
+						firstButtonText='Cancel'
+						secondButtonText='Edit Employee'
+						handleFirstButtonClick={closeEditEmployeeSideDrawer}
+						handleSecondButtonClick={editEmployee}
+					/>
 				</>
 			)}
 		</motion.div>
