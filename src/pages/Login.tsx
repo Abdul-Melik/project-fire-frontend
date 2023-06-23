@@ -8,7 +8,7 @@ const Login = () => {
 				<div className='hidden lg:block lg:w-1/2'>
 					<LogoBanner />
 				</div>
-				<div className='mx-4 flex flex-1 flex-col items-center justify-center p-4'>
+				<div className='mx-4 flex max-w-full flex-1 flex-col items-center justify-center p-4'>
 					<LoginForm />
 				</div>
 			</div>

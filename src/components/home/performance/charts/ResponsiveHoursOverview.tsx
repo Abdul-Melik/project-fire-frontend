@@ -27,6 +27,27 @@ const data = [
 			{ name: 'Grand Total Hours Billed', value: 7000 },
 		],
 	},
+	{
+		name: 'March 1/3/2023',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 3000 },
+			{ name: 'Grand Total Hours Billed', value: 7000 },
+		],
+	},
+	{
+		name: 'March 1/3/2023',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 3000 },
+			{ name: 'Grand Total Hours Billed', value: 7000 },
+		],
+	},
+	{
+		name: 'March 1/3/2023',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 3000 },
+			{ name: 'Grand Total Hours Billed', value: 7000 },
+		],
+	},
 ];
 const COLORS = ['#7BB99F', '#FF9F5A'];
 type Props = {};

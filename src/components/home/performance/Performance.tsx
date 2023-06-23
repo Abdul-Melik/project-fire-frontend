@@ -13,6 +13,7 @@ import SalesChannels from 'src/components/home/performance/charts/SalesChannels'
 import ProjectScope from 'src/components/home/performance/charts/ProjectScope';
 import HoursOverview from 'src/components/home/performance/charts/HoursOverview';
 import ResponsiveRevenuePerProject from './charts/ResponsiveHoursOverview';
+import { useState, useEffect } from 'react';
 
 type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
 
@@ -43,6 +44,14 @@ type Props = {
 };
 
 const Performance = ({ projectsInfo }: Props) => {
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const windowLg = windowWidth >= 1024;
+	//update window width on resize with useEffect
+	useEffect(() => {
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	});
 	return (
 		<div className='flex flex-col gap-[42px]'>
 			<div className='grid max-w-[100%] auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(240px,100%))] justify-center gap-[15px] lg:max-w-none lg:grid-cols-[repeat(auto-fit,minmax(240px,1fr))] lg:gap-[30px]'>
@@ -121,12 +130,16 @@ const Performance = ({ projectsInfo }: Props) => {
 				<div className='mb-[30px] lg:hidden'></div>
 				<ProjectScope chartValues={projectsInfo?.projectTypeCount ?? {}} />
 			</div>
-			<div className='hidden lg:block'>
-				<HoursOverview />
-			</div>
-			<div className='block lg:hidden'>
-				<ResponsiveRevenuePerProject />
-			</div>
+			{windowLg && (
+				<div className='block'>
+					<HoursOverview />
+				</div>
+			)}
+			{!windowLg && (
+				<div className='block'>
+					<ResponsiveRevenuePerProject />
+				</div>
+			)}
 		</div>
 	);
 };

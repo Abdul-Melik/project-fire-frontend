@@ -6,8 +6,17 @@ import RevenuesCostsActual from 'src/components/home/development-revenue-costs/c
 import RevenuesCostsPerMonth from 'src/components/home/development-revenue-costs/charts/RevenuesCostsPerMonth';
 import ResponsiveCostsPerMonth from './charts/ResponsiveCostsPerMonth';
 import ResponsiveCostsPerProject from './charts/ResponsiveCostsPerProject';
+import { useState, useEffect } from 'react';
 
 const DevelopmentRevenueCosts = () => {
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const windowLg = windowWidth >= 1024;
+	//update window width on resize with useEffect
+	useEffect(() => {
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	});
 	return (
 		<div className='flex flex-col gap-[42px]'>
 			<div className='max-w-screen flex flex-col gap-[30px] lg:grid lg:grid-cols-[1fr,minmax(330px,auto)]'>
@@ -49,14 +58,18 @@ const DevelopmentRevenueCosts = () => {
 					amount={'-284,086.00 KM'}
 				/>
 			</div>
-			<div className='hidden lg:block'>
-				<RevenuesCostsActual />
-				<RevenuesCostsPerMonth />
-			</div>
-			<div className='flex flex-col gap-5 lg:hidden'>
-				<ResponsiveCostsPerProject />
-				<ResponsiveCostsPerMonth />
-			</div>
+			{windowLg && (
+				<div className='block'>
+					<RevenuesCostsActual />
+					<RevenuesCostsPerMonth />
+				</div>
+			)}
+			{!windowLg && (
+				<div className='flex flex-col gap-5'>
+					<ResponsiveCostsPerProject />
+					<ResponsiveCostsPerMonth />
+				</div>
+			)}
 		</div>
 	);
 };

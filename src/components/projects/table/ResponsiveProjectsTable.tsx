@@ -121,15 +121,8 @@ const ResponsiveProjectsTable = ({
 								<React.Fragment key={projectId}>
 									<TableRow className='hover:cursor-pointer hover:bg-white' onClick={() => selectProject(projectId)}>
 										<td className='pl-4'>
-											<div className='flex w-3/5 items-center justify-between'>
+											<div className='flex w-3/5 items-center justify-between font-gilroy-regular text-[16px] leading-6 text-deep-forest'>
 												<p>{project.name}</p>
-												<img
-													src={arrow}
-													alt='arrow'
-													className={`h-3 w-3 transform transition-transform duration-300 ${
-														projectId === selectedProject ? 'rotate-180' : 'rotate-0'
-													}`}
-												/>
 											</div>
 										</td>
 										<td className='flex h-[60px] items-center gap-2 pl-4'>
@@ -142,7 +135,7 @@ const ResponsiveProjectsTable = ({
 									{projectId === selectedProject && (
 										<tr className='ml-[10%]'>
 											<td colSpan={2}>
-												<div className='ml-[5%] mt-[11px] flex w-[90%] flex-col gap-[5px]'>
+												<div className='ml-[5%] mt-[11px] flex w-[90%] flex-col gap-[5px] !text-[15px]'>
 													<PlanCardItem
 														text='Duration'
 														amount={`${getProjectDate(project).startDateString} - ${

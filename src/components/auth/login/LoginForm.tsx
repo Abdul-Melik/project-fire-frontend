@@ -66,7 +66,7 @@ const LoginForm = () => {
 					<img src={logo} alt='Logo' className='mx-auto mb-3 h-[150px] w-[300px] pb-20' />
 				</div>
 			)}
-			<div className='w-[450px] text-center'>
+			<div className='w-full text-center sm:w-[450px]'>
 				<h1 className='mb-[42px] font-gilroy-semi-bold text-[32px] font-semibold leading-10 text-midnight-grey'>
 					Log in
 				</h1>
