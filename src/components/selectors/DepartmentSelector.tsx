@@ -3,11 +3,11 @@ import { useState, useLayoutEffect, useRef } from 'react';
 import { chevronDown } from 'assets/media';
 
 type Props = {
-	department: string;
+	selectedDepartment: string;
 	handleDepartmentSelection: (department: string) => void;
 };
 
-const DepartmentSelector = ({ department, handleDepartmentSelection }: Props) => {
+const DepartmentSelector = ({ selectedDepartment, handleDepartmentSelection }: Props) => {
 	const ref = useRef<HTMLDivElement | null>(null);
 	const [width, setWidth] = useState(0);
 	const [height, setHeight] = useState(0);
@@ -16,7 +16,7 @@ const DepartmentSelector = ({ department, handleDepartmentSelection }: Props) =>
 	useLayoutEffect(() => {
 		setWidth(ref.current?.offsetWidth ?? 0);
 		setHeight(ref.current?.offsetHeight ?? 0);
-	}, [ref]);
+	}, [isDepartmentSelectorOpen]);
 
 	return (
 		<div className='flex flex-col gap-1'>
@@ -27,7 +27,7 @@ const DepartmentSelector = ({ department, handleDepartmentSelection }: Props) =>
 					onClick={() => setIsDepartmentSelectorOpen(!isDepartmentSelectorOpen)}
 				>
 					<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>
-						{!department ? 'Select employee department' : department}
+						{!selectedDepartment ? 'Select employee department' : selectedDepartment}
 					</span>
 					<img
 						className={`transition ${isDepartmentSelectorOpen ? 'rotate-180' : ''}`}
@@ -46,7 +46,7 @@ const DepartmentSelector = ({ department, handleDepartmentSelection }: Props) =>
 								type='checkbox'
 								id='administration'
 								name='administration'
-								checked={department === 'Administration'}
+								checked={selectedDepartment === 'Administration'}
 								onChange={event => {
 									handleDepartmentSelection(event.target.checked ? 'Administration' : '');
 									setIsDepartmentSelectorOpen(false);
@@ -62,7 +62,7 @@ const DepartmentSelector = ({ department, handleDepartmentSelection }: Props) =>
 								type='checkbox'
 								id='management'
 								name='management'
-								checked={department === 'Management'}
+								checked={selectedDepartment === 'Management'}
 								onChange={event => {
 									handleDepartmentSelection(event.target.checked ? 'Management' : '');
 									setIsDepartmentSelectorOpen(false);
@@ -78,7 +78,7 @@ const DepartmentSelector = ({ department, handleDepartmentSelection }: Props) =>
 								type='checkbox'
 								id='development'
 								name='development'
-								checked={department === 'Development'}
+								checked={selectedDepartment === 'Development'}
 								onChange={event => {
 									handleDepartmentSelection(event.target.checked ? 'Development' : '');
 									setIsDepartmentSelectorOpen(false);
@@ -94,7 +94,7 @@ const DepartmentSelector = ({ department, handleDepartmentSelection }: Props) =>
 								type='checkbox'
 								id='design'
 								name='design'
-								checked={department === 'Design'}
+								checked={selectedDepartment === 'Design'}
 								onChange={event => {
 									handleDepartmentSelection(event.target.checked ? 'Design' : '');
 									setIsDepartmentSelectorOpen(false);

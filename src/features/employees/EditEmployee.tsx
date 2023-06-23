@@ -23,10 +23,10 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [image, setImage] = useState<File | undefined>();
-	const [department, setDepartment] = useState('');
+	const [selectedDepartment, setSelectedDepartment] = useState('');
 	const [salary, setSalary] = useState('');
-	const [currency, setCurrency] = useState('');
-	const [techStack, setTechStack] = useState('');
+	const [selectedCurrency, setSelectedCurrency] = useState('');
+	const [selectedTechStack, setSelectedTechStack] = useState('');
 
 	const [updateEmployee, { isSuccess }] = useUpdateEmployeeMutation();
 
@@ -43,10 +43,10 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 		if (employee) {
 			setFirstName(employee.firstName);
 			setLastName(employee.lastName);
-			setDepartment(employee.department);
+			setSelectedDepartment(employee.department);
 			setSalary(employee.salary.toString());
-			setCurrency(employee.currency);
-			setTechStack(employee.techStack);
+			setSelectedCurrency(employee.currency);
+			setSelectedTechStack(employee.techStack);
 			fetchImage();
 		}
 	}, [employee]);
@@ -57,10 +57,10 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 		formData.append('firstName', firstName);
 		formData.append('lastName', lastName);
 		if (image) formData.append('image', image);
-		formData.append('department', department);
+		formData.append('department', selectedDepartment);
 		formData.append('salary', salary);
-		formData.append('currency', currency);
-		formData.append('techStack', techStack);
+		formData.append('currency', selectedCurrency);
+		formData.append('techStack', selectedTechStack);
 		await updateEmployee({ employeeId: employee.id, data: formData });
 	};
 
@@ -70,10 +70,10 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 
 	useEffect(() => {
 		if (!isSuccess) {
-			if (department === 'Administration' && techStack === 'MgmtNA') setTechStack('AdminNA');
-			else if (department === 'Management' && techStack === 'AdminNA') setTechStack('MgmtNA');
+			if (selectedDepartment === 'Administration' && selectedTechStack === 'MgmtNA') setSelectedTechStack('AdminNA');
+			else if (selectedDepartment === 'Management' && selectedTechStack === 'AdminNA') setSelectedTechStack('MgmtNA');
 		}
-	}, [department]);
+	}, [selectedDepartment]);
 
 	useLayoutEffect(() => {
 		setSalaryInputFieldHeight(salaryRef.current?.offsetHeight ?? 0);
@@ -136,8 +136,8 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 								handleImageUpload={file => setImage(file)}
 							/>
 							<DepartmentSelector
-								department={department}
-								handleDepartmentSelection={department => setDepartment(department)}
+								selectedDepartment={selectedDepartment}
+								handleDepartmentSelection={department => setSelectedDepartment(department)}
 							/>
 							<div className='flex gap-2'>
 								<InputField
@@ -160,14 +160,14 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 								/>
 								<CurrencySelector
 									height={salaryInputFieldHeight}
-									currency={currency}
-									handleCurrencySelection={currency => setCurrency(currency)}
+									selectedCurrency={selectedCurrency}
+									handleCurrencySelection={currency => setSelectedCurrency(currency)}
 								/>
 							</div>
 							<TechStackSelector
-								department={department}
-								techStack={techStack}
-								handleTechStackSelection={techStack => setTechStack(techStack)}
+								selectedDepartment={selectedDepartment}
+								selectedTechStack={selectedTechStack}
+								handleTechStackSelection={techStack => setSelectedTechStack(techStack)}
 							/>
 						</form>
 					</main>

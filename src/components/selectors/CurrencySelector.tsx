@@ -4,11 +4,11 @@ import { chevronDown } from 'assets/media';
 
 type Props = {
 	height: number;
-	currency: string;
+	selectedCurrency: string;
 	handleCurrencySelection: (currency: string) => void;
 };
 
-const CurrencySelector = ({ height, currency, handleCurrencySelection }: Props) => {
+const CurrencySelector = ({ height, selectedCurrency, handleCurrencySelection }: Props) => {
 	const ref = useRef<HTMLDivElement | null>(null);
 	const [width, setWidth] = useState(0);
 	const [isCurrencySelectorOpen, setIsCurrencySelectorOpen] = useState(false);
@@ -24,7 +24,7 @@ const CurrencySelector = ({ height, currency, handleCurrencySelection }: Props) 
 			style={{ height }}
 			onClick={() => setIsCurrencySelectorOpen(!isCurrencySelectorOpen)}
 		>
-			<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>{currency}</span>
+			<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>{selectedCurrency}</span>
 			<img className={`transition ${isCurrencySelectorOpen ? 'rotate-180' : ''}`} src={chevronDown} alt='Down icon' />
 			{isCurrencySelectorOpen && (
 				<div

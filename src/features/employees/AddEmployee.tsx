@@ -21,10 +21,10 @@ const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [image, setImage] = useState<File | undefined>();
-	const [department, setDepartment] = useState('');
+	const [selectedDepartment, setSelectedDepartment] = useState('');
 	const [salary, setSalary] = useState('');
-	const [currency, setCurrency] = useState('BAM');
-	const [techStack, setTechStack] = useState('');
+	const [selectedCurrency, setSelectedCurrency] = useState('BAM');
+	const [selectedTechStack, setSelectedTechStack] = useState('');
 
 	const [createEmployee, { isSuccess }] = useCreateEmployeeMutation();
 
@@ -34,10 +34,10 @@ const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
 		formData.append('firstName', firstName);
 		formData.append('lastName', lastName);
 		if (image) formData.append('image', image);
-		formData.append('department', department);
+		formData.append('department', selectedDepartment);
 		formData.append('salary', salary);
-		formData.append('currency', currency);
-		formData.append('techStack', techStack);
+		formData.append('currency', selectedCurrency);
+		formData.append('techStack', selectedTechStack);
 		await createEmployee(formData);
 	};
 
@@ -47,10 +47,10 @@ const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
 
 	useEffect(() => {
 		if (!isSuccess) {
-			if (department === 'Administration' && techStack === 'MgmtNA') setTechStack('AdminNA');
-			else if (department === 'Management' && techStack === 'AdminNA') setTechStack('MgmtNA');
+			if (selectedDepartment === 'Administration' && selectedTechStack === 'MgmtNA') setSelectedTechStack('AdminNA');
+			else if (selectedDepartment === 'Management' && selectedTechStack === 'AdminNA') setSelectedTechStack('MgmtNA');
 		}
-	}, [department]);
+	}, [selectedDepartment]);
 
 	useLayoutEffect(() => {
 		setSalaryInputFieldHeight(salaryRef.current?.offsetHeight ?? 0);
@@ -111,8 +111,8 @@ const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
 						handleImageUpload={file => setImage(file)}
 					/>
 					<DepartmentSelector
-						department={department}
-						handleDepartmentSelection={department => setDepartment(department)}
+						selectedDepartment={selectedDepartment}
+						handleDepartmentSelection={department => setSelectedDepartment(department)}
 					/>
 					<div className='flex gap-2'>
 						<InputField
@@ -135,14 +135,14 @@ const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
 						/>
 						<CurrencySelector
 							height={salaryInputFieldHeight}
-							currency={currency}
-							handleCurrencySelection={currency => setCurrency(currency)}
+							selectedCurrency={selectedCurrency}
+							handleCurrencySelection={currency => setSelectedCurrency(currency)}
 						/>
 					</div>
 					<TechStackSelector
-						department={department}
-						techStack={techStack}
-						handleTechStackSelection={techStack => setTechStack(techStack)}
+						selectedDepartment={selectedDepartment}
+						selectedTechStack={selectedTechStack}
+						handleTechStackSelection={techStack => setSelectedTechStack(techStack)}
 					/>
 				</form>
 			</main>

@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-import { Employee, Employees, ProjectStatus } from 'src/types';
+import { Employees, ProjectStatus } from 'src/types';
 import { getProjectColorAndStatus } from 'src/helpers';
-import { chevronDown, chevronLeft, cancel } from 'assets/media';
-import { useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
+import { chevronDown, chevronLeft } from 'assets/media';
 import { useCreateProjectMutation } from 'store/slices/projectsApiSlice';
-import LoadingSpinner from 'components/utils/LoadingSpinner';
 import SideDrawer from 'components/navigation/SideDrawer';
 import Footer from 'components/layout/Footer';
 import InputField from 'components/formElements/InputField';
 import DateInputs from 'components/formElements/DateInputs';
+import EmployeesSelector from 'src/components/selectors/EmployeesSelector';
 
 type Props = {
 	closeAddProjectSideDrawer: () => void;
 };
 
 const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
-	const [isEmployeesMenuOpen, setIsEmployeesMenuOpen] = useState(false);
 	const [isProjectStatusMenuOpen, setIsProjectStatusMenuOpen] = useState(false);
-	const [openPartTimeMenus, setOpenPartTimeMenus] = useState<string[]>([]);
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [startDate, setStartDate] = useState<Date | null>(new Date(new Date().getFullYear(), 0, 1));
@@ -31,27 +28,7 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
 	const [projectStatus, setProjectStatus] = useState('');
 	const [selectedEmployees, setSelectedEmployees] = useState<Employees[]>([]);
 
-	const {
-		isLoading,
-		isFetching,
-		isSuccess: isEmployeesSuccess,
-		data,
-	} = useGetEmployeesQuery(
-		{
-			searchTerm: '',
-			isEmployed: 'true',
-			orderByField: '',
-			orderDirection: '',
-			employeesPerPage: '',
-			currentPage: '',
-		},
-		{
-			pollingInterval: 60000,
-			refetchOnFocus: true,
-			refetchOnReconnect: true,
-		}
-	);
-	const [createProject, { isSuccess: isCreateSuccess }] = useCreateProjectMutation();
+	const [createProject, { isSuccess }] = useCreateProjectMutation();
 
 	const addProject = async (event: React.MouseEvent<HTMLElement>) => {
 		event.preventDefault();
@@ -74,21 +51,8 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
 	};
 
 	useEffect(() => {
-		if (isCreateSuccess) closeAddProjectSideDrawer();
-	}, [isCreateSuccess]);
-
-	useEffect(() => {
-		if (data) {
-			setSelectedEmployees(
-				selectedEmployees.filter(({ employee: selectedEmployee }) =>
-					data.employees.some((employee: Employee) => employee.id === selectedEmployee.id)
-				)
-			);
-			setOpenPartTimeMenus(
-				openPartTimeMenus.filter(employeeId => data.employees.some((employee: Employee) => employee.id === employeeId))
-			);
-		}
-	}, [data]);
+		if (isSuccess) closeAddProjectSideDrawer();
+	}, [isSuccess]);
 
 	const children = (
 		<motion.div
@@ -176,158 +140,10 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
 						handleStartDateInput={startDate => setStartDate(startDate)}
 						handleEndDateInput={endDate => setEndDate(endDate)}
 					/>
-					<div className='flex flex-col gap-1'>
-						<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
-							Assign developers
-						</span>
-						<div className='relative rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'>
-							<div
-								className='flex cursor-pointer items-center justify-between'
-								onClick={() => setIsEmployeesMenuOpen(!isEmployeesMenuOpen)}
-							>
-								<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>
-									Select team members working on this project
-								</span>
-								<img
-									className={`transition ${isEmployeesMenuOpen ? 'rotate-180' : ''}`}
-									src={chevronDown}
-									alt='Down icon'
-								/>
-							</div>
-							{isEmployeesMenuOpen && (
-								<div className='absolute left-0 top-10 z-20 flex max-h-[128px] w-[400px] flex-col overflow-y-scroll rounded-md border border-t-0 border-misty-moonstone bg-white py-2 scrollbar-thin scrollbar-track-ashen-grey scrollbar-thumb-misty-moonstone scrollbar-track-rounded-full scrollbar-thumb-rounded-full'>
-									{isLoading || isFetching ? (
-										<LoadingSpinner size={50} />
-									) : (
-										isEmployeesSuccess &&
-										data.employees.map((employee: Employee, index: number) => (
-											<div key={employee.id} className='flex items-center gap-2 px-4 py-1'>
-												<input
-													className='h-[15px] w-[15px] appearance-none rounded-sm border-2 border-slate-mist text-evergreen focus:ring-transparent'
-													type='checkbox'
-													id={`employee${index + 1}`}
-													name={`employee${index + 1}`}
-													checked={selectedEmployees.some(
-														selectedEmployee => selectedEmployee.employee.id === employee.id
-													)}
-													onChange={event => {
-														setSelectedEmployees(
-															event.target.checked
-																? [...selectedEmployees, { partTime: false, employee }]
-																: selectedEmployees.filter(
-																		selectedEmployee => selectedEmployee.employee.id !== employee.id
-																  )
-														);
-														setOpenPartTimeMenus(
-															!event.target.checked
-																? openPartTimeMenus.filter(employeeId => employeeId !== employee.id)
-																: openPartTimeMenus
-														);
-													}}
-												/>
-												<label
-													className='font-gilroy-regular text-sm font-normal text-slate-mist'
-													htmlFor='administration'
-												>
-													{employee.firstName + ' ' + employee.lastName}
-												</label>
-											</div>
-										))
-									)}
-								</div>
-							)}
-						</div>
-						{!isEmployeesMenuOpen && selectedEmployees.length > 0 && (
-							<div className='flex max-h-[154px] flex-col overflow-y-scroll p-4 scrollbar-thin scrollbar-track-ashen-grey scrollbar-thumb-misty-moonstone scrollbar-track-rounded-full scrollbar-thumb-rounded-full'>
-								{selectedEmployees.map(({ partTime, employee }, index: number) => (
-									<div
-										key={employee.id}
-										className={`flex items-center justify-between gap-2 ${
-											index < selectedEmployees.length - 1 ? 'border-b border-ashen-grey pb-3' : ''
-										} ${index > 0 ? 'pt-3' : ''}`}
-									>
-										<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-inky-twilight'>
-											{employee.firstName + ' ' + employee.lastName}
-										</span>
-										<div className='flex items-center gap-[10px]'>
-											<div className='relative min-w-[90px] rounded-md border border-misty-moonstone px-2 py-1 focus:outline-none'>
-												<div
-													className='flex cursor-pointer items-center justify-between gap-2'
-													onClick={() =>
-														setOpenPartTimeMenus(
-															openPartTimeMenus.includes(employee.id)
-																? openPartTimeMenus.filter(employeeId => employeeId !== employee.id)
-																: [...openPartTimeMenus, employee.id]
-														)
-													}
-												>
-													{openPartTimeMenus.includes(employee.id) && (
-														<div className='flex items-center gap-2'>
-															<div
-																className='rounded-md px-2 font-gilroy-regular text-xs font-normal text-evergreen hover:bg-misty-moonstone'
-																onClick={() => {
-																	setOpenPartTimeMenus(
-																		openPartTimeMenus.filter(employeeId => employeeId !== employee.id)
-																	);
-																	setSelectedEmployees(
-																		selectedEmployees.map(selectedEmployee =>
-																			selectedEmployee.employee.id === employee.id
-																				? { partTime: false, employee }
-																				: selectedEmployee
-																		)
-																	);
-																}}
-															>
-																Full time
-															</div>
-															<div
-																className='rounded-md px-2 font-gilroy-regular text-xs font-normal text-evergreen hover:bg-misty-moonstone'
-																onClick={() => {
-																	[...openPartTimeMenus, employee.id];
-																	setSelectedEmployees(
-																		selectedEmployees.map(selectedEmployee =>
-																			selectedEmployee.employee.id === employee.id
-																				? { partTime: true, employee }
-																				: selectedEmployee
-																		)
-																	);
-																}}
-															>
-																Part time
-															</div>
-														</div>
-													)}
-													<span className='font-gilroy-regular text-xs font-normal text-evergreen'>
-														{!openPartTimeMenus.includes(employee.id) ? (!partTime ? 'Full time' : 'Part time') : ''}
-													</span>
-													<img
-														className={`transition ${
-															openPartTimeMenus.find(employeeId => employeeId === employee.id) ? 'rotate-180' : ''
-														}`}
-														src={chevronDown}
-														alt='Down icon'
-													/>
-												</div>
-											</div>
-											<img
-												className='transition hover:scale-125 hover:cursor-pointer'
-												src={cancel}
-												alt='Cancel icon'
-												onClick={() => {
-													setSelectedEmployees(
-														selectedEmployees.filter(
-															({ employee: selectedEmployee }) => selectedEmployee.id !== employee.id
-														)
-													);
-													setOpenPartTimeMenus(openPartTimeMenus.filter(employeeId => employeeId !== employee.id));
-												}}
-											/>
-										</div>
-									</div>
-								))}
-							</div>
-						)}
-					</div>
+					<EmployeesSelector
+						selectedEmployees={selectedEmployees}
+						handleEmployeesSelection={employees => setSelectedEmployees(employees)}
+					/>
 					<div className='flex flex-col gap-1'>
 						<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>Status</span>
 						<div className='relative rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'>

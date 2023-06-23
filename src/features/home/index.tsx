@@ -10,7 +10,7 @@ import DevelopmentRevenueCosts from 'features/home/DevelopmentRevenueCosts';
 import Plan from 'features/home/Plan';
 
 const Home = () => {
-	const [year, setYear] = useState('2023');
+	const [selectedYear, setSelectedYear] = useState('2023');
 	const [activePage, setActivePage] = useState(1);
 
 	const {
@@ -19,7 +19,7 @@ const Home = () => {
 		isSuccess,
 		data: projectsInfo,
 	} = useGetProjectsInfoQuery(
-		{ year },
+		{ year: selectedYear },
 		{
 			pollingInterval: 60000,
 			refetchOnFocus: true,
@@ -27,7 +27,7 @@ const Home = () => {
 		}
 	);
 
-	const navLabels = [`${year}  Performance`, 'Development Revenue & Costs', `${year} Plan`];
+	const navLabels = [`${selectedYear}  Performance`, 'Development Revenue & Costs', `${selectedYear} Plan`];
 
 	return (
 		<MainLayout activeMenuItem={'home'}>
@@ -36,7 +36,7 @@ const Home = () => {
 				<div className='mt-[30px] flex flex-col'>
 					<div className='mb-12 flex flex-wrap justify-between gap-4'>
 						<Navbar navLabels={navLabels} handlePageSelect={page => setActivePage(page)} />
-						<YearSelector year={year} handleYearSelection={year => setYear(year)} />
+						<YearSelector selectedYear={selectedYear} handleYearSelection={year => setSelectedYear(year)} />
 					</div>
 					{isLoading || isFetching ? (
 						<LoadingSpinner />

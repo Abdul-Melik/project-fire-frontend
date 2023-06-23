@@ -3,11 +3,11 @@ import { useState, useLayoutEffect, useRef } from 'react';
 import { chevronDown } from 'assets/media';
 
 type Props = {
-	year: string;
+	selectedYear: string;
 	handleYearSelection: (year: string) => void;
 };
 
-const YearSelector = ({ year, handleYearSelection }: Props) => {
+const YearSelector = ({ selectedYear, handleYearSelection }: Props) => {
 	const ref = useRef<HTMLDivElement | null>(null);
 	const [height, setHeight] = useState(0);
 	const [isYearSelectorOpen, setIsYearSelectorOpen] = useState(false);
@@ -28,7 +28,7 @@ const YearSelector = ({ year, handleYearSelection }: Props) => {
 				} py-2 pl-[12px] pr-[10px]`}
 				onClick={() => setIsYearSelectorOpen(!isYearSelectorOpen)}
 			>
-				<span className='font-gilroy-bold text-base font-bold text-hunter-green'>{year}</span>
+				<span className='font-gilroy-bold text-base font-bold text-hunter-green'>{selectedYear}</span>
 				<img className={`transition ${isYearSelectorOpen ? 'rotate-180' : ''}`} src={chevronDown} alt='Down icon' />
 				{isYearSelectorOpen && (
 					<div
@@ -37,7 +37,7 @@ const YearSelector = ({ year, handleYearSelection }: Props) => {
 					>
 						<div
 							className={`border-b border-ashen-grey py-2 pl-[12px] pr-[10px] font-gilroy-medium text-base font-medium text-hunter-green ${
-								year === '2021'
+								selectedYear === '2021'
 									? 'bg-frosty-lagoon font-gilroy-semi-bold font-semibold'
 									: 'bg-white font-gilroy-medium font-medium'
 							}`}
@@ -47,7 +47,7 @@ const YearSelector = ({ year, handleYearSelection }: Props) => {
 						</div>
 						<div
 							className={`border-b border-ashen-grey py-2 pl-[12px] pr-[10px] font-gilroy-medium text-base font-medium text-hunter-green ${
-								year === '2022'
+								selectedYear === '2022'
 									? 'bg-frosty-lagoon font-gilroy-semi-bold font-semibold'
 									: 'bg-white font-gilroy-medium font-medium'
 							}`}
@@ -57,7 +57,7 @@ const YearSelector = ({ year, handleYearSelection }: Props) => {
 						</div>
 						<div
 							className={`py-2 pl-[12px] pr-[10px] font-gilroy-medium text-base font-medium text-hunter-green ${
-								year === '2023'
+								selectedYear === '2023'
 									? 'bg-frosty-lagoon font-gilroy-semi-bold font-semibold'
 									: 'bg-white font-gilroy-medium font-medium'
 							}`}
