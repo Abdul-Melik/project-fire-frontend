@@ -3,6 +3,7 @@ import { useState, useLayoutEffect, useRef } from 'react';
 import { ProjectStatus } from 'src/types';
 import { getProjectColorAndStatus } from 'src/helpers';
 import { chevronDown } from 'assets/media';
+import RadioButton from 'components/formElements/RadioButton';
 
 type Props = {
 	selectedProjectStatus: string;
@@ -44,70 +45,62 @@ const ProjectStatusSelector = ({ selectedProjectStatus, handleProjectStatusSelec
 						className='absolute left-0 z-20 flex max-h-[128px] flex-col rounded-md border border-t-0 border-misty-moonstone bg-white py-2'
 						style={{ width, top: height }}
 					>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none border-2 border-slate-mist text-evergreen focus:ring-transparent'
-								type='radio'
-								id='active'
-								name='active'
-								checked={selectedProjectStatus === 'Active'}
-								onChange={event => {
-									handleProjectStatusSelection(event.target.checked ? 'Active' : '');
-									setIsProjectStatusSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='active'>
-								Active
-							</label>
-						</div>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none border-2 border-slate-mist text-evergreen focus:ring-transparent'
-								type='radio'
-								id='onHold'
-								name='onHold'
-								checked={selectedProjectStatus === 'OnHold'}
-								onChange={event => {
-									handleProjectStatusSelection(event.target.checked ? 'OnHold' : '');
-									setIsProjectStatusSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='onHold'>
-								On hold
-							</label>
-						</div>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none border-2 border-slate-mist text-evergreen  focus:ring-transparent'
-								type='radio'
-								id='inactive'
-								name='inactive'
-								checked={selectedProjectStatus === 'Inactive'}
-								onChange={event => {
-									handleProjectStatusSelection(event.target.checked ? 'Inactive' : '');
-									setIsProjectStatusSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='inactive'>
-								Inactive
-							</label>
-						</div>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none border-2 border-slate-mist text-evergreen focus:ring-transparent'
-								type='radio'
-								id='completed'
-								name='completed'
-								checked={selectedProjectStatus === 'Completed'}
-								onChange={event => {
-									handleProjectStatusSelection(event.target.checked ? 'Completed' : '');
-									setIsProjectStatusSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='completed'>
-								Completed
-							</label>
-						</div>
+						<RadioButton
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='Active'
+							htmlFor='active'
+							id='active'
+							name='projectStatus'
+							checked={selectedProjectStatus === 'Active'}
+							handleRadioButtonChange={event => {
+								handleProjectStatusSelection(event.target.checked ? 'Active' : '');
+								setIsProjectStatusSelectorOpen(false);
+							}}
+						/>
+						<RadioButton
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='On hold'
+							htmlFor='onHold'
+							id='onHold'
+							name='projectStatus'
+							checked={selectedProjectStatus === 'OnHold'}
+							handleRadioButtonChange={event => {
+								handleProjectStatusSelection(event.target.checked ? 'OnHold' : '');
+								setIsProjectStatusSelectorOpen(false);
+							}}
+						/>
+						<RadioButton
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='Inactive'
+							htmlFor='inactive'
+							id='inactive'
+							name='projectStatus'
+							checked={selectedProjectStatus === 'Inactive'}
+							handleRadioButtonChange={event => {
+								handleProjectStatusSelection(event.target.checked ? 'Inactive' : '');
+								setIsProjectStatusSelectorOpen(false);
+							}}
+						/>
+						<RadioButton
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='Completed'
+							htmlFor='completed'
+							id='completed'
+							name='projectStatus'
+							checked={selectedProjectStatus === 'Completed'}
+							handleRadioButtonChange={event => {
+								handleProjectStatusSelection(event.target.checked ? 'Completed' : '');
+								setIsProjectStatusSelectorOpen(false);
+							}}
+						/>
 					</div>
 				)}
 			</div>

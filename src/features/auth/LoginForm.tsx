@@ -5,6 +5,7 @@ import { logo, gradientBackground } from 'assets/media';
 import { useLoginMutation } from 'store/slices/authApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import InputField from 'components/formElements/InputField';
+import Checkbox from 'components/formElements/Checkbox';
 
 const LoginForm = () => {
 	const navigate = useNavigate();
@@ -86,17 +87,17 @@ const LoginForm = () => {
 					</button>
 				</form>
 				<div className='mb-8 flex items-center justify-between gap-3'>
-					<div className='flex items-center justify-start gap-[9px]'>
-						<input
-							className=' h-[18px] w-[18px] accent-deep-teal'
-							type='checkbox'
-							id='checkbox'
-							onChange={() => setRememberMe(!rememberMe)}
-						/>
-						<span className='font-gilroy-medium font-medium tracking-[-0.015em] text-midnight-grey'>
-							Remember password
-						</span>
-					</div>
+					<Checkbox
+						containerClassName='gap-[9px]'
+						labelClassName='font-gilroy-medium font-medium tracking-[-0.015em] text-midnight-grey'
+						inputClassName='h-[18px] w-[18px] border-deep-teal text-deep-teal'
+						label='Remember password'
+						htmlFor='rememberMe'
+						id='rememberMe'
+						name='rememberMe'
+						checked={rememberMe}
+						handleCheckboxChange={() => setRememberMe(!rememberMe)}
+					/>
 					<Link
 						className='font-gilroy-medium font-medium tracking-[-0.015em] text-deep-teal underline'
 						to='/forgot-password'

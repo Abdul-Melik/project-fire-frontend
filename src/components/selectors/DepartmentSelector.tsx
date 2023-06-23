@@ -1,6 +1,7 @@
 import { useState, useLayoutEffect, useRef } from 'react';
 
 import { chevronDown } from 'assets/media';
+import Checkbox from 'components/formElements/Checkbox';
 
 type Props = {
 	selectedDepartment: string;
@@ -40,70 +41,62 @@ const DepartmentSelector = ({ selectedDepartment, handleDepartmentSelection }: P
 						className='absolute left-0 z-20 flex flex-col rounded-md border border-t-0 border-misty-moonstone bg-white py-2'
 						style={{ width, top: height }}
 					>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none rounded-sm border-2 border-slate-mist text-evergreen focus:ring-transparent'
-								type='checkbox'
-								id='administration'
-								name='administration'
-								checked={selectedDepartment === 'Administration'}
-								onChange={event => {
-									handleDepartmentSelection(event.target.checked ? 'Administration' : '');
-									setIsDepartmentSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='administration'>
-								Administration
-							</label>
-						</div>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none rounded-sm border-2 border-slate-mist text-evergreen  focus:ring-transparent'
-								type='checkbox'
-								id='management'
-								name='management'
-								checked={selectedDepartment === 'Management'}
-								onChange={event => {
-									handleDepartmentSelection(event.target.checked ? 'Management' : '');
-									setIsDepartmentSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='management'>
-								Management
-							</label>
-						</div>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none rounded-sm border-2 border-slate-mist text-evergreen focus:ring-transparent'
-								type='checkbox'
-								id='development'
-								name='development'
-								checked={selectedDepartment === 'Development'}
-								onChange={event => {
-									handleDepartmentSelection(event.target.checked ? 'Development' : '');
-									setIsDepartmentSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='development'>
-								Development
-							</label>
-						</div>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none rounded-sm border-2 border-slate-mist text-evergreen  focus:ring-transparent'
-								type='checkbox'
-								id='design'
-								name='design'
-								checked={selectedDepartment === 'Design'}
-								onChange={event => {
-									handleDepartmentSelection(event.target.checked ? 'Design' : '');
-									setIsDepartmentSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='design'>
-								Design
-							</label>
-						</div>
+						<Checkbox
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='Administration'
+							htmlFor='administration'
+							id='administration'
+							name='administration'
+							checked={selectedDepartment === 'Administration'}
+							handleCheckboxChange={event => {
+								handleDepartmentSelection(event.target.checked ? 'Administration' : '');
+								setIsDepartmentSelectorOpen(false);
+							}}
+						/>
+						<Checkbox
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='Management'
+							htmlFor='management'
+							id='management'
+							name='management'
+							checked={selectedDepartment === 'Management'}
+							handleCheckboxChange={event => {
+								handleDepartmentSelection(event.target.checked ? 'Management' : '');
+								setIsDepartmentSelectorOpen(false);
+							}}
+						/>
+						<Checkbox
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='Development'
+							htmlFor='development'
+							id='development'
+							name='development'
+							checked={selectedDepartment === 'Development'}
+							handleCheckboxChange={event => {
+								handleDepartmentSelection(event.target.checked ? 'Development' : '');
+								setIsDepartmentSelectorOpen(false);
+							}}
+						/>
+						<Checkbox
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='Design'
+							htmlFor='design'
+							id='design'
+							name='design'
+							checked={selectedDepartment === 'Design'}
+							handleCheckboxChange={event => {
+								handleDepartmentSelection(event.target.checked ? 'Design' : '');
+								setIsDepartmentSelectorOpen(false);
+							}}
+						/>
 					</div>
 				)}
 			</div>

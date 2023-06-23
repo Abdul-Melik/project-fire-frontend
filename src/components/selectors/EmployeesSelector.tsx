@@ -4,6 +4,7 @@ import { Employee, Employees } from 'src/types';
 import { chevronDown, cancel } from 'assets/media';
 import { useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
+import Checkbox from 'components/formElements/Checkbox';
 
 type Props = {
 	selectedEmployees: Employees[];
@@ -82,33 +83,29 @@ const EmployeesSelector = ({ selectedEmployees, handleEmployeesSelection }: Prop
 						) : (
 							isSuccess &&
 							data.employees.map((employee: Employee, index: number) => (
-								<div key={employee.id} className='flex items-center gap-2 px-4 py-1'>
-									<input
-										className='h-[15px] w-[15px] appearance-none rounded-sm border-2 border-slate-mist text-evergreen focus:ring-transparent'
-										type='checkbox'
-										id={`employee${index + 1}`}
-										name={`employee${index + 1}`}
-										checked={selectedEmployees.some(selectedEmployee => selectedEmployee.employee.id === employee.id)}
-										onChange={event => {
-											handleEmployeesSelection(
-												event.target.checked
-													? [...selectedEmployees, { partTime: false, employee }]
-													: selectedEmployees.filter(selectedEmployee => selectedEmployee.employee.id !== employee.id)
-											);
-											setOpenPartTimeSelectors(
-												!event.target.checked
-													? openPartTimeSelectors.filter(employeeId => employeeId !== employee.id)
-													: openPartTimeSelectors
-											);
-										}}
-									/>
-									<label
-										className='font-gilroy-regular text-sm font-normal text-slate-mist'
-										htmlFor={`employee${index + 1}`}
-									>
-										{employee.firstName + ' ' + employee.lastName}
-									</label>
-								</div>
+								<Checkbox
+									key={employee.id}
+									containerClassName='gap-2 px-4 py-1'
+									labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+									inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+									label={employee.firstName + ' ' + employee.lastName}
+									htmlFor={`employee${index + 1}`}
+									id={`employee${index + 1}`}
+									name={`employee${index + 1}`}
+									checked={selectedEmployees.some(selectedEmployee => selectedEmployee.employee.id === employee.id)}
+									handleCheckboxChange={event => {
+										handleEmployeesSelection(
+											event.target.checked
+												? [...selectedEmployees, { partTime: false, employee }]
+												: selectedEmployees.filter(selectedEmployee => selectedEmployee.employee.id !== employee.id)
+										);
+										setOpenPartTimeSelectors(
+											!event.target.checked
+												? openPartTimeSelectors.filter(employeeId => employeeId !== employee.id)
+												: openPartTimeSelectors
+										);
+									}}
+								/>
 							))
 						)}
 					</div>

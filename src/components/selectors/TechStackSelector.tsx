@@ -3,6 +3,7 @@ import { useState, useLayoutEffect, useRef } from 'react';
 import { TechStack } from 'src/types';
 import { getEmployeeTechStack } from 'src/helpers';
 import { chevronDown } from 'assets/media';
+import Checkbox from 'components/formElements/Checkbox';
 
 type Props = {
 	selectedDepartment: string;
@@ -43,88 +44,78 @@ const TechStackSelector = ({ selectedDepartment, selectedTechStack, handleTechSt
 						className='absolute left-0 flex flex-col rounded-md border border-t-0 border-misty-moonstone bg-white py-2'
 						style={{ width, top: height }}
 					>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none rounded-sm border-2 border-slate-mist text-evergreen focus:ring-transparent'
-								type='checkbox'
-								id='na'
-								name='na'
-								checked={selectedTechStack === 'AdminNA' || selectedTechStack === 'MgmtNA'}
-								onChange={event => {
-									handleTechStackSelection(
-										event.target.checked ? (selectedDepartment === 'Administration' ? 'AdminNA' : 'MgmtNA') : ''
-									);
-									setIsTechStackSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='na'>
-								N/A
-							</label>
-						</div>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none rounded-sm border-2 border-slate-mist text-evergreen  focus:ring-transparent'
-								type='checkbox'
-								id='fullstack'
-								name='fullstack'
-								checked={selectedTechStack === 'FullStack'}
-								onChange={event => {
-									handleTechStackSelection(event.target.checked ? 'FullStack' : '');
-									setIsTechStackSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='fullstack'>
-								Full Stack
-							</label>
-						</div>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none rounded-sm border-2 border-slate-mist text-evergreen  focus:ring-transparent'
-								type='checkbox'
-								id='backend'
-								name='backend'
-								checked={selectedTechStack === 'Backend'}
-								onChange={event => {
-									handleTechStackSelection(event.target.checked ? 'Backend' : '');
-									setIsTechStackSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='backend'>
-								Back End
-							</label>
-						</div>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none rounded-sm border-2 border-slate-mist text-evergreen focus:ring-transparent'
-								type='checkbox'
-								id='frontend'
-								name='frontend'
-								checked={selectedTechStack === 'Frontend'}
-								onChange={event => {
-									handleTechStackSelection(event.target.checked ? 'Frontend' : '');
-									setIsTechStackSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='frontend'>
-								Front End
-							</label>
-						</div>
-						<div className='flex items-center gap-2 px-4 py-1'>
-							<input
-								className='h-[15px] w-[15px] appearance-none rounded-sm border-2 border-slate-mist text-evergreen focus:ring-transparent'
-								type='checkbox'
-								id='uxui'
-								name='uxui'
-								checked={selectedTechStack === 'UXUI'}
-								onChange={event => {
-									handleTechStackSelection(event.target.checked ? 'UXUI' : '');
-									setIsTechStackSelectorOpen(false);
-								}}
-							/>
-							<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='uxui'>
-								UX/UI
-							</label>
-						</div>
+						<Checkbox
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='N/A'
+							htmlFor='na'
+							id='na'
+							name='na'
+							checked={selectedTechStack === 'AdminNA' || selectedTechStack === 'MgmtNA'}
+							handleCheckboxChange={event => {
+								handleTechStackSelection(
+									event.target.checked ? (selectedDepartment === 'Administration' ? 'AdminNA' : 'MgmtNA') : ''
+								);
+								setIsTechStackSelectorOpen(false);
+							}}
+						/>
+						<Checkbox
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='Full Stack'
+							htmlFor='fullstack'
+							id='fullstack'
+							name='fullstack'
+							checked={selectedTechStack === 'FullStack'}
+							handleCheckboxChange={event => {
+								handleTechStackSelection(event.target.checked ? 'FullStack' : '');
+								setIsTechStackSelectorOpen(false);
+							}}
+						/>
+						<Checkbox
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='Back End'
+							htmlFor='backend'
+							id='backend'
+							name='backend'
+							checked={selectedTechStack === 'Backend'}
+							handleCheckboxChange={event => {
+								handleTechStackSelection(event.target.checked ? 'Backend' : '');
+								setIsTechStackSelectorOpen(false);
+							}}
+						/>
+						<Checkbox
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='Front End'
+							htmlFor='frontend'
+							id='frontend'
+							name='frontend'
+							checked={selectedTechStack === 'Frontend'}
+							handleCheckboxChange={event => {
+								handleTechStackSelection(event.target.checked ? 'Frontend' : '');
+								setIsTechStackSelectorOpen(false);
+							}}
+						/>
+						<Checkbox
+							containerClassName='gap-2 px-4 py-1'
+							labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
+							inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
+							label='UX/UI'
+							htmlFor='uxui'
+							id='uxui'
+							name='uxui'
+							checked={selectedTechStack === 'UXUI'}
+							handleCheckboxChange={event => {
+								handleTechStackSelection(event.target.checked ? 'UXUI' : '');
+								setIsTechStackSelectorOpen(false);
+							}}
+						/>
 					</div>
 				)}
 			</div>
