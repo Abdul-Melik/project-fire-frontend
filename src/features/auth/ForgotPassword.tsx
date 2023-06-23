@@ -33,15 +33,16 @@ const ForgotPassword = () => {
 				</h1>
 				<form className='flex flex-col items-center justify-center text-base' onSubmit={handleFormSubmit}>
 					<InputField
-						className='mb-[34px]'
-						label='Email'
-						htmlFor='email'
+						containerClassName='mb-[21px] gap-[10px]'
+						inputClassName='border-misty-lavender p-3 text-dark-indigo focus:border-misty-lavender text-base'
 						required
 						type='email'
+						label='Email'
+						htmlFor='email'
 						id='email'
 						name='email'
-						value={email}
 						placeholder='Enter your email'
+						value={email}
 						handleInput={email => setEmail(email)}
 					/>
 					<button

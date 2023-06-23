@@ -3,7 +3,7 @@ type Props = {
 	labelClassName?: string;
 	inputClassName?: string;
 	required?: boolean;
-	type?: string;
+	type: string;
 	label: string;
 	htmlFor: string;
 	id: string;
@@ -18,7 +18,7 @@ const InputField = ({
 	labelClassName,
 	inputClassName,
 	required,
-	type = 'text',
+	type,
 	label,
 	htmlFor,
 	id,

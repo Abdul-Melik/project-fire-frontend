@@ -40,27 +40,29 @@ const ResetPassword = () => {
 				</h1>
 				<form className='flex flex-col items-center justify-center text-base' onSubmit={handleFormSubmit}>
 					<InputField
-						className='mb-[21px]'
-						label='New Password'
-						htmlFor='password'
+						containerClassName='mb-[21px] gap-[10px]'
+						inputClassName='border-misty-lavender p-3 text-dark-indigo focus:border-misty-lavender text-base'
 						required
 						type='password'
+						label='Password'
+						htmlFor='password'
 						id='password'
 						name='password'
-						value={password}
 						placeholder='Enter your password'
+						value={password}
 						handleInput={password => setPassword(password)}
 					/>
 					<InputField
-						className='mb-[34px]'
+						containerClassName='mb-[34px] gap-[10px]'
+						inputClassName='border-misty-lavender p-3 text-dark-indigo focus:border-misty-lavender text-base'
+						required
+						type='confirmPassword'
 						label='Confirm Password'
 						htmlFor='confirmPassword'
-						required
-						type='password'
 						id='confirmPassword'
 						name='confirmPassword'
-						value={confirmPassword}
 						placeholder='Confirm your password'
+						value={confirmPassword}
 						handleInput={confirmPassword => setConfirmPassword(confirmPassword)}
 					/>
 					<button
