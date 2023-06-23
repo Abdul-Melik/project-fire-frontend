@@ -18,9 +18,7 @@ const YearSelector = ({ selectedYear, handleYearSelection }: Props) => {
 
 	return (
 		<div className='flex items-center'>
-			<label htmlFor='years' className='mr-4 font-gilroy-bold text-[22px] font-bold leading-[30px] text-deep-forest'>
-				Year:
-			</label>
+			<span className='mr-4 font-gilroy-bold text-[22px] font-bold leading-[30px] text-deep-forest'>Year:</span>
 			<div
 				ref={ref}
 				className={`relative flex w-[110px] cursor-pointer items-center justify-between gap-[10px] rounded-md border ${

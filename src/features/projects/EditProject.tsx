@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-import { Employee, Employees, Project, ProjectStatus } from 'src/types';
-import { getProjectColorAndStatus } from 'src/helpers';
-import { chevronDown, chevronLeft, cancel, employees } from 'assets/media';
-import { useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
+import { Employees, Project } from 'src/types';
+import { chevronLeft } from 'assets/media';
 import { useUpdateProjectMutation } from 'store/slices/projectsApiSlice';
-import LoadingSpinner from 'components/utils/LoadingSpinner';
 import SideDrawer from 'components/navigation/SideDrawer';
 import Footer from 'components/layout/Footer';
 import InputField from 'components/formElements/InputField';
 import DateInputs from 'components/formElements/DateInputs';
 import EmployeesSelector from 'src/components/selectors/EmployeesSelector';
+import ProjectStatusSelector from 'src/components/selectors/ProjectStatusSelector';
 
 type Props = {
 	project: Project;
@@ -19,7 +17,6 @@ type Props = {
 };
 
 const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
-	const [isProjectStatusMenuOpen, setIsProjectStatusMenuOpen] = useState(false);
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [startDate, setStartDate] = useState<Date | null>(new Date(new Date().getFullYear(), 0, 1));
@@ -28,7 +25,7 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 	const [hourlyRate, setHourlyRate] = useState('');
 	const [projectValueBAM, setProjectValueBAM] = useState('');
 	const [salesChannel, setSalesChannel] = useState('Online');
-	const [projectStatus, setProjectStatus] = useState('');
+	const [selectedProjectStatus, setSelectedProjectStatus] = useState('');
 	const [selectedEmployees, setSelectedEmployees] = useState<Employees[]>([]);
 
 	const [updateProject, { isSuccess }] = useUpdateProjectMutation();
@@ -43,7 +40,7 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 			setHourlyRate(project.hourlyRate.toString());
 			setProjectValueBAM(project.projectValueBAM.toString());
 			setSalesChannel(project.salesChannel);
-			setProjectStatus(project.projectStatus);
+			setSelectedProjectStatus(project.projectStatus);
 			setSelectedEmployees(project.employees);
 		}
 	}, [project]);
@@ -63,7 +60,7 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 			hourlyRate: Number(hourlyRate),
 			projectValueBAM: Number(projectValueBAM),
 			salesChannel,
-			projectStatus,
+			projectStatus: selectedProjectStatus,
 			employees,
 		};
 		await updateProject({ projectId: project.id, data });
@@ -119,6 +116,18 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 						value={description}
 						handleInput={description => setDescription(description)}
 					/>
+					<DateInputs
+						startDate={startDate}
+						endDate={endDate}
+						handleStartDateInput={startDate => setStartDate(startDate)}
+						handleEndDateInput={endDate => setEndDate(endDate)}
+					/>
+					<EmployeesSelector
+						selectedEmployees={selectedEmployees}
+						handleEmployeesSelection={employees => {
+							setSelectedEmployees(employees);
+						}}
+					/>
 					<InputField
 						containerClassName='gap-1'
 						labelClassName='leading-[22px]'
@@ -153,106 +162,10 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 						value={projectValueBAM}
 						handleInput={projectValueBAM => setProjectValueBAM(projectValueBAM)}
 					/>
-					<DateInputs
-						startDate={startDate}
-						endDate={endDate}
-						handleStartDateInput={startDate => setStartDate(startDate)}
-						handleEndDateInput={endDate => setEndDate(endDate)}
+					<ProjectStatusSelector
+						selectedProjectStatus={selectedProjectStatus}
+						handleProjectStatusSelection={projectStatus => setSelectedProjectStatus(projectStatus)}
 					/>
-					<EmployeesSelector
-						selectedEmployees={selectedEmployees}
-						handleEmployeesSelection={employees => {
-							setSelectedEmployees(employees);
-						}}
-					/>
-					<div className='flex flex-col gap-1'>
-						<span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>Status</span>
-						<div className='relative rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'>
-							<div
-								className='flex cursor-pointer items-center justify-between'
-								onClick={() => setIsProjectStatusMenuOpen(!isProjectStatusMenuOpen)}
-							>
-								<span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>
-									{projectStatus
-										? getProjectColorAndStatus(projectStatus as ProjectStatus)?.status
-										: 'Select project status'}
-								</span>
-								<img
-									className={`transition ${isProjectStatusMenuOpen ? 'rotate-180' : ''}`}
-									src={chevronDown}
-									alt='Down icon'
-								/>
-							</div>
-							{isProjectStatusMenuOpen && (
-								<div className='absolute left-0 top-10 z-20 flex max-h-[128px] w-[400px] flex-col rounded-md border border-t-0 border-misty-moonstone bg-white py-2'>
-									<div className='flex items-center gap-2 px-4 py-1'>
-										<input
-											className='h-[15px] w-[15px] appearance-none border-2 border-slate-mist text-evergreen focus:ring-transparent'
-											type='radio'
-											id='active'
-											name='active'
-											checked={projectStatus === 'Active'}
-											onChange={event => {
-												setProjectStatus(event.target.checked ? 'Active' : '');
-												setIsProjectStatusMenuOpen(false);
-											}}
-										/>
-										<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='active'>
-											Active
-										</label>
-									</div>
-									<div className='flex items-center gap-2 px-4 py-1'>
-										<input
-											className='h-[15px] w-[15px] appearance-none border-2 border-slate-mist text-evergreen focus:ring-transparent'
-											type='radio'
-											id='onHold'
-											name='onHold'
-											checked={projectStatus === 'OnHold'}
-											onChange={event => {
-												setProjectStatus(event.target.checked ? 'OnHold' : '');
-												setIsProjectStatusMenuOpen(false);
-											}}
-										/>
-										<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='fullstack'>
-											On hold
-										</label>
-									</div>
-									<div className='flex items-center gap-2 px-4 py-1'>
-										<input
-											className='h-[15px] w-[15px] appearance-none border-2 border-slate-mist text-evergreen  focus:ring-transparent'
-											type='radio'
-											id='inactive'
-											name='inactive'
-											checked={projectStatus === 'Inactive'}
-											onChange={event => {
-												setProjectStatus(event.target.checked ? 'Inactive' : '');
-												setIsProjectStatusMenuOpen(false);
-											}}
-										/>
-										<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='backend'>
-											Inactive
-										</label>
-									</div>
-									<div className='flex items-center gap-2 px-4 py-1'>
-										<input
-											className='h-[15px] w-[15px] appearance-none border-2 border-slate-mist text-evergreen focus:ring-transparent'
-											type='radio'
-											id='completed'
-											name='completed'
-											checked={projectStatus === 'Completed'}
-											onChange={event => {
-												setProjectStatus(event.target.checked ? 'Completed' : '');
-												setIsProjectStatusMenuOpen(false);
-											}}
-										/>
-										<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='frontend'>
-											Completed
-										</label>
-									</div>
-								</div>
-							)}
-						</div>
-					</div>
 				</form>
 			</main>
 			<Footer

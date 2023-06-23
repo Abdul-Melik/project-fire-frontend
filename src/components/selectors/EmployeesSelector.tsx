@@ -102,7 +102,10 @@ const EmployeesSelector = ({ selectedEmployees, handleEmployeesSelection }: Prop
 											);
 										}}
 									/>
-									<label className='font-gilroy-regular text-sm font-normal text-slate-mist' htmlFor='administration'>
+									<label
+										className='font-gilroy-regular text-sm font-normal text-slate-mist'
+										htmlFor={`employee${index + 1}`}
+									>
 										{employee.firstName + ' ' + employee.lastName}
 									</label>
 								</div>
