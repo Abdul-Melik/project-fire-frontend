@@ -10,6 +10,7 @@ import CurrencySelector from 'components/selectors/CurrencySelector';
 import TechStackSelector from 'components/selectors/TechStackSelector';
 import SideDrawer from 'components/navigation/SideDrawer';
 import Header from 'components/layout/Header';
+import Main from 'components/layout/Main';
 import Footer from 'components/layout/Footer';
 
 type Props = {
@@ -70,7 +71,7 @@ const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
 					Add New Employee
 				</h2>
 			</Header>
-			<main className='mt-4 rounded-lg bg-white p-6'>
+			<Main className='rounded-lg bg-white p-6'>
 				<form className='flex flex-col gap-4'>
 					<InputField
 						containerClassName='gap-1'
@@ -143,7 +144,7 @@ const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
 						handleTechStackSelection={techStack => setSelectedTechStack(techStack)}
 					/>
 				</form>
-			</main>
+			</Main>
 			<Footer
 				firstButtonClassName='border border-deep-teal text-evergreen'
 				secondButtonClassName='bg-deep-teal text-white'

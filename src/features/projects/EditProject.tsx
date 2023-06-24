@@ -10,6 +10,7 @@ import EmployeesSelector from 'components/selectors/EmployeesSelector';
 import ProjectStatusSelector from 'components/selectors/ProjectStatusSelector';
 import SideDrawer from 'components/navigation/SideDrawer';
 import Header from 'components/layout/Header';
+import Main from 'components/layout/Main';
 import Footer from 'components/layout/Footer';
 
 type Props = {
@@ -84,7 +85,7 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 					Edit Project
 				</h2>
 			</Header>
-			<main className='mt-4 rounded-lg bg-white p-6'>
+			<Main className='rounded-lg bg-white p-6'>
 				<form className='flex flex-col gap-4'>
 					<InputField
 						containerClassName='gap-1'
@@ -165,7 +166,7 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 						handleProjectStatusSelection={projectStatus => setSelectedProjectStatus(projectStatus)}
 					/>
 				</form>
-			</main>
+			</Main>
 			<Footer
 				firstButtonClassName='border border-deep-teal text-evergreen'
 				secondButtonClassName='bg-deep-teal text-white'

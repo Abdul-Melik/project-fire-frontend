@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-import { Employee, Projects } from 'src/types';
-import { getEmployeeSalaryInBAM, getEmployeeTechStack } from 'src/helpers';
+import { Employee } from 'src/types';
 import { useAppSelector } from 'store/hooks';
 import { selectUserRole } from 'store/slices/authSlice';
 import { useDeleteEmployeeMutation } from 'store/slices/employeesApiSlice';
@@ -11,7 +10,10 @@ import AlertModal from 'components/modals/AlertModal';
 import EmployeeCard from 'components/cards/EmployeeCard';
 import SideDrawer from 'components/navigation/SideDrawer';
 import Header from 'components/layout/Header';
+import Main from 'components/layout/Main';
 import Footer from 'components/layout/Footer';
+import EmployeeSalaryAndTechStack from 'features/employees/EmployeeSalaryAndTechStack';
+import AssignedToProjects from 'features/employees/AssignedToProjects';
 
 type Props = {
 	employee: Employee;
@@ -61,55 +63,10 @@ const ViewEmployee = ({ employee, closeViewEmployeeSideDrawer, openEditEmployeeS
 						<Header className='mt-[13px]'>
 							<EmployeeCard employee={employee} />
 						</Header>
-						<main className='mt-4 flex flex-col gap-5'>
-							<div className='flex flex-col gap-4 rounded-lg bg-white p-6'>
-								<div className='flex flex-col'>
-									<span className='font-gilroy-medium text-base font-medium text-midnight-grey'>
-										Monthly Salary (BAM)
-									</span>
-									<span className='font-gilroy-regular text-base font-normal text-slate-mist'>
-										{getEmployeeSalaryInBAM(employee.salary, employee.currency)}
-									</span>
-								</div>
-								<div className='h-[1px] w-full bg-ashen-grey' />
-								<div className='flex flex-col'>
-									<span className='font-gilroy-medium text-base font-medium text-midnight-grey'>Tech Stack</span>
-									<span className='font-gilroy-regular text-base font-normal text-slate-mist'>
-										{getEmployeeTechStack(employee.techStack)}
-									</span>
-								</div>
-							</div>
-							<div
-								className={`flex max-h-[240px] flex-col ${
-									employee.projects.length > 0
-										? 'overflow-y-scroll scrollbar-thin scrollbar-track-ashen-grey scrollbar-thumb-misty-moonstone scrollbar-track-rounded-full scrollbar-thumb-rounded-full'
-										: ''
-								} rounded-lg bg-white p-6`}
-							>
-								<span className='font-gilroy-medium text-base font-medium text-midnight-grey'>
-									Assigned to projects
-								</span>
-								<div className='mt-2 flex flex-col gap-1'>
-									{employee.projects.map(({ project, partTime }: Projects, index: number) => (
-										<div
-											key={project.id}
-											className={`flex items-center justify-between gap-4 p-2 ${
-												index < employee.projects.length - 1 ? 'border-b border-ashen-grey' : ''
-											}`}
-										>
-											<span className='font-gilroy-regular text-base font-normal text-slate-mist'>{project.name}</span>
-											<span
-												className={`h-5 w-[68px] rounded-xl px-2 py-[2px] text-center font-gilroy-regular text-xs font-normal tracking-[0.16px] text-white ${
-													partTime ? 'bg-blue-ash' : 'bg-sage-green'
-												}`}
-											>
-												{partTime ? 'Part time' : 'Full time'}
-											</span>
-										</div>
-									))}
-								</div>
-							</div>
-						</main>
+						<Main className='flex flex-col gap-5'>
+							<EmployeeSalaryAndTechStack employee={employee} />
+							<AssignedToProjects employee={employee} />
+						</Main>
 						{userRole === 'Admin' && (
 							<Footer
 								firstButtonClassName='border border-crimson-blaze text-crimson-blaze'
