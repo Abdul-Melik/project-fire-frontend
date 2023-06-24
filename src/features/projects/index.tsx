@@ -128,7 +128,7 @@ const Projects = () => {
 						lastPage={data.pageInfo.lastPage}
 						perPage={projectsPerPage}
 						items='Projects'
-						handlePerPage={projectsPerPage => {
+						handlePerPageSelection={projectsPerPage => {
 							setProjectsPerPage(projectsPerPage);
 							setCurrentPage(1);
 							setSearchTerm('');

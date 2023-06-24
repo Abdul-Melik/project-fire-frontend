@@ -1,5 +1,5 @@
 import { ellipsis } from 'assets/media';
-import PerPageSelector from 'components/pagination/PerPageSelector';
+import PerPageSelector from 'components/selectors/PerPageSelector';
 import PageNumberButton from 'components/pagination/PageNumberButton';
 
 type Props = {
@@ -8,11 +8,19 @@ type Props = {
 	lastPage: number;
 	perPage: number;
 	items: string;
-	handlePerPage: (perPage: number) => void;
+	handlePerPageSelection: (perPage: number) => void;
 	handlePageChange: (pageNumber: number) => void;
 };
 
-const Pagination = ({ total, currentPage, lastPage, perPage, items, handlePerPage, handlePageChange }: Props) => {
+const Pagination = ({
+	total,
+	currentPage,
+	lastPage,
+	perPage,
+	items,
+	handlePerPageSelection,
+	handlePageChange,
+}: Props) => {
 	const pageNumbers = Array.from({ length: lastPage }, (_, index) => index + 1);
 
 	return (
@@ -22,7 +30,7 @@ const Pagination = ({ total, currentPage, lastPage, perPage, items, handlePerPag
 					<span className='font-opensans-semi-bold text-sm font-semibold leading-[30px] tracking-[0.15px] text-nightfall-navy'>
 						Rows per page:
 					</span>
-					<PerPageSelector perPage={perPage} handlePerPage={handlePerPage} />
+					<PerPageSelector perPage={perPage} handlePerPageSelection={handlePerPageSelection} />
 				</div>
 				<span className='font-opensans-semi-bold text-sm font-semibold leading-[30px] tracking-[0.15px] text-whispering-gray'>
 					{total === 0 ? 0 : (currentPage - 1) * perPage + 1}

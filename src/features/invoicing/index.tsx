@@ -146,7 +146,7 @@ const Invoicing = () => {
 						lastPage={data.pageInfo.lastPage}
 						perPage={invoicesPerPage}
 						items='Invoices'
-						handlePerPage={invoicesPerPage => {
+						handlePerPageSelection={invoicesPerPage => {
 							setInvoicesPerPage(invoicesPerPage);
 							setCurrentPage(1);
 							setClient('');

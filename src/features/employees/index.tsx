@@ -161,7 +161,7 @@ const Employees = () => {
 						lastPage={data.pageInfo.lastPage}
 						perPage={employeesPerPage}
 						items='Employees'
-						handlePerPage={employeesPerPage => {
+						handlePerPageSelection={employeesPerPage => {
 							setEmployeesPerPage(employeesPerPage);
 							setCurrentPage(1);
 							setSearchTerm('');
