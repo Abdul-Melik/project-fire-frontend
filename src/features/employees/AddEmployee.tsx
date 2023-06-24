@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
-import { chevronLeft } from 'assets/media';
 import { useCreateEmployeeMutation } from 'store/slices/employeesApiSlice';
+import BackButton from 'components/utils/BackButton';
 import SideDrawer from 'components/navigation/SideDrawer';
 import Footer from 'components/layout/Footer';
 import InputField from 'components/formElements/InputField';
@@ -64,10 +64,7 @@ const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
 			className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pt-[27px]'
 		>
 			<header className='flex flex-col gap-[13px]'>
-				<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeAddEmployeeSideDrawer}>
-					<img className='h-4 w-4' src={chevronLeft} alt='Back icon' />
-					<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
-				</div>
+				<BackButton closeSideDrawer={closeAddEmployeeSideDrawer} />
 				<h2 className='rounded-lg bg-white px-6 py-4 font-gilroy-bold text-[21px] font-bold leading-6 text-midnight-grey'>
 					Add New Employee
 				</h2>

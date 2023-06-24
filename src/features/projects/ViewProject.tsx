@@ -7,6 +7,7 @@ import { chevronLeft } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
 import { selectUserRole } from 'store/slices/authSlice';
 import { useDeleteProjectMutation } from 'store/slices/projectsApiSlice';
+import BackButton from 'components/utils/BackButton';
 import AlertModal from 'components/modals/AlertModal';
 import SideDrawer from 'components/navigation/SideDrawer';
 import Footer from 'components/layout/Footer';
@@ -53,10 +54,7 @@ const ViewProject = ({ project, closeViewProjectSideDrawer, openEditProjectSideD
 				transition={{ duration: 0.4, ease: 'easeInOut' }}
 				className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pb-6 pt-[27px]'
 			>
-				<div className='flex cursor-pointer items-center gap-[3px]' onClick={closeViewProjectSideDrawer}>
-					<img className='h-4 w-4' src={chevronLeft} alt='Back icon' />
-					<span className='font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-evergreen'>Back</span>
-				</div>
+				<BackButton closeSideDrawer={closeViewProjectSideDrawer} />
 				{project && (
 					<>
 						<header className='mt-[13px]'>
