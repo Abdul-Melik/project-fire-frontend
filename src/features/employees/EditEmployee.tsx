@@ -10,6 +10,7 @@ import DepartmentSelector from 'components/selectors/DepartmentSelector';
 import CurrencySelector from 'components/selectors/CurrencySelector';
 import TechStackSelector from 'components/selectors/TechStackSelector';
 import SideDrawer from 'components/navigation/SideDrawer';
+import Header from 'components/layout/Header';
 import Footer from 'components/layout/Footer';
 
 type Props = {
@@ -89,11 +90,11 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
 			<BackButton closeSideDrawer={closeEditEmployeeSideDrawer} />
 			{employee && (
 				<>
-					<header className='mt-[13px]'>
+					<Header className='mt-[13px]'>
 						<h2 className='rounded-lg bg-white px-6 py-4 font-gilroy-bold text-[21px] font-bold leading-6 text-midnight-grey'>
 							Edit Employee
 						</h2>
-					</header>
+					</Header>
 					<main className='mt-4 rounded-lg bg-white p-6'>
 						<form className='flex flex-col gap-4'>
 							<InputField

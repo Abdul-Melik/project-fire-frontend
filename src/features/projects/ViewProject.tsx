@@ -9,6 +9,7 @@ import { useDeleteProjectMutation } from 'store/slices/projectsApiSlice';
 import BackButton from 'components/utils/BackButton';
 import AlertModal from 'components/modals/AlertModal';
 import SideDrawer from 'components/navigation/SideDrawer';
+import Header from 'components/layout/Header';
 import Footer from 'components/layout/Footer';
 
 type Props = {
@@ -56,11 +57,11 @@ const ViewProject = ({ project, closeViewProjectSideDrawer, openEditProjectSideD
 				<BackButton closeSideDrawer={closeViewProjectSideDrawer} />
 				{project && (
 					<>
-						<header className='mt-[13px]'>
+						<Header className='mt-[13px]'>
 							<h2 className='rounded-lg bg-white px-6 py-4 font-gilroy-bold text-[21px] font-bold leading-6 text-midnight-grey'>
 								{project.name}
 							</h2>
-						</header>
+						</Header>
 						<main className='mt-4 flex flex-col gap-5'>
 							<div className='flex flex-col gap-4 rounded-lg bg-white p-6'>
 								<div className='flex flex-col border-b border-ashen-grey pb-4'>

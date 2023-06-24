@@ -9,6 +9,7 @@ import DateInputs from 'components/formElements/DateInputs';
 import EmployeesSelector from 'components/selectors/EmployeesSelector';
 import ProjectStatusSelector from 'components/selectors/ProjectStatusSelector';
 import SideDrawer from 'components/navigation/SideDrawer';
+import Header from 'components/layout/Header';
 import Footer from 'components/layout/Footer';
 
 type Props = {
@@ -77,12 +78,12 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
 			transition={{ duration: 0.4, ease: 'easeInOut' }}
 			className='fixed right-0 top-0 z-20 flex min-h-full w-[496px] flex-col bg-frosty-mint px-6 pt-[27px]'
 		>
-			<header className='flex flex-col gap-[13px]'>
+			<Header className='flex flex-col gap-[13px]'>
 				<BackButton closeSideDrawer={closeEditProjectSideDrawer} />
 				<h2 className='rounded-lg bg-white px-6 py-4 font-gilroy-bold text-[21px] font-bold leading-6 text-midnight-grey'>
 					Edit Project
 				</h2>
-			</header>
+			</Header>
 			<main className='mt-4 rounded-lg bg-white p-6'>
 				<form className='flex flex-col gap-4'>
 					<InputField

@@ -10,6 +10,7 @@ import BackButton from 'components/utils/BackButton';
 import AlertModal from 'components/modals/AlertModal';
 import EmployeeCard from 'components/cards/EmployeeCard';
 import SideDrawer from 'components/navigation/SideDrawer';
+import Header from 'components/layout/Header';
 import Footer from 'components/layout/Footer';
 
 type Props = {
@@ -57,9 +58,9 @@ const ViewEmployee = ({ employee, closeViewEmployeeSideDrawer, openEditEmployeeS
 				<BackButton closeSideDrawer={closeViewEmployeeSideDrawer} />
 				{employee && (
 					<>
-						<header className='mt-[13px]'>
+						<Header className='mt-[13px]'>
 							<EmployeeCard employee={employee} />
-						</header>
+						</Header>
 						<main className='mt-4 flex flex-col gap-5'>
 							<div className='flex flex-col gap-4 rounded-lg bg-white p-6'>
 								<div className='flex flex-col'>
