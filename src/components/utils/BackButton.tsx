@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { chevronLeft } from 'assets/media';
 
 type Props = {

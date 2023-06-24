@@ -10,9 +10,9 @@ import {
 } from 'store/slices/invoicingApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
 import AlertModal from 'components/modals/AlertModal';
-import MainLayout from 'components/layout';
-import Navbar from 'components/navigation/NavBar';
 import Pagination from 'components/pagination';
+import Navbar from 'components/navigation/NavBar';
+import MainLayout from 'components/layout';
 import InvoicesTable from 'features/invoicing/InvoicesTable';
 
 const navLabels = ['All Invoices', 'Sent', 'Paid'];

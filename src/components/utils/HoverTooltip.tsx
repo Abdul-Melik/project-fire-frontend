@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect, useRef } from 'react';
 
 type Props = {
 	content: string;

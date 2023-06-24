@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 
 import { Project } from 'src/types';
 import { getProjectDate, getProjectValueBAM, getProjectColorAndStatus } from 'src/helpers';
-import { chevronLeft } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
 import { selectUserRole } from 'store/slices/authSlice';
 import { useDeleteProjectMutation } from 'store/slices/projectsApiSlice';

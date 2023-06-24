@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { useGetProjectsInfoQuery } from 'store/slices/projectsApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
-import MainLayout from 'components/layout';
-import Navbar from 'components/navigation/NavBar';
 import YearSelector from 'components/selectors/YearSelector';
+import Navbar from 'components/navigation/NavBar';
+import MainLayout from 'components/layout';
 import Performance from 'features/home/Performance';
 import DevelopmentRevenueCosts from 'features/home/DevelopmentRevenueCosts';
 import Plan from 'features/home/Plan';

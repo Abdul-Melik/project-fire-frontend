@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 
 import { download, dollar, email, trash } from 'assets/media';
 import { useAppSelector } from 'store/hooks';

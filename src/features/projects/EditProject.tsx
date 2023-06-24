@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 import { Employees, Project } from 'src/types';
 import { useUpdateProjectMutation } from 'store/slices/projectsApiSlice';
 import BackButton from 'components/utils/BackButton';
-import SideDrawer from 'components/navigation/SideDrawer';
-import Footer from 'components/layout/Footer';
 import InputField from 'components/formElements/InputField';
 import DateInputs from 'components/formElements/DateInputs';
-import EmployeesSelector from 'src/components/selectors/EmployeesSelector';
-import ProjectStatusSelector from 'src/components/selectors/ProjectStatusSelector';
+import EmployeesSelector from 'components/selectors/EmployeesSelector';
+import ProjectStatusSelector from 'components/selectors/ProjectStatusSelector';
+import SideDrawer from 'components/navigation/SideDrawer';
+import Footer from 'components/layout/Footer';
 
 type Props = {
 	project: Project;

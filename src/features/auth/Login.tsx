@@ -1,5 +1,5 @@
-import LoginForm from 'features/auth/LoginForm';
 import LogoBanner from 'features/auth/LogoBanner';
+import LoginForm from 'features/auth/LoginForm';
 
 const Login = () => {
 	return (

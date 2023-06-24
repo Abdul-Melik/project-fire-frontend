@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Employee } from 'src/types';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
 import { useDeleteEmployeeMutation, useGetEmployeesQuery } from 'store/slices/employeesApiSlice';
 import LoadingSpinner from 'components/utils/LoadingSpinner';
-import MainLayout from 'components/layout';
-import Navbar from 'components/navigation/NavBar';
-import Pagination from 'components/pagination';
 import AlertModal from 'components/modals/AlertModal';
+import Pagination from 'components/pagination';
+import Navbar from 'components/navigation/NavBar';
+import MainLayout from 'components/layout';
 import EmployeesTable from 'features/employees/EmployeesTable';
 import ViewEmployee from 'features/employees/ViewEmployee';
-import AddEmployee from 'src/features/employees/AddEmployee';
+import AddEmployee from 'features/employees/AddEmployee';
 import EditEmployee from 'features/employees/EditEmployee';
 
 const navLabels = ['All Employees', 'Current', 'Past'];

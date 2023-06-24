@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 
 import { logo, close, hamburger } from 'assets/media';
 import UserCard from 'components/cards/UserCard';
-import SidebarMenu from 'components/menus/SidebarMenu';
 import UserMenu from 'components/menus/UserMenu';
+import SidebarMenu from 'components/menus/SidebarMenu';
 
 type HamburgerMenuProps = {
 	activeMenuItem: string;

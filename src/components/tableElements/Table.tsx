@@ -1,6 +1,6 @@
 import React from 'react';
+import TableHead from 'components/tableElements/TableHead';
 import TableHeader from 'components/tableElements/TableHeader';
-import TableHead from 'src/components/tableElements/TableHead';
 
 type Column = {
 	name: string;

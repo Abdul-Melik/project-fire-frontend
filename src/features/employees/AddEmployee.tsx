@@ -3,13 +3,13 @@ import { motion } from 'framer-motion';
 
 import { useCreateEmployeeMutation } from 'store/slices/employeesApiSlice';
 import BackButton from 'components/utils/BackButton';
-import SideDrawer from 'components/navigation/SideDrawer';
-import Footer from 'components/layout/Footer';
 import InputField from 'components/formElements/InputField';
 import ImageUpload from 'components/formElements/ImageUpload';
-import CurrencySelector from 'components/selectors/CurrencySelector';
 import DepartmentSelector from 'components/selectors/DepartmentSelector';
+import CurrencySelector from 'components/selectors/CurrencySelector';
 import TechStackSelector from 'components/selectors/TechStackSelector';
+import SideDrawer from 'components/navigation/SideDrawer';
+import Footer from 'components/layout/Footer';
 
 type Props = {
 	closeAddEmployeeSideDrawer: () => void;

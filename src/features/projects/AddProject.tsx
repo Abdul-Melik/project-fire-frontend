@@ -5,12 +5,12 @@ import { Employees } from 'src/types';
 
 import { useCreateProjectMutation } from 'store/slices/projectsApiSlice';
 import BackButton from 'components/utils/BackButton';
-import SideDrawer from 'components/navigation/SideDrawer';
-import Footer from 'components/layout/Footer';
 import InputField from 'components/formElements/InputField';
 import DateInputs from 'components/formElements/DateInputs';
 import EmployeesSelector from 'components/selectors/EmployeesSelector';
 import ProjectStatusSelector from 'components/selectors/ProjectStatusSelector';
+import SideDrawer from 'components/navigation/SideDrawer';
+import Footer from 'components/layout/Footer';
 
 type Props = {
 	closeAddProjectSideDrawer: () => void;

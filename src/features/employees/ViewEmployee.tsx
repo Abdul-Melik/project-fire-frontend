@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 
 import { Employee, Projects } from 'src/types';
 import { getEmployeeSalaryInBAM, getEmployeeTechStack } from 'src/helpers';
-import { avatar } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
 import { selectUserRole } from 'store/slices/authSlice';
 import { useDeleteEmployeeMutation } from 'store/slices/employeesApiSlice';
 import BackButton from 'components/utils/BackButton';
 import AlertModal from 'components/modals/AlertModal';
+import EmployeeCard from 'components/cards/EmployeeCard';
 import SideDrawer from 'components/navigation/SideDrawer';
 import Footer from 'components/layout/Footer';
 
@@ -58,21 +58,7 @@ const ViewEmployee = ({ employee, closeViewEmployeeSideDrawer, openEditEmployeeS
 				{employee && (
 					<>
 						<header className='mt-[13px]'>
-							<div className='flex gap-4 rounded-lg bg-white p-6'>
-								<img
-									className='h-20 w-20 rounded-[4.61538px] object-cover opacity-80'
-									src={employee.image ? employee.image : avatar}
-									alt='Employee image'
-								/>
-								<div className='flex flex-1 flex-col justify-center'>
-									<span className='font-gilroy-bold text-[21px] font-bold leading-6 text-midnight-grey'>
-										{employee.firstName} {employee.lastName}
-									</span>
-									<span className='font-gilroy-regular text-base font-normal text-slate-mist'>
-										{employee.department}
-									</span>
-								</div>
-							</div>
+							<EmployeeCard employee={employee} />
 						</header>
 						<main className='mt-4 flex flex-col gap-5'>
 							<div className='flex flex-col gap-4 rounded-lg bg-white p-6'>

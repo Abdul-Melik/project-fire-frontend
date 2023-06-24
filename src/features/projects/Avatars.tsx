@@ -1,7 +1,7 @@
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect, useRef } from 'react';
 
-import Avatar from 'components/utils/Avatar';
 import HoverTooltip from 'components/utils/HoverTooltip';
+import Avatar from 'components/utils/Avatar';
 
 type Props = {
 	images?: (string | undefined)[];

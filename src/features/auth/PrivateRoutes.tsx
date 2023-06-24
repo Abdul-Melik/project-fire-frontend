@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 
 import { useAppSelector } from 'store/hooks';
