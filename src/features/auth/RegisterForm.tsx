@@ -26,7 +26,6 @@ const RegisterForm = () => {
 		if (image) formData.append('image', image);
 		formData.append('lastName', lastName);
 		formData.append('password', password);
-		if (image) formData.append('image', image);
 		await register(formData);
 	};
 

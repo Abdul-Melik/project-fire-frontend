@@ -20,6 +20,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 				url: '/auth/register',
 				method: 'POST',
 				body: data,
+				formData: true,
 			}),
 			async onQueryStarted(args, { dispatch, queryFulfilled }) {
 				try {
