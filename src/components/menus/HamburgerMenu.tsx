@@ -47,7 +47,7 @@ const HamburgerMenu = ({ activeMenuItem }: HamburgerMenuProps) => {
 					/>
 					{isUserMenuOpen && (
 						<div className='relative'>
-							<UserMenu className='right-0 top-0 w-[15vw] overflow-hidden rounded-md border border-ashen-grey bg-seafoam-green shadow-[3px_3px_3px_rgba(0,0,0,0.3)]' />
+							<UserMenu className='right-0 top-0 w-[200px] overflow-hidden rounded-md border border-ashen-grey bg-seafoam-green shadow-[3px_3px_3px_rgba(0,0,0,0.3)]' />
 						</div>
 					)}
 					<div>

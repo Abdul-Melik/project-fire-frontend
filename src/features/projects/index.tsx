@@ -12,6 +12,8 @@ import ProjectsTable from 'features/projects/ProjectsTable';
 import ViewProject from 'features/projects/ViewProject';
 import AddProject from 'features/projects/AddProject';
 import EditProject from 'features/projects/EditProject';
+import ResponsiveProjectsTable from './ResponsiveProjectsTable';
+import FilterSelector from 'src/components/selectors/FilterSelector';
 
 const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
 
@@ -70,8 +72,8 @@ const Projects = () => {
 			{isEditProjectSideDrawerOpen && (
 				<EditProject project={project} closeEditProjectSideDrawer={() => setIsEditProjectSideDrawerOpen(false)} />
 			)}
-			<div className='mx-14 mb-[17px] mt-[34px]'>
-				<div className='mb-[30px] flex items-center justify-between'>
+			<div className='mx-14 mb-[17px] mt-14 sm:mt-[34px]'>
+				<div className='mb-[30px] flex flex-col items-center justify-between gap-8 sm:flex-row sm:gap-0'>
 					<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</h1>
 					{user?.role === 'Admin' && (
 						<button
@@ -82,7 +84,21 @@ const Projects = () => {
 						</button>
 					)}
 				</div>
-				<div className='flex flex-col'>
+				<div className='flex w-full justify-center sm:hidden'>
+					<FilterSelector
+						label='Filter'
+						options={['All Projects', 'Active', 'On Hold', 'Inactive', 'Completed']}
+						defaultValue='All Projects'
+						handleYearSelect={status => {
+							status === 'All Projects'
+								? setProjectStatus('')
+								: status === 'On Hold'
+								? setProjectStatus('OnHold')
+								: setProjectStatus(status);
+						}}
+					/>
+				</div>
+				<div className='hidden flex-col sm:flex'>
 					<div className='mb-[30px]'>
 						<Navbar
 							navLabels={navLabels}
@@ -119,6 +135,26 @@ const Projects = () => {
 						)
 					)}
 				</div>
+			</div>
+			<div className='mb-[25px] flex w-full justify-center sm:hidden'>
+				{isLoading ? (
+					<LoadingSpinner />
+				) : (
+					<div className='w-[95%]'>
+						<ResponsiveProjectsTable
+							totalNumberOfProjects={data.pageInfo.total}
+							projects={data.projects}
+							value={searchTerm}
+							orderByField={orderByField}
+							orderDirection={orderDirection}
+							handleSearch={input => setSearchTerm(input)}
+							handleSort={(label: string, orderDirection: string) => {
+								setOrderByField(label);
+								setOrderDirection(orderDirection);
+							}}
+						/>
+					</div>
+				)}
 			</div>
 			<div className='mx-14 mb-[25px]'>
 				{isSuccess && (

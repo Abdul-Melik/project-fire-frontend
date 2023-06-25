@@ -32,7 +32,7 @@ const Home = () => {
 	return (
 		<MainLayout activeMenuItem={'home'}>
 			<div className='mx-4 my-[34px] lg:mx-14'>
-				<h1 className='mt-24 flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest lg:mt-0'>
+				<h1 className='mt-24 flex flex-1 justify-center font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest sm:justify-start lg:mt-0'>
 					Home
 				</h1>
 				<div className='mt-[30px] flex flex-col'>
