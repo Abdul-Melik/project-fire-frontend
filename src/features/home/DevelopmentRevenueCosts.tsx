@@ -4,11 +4,22 @@ import InfoCard from 'components/cards/InfoCard';
 import SummaryCard from 'components/cards/SummaryCard';
 import RevenuesCostsActualChart from 'features/home/RevenuesCostsActualChart';
 import RevenuesCostsPerMonthChart from 'features/home/RevenuesCostsPerMonthChart';
+import { useState, useEffect } from 'react';
+import ResponsiveCostsPerProjectChart from './ResponsiveCostsPerProjectChart';
+import ResponsiveCostsPerMonthChart from './ResponsiveCostsPerMonthChart';
 
 const DevelopmentRevenueCosts = () => {
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const windowLg = windowWidth >= 1024;
+	//update window width on resize with useEffect
+	useEffect(() => {
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	});
 	return (
 		<div className='flex flex-col gap-[42px]'>
-			<div className='grid grid-cols-[1fr,minmax(330px,auto)] gap-[30px]'>
+			<div className='max-w-screen flex flex-col gap-[30px] lg:grid lg:grid-cols-[1fr,minmax(330px,auto)]'>
 				<div className='grid auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(330px,1fr))] gap-[30px]'>
 					<InfoCard
 						className='overflow-hidden rounded-md border border-ashen-grey'
@@ -40,15 +51,25 @@ const DevelopmentRevenueCosts = () => {
 					/>
 				</div>
 				<SummaryCard
-					className='gap-2 overflow-hidden rounded-md bg-winter-mint'
+					className='gap-2 overflow-hidden rounded-md bg-winter-mint py-3'
 					descriptionClassName='text-[18px] leading-[28px]'
 					amountClassName='text-[30px] leading-[40px]'
 					description='Actual gross profit'
 					amount={'-284,086.00 KM'}
 				/>
 			</div>
-			<RevenuesCostsActualChart />
-			<RevenuesCostsPerMonthChart />
+			{windowLg && (
+				<div className='block'>
+					<RevenuesCostsActualChart />
+					<RevenuesCostsPerMonthChart />
+				</div>
+			)}
+			{!windowLg && (
+				<div className='flex flex-col gap-5'>
+					<ResponsiveCostsPerProjectChart />
+					<ResponsiveCostsPerMonthChart />
+				</div>
+			)}
 		</div>
 	);
 };
