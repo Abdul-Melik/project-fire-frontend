@@ -13,15 +13,24 @@ import InfoCard from 'components/cards/InfoCard';
 import SalesChannelsChart from 'features/home/SalesChannelsChart';
 import ProjectScopeChart from 'features/home/ProjectScopeChart';
 import HoursOverviewChart from 'features/home/HoursOverviewChart';
+import { useState, useEffect } from 'react';
+import ResponsiveHoursOverviewChart from './ResponsiveHoursOverviewChart';
 
 type Props = {
 	projectsInfo: ProjectsInfo | null;
 };
 
 const Performance = ({ projectsInfo }: Props) => {
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const windowLg = windowWidth >= 1024;
+	useEffect(() => {
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	});
 	return (
 		<div className='flex flex-col gap-[42px]'>
-			<div className='grid auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-[30px]'>
+			<div className='grid max-w-[100%] auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(240px,100%))] justify-center gap-[15px] lg:max-w-none lg:grid-cols-[repeat(auto-fit,minmax(240px,1fr))] lg:gap-[30px]'>
 				<InfoCard
 					className='overflow-hidden rounded-md border border-ashen-grey'
 					description='Number of projects'
@@ -92,11 +101,21 @@ const Performance = ({ projectsInfo }: Props) => {
 					iconAlt='Average hourly price icon'
 				/>
 			</div>
-			<div className='flex gap-[30px]'>
+			<div className='block gap-[30px] lg:flex lg:flex-row'>
 				<SalesChannelsChart chartValues={projectsInfo?.salesChannelPercentage ?? {}} />
+				<div className='mb-[30px] lg:hidden'></div>
 				<ProjectScopeChart chartValues={projectsInfo?.projectTypeCount ?? {}} />
 			</div>
-			<HoursOverviewChart />
+			{windowLg && (
+				<div className='block'>
+					<HoursOverviewChart />
+				</div>
+			)}
+			{!windowLg && (
+				<div className='block'>
+					<ResponsiveHoursOverviewChart />
+				</div>
+			)}
 		</div>
 	);
 };

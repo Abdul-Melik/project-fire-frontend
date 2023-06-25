@@ -31,10 +31,12 @@ const Home = () => {
 
 	return (
 		<MainLayout activeMenuItem={'home'}>
-			<div className='mx-14 my-[34px]'>
-				<h1 className='flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Home</h1>
+			<div className='mx-4 my-[34px] lg:mx-14'>
+				<h1 className='mt-24 flex-1 font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest lg:mt-0'>
+					Home
+				</h1>
 				<div className='mt-[30px] flex flex-col'>
-					<div className='mb-12 flex flex-wrap justify-between gap-4'>
+					<div className='mb-12 flex flex-wrap justify-center gap-4 lg:justify-between'>
 						<Navbar navLabels={navLabels} handlePageSelect={page => setActivePage(page)} />
 						<YearSelector selectedYear={selectedYear} handleYearSelection={year => setSelectedYear(year)} />
 					</div>

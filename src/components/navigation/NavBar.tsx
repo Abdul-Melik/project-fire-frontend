@@ -7,19 +7,19 @@ type Props = {
 	handlePageSelect: (page: number) => void;
 };
 
-const NavBar = ({ navLabels, handlePageSelect }: Props) => {
+const Navbar = ({ navLabels, handlePageSelect }: Props) => {
 	const [selectedPage, setSelectedPage] = useState(1);
 	const activeLink = 'bg-aqua-haze text-moss-green font-inter-semi-bold font-semibold';
 	const inactiveLink = 'text-blue-grey font-inter-regular font-normal';
 
 	return (
-		<div className='flex items-center justify-between'>
-			<div className='flex-start flex'>
+		<div className='flex items-center'>
+			<div className='sm:flex-start flex flex-col sm:flex-row'>
 				{navLabels.map((label, index) => (
 					<NavLink
 						key={index}
 						className={`${selectedPage === index + 1 ? activeLink : inactiveLink} ${
-							index === 0 ? 'rounded-l border-l' : 'border-l-0'
+							index === 0 ? 'rounded-l border-l' : 'lg-border-l-0 rounded border-l lg:rounded-none'
 						} ${index === navLabels.length - 1 ? 'rounded-r' : ''}`}
 						label={label}
 						onClick={() => {
@@ -33,4 +33,4 @@ const NavBar = ({ navLabels, handlePageSelect }: Props) => {
 	);
 };
 
-export default NavBar;
+export default Navbar;

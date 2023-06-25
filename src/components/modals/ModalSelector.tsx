@@ -16,10 +16,10 @@ type Props = {
 	selectProject: Function;
 };
 
-const ModalSelector = ({ show, onCancel, isError, children, selectProject }: Props) => {
+const ModalSelector = ({ show, header, onCancel, isError, children, selectProject }: Props) => {
 	const content = (
 		<>
-			{show && <Backdrop onClick={() => onCancel()} />}
+			{show && <Backdrop onClick={() => onCancel()} className='z-[20] bg-black bg-opacity-50' />}
 			{show && (
 				<motion.div
 					className='fixed left-1/2 top-1/2 z-20 w-3/5 -translate-x-1/2 -translate-y-1/2 transform rounded-sm bg-white shadow-md md:w-1/4'
