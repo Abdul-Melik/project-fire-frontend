@@ -31,11 +31,11 @@ const Employees = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [employeesPerPage, setEmployeesPerPage] = useState(10);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-	const [windowLg, setWindowLg] = useState(windowWidth >= 768);
+	const [windowLg, setWindowLg] = useState(windowWidth >= 1024);
 	useEffect(() => {
 		const handleResize = () => setWindowWidth(window.innerWidth);
 		window.addEventListener('resize', handleResize);
-		setWindowLg(windowWidth >= 768);
+		setWindowLg(windowWidth >= 1024);
 		return () => window.removeEventListener('resize', handleResize);
 	});
 

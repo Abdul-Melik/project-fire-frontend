@@ -43,7 +43,7 @@ const ResponsiveInvoicesTable = ({
 
 	return (
 		<div className='w-full rounded-md border border-ashen-grey bg-white'>
-			<TableHeader label='Projects Table' total={totalNumberOfInvoices} value={value} handleSearch={handleSearch} />
+			<TableHeader label='All Invoices' total={totalNumberOfInvoices} value={value} handleSearch={handleSearch} />
 			<div className='table-responsive'>
 				<table className='w-full border-t border-ashen-grey'>
 					<TableHead
