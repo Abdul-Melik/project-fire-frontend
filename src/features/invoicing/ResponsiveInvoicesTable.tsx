@@ -9,20 +9,11 @@ import DataCard from 'src/components/cards/DataCard';
 import PlanCardItem from 'src/features/home/PlanCardItem';
 import arrow from 'src/assets/media/svg/arrow.svg';
 import React from 'react';
-
-type Employee = {
-	id: string;
-	firstName: string;
-	lastName: string;
-	image: string;
-	department: string;
-	salary: number;
-	techStack: string[];
-};
+import { Invoice } from 'src/types';
 
 type Props = {
-	totalNumberOfEmployees: number;
-	employees: Employee[];
+	totalNumberOfInvoices: number;
+	invoices: Invoice[];
 	value: string;
 	orderByField: string;
 	orderDirection: string;
@@ -30,29 +21,29 @@ type Props = {
 	handleSort: (label: string, orderDirection: string) => void;
 };
 
-const ResponsiveEmployeesTable = ({
-	totalNumberOfEmployees,
-	employees,
+const ResponsiveInvoicesTable = ({
+	totalNumberOfInvoices,
+	invoices,
 	value,
 	orderByField,
 	orderDirection,
 	handleSearch,
 	handleSort,
 }: Props) => {
-	const [selectedEmployee, setSelectedEmployee] = useState<string>('');
+	const [selectedInvoice, setSelectedInvoice] = useState<string>('');
 
 	const columns = [
-		{ name: 'First Name', label: 'firstName' },
-		{ name: 'Last Name', label: 'lastName' },
+		{ name: 'Client', label: 'client' },
+		{ name: 'Status', label: 'invoiceStatus' },
 	];
 
-	const selectEmployee = (employeeId: string) => {
-		selectedEmployee === employeeId ? setSelectedEmployee('') : setSelectedEmployee(employeeId);
+	const selectEmployee = (projectId: string) => {
+		selectedInvoice === projectId ? setSelectedInvoice('') : setSelectedInvoice(projectId);
 	};
 
 	return (
 		<div className='w-full rounded-md border border-ashen-grey bg-white'>
-			<TableHeader label='All Employees' total={totalNumberOfEmployees} value={value} handleSearch={handleSearch} />
+			<TableHeader label='Projects Table' total={totalNumberOfInvoices} value={value} handleSearch={handleSearch} />
 			<div className='table-responsive'>
 				<table className='w-full border-t border-ashen-grey'>
 					<TableHead
@@ -62,29 +53,29 @@ const ResponsiveEmployeesTable = ({
 						handleSort={handleSort}
 					/>
 					<tbody>
-						{employees.map(employee => {
-							const employeeId = employee.id;
+						{invoices.map(invoice => {
+							const invoiceId = invoice.id;
 							return (
-								<React.Fragment key={employeeId}>
-									<TableRow className='hover:cursor-pointer hover:bg-white' onClick={() => selectEmployee(employeeId)}>
+								<React.Fragment key={invoiceId}>
+									<TableRow className='hover:cursor-pointer hover:bg-white' onClick={() => selectEmployee(invoiceId)}>
 										<td className='pl-4'>
 											<div className='flex w-3/5 items-center justify-between font-gilroy-regular text-[16px] leading-6 text-deep-forest'>
-												<p>{employee.firstName}</p>
+												<p>{invoice.client}</p>
 											</div>
 										</td>
 										<td className='flex h-[60px] items-center gap-2 pl-4'>
 											<div className='flex w-3/5 items-center justify-between font-gilroy-regular text-[16px] leading-6 text-deep-forest'>
-												<p>{employee.lastName}</p>
+												<p>{invoice.invoiceStatus}</p>
 											</div>{' '}
 										</td>
 									</TableRow>
-									{employeeId === selectedEmployee && (
+									{invoiceId === selectedInvoice && (
 										<tr className='ml-[10%]'>
 											<td colSpan={2}>
 												<div className='ml-[5%] mt-[11px] flex w-[90%] flex-col gap-[5px] !text-[15px]'>
-													<PlanCardItem text='Department' amount={employee.department} />
-													<PlanCardItem text='Monthly Salary (BAM)' amount={employee.salary.toString()} />
-													<PlanCardItem text='Tech Stack' amount={employee.techStack.toString()} />
+													<PlanCardItem text='Industry' amount={invoice.industry} />
+													<PlanCardItem text='Amount Billed' amount={invoice.amountBilledBAM.toString()} />
+													<PlanCardItem text='Hours Billed' amount={invoice.totalHoursBilled.toString()} />
 												</div>
 											</td>
 										</tr>
@@ -99,4 +90,4 @@ const ResponsiveEmployeesTable = ({
 	);
 };
 
-export default ResponsiveEmployeesTable;
+export default ResponsiveInvoicesTable;

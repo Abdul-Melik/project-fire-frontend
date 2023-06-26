@@ -14,6 +14,7 @@ import Pagination from 'components/pagination';
 import Navbar from 'components/navigation/NavBar';
 import MainLayout from 'components/layout';
 import InvoicesTable from 'features/invoicing/InvoicesTable';
+import ResponsiveInvoicesTable from './ResponsiveInvoicesTable';
 
 const navLabels = ['All Invoices', 'Sent', 'Paid'];
 
@@ -27,6 +28,14 @@ const Invoicing = () => {
 	const [orderDirection, setOrderDirection] = useState('asc');
 	const [currentPage, setCurrentPage] = useState(1);
 	const [invoicesPerPage, setInvoicesPerPage] = useState(10);
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const [windowLg, setWindowLg] = useState(windowWidth >= 768);
+	useEffect(() => {
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		window.addEventListener('resize', handleResize);
+		setWindowLg(windowWidth >= 768);
+		return () => window.removeEventListener('resize', handleResize);
+	});
 
 	const user = useAppSelector(selectCurrentUser);
 	const {
@@ -85,8 +94,8 @@ const Invoicing = () => {
 					onConfirm={onConfirm}
 				/>
 			)}
-			<div className='mx-14 mb-[17px] mt-[34px]'>
-				<div className='mb-[30px] flex items-center justify-between'>
+			<div className='mx-14 mb-[17px] mt-14 sm:mt-[34px]'>
+				<div className='mb-[30px] flex flex-col items-center justify-between gap-8 sm:flex-row sm:gap-0'>
 					<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Invoicing</h1>
 					{user?.role === 'Admin' && (
 						<button
@@ -98,7 +107,7 @@ const Invoicing = () => {
 					)}
 				</div>
 				<div className='flex flex-col'>
-					<div className='mb-[30px]'>
+					<div className='mb-12 flex flex-wrap justify-center gap-4 lg:justify-between'>
 						<Navbar
 							navLabels={navLabels}
 							handlePageSelect={pageNumber => {
@@ -114,7 +123,8 @@ const Invoicing = () => {
 					{isLoading || isFetching ? (
 						<LoadingSpinner />
 					) : (
-						(isInvoicesSuccess || isUpdateSuccess) && (
+						(isInvoicesSuccess || isUpdateSuccess) &&
+						windowLg && (
 							<InvoicesTable
 								totalNumberOfInvoices={data.pageInfo.total}
 								invoices={data.invoices}
@@ -137,6 +147,22 @@ const Invoicing = () => {
 						)
 					)}
 				</div>
+			</div>
+			<div className='mb-[25px] flex w-full justify-center sm:hidden'>
+				{!windowLg && !isLoading && !isFetching && (
+					<ResponsiveInvoicesTable
+						totalNumberOfInvoices={data.pageInfo.total}
+						invoices={data.invoices}
+						value={client}
+						orderByField={orderByField}
+						orderDirection={orderDirection}
+						handleSearch={input => setClient(input)}
+						handleSort={(label: string, orderDirection: string) => {
+							setOrderByField(label);
+							setOrderDirection(orderDirection);
+						}}
+					/>
+				)}
 			</div>
 			<div className='mx-14 mb-[25px]'>
 				{isInvoicesSuccess && (
