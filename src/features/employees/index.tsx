@@ -104,7 +104,7 @@ const Employees = () => {
 			{isEditEmployeeSideDrawerOpen && (
 				<EditEmployee employee={employee} closeEditEmployeeSideDrawer={() => setIsEditEmployeeSideDrawerOpen(false)} />
 			)}
-			<div className='mx-14 mb-[17px] mt-14 sm:mt-[34px]'>
+			<div className='mx-14 mb-[17px] mt-14 md:mt-[34px]'>
 				<div className='mb-[30px] flex flex-col items-center justify-between gap-8 sm:flex-row sm:gap-0'>
 					<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Employees</h1>
 					{user?.role === 'Admin' && (
@@ -163,7 +163,7 @@ const Employees = () => {
 					)}
 				</div>
 			</div>
-			<div className='mb-[25px] flex w-full justify-center sm:hidden'>
+			<div className='mb-[25px] flex w-full justify-center'>
 				{!windowLg && !isLoading && !isFetching && (
 					<div className='w-[95%]'>
 						<ResponsiveEmployeesTable

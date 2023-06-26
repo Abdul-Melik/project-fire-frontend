@@ -4,45 +4,19 @@ import axios from 'axios';
 import TableHeader from 'src/components/tableElements/TableHeader';
 import TableHead from 'src/components/tableElements/TableHead';
 import TableRow from 'src/components/tableElements/TableRow';
-import { toast } from 'react-toastify';
 import DataCard from 'src/components/cards/DataCard';
 import PlanCardItem from 'src/features/home/PlanCardItem';
 import arrow from 'src/assets/media/svg/arrow.svg';
 import React from 'react';
+import { Project } from 'src/types';
+import { Employee } from 'src/types';
+import { getProjectColorAndStatus } from 'src/helpers';
+import { getProjectValueBAM } from 'src/helpers';
+import { getProjectDate } from 'src/helpers';
 
 type ProjectType = 'Fixed' | 'OnGoing';
 type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
 type ProjectStatus = 'Active' | 'OnHold' | 'Inactive' | 'Completed';
-
-type Employee = {
-	id: string;
-	firstName: string;
-	lastName: string;
-	image: string;
-	department: string;
-	salary: number;
-	techStack: string[];
-};
-
-type EmployeesPerProject = {
-	partTime: boolean;
-	employee: Employee;
-};
-
-type Project = {
-	id: string;
-	name: string;
-	description: string;
-	startDate: string;
-	endDate: string;
-	actualEndDate: string;
-	projectType: ProjectType;
-	hourlyRate: number;
-	projectValueBAM: number;
-	salesChannel: SalesChannel;
-	projectStatus: ProjectStatus;
-	employees: EmployeesPerProject[];
-};
 
 type Props = {
 	totalNumberOfProjects: number;
@@ -52,35 +26,6 @@ type Props = {
 	orderDirection: string;
 	handleSearch: (input: string) => void;
 	handleSort: (label: string, orderDirection: string) => void;
-};
-
-const getProjectDate = (project: Project) => {
-	const startDate = new Date(project.startDate);
-	const endDate = new Date(project.endDate);
-	const startDateString = startDate.toLocaleDateString('en-US', {
-		year: 'numeric',
-		month: 'short',
-	});
-	const endDateString = endDate.toLocaleDateString('en-US', {
-		year: 'numeric',
-		month: 'short',
-	});
-	return { startDateString, endDateString };
-};
-
-const getProjectValueBAM = (project: Project) => {
-	return project.projectValueBAM.toLocaleString('en-US', {
-		minimumFractionDigits: 2,
-		maximumFractionDigits: 2,
-	});
-};
-
-const getProjectColorAndStatus = (project: Project) => {
-	const projectStatus = project.projectStatus;
-	if (projectStatus === 'Active') return { color: 'bg-spring-fern', status: 'Active' };
-	else if (projectStatus === 'OnHold') return { color: 'bg-golden-tangerine', status: 'On hold' };
-	else if (projectStatus === 'Inactive') return { color: 'bg-silver-mist', status: 'Inactive' };
-	else return { color: 'bg-cerulean-breeze', status: 'Completed' };
 };
 
 const ResponsiveProjectsTable = ({
@@ -126,9 +71,13 @@ const ResponsiveProjectsTable = ({
 											</div>
 										</td>
 										<td className='flex h-[60px] items-center gap-2 pl-4'>
-											<div className={`h-[6px] w-[6px] rounded-full ${getProjectColorAndStatus(project).color}`} />
+											<div
+												className={`h-[6px] w-[6px] rounded-full ${
+													getProjectColorAndStatus(project.projectStatus)?.color
+												}`}
+											/>
 											<div className='font-gilroy-semi-bold font-semibold'>
-												{getProjectColorAndStatus(project).status}
+												{getProjectColorAndStatus(project.projectStatus)?.status}
 											</div>
 										</td>
 									</TableRow>
@@ -136,15 +85,13 @@ const ResponsiveProjectsTable = ({
 										<tr className='ml-[10%]'>
 											<td colSpan={2}>
 												<div className='ml-[5%] mt-[11px] flex w-[90%] flex-col gap-[5px] !text-[15px]'>
-													<PlanCardItem
-														text='Duration'
-														amount={`${getProjectDate(project).startDateString} - ${
-															getProjectDate(project).endDateString
-														}`}
-													/>
+													<PlanCardItem text='Duration' amount={getProjectDate(project.startDate, project.endDate)} />
 													<PlanCardItem text='Developers' amount={project.employees.length.toString()} />
 													<PlanCardItem text='Hourly Rate' amount={'$' + project.hourlyRate.toString()} />
-													<PlanCardItem text='Project Value' amount={project.projectValueBAM.toString() + ' BAM'} />
+													<PlanCardItem
+														text='Project Value'
+														amount={getProjectValueBAM(project.projectValueBAM) + ' KM'}
+													/>
 												</div>
 											</td>
 										</tr>

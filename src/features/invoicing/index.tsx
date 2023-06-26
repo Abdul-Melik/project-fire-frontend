@@ -150,18 +150,20 @@ const Invoicing = () => {
 			</div>
 			<div className='mb-[25px] flex w-full justify-center sm:hidden'>
 				{!windowLg && !isLoading && !isFetching && (
-					<ResponsiveInvoicesTable
-						totalNumberOfInvoices={data.pageInfo.total}
-						invoices={data.invoices}
-						value={client}
-						orderByField={orderByField}
-						orderDirection={orderDirection}
-						handleSearch={input => setClient(input)}
-						handleSort={(label: string, orderDirection: string) => {
-							setOrderByField(label);
-							setOrderDirection(orderDirection);
-						}}
-					/>
+					<div className='w-[95%]'>
+						<ResponsiveInvoicesTable
+							totalNumberOfInvoices={data.pageInfo.total}
+							invoices={data.invoices}
+							value={client}
+							orderByField={orderByField}
+							orderDirection={orderDirection}
+							handleSearch={input => setClient(input)}
+							handleSort={(label: string, orderDirection: string) => {
+								setOrderByField(label);
+								setOrderDirection(orderDirection);
+							}}
+						/>
+					</div>
 				)}
 			</div>
 			<div className='mx-14 mb-[25px]'>

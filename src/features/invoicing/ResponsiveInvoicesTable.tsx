@@ -4,12 +4,12 @@ import axios from 'axios';
 import TableHeader from 'src/components/tableElements/TableHeader';
 import TableHead from 'src/components/tableElements/TableHead';
 import TableRow from 'src/components/tableElements/TableRow';
-import { toast } from 'react-toastify';
 import DataCard from 'src/components/cards/DataCard';
 import PlanCardItem from 'src/features/home/PlanCardItem';
 import arrow from 'src/assets/media/svg/arrow.svg';
 import React from 'react';
 import { Invoice } from 'src/types';
+import { getInvoiceColorAndStatus } from 'src/helpers';
 
 type Props = {
 	totalNumberOfInvoices: number;
@@ -64,9 +64,14 @@ const ResponsiveInvoicesTable = ({
 											</div>
 										</td>
 										<td className='flex h-[60px] items-center gap-2 pl-4'>
-											<div className='flex w-3/5 items-center justify-between font-gilroy-regular text-[16px] leading-6 text-deep-forest'>
-												<p>{invoice.invoiceStatus}</p>
-											</div>{' '}
+											<div
+												className={`h-[6px] w-[6px] rounded-full ${
+													getInvoiceColorAndStatus(invoice.invoiceStatus)?.color
+												}`}
+											/>
+											<div className='font-gilroy-semi-bold font-semibold'>
+												{getInvoiceColorAndStatus(invoice.invoiceStatus)?.status}
+											</div>
 										</td>
 									</TableRow>
 									{invoiceId === selectedInvoice && (

@@ -4,21 +4,11 @@ import axios from 'axios';
 import TableHeader from 'src/components/tableElements/TableHeader';
 import TableHead from 'src/components/tableElements/TableHead';
 import TableRow from 'src/components/tableElements/TableRow';
-import { toast } from 'react-toastify';
 import DataCard from 'src/components/cards/DataCard';
 import PlanCardItem from 'src/features/home/PlanCardItem';
 import arrow from 'src/assets/media/svg/arrow.svg';
 import React from 'react';
-
-type Employee = {
-	id: string;
-	firstName: string;
-	lastName: string;
-	image: string;
-	department: string;
-	salary: number;
-	techStack: string[];
-};
+import { Employee } from 'src/types';
 
 type Props = {
 	totalNumberOfEmployees: number;
