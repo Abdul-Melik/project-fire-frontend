@@ -63,7 +63,7 @@ const AddEmployee = ({ closeAddEmployeeSideDrawer }: Props) => {
       initial={{ opacity: 0, x: "100%" }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className='fixed right-0 top-0 z-20 flex min-h-full w-full flex-col bg-frosty-mint px-6 pt-[27px] md:w-[496px]'
+      className='fixed right-0 top-0 z-20 flex h-full w-full flex-col bg-frosty-mint px-6 pt-[27px] md:w-[496px]'
     >
       <Header className='flex flex-col gap-[13px]'>
         <BackButton closeSideDrawer={closeAddEmployeeSideDrawer} />
