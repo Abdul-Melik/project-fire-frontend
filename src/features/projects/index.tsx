@@ -65,124 +65,124 @@ const Projects = () => {
 	const project = isSuccess && data.projects.find((project: Project) => project.id === projectId);
 
 	return (
-    <MainLayout activeMenuItem={"projects"}>
-      {isViewProjectSideDrawerOpen && (
-        <ViewProject
-          project={project}
-          closeViewProjectSideDrawer={() => setIsViewProjectSideDrawerOpen(false)}
-          openEditProjectSideDrawer={() => setIsEditProjectSideDrawerOpen(true)}
-        />
-      )}
-      {isAddProjectSideDrawerOpen && (
-        <AddProject closeAddProjectSideDrawer={() => setIsAddProjectSideDrawerOpen(false)} />
-      )}
-      {isEditProjectSideDrawerOpen && (
-        <EditProject project={project} closeEditProjectSideDrawer={() => setIsEditProjectSideDrawerOpen(false)} />
-      )}
-      <div className='mx-14 mb-[17px] mt-14 md:mt-[34px]'>
-        <div className='mb-[30px] flex flex-col items-center justify-between gap-8 sm:flex-row sm:gap-0'>
-          <h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</h1>
-          {user?.role === "Admin" && (
-            <button
-              className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white hover:saturate-[400%]'
-              onClick={() => setIsAddProjectSideDrawerOpen(true)}
-            >
-              Create new project
-            </button>
-          )}
-        </div>
-        <div className='flex w-full justify-center sm:hidden'>
-          <FilterSelector
-            label='Filter'
-            options={["All Projects", "Active", "On Hold", "Inactive", "Completed"]}
-            defaultValue='All Projects'
-            handleYearSelect={(status) => {
-              status === "All Projects"
-                ? setProjectStatus("")
-                : status === "On Hold"
-                ? setProjectStatus("OnHold")
-                : setProjectStatus(status);
-            }}
-          />
-        </div>
-        <div className='hidden flex-col sm:flex'>
-          <div className='mb-[30px]'>
-            <Navbar
-              navLabels={navLabels}
-              handlePageSelect={(pageNumber) => {
-                setActivePage(pageNumber);
-                setProjectsPerPage(10);
-                setCurrentPage(1);
-                setSearchTerm("");
-                setOrderByField("name");
-                setOrderDirection("asc");
-              }}
-            />
-          </div>
-          {isLoading || isFetching ? (
-            <LoadingSpinner />
-          ) : (
-            isSuccess &&
-            windowLg && (
-              <ProjectsTable
-                totalNumberOfProjects={data.pageInfo.total}
-                projects={data.projects}
-                value={searchTerm}
-                orderByField={orderByField}
-                orderDirection={orderDirection}
-                handleSearch={(input) => setSearchTerm(input)}
-                handleSort={(label: string, orderDirection: string) => {
-                  setOrderByField(label);
-                  setOrderDirection(orderDirection);
-                }}
-                openViewProjectSideDrawer={(projectId: string) => {
-                  setIsViewProjectSideDrawerOpen(true);
-                  setProjectId(projectId);
-                }}
-              />
-            )
-          )}
-        </div>
-      </div>
-      <div className='mb-[25px] flex w-full justify-center'>
-        {!windowLg && !isLoading && !isFetching && (
-          <div className='w-[95%]'>
-            <ResponsiveProjectsTable
-              totalNumberOfProjects={data.pageInfo.total}
-              projects={data.projects}
-              value={searchTerm}
-              orderByField={orderByField}
-              orderDirection={orderDirection}
-              handleSearch={(input) => setSearchTerm(input)}
-              handleSort={(label: string, orderDirection: string) => {
-                setOrderByField(label);
-                setOrderDirection(orderDirection);
-              }}
-              project={project}
-              closeViewProjectSideDrawer={() => setIsViewProjectSideDrawerOpen(false)}
-            />
-          </div>
-        )}
-      </div>
-      <div className='mx-14 mb-[25px]'>
-        {isSuccess && (
-          <Pagination
-            total={data.pageInfo.total}
-            currentPage={data.pageInfo.currentPage}
-            lastPage={data.pageInfo.lastPage}
-            perPage={projectsPerPage}
-            items='Projects'
-            handlePerPageSelection={(projectsPerPage) => {
-              setProjectsPerPage(projectsPerPage);
-              setCurrentPage(1);
-              setSearchTerm("");
-            }}
-            handlePageChange={(pageNumber) => setCurrentPage(pageNumber)}
-          />
-        )}
-      </div>
-    </MainLayout>
-  );
+		<MainLayout activeMenuItem={'projects'}>
+			{isViewProjectSideDrawerOpen && (
+				<ViewProject
+					project={project}
+					closeViewProjectSideDrawer={() => setIsViewProjectSideDrawerOpen(false)}
+					openEditProjectSideDrawer={() => setIsEditProjectSideDrawerOpen(true)}
+				/>
+			)}
+			{isAddProjectSideDrawerOpen && (
+				<AddProject closeAddProjectSideDrawer={() => setIsAddProjectSideDrawerOpen(false)} />
+			)}
+			{isEditProjectSideDrawerOpen && (
+				<EditProject project={project} closeEditProjectSideDrawer={() => setIsEditProjectSideDrawerOpen(false)} />
+			)}
+			<div className='mx-14 mb-[17px] mt-14 md:mt-[34px]'>
+				<div className='mb-[30px] flex flex-col items-center justify-between gap-8 sm:flex-row sm:gap-0'>
+					<h1 className='font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest'>Projects</h1>
+					{user?.role === 'Admin' && (
+						<button
+							className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white hover:saturate-[400%]'
+							onClick={() => setIsAddProjectSideDrawerOpen(true)}
+						>
+							Create new project
+						</button>
+					)}
+				</div>
+				<div className='flex w-full justify-center sm:hidden'>
+					<FilterSelector
+						label='Filter'
+						options={['All Projects', 'Active', 'On Hold', 'Inactive', 'Completed']}
+						defaultValue='All Projects'
+						handleYearSelect={status => {
+							status === 'All Projects'
+								? setProjectStatus('')
+								: status === 'On Hold'
+								? setProjectStatus('OnHold')
+								: setProjectStatus(status);
+						}}
+					/>
+				</div>
+				<div className='hidden flex-col sm:flex'>
+					<div className='mb-[30px]'>
+						<Navbar
+							navLabels={navLabels}
+							handlePageSelect={pageNumber => {
+								setActivePage(pageNumber);
+								setProjectsPerPage(10);
+								setCurrentPage(1);
+								setSearchTerm('');
+								setOrderByField('name');
+								setOrderDirection('asc');
+							}}
+						/>
+					</div>
+					{isLoading || isFetching ? (
+						<LoadingSpinner />
+					) : (
+						isSuccess &&
+						windowLg && (
+							<ProjectsTable
+								totalNumberOfProjects={data.pageInfo.total}
+								projects={data.projects}
+								value={searchTerm}
+								orderByField={orderByField}
+								orderDirection={orderDirection}
+								handleSearch={input => setSearchTerm(input)}
+								handleSort={(label: string, orderDirection: string) => {
+									setOrderByField(label);
+									setOrderDirection(orderDirection);
+								}}
+								openViewProjectSideDrawer={(projectId: string) => {
+									setIsViewProjectSideDrawerOpen(true);
+									setProjectId(projectId);
+								}}
+							/>
+						)
+					)}
+				</div>
+			</div>
+			<div className='mb-[25px] flex w-full justify-center'>
+				{!windowLg && !isLoading && !isFetching && (
+					<div className='w-[95%]'>
+						<ResponsiveProjectsTable
+							totalNumberOfProjects={data.pageInfo.total}
+							projects={data.projects}
+							value={searchTerm}
+							orderByField={orderByField}
+							orderDirection={orderDirection}
+							handleSearch={input => setSearchTerm(input)}
+							handleSort={(label: string, orderDirection: string) => {
+								setOrderByField(label);
+								setOrderDirection(orderDirection);
+							}}
+							project={project}
+							closeViewProjectSideDrawer={() => setIsViewProjectSideDrawerOpen(false)}
+						/>
+					</div>
+				)}
+			</div>
+			<div className='mx-14 mb-[25px]'>
+				{isSuccess && (
+					<Pagination
+						total={data.pageInfo.total}
+						currentPage={data.pageInfo.currentPage}
+						lastPage={data.pageInfo.lastPage}
+						perPage={projectsPerPage}
+						items='Projects'
+						handlePerPageSelection={projectsPerPage => {
+							setProjectsPerPage(projectsPerPage);
+							setCurrentPage(1);
+							setSearchTerm('');
+						}}
+						handlePageChange={pageNumber => setCurrentPage(pageNumber)}
+					/>
+				)}
+			</div>
+		</MainLayout>
+	);
 };
 
 export default Projects;

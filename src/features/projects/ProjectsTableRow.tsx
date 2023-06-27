@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Project } from 'src/types';
 import { getEmployeeNamesAndImages, getProjectDate, getProjectValueBAM, getProjectColorAndStatus } from 'src/helpers';
 import TableRow from 'components/tableElements/TableRow';
@@ -11,6 +12,22 @@ type Props = {
 const ProjectsTableRow = ({ project, openViewProjectSideDrawer }: Props) => {
 	const projectId = project.id;
 	const { names, images } = getEmployeeNamesAndImages(project.employees);
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+	const handleResize = () => {
+		setWindowWidth(window.innerWidth);
+	};
+
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
+	let maxVisibleAvatars;
+	windowWidth < 1228 ? (maxVisibleAvatars = 1) : windowWidth < 1450 ? (maxVisibleAvatars = 2) : (maxVisibleAvatars = 3);
+
 	return (
 		<TableRow key={projectId} onClick={() => openViewProjectSideDrawer(projectId)}>
 			<td className='p-4'>{project.name}</td>
@@ -19,7 +36,7 @@ const ProjectsTableRow = ({ project, openViewProjectSideDrawer }: Props) => {
 			</td>
 			<td className='p-4'>{getProjectDate(project.startDate, project.endDate)}</td>
 			<td className='py-1 pl-4 pr-2'>
-				<Avatars names={names} images={images} maxVisibleAvatars={3} />
+				<Avatars names={names} images={images} maxVisibleAvatars={maxVisibleAvatars} />{' '}
 			</td>
 			<td className='p-4'>${project.hourlyRate}</td>
 			<td className='p-4'>{getProjectValueBAM(project.projectValueBAM)} KM</td>
