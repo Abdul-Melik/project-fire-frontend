@@ -4,30 +4,9 @@ import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 import { arrow } from 'src/assets/media';
 import ModalSelector from 'src/components/modals/ModalSelector';
 import DataCard from 'src/components/cards/DataCard';
+import { responsiveCostsPerProjectChartData } from 'src/data';
+const data = responsiveCostsPerProjectChartData;
 
-const data = [
-	{
-		name: 'AudioWolf',
-		value: [
-			{ name: 'Grand Total Hours Available', value: 18000 },
-			{ name: 'Grand Total Hours Billed', value: 20000 },
-		],
-	},
-	{
-		name: 'AlphaBid',
-		value: [
-			{ name: 'Grand Total Hours Available', value: 5000 },
-			{ name: 'Grand Total Hours Billed', value: 1000 },
-		],
-	},
-	{
-		name: 'Kutuby',
-		value: [
-			{ name: 'Grand Total Hours Available', value: 3000 },
-			{ name: 'Grand Total Hours Billed', value: 7000 },
-		],
-	},
-];
 const COLORS = ['#7BB99F', '#FF9F5A'];
 type Props = {};
 

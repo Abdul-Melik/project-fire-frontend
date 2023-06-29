@@ -112,3 +112,110 @@ export const invoicesTableColumnsData = [
 	{ name: 'Status', label: 'invoiceStatus' },
 	{ name: 'Actions', label: 'actions' },
 ];
+
+export const responsiveHoursOverviewChartData = [
+	{
+		name: 'January 1/1/2023',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 18000 },
+			{ name: 'Grand Total Hours Billed', value: 20000 },
+		],
+	},
+	{
+		name: 'February 1/2/2023',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 5000 },
+			{ name: 'Grand Total Hours Billed', value: 1000 },
+		],
+	},
+	{
+		name: 'March 1/3/2023',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 3000 },
+			{ name: 'Grand Total Hours Billed', value: 7000 },
+		],
+	},
+	{
+		name: 'May 1/5/2023',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 3000 },
+			{ name: 'Grand Total Hours Billed', value: 3001 },
+		],
+	},
+	{
+		name: 'July 1/7/2023',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 300 },
+			{ name: 'Grand Total Hours Billed', value: 7000 },
+		],
+	},
+
+	{
+		name: 'September 1/9/2023',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 1080 },
+			{ name: 'Grand Total Hours Billed', value: 5000 },
+		],
+	},
+	{
+		name: 'November 1/11/2023',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 1580 },
+			{ name: 'Grand Total Hours Billed', value: 610 },
+		],
+	},
+];
+
+export const responsiveCostsPerMonthChartData = [
+	{
+		name: 'January 1/1/2023',
+		value: [
+			{ name: 'Grand Total Planned Revenue', value: 18000 },
+			{ name: 'Grand Total Actual Expense', value: 20000 },
+			{ name: 'Grand Total Total Expenses (Planned)', value: 18000 },
+			{ name: 'Grand Total Total Expenses (Actual)', value: 27000 },
+		],
+	},
+	{
+		name: 'February 1/2/2023',
+		value: [
+			{ name: 'Grand Total Planned Revenue', value: 1000 },
+			{ name: 'Grand Total Actual Expense', value: 2100 },
+			{ name: 'Grand Total Total Expenses (Planned)', value: 3000 },
+			{ name: 'Grand Total Total Expenses (Actual)', value: 40000 },
+		],
+	},
+	{
+		name: 'March 1/3/2023',
+		value: [
+			{ name: 'Grand Total Planned Revenue', value: 18000 },
+			{ name: 'Grand Total Actual Expense', value: 30000 },
+			{ name: 'Grand Total Total Expenses (Planned)', value: 8000 },
+			{ name: 'Grand Total Total Expenses (Actual)', value: 25000 },
+		],
+	},
+];
+
+export const responsiveCostsPerProjectChartData = [
+	{
+		name: 'AudioWolf',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 18000 },
+			{ name: 'Grand Total Hours Billed', value: 20000 },
+		],
+	},
+	{
+		name: 'AlphaBid',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 5000 },
+			{ name: 'Grand Total Hours Billed', value: 1000 },
+		],
+	},
+	{
+		name: 'Kutuby',
+		value: [
+			{ name: 'Grand Total Hours Available', value: 3000 },
+			{ name: 'Grand Total Hours Billed', value: 7000 },
+		],
+	},
+];

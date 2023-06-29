@@ -4,36 +4,10 @@ import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 import { arrow } from 'src/assets/media';
 import ModalSelector from 'src/components/modals/ModalSelector';
 import DataCard from 'src/components/cards/DataCard';
+import { responsiveCostsPerMonthChartData } from 'src/data';
 
-const data = [
-	{
-		name: 'January 1/1/2023',
-		value: [
-			{ name: 'Grand Total Planned Revenue', value: 18000 },
-			{ name: 'Grand Total Actual Expense', value: 20000 },
-			{ name: 'Grand Total Total Expenses (Planned)', value: 18000 },
-			{ name: 'Grand Total Total Expenses (Actual)', value: 27000 },
-		],
-	},
-	{
-		name: 'February 1/2/2023',
-		value: [
-			{ name: 'Grand Total Planned Revenue', value: 1000 },
-			{ name: 'Grand Total Actual Expense', value: 2100 },
-			{ name: 'Grand Total Total Expenses (Planned)', value: 3000 },
-			{ name: 'Grand Total Total Expenses (Actual)', value: 40000 },
-		],
-	},
-	{
-		name: 'March 1/3/2023',
-		value: [
-			{ name: 'Grand Total Planned Revenue', value: 18000 },
-			{ name: 'Grand Total Actual Expense', value: 30000 },
-			{ name: 'Grand Total Total Expenses (Planned)', value: 8000 },
-			{ name: 'Grand Total Total Expenses (Actual)', value: 25000 },
-		],
-	},
-];
+const data = responsiveCostsPerMonthChartData;
+
 const COLORS = ['#7BB99F', '#FF9F5A', '#4C84F2', '#FDCA48'];
 type Props = {};
 
