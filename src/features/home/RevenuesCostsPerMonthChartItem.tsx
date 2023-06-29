@@ -37,7 +37,7 @@ const RevenuesCostsPerMonthChartItem = ({
 							tickLine={false}
 							dy={12}
 							tick={{
-								fontFamily: 'Gilroy-Medium',
+								fontFamily: 'GilroyMedium',
 								fontWeight: 500,
 								fontSize: 12,
 								letterSpacing: '0.06em',

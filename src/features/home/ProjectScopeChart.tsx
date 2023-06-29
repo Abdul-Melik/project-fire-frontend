@@ -17,15 +17,7 @@ type ProjectScopeChartValues = {
 
 const CustomLabel = ({ x, y, value }: ProjectScopeCustomLabel) => {
 	return (
-		<text
-			x={x}
-			y={y - 10}
-			fill='#232F2D'
-			textAnchor='start'
-			fontFamily='Gilroy-SemiBold'
-			fontWeight={600}
-			fontSize={14}
-		>
+		<text x={x} y={y - 10} fill='#232F2D' textAnchor='start' fontFamily='GilroySemiBold' fontWeight={600} fontSize={14}>
 			{value}
 		</text>
 	);
@@ -73,7 +65,7 @@ const ProjectScopeChart = ({ chartValues }: ProjectScopeChartValues) => {
 							domain={[0, maxValue]}
 							ticks={[0, maxValue / 4, maxValue / 2, (3 * maxValue) / 4, maxValue]}
 							stroke='#232F2D'
-							fontFamily='Gilroy-Regular'
+							fontFamily='gilroyRegular'
 							fontWeight={400}
 							fontSize={14}
 						/>
