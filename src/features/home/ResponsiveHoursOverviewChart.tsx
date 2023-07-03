@@ -24,7 +24,10 @@ const ResponsiveHoursOverview = () => {
 	);
 
 	return (
-		<DataCard header={headerContent} className='w-full border border-ashen-grey text-center font-gilroy-medium'>
+		<DataCard
+			header={headerContent}
+			className='w-full rounded-md border border-ashen-grey text-center font-gilroy-medium'
+		>
 			<div className='flex w-full justify-center bg-red-300'>
 				<h1
 					className='absolute z-10 mt-[120px] flex cursor-pointer gap-2 font-gilroy-semi-bold text-2xl'

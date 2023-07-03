@@ -32,9 +32,9 @@ const Table = ({
 	rows,
 }: Props) => {
 	return (
-		<div className='w-full rounded-md border border-ashen-grey bg-white'>
+		<div className='w-full rounded-md border border-ashen-grey'>
 			<TableHeader label={label} total={total} value={value} handleSearch={handleSearch} />
-			<table className='w-full border-t border-ashen-grey'>
+			<table className='w-full border-t border-ashen-grey bg-ashen-grey'>
 				<TableHead
 					columns={columns}
 					orderByField={orderByField}

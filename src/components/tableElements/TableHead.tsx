@@ -14,7 +14,7 @@ type Props = {
 
 const TableHead = ({ columns, orderByField, orderDirection, handleSort }: Props) => {
 	return (
-		<thead>
+		<thead className='bg-white'>
 			<tr className='h-[40px] text-left'>
 				{columns.map((column, index) => (
 					<th

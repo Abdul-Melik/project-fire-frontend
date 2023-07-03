@@ -41,7 +41,7 @@ const HoursOverviewChart = () => {
 	);
 
 	return (
-		<DataCard className='h-[392px] rounded-[6px] border border-ashen-grey bg-white' header={headerContent}>
+		<DataCard className='h-[392px] rounded-md border border-ashen-grey bg-white' header={headerContent}>
 			<ResponsiveContainer width='100%' height='65%' className='mt-[38px]'>
 				<BarChart data={hoursOverviewChartData}>
 					<CartesianGrid strokeDasharray='3 3' vertical={false} />

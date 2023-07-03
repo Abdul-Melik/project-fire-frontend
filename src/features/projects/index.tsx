@@ -147,23 +147,28 @@ const Projects = () => {
 				</div>
 			</div>
 			<div className='mb-[25px] flex w-full justify-center'>
-				{!windowLg && !isLoading && !isFetching && (
-					<div className='w-[95%]'>
-						<ResponsiveProjectsTable
-							totalNumberOfProjects={data.pageInfo.total}
-							projects={data.projects}
-							value={searchTerm}
-							orderByField={orderByField}
-							orderDirection={orderDirection}
-							handleSearch={input => setSearchTerm(input)}
-							handleSort={(label: string, orderDirection: string) => {
-								setOrderByField(label);
-								setOrderDirection(orderDirection);
-							}}
-							project={project}
-							closeViewProjectSideDrawer={() => setIsViewProjectSideDrawerOpen(false)}
-						/>
-					</div>
+				{isLoading || isFetching ? (
+					<LoadingSpinner />
+				) : (
+					isSuccess &&
+					!windowLg && (
+						<div className='w-[95%]'>
+							<ResponsiveProjectsTable
+								totalNumberOfProjects={data.pageInfo.total}
+								projects={data.projects}
+								value={searchTerm}
+								orderByField={orderByField}
+								orderDirection={orderDirection}
+								handleSearch={input => setSearchTerm(input)}
+								handleSort={(label: string, orderDirection: string) => {
+									setOrderByField(label);
+									setOrderDirection(orderDirection);
+								}}
+								project={project}
+								closeViewProjectSideDrawer={() => setIsViewProjectSideDrawerOpen(false)}
+							/>
+						</div>
+					)
 				)}
 			</div>
 			<div className='mx-14 mb-[25px]'>

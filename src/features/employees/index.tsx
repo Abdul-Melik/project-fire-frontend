@@ -165,21 +165,26 @@ const Employees = () => {
 				</div>
 			</div>
 			<div className='mb-[25px] flex w-full justify-center'>
-				{!windowLg && !isLoading && !isFetching && (
-					<div className='w-[95%]'>
-						<ResponsiveEmployeesTable
-							totalNumberOfEmployees={data.pageInfo.total}
-							employees={data.employees}
-							value={searchTerm}
-							orderByField={orderByField}
-							orderDirection={orderDirection}
-							handleSearch={input => setSearchTerm(input)}
-							handleSort={(label: string, orderDirection: string) => {
-								setOrderByField(label);
-								setOrderDirection(orderDirection);
-							}}
-						/>
-					</div>
+				{isLoading || isFetching ? (
+					<LoadingSpinner />
+				) : (
+					isEmployeesSuccess &&
+					!windowLg && (
+						<div className='w-[95%]'>
+							<ResponsiveEmployeesTable
+								totalNumberOfEmployees={data.pageInfo.total}
+								employees={data.employees}
+								value={searchTerm}
+								orderByField={orderByField}
+								orderDirection={orderDirection}
+								handleSearch={input => setSearchTerm(input)}
+								handleSort={(label: string, orderDirection: string) => {
+									setOrderByField(label);
+									setOrderDirection(orderDirection);
+								}}
+							/>
+						</div>
+					)
 				)}
 			</div>
 			<div className='mx-14 mb-[25px]'>
