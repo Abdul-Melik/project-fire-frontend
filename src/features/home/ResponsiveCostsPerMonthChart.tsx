@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 
-import { arrow } from 'src/assets/media';
-import ModalSelector from 'src/components/modals/ModalSelector';
-import DataCard from 'src/components/cards/DataCard';
-import { responsiveCostsPerMonthChartData } from 'src/data';
-
-const data = responsiveCostsPerMonthChartData;
+import { arrow } from 'assets/media';
+import { responsiveCostsPerMonthChartData as data } from 'src/data';
+import ModalSelector from 'components/modals/ModalSelector';
+import DataCard from 'components/cards/DataCard';
 
 const COLORS = ['#7BB99F', '#FF9F5A', '#4C84F2', '#FDCA48'];
 type Props = {};

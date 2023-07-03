@@ -6,6 +6,7 @@ Package versions:
 
 Depedencies:
 
+    "@hookform/resolvers": "^3.1.1",
     "@reduxjs/toolkit": "^1.9.5",
     "async-mutex": "^0.4.0",
     "axios": "^1.4.0",
@@ -20,6 +21,7 @@ Depedencies:
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.3",
     "recharts": "^2.6.2"
+    "zod": "^3.21.4"
 
 Dev depedencies:
 

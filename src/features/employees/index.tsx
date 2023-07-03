@@ -32,12 +32,6 @@ const Employees = () => {
 	const [employeesPerPage, setEmployeesPerPage] = useState(10);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const [windowLg, setWindowLg] = useState(windowWidth >= 1024);
-	useEffect(() => {
-		const handleResize = () => setWindowWidth(window.innerWidth);
-		window.addEventListener('resize', handleResize);
-		setWindowLg(windowWidth >= 1024);
-		return () => window.removeEventListener('resize', handleResize);
-	});
 
 	const user = useAppSelector(selectCurrentUser);
 	const {
@@ -75,6 +69,13 @@ const Employees = () => {
 	useEffect(() => {
 		if (isDeleteSuccess) setIsAlertModalOpen(false);
 	}, [isDeleteSuccess]);
+
+	useEffect(() => {
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		window.addEventListener('resize', handleResize);
+		setWindowLg(windowWidth >= 1024);
+		return () => window.removeEventListener('resize', handleResize);
+	});
 
 	const employee = isEmployeesSuccess && data.employees.find((employee: Employee) => employee.id === employeeId);
 

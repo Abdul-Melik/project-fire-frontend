@@ -8,12 +8,12 @@ import LoadingSpinner from 'components/utils/LoadingSpinner';
 import Pagination from 'components/pagination';
 import Navbar from 'components/navigation/NavBar';
 import MainLayout from 'components/layout';
+import FilterSelector from 'components/selectors/FilterSelector';
 import ProjectsTable from 'features/projects/ProjectsTable';
+import ResponsiveProjectsTable from 'features/projects/ResponsiveProjectsTable';
 import ViewProject from 'features/projects/ViewProject';
 import AddProject from 'features/projects/AddProject';
 import EditProject from 'features/projects/EditProject';
-import ResponsiveProjectsTable from './ResponsiveProjectsTable';
-import FilterSelector from 'src/components/selectors/FilterSelector';
 
 const navLabels = ['All Projects', 'Active', 'On hold', 'Inactive', 'Completed'];
 
@@ -31,12 +31,7 @@ const Projects = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const [windowLg, setWindowLg] = useState(windowWidth >= 1024);
-	useEffect(() => {
-		const handleResize = () => setWindowWidth(window.innerWidth);
-		window.addEventListener('resize', handleResize);
-		setWindowLg(windowWidth >= 1024);
-		return () => window.removeEventListener('resize', handleResize);
-	});
+
 	const user = useAppSelector(selectCurrentUser);
 	const { isLoading, isFetching, isSuccess, data } = useGetProjectsQuery(
 		{
@@ -61,6 +56,13 @@ const Projects = () => {
 		else if (activePage === 4) setProjectStatus('Inactive');
 		else if (activePage === 5) setProjectStatus('Completed');
 	}, [activePage]);
+
+	useEffect(() => {
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		window.addEventListener('resize', handleResize);
+		setWindowLg(windowWidth >= 1024);
+		return () => window.removeEventListener('resize', handleResize);
+	});
 
 	const project = isSuccess && data.projects.find((project: Project) => project.id === projectId);
 

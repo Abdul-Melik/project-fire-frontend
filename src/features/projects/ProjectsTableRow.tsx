@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 import { Project } from 'src/types';
 import { getEmployeeNamesAndImages, getProjectDate, getProjectValueBAM, getProjectColorAndStatus } from 'src/helpers';
 import TableRow from 'components/tableElements/TableRow';

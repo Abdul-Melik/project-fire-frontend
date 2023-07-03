@@ -1,4 +1,4 @@
-import { avatar, arrow } from 'assets/media';
+import { arrow } from 'assets/media';
 import { useAppSelector } from 'store/hooks';
 import { selectCurrentUser } from 'store/slices/authSlice';
 import Avatar from 'components/utils/Avatar';

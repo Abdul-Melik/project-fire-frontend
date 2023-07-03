@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { Role } from 'src/types';
 import type { RootState } from 'src/store';
-
-type Role = 'Admin' | 'Guest';
 
 type User = {
 	id: string;

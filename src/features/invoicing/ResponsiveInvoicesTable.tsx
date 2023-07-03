@@ -1,15 +1,12 @@
-import { useContext, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 
-import TableHeader from 'src/components/tableElements/TableHeader';
-import TableHead from 'src/components/tableElements/TableHead';
-import TableRow from 'src/components/tableElements/TableRow';
-import DataCard from 'src/components/cards/DataCard';
-import PlanCardItem from 'src/features/home/PlanCardItem';
-import arrow from 'src/assets/media/svg/arrow.svg';
-import React from 'react';
 import { Invoice } from 'src/types';
 import { getInvoiceColorAndStatus } from 'src/helpers';
+import { invoicesResponsiveTableColumnsData as columns } from 'src/data';
+import TableHeader from 'components/tableElements/TableHeader';
+import TableHead from 'components/tableElements/TableHead';
+import TableRow from 'components/tableElements/TableRow';
+import PlanCardItem from 'features/home/PlanCardItem';
 
 type Props = {
 	totalNumberOfInvoices: number;
@@ -31,11 +28,6 @@ const ResponsiveInvoicesTable = ({
 	handleSort,
 }: Props) => {
 	const [selectedInvoice, setSelectedInvoice] = useState<string>('');
-
-	const columns = [
-		{ name: 'Client', label: 'client' },
-		{ name: 'Status', label: 'invoiceStatus' },
-	];
 
 	const selectEmployee = (projectId: string) => {
 		selectedInvoice === projectId ? setSelectedInvoice('') : setSelectedInvoice(projectId);

@@ -1,6 +1,8 @@
-type Currency = 'USD' | 'EUR' | 'BAM';
+type Role = 'Admin' | 'Guest';
 
 type Department = 'Administration' | 'Management' | 'Development' | 'Design';
+
+type Currency = 'USD' | 'EUR' | 'BAM';
 
 type TechStack = 'AdminNA' | 'MgmtNA' | 'FullStack' | 'Frontend' | 'Backend' | 'UXUI';
 
@@ -82,7 +84,9 @@ type Invoice = {
 };
 
 export type {
+	Role,
 	Department,
+	Currency,
 	TechStack,
 	ProjectType,
 	SalesChannel,

@@ -1,5 +1,6 @@
-import { useLayoutEffect, useRef, useState } from 'react';
-import arrow from 'src/assets/media/svg/arrow.svg';
+import { useState, useLayoutEffect, useRef } from 'react';
+
+import { arrow } from 'assets/media';
 
 type Props = {
 	handleYearSelect: (year: string) => void;

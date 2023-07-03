@@ -1,28 +1,28 @@
 import { useState } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 
-import { arrow } from 'src/assets/media';
-import ModalSelector from 'src/components/modals/ModalSelector';
-import DataCard from 'src/components/cards/DataCard';
-import { responsiveHoursOverviewChartData } from 'src/data';
-
-const data = responsiveHoursOverviewChartData;
+import { arrow } from 'assets/media';
+import { responsiveHoursOverviewChartData as data } from 'src/data';
+import ModalSelector from 'components/modals/ModalSelector';
+import DataCard from 'components/cards/DataCard';
 
 const COLORS = ['#7BB99F', '#FF9F5A'];
-type Props = {};
 
-const ResponsiveHoursOverview = (props: Props) => {
+const ResponsiveHoursOverview = () => {
 	const [project, setProject] = useState(data[0]);
 	const [show, setShow] = useState(false);
+
 	const handleNameClick = (index: number) => {
 		setProject(data[index]);
 		setShow(false);
 	};
+
 	const headerContent = (
 		<div className='flex gap-[10px] self-start'>
 			<h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>Hours Overview</h2>
 		</div>
 	);
+
 	return (
 		<DataCard header={headerContent} className='w-full border border-ashen-grey text-center font-gilroy-medium'>
 			<div className='flex w-full justify-center bg-red-300'>

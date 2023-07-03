@@ -1,42 +1,26 @@
-import { useEffect, useState } from 'react';
-import { useDeleteProjectMutation } from 'store/slices/projectsApiSlice';
+import React, { useEffect, useState } from 'react';
 
-import TableHeader from 'src/components/tableElements/TableHeader';
-import TableHead from 'src/components/tableElements/TableHead';
-import TableRow from 'src/components/tableElements/TableRow';
-
-import PlanCardItem from 'src/features/home/PlanCardItem';
-
-import React from 'react';
-import ViewProject from './ViewProject';
-import EditProject from './EditProject';
-import AlertModal from 'src/components/modals/AlertModal';
-
-import { Employee } from 'src/types';
 import { Project } from 'src/types';
-import { getEmployeeNamesAndImages, getProjectDate, getProjectValueBAM, getProjectColorAndStatus } from 'src/helpers';
-
-type ProjectType = 'Fixed' | 'OnGoing';
-type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
-type ProjectStatus = 'Active' | 'OnHold' | 'Inactive' | 'Completed';
-type Department = 'Administration' | 'Management' | 'Development' | 'Design';
-type Currency = 'USD' | 'EUR' | 'BAM';
-type TechStack = 'AdminNA' | 'MgmtNA' | 'FullStack' | 'Frontend' | 'Backend' | 'UXUI';
-
-type EmployeesPerProject = {
-	partTime: boolean;
-	employee: Employee;
-};
+import { getProjectDate, getProjectColorAndStatus } from 'src/helpers';
+import { projectsResponsiveTableColumnsData as columns } from 'src/data';
+import { useDeleteProjectMutation } from 'store/slices/projectsApiSlice';
+import AlertModal from 'components/modals/AlertModal';
+import TableHeader from 'components/tableElements/TableHeader';
+import TableHead from 'components/tableElements/TableHead';
+import TableRow from 'components/tableElements/TableRow';
+import PlanCardItem from 'features/home/PlanCardItem';
+import ViewProject from 'features/projects/ViewProject';
+import EditProject from 'features/projects/EditProject';
 
 type Props = {
 	totalNumberOfProjects: number;
 	projects: Project[];
+	project: Project;
 	value: string;
 	orderByField: string;
 	orderDirection: string;
 	handleSearch: (input: string) => void;
 	handleSort: (label: string, orderDirection: string) => void;
-	project: Project;
 	closeViewProjectSideDrawer: () => void;
 };
 
@@ -57,11 +41,6 @@ const ResponsiveProjectsTable = ({
 	const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
 	const [deleteProject, { isSuccess }] = useDeleteProjectMutation();
-
-	const columns = [
-		{ name: 'Name', label: 'name' },
-		{ name: 'Status', label: 'projectStatus' },
-	];
 
 	const selectProject = (projectId: string) => {
 		selectedProject === projectId ? setSelectedProject('') : setSelectedProject(projectId);

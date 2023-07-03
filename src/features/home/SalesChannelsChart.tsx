@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
+import { SalesChannel } from 'src/types';
 import DataCard from 'src/components/cards/DataCard';
-
-type SalesChannel = 'Online' | 'InPerson' | 'Referral' | 'Other';
 
 type ChartData = {
 	name: string;
@@ -55,11 +54,13 @@ const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, inde
 
 const SalesChannelsChart = ({ chartValues }: SalesChannelChartValues) => {
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
 	useEffect(() => {
 		const handleResize = () => setWindowWidth(window.innerWidth);
 		window.addEventListener('resize', handleResize);
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
+
 	const isMobile = windowWidth < 768;
 
 	const chartData: ChartData[] = [

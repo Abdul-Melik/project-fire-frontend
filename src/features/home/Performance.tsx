@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import { ProjectsInfo } from 'src/types';
 import {
 	projectsNumber,
@@ -13,8 +15,7 @@ import InfoCard from 'components/cards/InfoCard';
 import SalesChannelsChart from 'features/home/SalesChannelsChart';
 import ProjectScopeChart from 'features/home/ProjectScopeChart';
 import HoursOverviewChart from 'features/home/HoursOverviewChart';
-import { useState, useEffect } from 'react';
-import ResponsiveHoursOverviewChart from './ResponsiveHoursOverviewChart';
+import ResponsiveHoursOverviewChart from 'features/home/ResponsiveHoursOverviewChart';
 
 type Props = {
 	projectsInfo: ProjectsInfo | null;
@@ -23,11 +24,13 @@ type Props = {
 const Performance = ({ projectsInfo }: Props) => {
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const windowLg = windowWidth >= 1024;
+
 	useEffect(() => {
 		const handleResize = () => setWindowWidth(window.innerWidth);
 		window.addEventListener('resize', handleResize);
 		return () => window.removeEventListener('resize', handleResize);
 	});
+
 	return (
 		<div className='flex flex-col gap-[42px]'>
 			<div className='grid max-w-[100%] auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(240px,100%))] justify-center gap-[15px] lg:max-w-none lg:grid-cols-[repeat(auto-fit,minmax(240px,1fr))] lg:gap-[30px]'>

@@ -1,22 +1,23 @@
-import { revenue, directCosts, margin, avgMargin } from 'assets/media';
+import { useState, useEffect } from 'react';
 
+import { revenue, directCosts, margin, avgMargin } from 'assets/media';
 import InfoCard from 'components/cards/InfoCard';
 import SummaryCard from 'components/cards/SummaryCard';
 import RevenuesCostsActualChart from 'features/home/RevenuesCostsActualChart';
 import RevenuesCostsPerMonthChart from 'features/home/RevenuesCostsPerMonthChart';
-import { useState, useEffect } from 'react';
-import ResponsiveCostsPerProjectChart from './ResponsiveCostsPerProjectChart';
-import ResponsiveCostsPerMonthChart from './ResponsiveCostsPerMonthChart';
+import ResponsiveCostsPerProjectChart from 'features/home/ResponsiveCostsPerProjectChart';
+import ResponsiveCostsPerMonthChart from 'features/home/ResponsiveCostsPerMonthChart';
 
 const DevelopmentRevenueCosts = () => {
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const windowLg = windowWidth >= 1024;
-	//update window width on resize with useEffect
+
 	useEffect(() => {
 		const handleResize = () => setWindowWidth(window.innerWidth);
 		window.addEventListener('resize', handleResize);
 		return () => window.removeEventListener('resize', handleResize);
 	});
+
 	return (
 		<div className='flex flex-col gap-[42px]'>
 			<div className='max-w-screen flex flex-col gap-[30px] lg:grid lg:grid-cols-[1fr,minmax(330px,auto)]'>

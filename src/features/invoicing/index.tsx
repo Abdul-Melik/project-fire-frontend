@@ -14,7 +14,7 @@ import Pagination from 'components/pagination';
 import Navbar from 'components/navigation/NavBar';
 import MainLayout from 'components/layout';
 import InvoicesTable from 'features/invoicing/InvoicesTable';
-import ResponsiveInvoicesTable from './ResponsiveInvoicesTable';
+import ResponsiveInvoicesTable from 'features/invoicing/ResponsiveInvoicesTable';
 
 const navLabels = ['All Invoices', 'Sent', 'Paid'];
 
@@ -29,17 +29,6 @@ const Invoicing = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [invoicesPerPage, setInvoicesPerPage] = useState(10);
 	const [windowLg, setWindowLg] = useState(window.innerWidth >= 1024);
-	useEffect(() => {
-		const handleResize = () => {
-			setWindowLg(window.innerWidth >= 1024);
-		};
-
-		window.addEventListener('resize', handleResize);
-
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, []);
 
 	const user = useAppSelector(selectCurrentUser);
 	const {
@@ -82,6 +71,16 @@ const Invoicing = () => {
 	useEffect(() => {
 		if (isDeleteSuccess) setIsAlertModalOpen(false);
 	}, [isDeleteSuccess]);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setWindowLg(window.innerWidth >= 1024);
+		};
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 
 	const invoice = isInvoicesSuccess && data.invoices.find((invoice: Invoice) => invoice.id === invoiceId);
 

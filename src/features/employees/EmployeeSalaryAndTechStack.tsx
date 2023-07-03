@@ -1,5 +1,5 @@
-import { getEmployeeSalaryInBAM, getEmployeeTechStack } from 'src/helpers';
 import { Employee } from 'src/types';
+import { getEmployeeSalaryInBAM, getEmployeeTechStack } from 'src/helpers';
 
 type Props = {
 	employee: Employee;

@@ -84,35 +84,6 @@ export const revenuesCostsPerMonthChartData = {
 	revenueGap: ['914.00 KM', '10,000.00 KM', '-15,000.00 KM'],
 };
 
-// Table Columns Data
-export const employeesTableColumnsData = [
-	{ name: 'First Name', label: 'firstName' },
-	{ name: 'Last Name', label: 'lastName' },
-	{ name: 'Department', label: 'department' },
-	{ name: 'Monthly Salary (BAM)', label: 'salary' },
-	{ name: 'Tech Stack', label: 'techStack' },
-	{ name: 'Actions', label: 'actions' },
-];
-
-export const projectsTableColumnsData = [
-	{ name: 'Name', label: 'name' },
-	{ name: 'Description', label: 'description' },
-	{ name: 'Duration', label: 'startDate' },
-	{ name: 'Developers', label: 'employeesCount' },
-	{ name: 'Hourly rate', label: 'hourlyRate' },
-	{ name: 'Project value in BAM', label: 'projectValueBAM' },
-	{ name: 'Status', label: 'projectStatus' },
-];
-
-export const invoicesTableColumnsData = [
-	{ name: 'Client', label: 'client' },
-	{ name: 'Industry', label: 'industry' },
-	{ name: 'Totall Hours Billed', label: 'totalHoursBilled' },
-	{ name: 'Amount Billed (BAM)', label: 'amountBilledBAM' },
-	{ name: 'Status', label: 'invoiceStatus' },
-	{ name: 'Actions', label: 'actions' },
-];
-
 export const responsiveHoursOverviewChartData = [
 	{
 		name: 'January 1/1/2023',
@@ -218,4 +189,48 @@ export const responsiveCostsPerProjectChartData = [
 			{ name: 'Grand Total Hours Billed', value: 7000 },
 		],
 	},
+];
+
+// Table Columns Data
+export const employeesTableColumnsData = [
+	{ name: 'First Name', label: 'firstName' },
+	{ name: 'Last Name', label: 'lastName' },
+	{ name: 'Department', label: 'department' },
+	{ name: 'Monthly Salary (BAM)', label: 'salary' },
+	{ name: 'Tech Stack', label: 'techStack' },
+	{ name: 'Actions', label: 'actions' },
+];
+
+export const employeesResponsiveTableColumnsData = [
+	{ name: 'First Name', label: 'firstName' },
+	{ name: 'Last Name', label: 'lastName' },
+];
+
+export const projectsTableColumnsData = [
+	{ name: 'Name', label: 'name' },
+	{ name: 'Description', label: 'description' },
+	{ name: 'Duration', label: 'startDate' },
+	{ name: 'Developers', label: 'employeesCount' },
+	{ name: 'Hourly rate', label: 'hourlyRate' },
+	{ name: 'Project value in BAM', label: 'projectValueBAM' },
+	{ name: 'Status', label: 'projectStatus' },
+];
+
+export const projectsResponsiveTableColumnsData = [
+	{ name: 'Name', label: 'name' },
+	{ name: 'Status', label: 'projectStatus' },
+];
+
+export const invoicesTableColumnsData = [
+	{ name: 'Client', label: 'client' },
+	{ name: 'Industry', label: 'industry' },
+	{ name: 'Totall Hours Billed', label: 'totalHoursBilled' },
+	{ name: 'Amount Billed (BAM)', label: 'amountBilledBAM' },
+	{ name: 'Status', label: 'invoiceStatus' },
+	{ name: 'Actions', label: 'actions' },
+];
+
+export const invoicesResponsiveTableColumnsData = [
+	{ name: 'Client', label: 'client' },
+	{ name: 'Status', label: 'invoiceStatus' },
 ];
