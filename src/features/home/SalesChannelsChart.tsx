@@ -43,7 +43,7 @@ const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, inde
 			textAnchor='middle'
 			dominantBaseline='central'
 			fill={index < 3 ? 'white' : '#1D2129'}
-			fontFamily='HelveticaNeue-Medium'
+			fontFamily='HelveticaNeueMedium'
 			fontWeight={500}
 			fontSize={14}
 		>

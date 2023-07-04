@@ -63,7 +63,7 @@ const RevenuesCostsActualChart = () => {
 						domain={[0, 600000]}
 						axisLine={false}
 						tickLine={false}
-						tick={{ fontFamily: 'Gilroy-Medium', fontWeight: 500, fontSize: 14, fill: '#232F2D' }}
+						tick={{ fontFamily: 'GilroyMedium', fontWeight: 500, fontSize: 14, fill: '#232F2D' }}
 					/>
 					<Tooltip />
 					{firstOption && <Bar dataKey='Grand Total Total Billed' fill='#FF9F5A' radius={[4, 4, 0, 0]} barSize={20} />}

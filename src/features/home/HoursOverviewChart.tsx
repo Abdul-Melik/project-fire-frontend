@@ -61,7 +61,7 @@ const HoursOverviewChart = () => {
 						domain={[0, 6000]}
 						axisLine={false}
 						tickLine={false}
-						tick={{ fontFamily: 'Gilroy-Medium', fontWeight: 500, fontSize: 14, fill: '#232F2D' }}
+						tick={{ fontFamily: 'GilroyMedium', fontWeight: 500, fontSize: 14, fill: '#232F2D' }}
 					/>
 					<Tooltip />
 					{firstOption && (

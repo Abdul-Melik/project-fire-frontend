@@ -62,6 +62,7 @@ const DevelopmentRevenueCosts = () => {
 			{windowLg && (
 				<div className='block'>
 					<RevenuesCostsActualChart />
+					<div className='mb-[30px]'></div>
 					<RevenuesCostsPerMonthChart />
 				</div>
 			)}

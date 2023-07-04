@@ -49,7 +49,7 @@ const RevenuesCostsPerMonthChartItem = ({
 								domain={[0, 260000]}
 								axisLine={false}
 								tickLine={false}
-								tick={{ fontFamily: 'Gilroy-Medium', fontWeight: 500, fontSize: 14, fill: '#232F2D' }}
+								tick={{ fontFamily: 'GilroyMedium', fontWeight: 500, fontSize: 14, fill: '#232F2D' }}
 							/>
 						)}
 						<Tooltip />
