@@ -17,6 +17,7 @@ import Main from "components/layout/Main";
 import Footer from "components/layout/Footer";
 import ProjectTypeSelector from "src/components/selectors/ProjectTypeSelector";
 import SalesChannelSelector from "src/components/selectors/SalesChannelSelector";
+import DateInput from "src/components/formElements/DateInput";
 
 type Props = {
   project: Project;
@@ -128,11 +129,10 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
             handleStartDateInput={(startDate) => setStartDate(startDate)}
             handleEndDateInput={(endDate) => setEndDate(endDate)}
           />
-
-          <DatePicker
-            customInput={<CustomDateInput />}
-            selected={actualEndDate}
-            onChange={(date) => setActualEndDate(date)}
+          <DateInput
+            endDate={endDate}
+            actualEndDate={actualEndDate}
+            handleActualEndDateInput={(date) => setActualEndDate(date)}
           />
 
           <EmployeesSelector
