@@ -1,46 +1,45 @@
 import { useState, useLayoutEffect, useRef } from "react";
 
-import { ProjectStatus } from "src/types";
+import { SalesChannel } from "src/types";
 import { getProjectColorAndStatus } from "src/helpers";
 import { chevronDown } from "assets/media";
 import RadioButton from "components/formElements/RadioButton";
 
 type Props = {
-  selectedProjectStatus: string;
-  handleProjectStatusSelection: (projectStatus: string) => void;
+  selectedSalesChannel: string;
+  handleSalesChannelSelection: (salesChannel: string) => void;
 };
 
-const ProjectStatusSelector = ({ selectedProjectStatus, handleProjectStatusSelection }: Props) => {
+const SalesChannelSelector = ({ selectedSalesChannel, handleSalesChannelSelection }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
-  const [isProjectStatusSelectorOpen, setIsProjectStatusSelectorOpen] = useState(false);
+  const [isSalesChannelSelectorOpen, setIsSalesChannelSelectorOpen] = useState(false);
 
   useLayoutEffect(() => {
     setWidth(ref.current?.offsetWidth ?? 0);
     setHeight(ref.current?.offsetHeight ?? 0);
-  }, [isProjectStatusSelectorOpen]);
+  }, [isSalesChannelSelectorOpen]);
 
   return (
     <div className='flex flex-col gap-1'>
-      <span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>Status</span>
+      <span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>Sales Channel</span>
       <div ref={ref} className='relative rounded-md border border-misty-moonstone px-4 py-2 focus:outline-none'>
         <div
           className='flex cursor-pointer items-center justify-between'
-          onClick={() => setIsProjectStatusSelectorOpen(!isProjectStatusSelectorOpen)}
+          onClick={() => setIsSalesChannelSelectorOpen(!isSalesChannelSelectorOpen)}
         >
           <span className='font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist'>
-            {selectedProjectStatus
-              ? getProjectColorAndStatus(selectedProjectStatus as ProjectStatus)?.status
-              : "Select project status"}
+            {selectedSalesChannel ? (selectedSalesChannel as SalesChannel) : "Select sales channel"}
           </span>
+
           <img
-            className={`transition ${isProjectStatusSelectorOpen ? "rotate-180" : ""}`}
+            className={`transition ${isSalesChannelSelectorOpen ? "rotate-180" : ""}`}
             src={chevronDown}
             alt='Down icon'
           />
         </div>
-        {isProjectStatusSelectorOpen && (
+        {isSalesChannelSelectorOpen && (
           <div
             className='absolute left-0 z-20 flex max-h-[128px] flex-col rounded-md border border-t-0 border-misty-moonstone bg-white py-2'
             style={{ width, top: height }}
@@ -49,56 +48,56 @@ const ProjectStatusSelector = ({ selectedProjectStatus, handleProjectStatusSelec
               containerClassName='gap-2 px-4 py-1'
               labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
               inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
-              label='Active'
-              htmlFor='active'
-              id='active'
-              name='projectStatus'
-              checked={selectedProjectStatus === "Active"}
+              label='Online'
+              htmlFor='online'
+              id='online'
+              name='salesChannel'
+              checked={selectedSalesChannel === "Online"}
               handleRadioButtonChange={(event) => {
-                handleProjectStatusSelection(event.target.checked ? "Active" : "");
-                setIsProjectStatusSelectorOpen(false);
+                handleSalesChannelSelection(event.target.checked ? "Online" : "");
+                setIsSalesChannelSelectorOpen(false);
               }}
             />
             <RadioButton
               containerClassName='gap-2 px-4 py-1'
               labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
               inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
-              label='On hold'
-              htmlFor='onHold'
-              id='onHold'
-              name='projectStatus'
-              checked={selectedProjectStatus === "OnHold"}
+              label='InPerson'
+              htmlFor='inperson'
+              id='inperson'
+              name='salesChannel'
+              checked={selectedSalesChannel === "InPerson"}
               handleRadioButtonChange={(event) => {
-                handleProjectStatusSelection(event.target.checked ? "OnHold" : "");
-                setIsProjectStatusSelectorOpen(false);
+                handleSalesChannelSelection(event.target.checked ? "InPerson" : "");
+                setIsSalesChannelSelectorOpen(false);
               }}
             />
             <RadioButton
               containerClassName='gap-2 px-4 py-1'
               labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
               inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
-              label='Inactive'
-              htmlFor='inactive'
-              id='inactive'
-              name='projectStatus'
-              checked={selectedProjectStatus === "Inactive"}
+              label='Referral'
+              htmlFor='referral'
+              id='referral'
+              name='salesChannel'
+              checked={selectedSalesChannel === "Referral"}
               handleRadioButtonChange={(event) => {
-                handleProjectStatusSelection(event.target.checked ? "Inactive" : "");
-                setIsProjectStatusSelectorOpen(false);
+                handleSalesChannelSelection(event.target.checked ? "Referral" : "");
+                setIsSalesChannelSelectorOpen(false);
               }}
             />
             <RadioButton
               containerClassName='gap-2 px-4 py-1'
               labelClassName='font-gilroy-regular text-sm font-normal text-slate-mist'
               inputClassName='h-[15px] w-[15px] border-slate-mist text-evergreen'
-              label='Completed'
-              htmlFor='completed'
-              id='completed'
-              name='projectStatus'
-              checked={selectedProjectStatus === "Completed"}
+              label='Other'
+              htmlFor='other'
+              id='other'
+              name='salesChannel'
+              checked={selectedSalesChannel === "Other"}
               handleRadioButtonChange={(event) => {
-                handleProjectStatusSelection(event.target.checked ? "Completed" : "");
-                setIsProjectStatusSelectorOpen(false);
+                handleSalesChannelSelection(event.target.checked ? "Other" : "");
+                setIsSalesChannelSelectorOpen(false);
               }}
             />
           </div>
@@ -108,4 +107,4 @@ const ProjectStatusSelector = ({ selectedProjectStatus, handleProjectStatusSelec
   );
 };
 
-export default ProjectStatusSelector;
+export default SalesChannelSelector;
