@@ -7,13 +7,14 @@ type Props = {
 	invoice: Invoice;
 	handleUpdate: (invoiceId: string, invoiceStatus: string) => void;
 	handleDelete: (invoiceId: string) => void;
+	openViewInvoiceSideDrawer: (invoiceId: string) => void;
 };
 
-const InvoicesTableRow = ({ invoice, handleUpdate, handleDelete }: Props) => {
+const InvoicesTableRow = ({ invoice, handleUpdate, handleDelete, openViewInvoiceSideDrawer }: Props) => {
 	const invoiceId = invoice.id;
 
 	return (
-		<TableRow key={invoiceId}>
+		<TableRow key={invoiceId} onClick={() => openViewInvoiceSideDrawer(invoiceId)}>
 			<td className='p-4'>{invoice.client}</td>
 			<td className='p-4'>{invoice.industry}</td>
 			<td className='p-4'>{invoice.totalHoursBilled}</td>

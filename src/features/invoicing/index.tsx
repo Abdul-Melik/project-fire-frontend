@@ -15,6 +15,7 @@ import Navbar from 'components/navigation/NavBar';
 import MainLayout from 'components/layout';
 import InvoicesTable from 'features/invoicing/InvoicesTable';
 import ResponsiveInvoicesTable from 'features/invoicing/ResponsiveInvoicesTable';
+import ViewInvoice from './ViewInvoice';
 
 const navLabels = ['All Invoices', 'Sent', 'Paid'];
 
@@ -29,6 +30,9 @@ const Invoicing = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [invoicesPerPage, setInvoicesPerPage] = useState(10);
 	const [windowLg, setWindowLg] = useState(window.innerWidth >= 1024);
+	const [isViewInvoiceSideDrawerOpen, setIsViewInvoiceSideDrawerOpen] = useState(false);
+	const [isAddInvoiceSideDrawerOpen, setIsAddInvoiceSideDrawerOpen] = useState(false);
+	const [isEditInvoiceSideDrawerOpen, setIsEditInvoiceSideDrawerOpen] = useState(false);
 
 	const user = useAppSelector(selectCurrentUser);
 	const {
@@ -123,6 +127,13 @@ const Invoicing = () => {
 							}}
 						/>
 					</div>
+					{isViewInvoiceSideDrawerOpen && (
+						<ViewInvoice
+							invoice={invoice}
+							closeViewInvoiceSideDrawer={() => setIsViewInvoiceSideDrawerOpen(false)}
+							openEditInvoiceSideDrawer={() => setIsEditInvoiceSideDrawerOpen(true)}
+						/>
+					)}
 					{isLoading || isFetching ? (
 						<LoadingSpinner />
 					) : (
@@ -144,6 +155,10 @@ const Invoicing = () => {
 								}}
 								handleDelete={invoiceId => {
 									setIsAlertModalOpen(true);
+									setInvoiceId(invoiceId);
+								}}
+								openViewInvoiceSideDrawer={invoiceId => {
+									setIsViewInvoiceSideDrawerOpen(true);
 									setInvoiceId(invoiceId);
 								}}
 							/>

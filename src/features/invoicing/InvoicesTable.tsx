@@ -13,6 +13,7 @@ type Props = {
 	handleSort: (label: string, orderDirection: string) => void;
 	handleUpdate: (invoiceId: string, invoiceStatus: string) => void;
 	handleDelete: (invoiceId: string) => void;
+	openViewInvoiceSideDrawer: (invoiceId: string) => void;
 };
 
 const InvoicesTable = ({
@@ -25,6 +26,7 @@ const InvoicesTable = ({
 	handleSort,
 	handleUpdate,
 	handleDelete,
+	openViewInvoiceSideDrawer,
 }: Props) => {
 	return (
 		<Table
@@ -37,7 +39,13 @@ const InvoicesTable = ({
 			handleSearch={handleSearch}
 			handleSort={handleSort}
 			rows={invoices.map(invoice => (
-				<InvoicesTableRow key={invoice.id} invoice={invoice} handleUpdate={handleUpdate} handleDelete={handleDelete} />
+				<InvoicesTableRow
+					openViewInvoiceSideDrawer={openViewInvoiceSideDrawer}
+					key={invoice.id}
+					invoice={invoice}
+					handleUpdate={handleUpdate}
+					handleDelete={handleDelete}
+				/>
 			))}
 		/>
 	);
