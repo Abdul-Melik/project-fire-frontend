@@ -12,6 +12,7 @@ import SideDrawer from 'components/navigation/SideDrawer';
 import Header from 'components/layout/Header';
 import Main from 'components/layout/Main';
 import Footer from 'components/layout/Footer';
+import InvoiceStatusSelector from './InvoiceStatusSelector';
 
 type Props = {
 	closeAddInvoiceSideDrawer: () => void;
@@ -117,6 +118,10 @@ const AddInvoice = ({ closeAddInvoiceSideDrawer }: Props) => {
 						placeholder='Enter the amount billed in BAM'
 						value={amountBilledBAM}
 						handleInput={amountBilledBAM => setAmountBilledBAM(amountBilledBAM)}
+					/>
+					<InvoiceStatusSelector
+						selectedInvoiceStatus={invoiceStatus}
+						handleInvoiceStatusSelection={invoiceStatus => setInvoiceStatus(invoiceStatus)}
 					/>
 				</form>
 			</Main>
