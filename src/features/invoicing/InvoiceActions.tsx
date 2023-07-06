@@ -66,7 +66,10 @@ const InvoiceActions = ({ invoiceId, handleUpdate, handleDelete }: Props) => {
 									setActionLabel('');
 									setActionDescription('');
 								}}
-								onClick={() => handleUpdate(invoiceId, 'Paid')}
+								onClick={event => {
+									event.stopPropagation();
+									handleUpdate(invoiceId, 'Paid');
+								}}
 							>
 								<img src={dollar} alt='Dollar icon' />
 							</button>
@@ -85,7 +88,10 @@ const InvoiceActions = ({ invoiceId, handleUpdate, handleDelete }: Props) => {
 									setActionLabel('');
 									setActionDescription('');
 								}}
-								onClick={() => handleUpdate(invoiceId, 'Sent')}
+								onClick={event => {
+									event.stopPropagation();
+									handleUpdate(invoiceId, 'Sent');
+								}}
 							>
 								<img src={email} alt='Email icon' />
 							</button>
@@ -104,7 +110,10 @@ const InvoiceActions = ({ invoiceId, handleUpdate, handleDelete }: Props) => {
 									setActionLabel('');
 									setActionDescription('');
 								}}
-								onClick={() => handleDelete(invoiceId)}
+								onClick={event => {
+									event.stopPropagation();
+									handleDelete(invoiceId);
+								}}
 							>
 								<img src={trash} alt='Trash icon' />
 							</button>
