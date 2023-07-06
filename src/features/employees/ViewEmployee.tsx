@@ -12,7 +12,7 @@ import SideDrawer from "components/navigation/SideDrawer";
 import Header from "components/layout/Header";
 import Main from "components/layout/Main";
 import Footer from "components/layout/Footer";
-import EmployeeSalaryAndTechStack from "features/employees/EmployeeSalaryAndTechStack";
+import EmployeeInfo from "features/employees/EmployeeInfo";
 import AssignedToProjects from "features/employees/AssignedToProjects";
 
 type Props = {
@@ -68,7 +68,7 @@ const ViewEmployee = ({
               <EmployeeCard employee={employee} />
             </Header>
             <Main className="flex flex-col gap-5">
-              <EmployeeSalaryAndTechStack employee={employee} />
+              <EmployeeInfo employee={employee} />
               <AssignedToProjects employee={employee} />
             </Main>
             {userRole === "Admin" && (

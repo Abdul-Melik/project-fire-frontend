@@ -45,6 +45,19 @@ export const getEmployeeNamesAndImages = (employees: Employees[]) => {
   return { names, images };
 };
 
+export const getIsEmployedDate = (isEmployedDateString: string) => {
+  const isEmployedDate = new Date(isEmployedDateString);
+  const isEmployedDateFormattedString = isEmployedDate.toLocaleDateString(
+    "en-US",
+    {
+      year: "2-digit",
+      month: "2-digit",
+      day: "2-digit",
+    }
+  );
+  return isEmployedDateFormattedString;
+};
+
 export const getProjectDate = (
   startDateString: string,
   endDateString: string

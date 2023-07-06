@@ -1,5 +1,9 @@
 import { Employee } from "src/types";
-import { getEmployeeSalaryInBAM, getEmployeeTechStack } from "src/helpers";
+import {
+  getEmployeeSalaryInBAM,
+  getEmployeeTechStack,
+  getIsEmployedDate,
+} from "src/helpers";
 
 type Props = {
   employee: Employee;
@@ -23,6 +27,24 @@ const EmployeeSalaryAndTechStack = ({ employee }: Props) => {
         </span>
         <span className="font-gilroy-regular text-base font-normal text-slate-mist">
           {getEmployeeTechStack(employee.techStack)}
+        </span>
+      </div>
+      <div className="h-[1px] w-full bg-ashen-grey" />
+      <div className="flex flex-col">
+        <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
+          Employment Status
+        </span>
+        <span className="font-gilroy-regular text-base font-normal text-slate-mist">
+          {employee.isEmployed ? "Current" : "Past"}
+        </span>
+      </div>
+      <div className="h-[1px] w-full bg-ashen-grey" />
+      <div className="flex flex-col">
+        <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
+          {employee.isEmployed ? "Employed on" : "Fired on"}
+        </span>
+        <span className="font-gilroy-regular text-base font-normal text-slate-mist">
+          {getIsEmployedDate(employee.isEmployedDate)}
         </span>
       </div>
     </div>
