@@ -16,6 +16,7 @@ import MainLayout from 'components/layout';
 import InvoicesTable from 'features/invoicing/InvoicesTable';
 import ResponsiveInvoicesTable from 'features/invoicing/ResponsiveInvoicesTable';
 import ViewInvoice from './ViewInvoice';
+import AddInvoice from './AddInvoice';
 
 const navLabels = ['All Invoices', 'Sent', 'Paid'];
 
@@ -107,7 +108,9 @@ const Invoicing = () => {
 					{user?.role === 'Admin' && (
 						<button
 							className='rounded-md bg-deep-teal px-4 py-2 font-inter-semi-bold text-base font-semibold tracking-[-0.015em] text-white hover:saturate-[400%]'
-							onClick={() => {}}
+							onClick={() => {
+								setIsAddInvoiceSideDrawerOpen(true);
+							}}
 						>
 							Create New Invoice
 						</button>
@@ -133,6 +136,9 @@ const Invoicing = () => {
 							closeViewInvoiceSideDrawer={() => setIsViewInvoiceSideDrawerOpen(false)}
 							openEditInvoiceSideDrawer={() => setIsEditInvoiceSideDrawerOpen(true)}
 						/>
+					)}
+					{isAddInvoiceSideDrawerOpen && (
+						<AddInvoice closeAddInvoiceSideDrawer={() => setIsAddInvoiceSideDrawerOpen(false)} />
 					)}
 					{isLoading || isFetching ? (
 						<LoadingSpinner />
