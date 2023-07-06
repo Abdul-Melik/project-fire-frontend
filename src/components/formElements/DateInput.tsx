@@ -10,14 +10,18 @@ type Props = {
   handleActualEndDateInput: (date: Date | null) => void;
 };
 
-const DateInput = ({ endDate, actualEndDate, handleActualEndDateInput }: Props) => {
+const DateInput = ({
+  endDate,
+  actualEndDate,
+  handleActualEndDateInput,
+}: Props) => {
   return (
-    <div className='flex flex-col gap-1'>
-      <span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>
+    <div className="flex flex-col gap-1">
+      <span className="font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey">
         Actual End Date
       </span>
       <DatePicker
-        customInput={<CustomDateInput width='w-full' />}
+        customInput={<CustomDateInput width="w-full" />}
         placeholderText={endDate?.toLocaleDateString("en-US", {
           year: "numeric",
           month: "short",

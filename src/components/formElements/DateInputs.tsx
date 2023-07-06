@@ -10,15 +10,22 @@ type Props = {
   handleEndDateInput: (date: Date | null) => void;
 };
 
-const DateInputs = ({ startDate, endDate, handleStartDateInput, handleEndDateInput }: Props) => {
+const DateInputs = ({
+  startDate,
+  endDate,
+  handleStartDateInput,
+  handleEndDateInput,
+}: Props) => {
   return (
-    <div className='flex flex-col gap-1'>
-      <span className='font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey'>Duration</span>
-      <div className='flex w-full items-center gap-4'>
+    <div className="flex flex-col gap-1">
+      <span className="font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey">
+        Duration
+      </span>
+      <div className="flex w-full items-center gap-4">
         <div>
           <DatePicker
             required
-            customInput={<CustomDateInput width='w-[175px]' />}
+            customInput={<CustomDateInput width="w-[175px]" />}
             placeholderText={startDate?.toLocaleDateString("en-US", {
               year: "numeric",
               month: "2-digit",
@@ -28,11 +35,13 @@ const DateInputs = ({ startDate, endDate, handleStartDateInput, handleEndDateInp
             onChange={(date) => handleStartDateInput(date)}
           />
         </div>
-        <span className='font-gilroy-regular text-lg font-normal leading-6 text-black'>to</span>
+        <span className="font-gilroy-regular text-lg font-normal leading-6 text-black">
+          to
+        </span>
         <div>
           <DatePicker
             required
-            customInput={<CustomDateInput width='w-[175px]' />}
+            customInput={<CustomDateInput width="w-[175px]" />}
             placeholderText={endDate?.toLocaleDateString("en-US", {
               year: "numeric",
               month: "2-digit",

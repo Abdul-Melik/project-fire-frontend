@@ -1,4 +1,10 @@
-import { TechStack, ProjectStatus, InvoiceStatus, Employees, Employee } from "src/types";
+import {
+  TechStack,
+  ProjectStatus,
+  InvoiceStatus,
+  Employees,
+  Employee,
+} from "src/types";
 
 export const getEmployeeSalaryInBAM = (salary: number, currency: string) => {
   let conversionFactor = 1;
@@ -29,7 +35,9 @@ export const getEmployeeNamesAndImages = (employees: Employees[]) => {
       firstName: employee.firstName,
       lastName: employee.lastName,
     }));
-    images = employees.map(({ employee }: { employee: Employee }) => employee.image);
+    images = employees.map(
+      ({ employee }: { employee: Employee }) => employee.image
+    );
   } else {
     names = [];
     images = [];
@@ -37,7 +45,10 @@ export const getEmployeeNamesAndImages = (employees: Employees[]) => {
   return { names, images };
 };
 
-export const getProjectDate = (startDateString: string, endDateString: string) => {
+export const getProjectDate = (
+  startDateString: string,
+  endDateString: string
+) => {
   const startDate = new Date(startDateString);
   const endDate = new Date(endDateString);
   const startDateFormattedString = startDate.toLocaleDateString("en-US", {
@@ -53,10 +64,13 @@ export const getProjectDate = (startDateString: string, endDateString: string) =
 
 export const getProjectActualEndDate = (actualEndDateString: string) => {
   const actualEndDate = new Date(actualEndDateString);
-  const actualEndDateFormattedString = actualEndDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-  });
+  const actualEndDateFormattedString = actualEndDate.toLocaleDateString(
+    "en-US",
+    {
+      year: "numeric",
+      month: "short",
+    }
+  );
   return actualEndDateFormattedString;
 };
 
@@ -68,16 +82,23 @@ export const getProjectValueBAM = (projectValueBAM: number) => {
 };
 
 export const getProjectColorAndStatus = (projectStatus: ProjectStatus) => {
-  if (projectStatus === "Active") return { color: "bg-spring-fern", status: "Active" };
-  if (projectStatus === "OnHold") return { color: "bg-golden-tangerine", status: "On hold" };
-  if (projectStatus === "Inactive") return { color: "bg-silver-mist", status: "Inactive" };
-  if (projectStatus === "Completed") return { color: "bg-cerulean-breeze", status: "Completed" };
+  if (projectStatus === "Active")
+    return { color: "bg-spring-fern", status: "Active" };
+  if (projectStatus === "OnHold")
+    return { color: "bg-golden-tangerine", status: "On hold" };
+  if (projectStatus === "Inactive")
+    return { color: "bg-silver-mist", status: "Inactive" };
+  if (projectStatus === "Completed")
+    return { color: "bg-cerulean-breeze", status: "Completed" };
   return null;
 };
 
 export const getInvoiceColorAndStatus = (invoiceStatus: InvoiceStatus) => {
-  if (invoiceStatus === "Paid") return { color: "bg-spring-fern", status: "Paid" };
-  if (invoiceStatus === "Sent") return { color: "bg-golden-tangerine", status: "Sent" };
-  if (invoiceStatus === "NotSent") return { color: "bg-silver-mist", status: "Not sent" };
+  if (invoiceStatus === "Paid")
+    return { color: "bg-spring-fern", status: "Paid" };
+  if (invoiceStatus === "Sent")
+    return { color: "bg-golden-tangerine", status: "Sent" };
+  if (invoiceStatus === "NotSent")
+    return { color: "bg-silver-mist", status: "Not sent" };
   return null;
 };
