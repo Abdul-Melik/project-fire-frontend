@@ -17,6 +17,7 @@ import InvoicesTable from 'features/invoicing/InvoicesTable';
 import ResponsiveInvoicesTable from 'features/invoicing/ResponsiveInvoicesTable';
 import ViewInvoice from './ViewInvoice';
 import AddInvoice from './AddInvoice';
+import EditInvoice from './EditInvoice';
 
 const navLabels = ['All Invoices', 'Sent', 'Paid'];
 
@@ -139,6 +140,9 @@ const Invoicing = () => {
 					)}
 					{isAddInvoiceSideDrawerOpen && (
 						<AddInvoice closeAddInvoiceSideDrawer={() => setIsAddInvoiceSideDrawerOpen(false)} />
+					)}
+					{isEditInvoiceSideDrawerOpen && (
+						<EditInvoice invoice={invoice} closeEditInvoiceSideDrawer={() => setIsEditInvoiceSideDrawerOpen(false)} />
 					)}
 					{isLoading || isFetching ? (
 						<LoadingSpinner />
