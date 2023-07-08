@@ -2,7 +2,7 @@ import { Employee } from "src/types";
 import {
   getEmployeeSalaryInBAM,
   getEmployeeTechStack,
-  getIsEmployedDate,
+  getEmploymentDate,
 } from "src/helpers";
 
 type Props = {
@@ -22,10 +22,20 @@ const EmployeeSalaryAndTechStack = ({ employee }: Props) => {
       </div>
       <div className="flex flex-col border-b border-ashen-grey pb-4">
         <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
-          {employee.isEmployed ? "Employed on" : "Fired on"}
+          {"Hiring date"}
         </span>
         <span className="font-gilroy-regular text-base font-normal text-slate-mist">
-          {getIsEmployedDate(employee.isEmployedDate)}
+          {getEmploymentDate(employee.hiringDate)}
+        </span>
+      </div>
+      <div className="flex flex-col border-b border-ashen-grey pb-4">
+        <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
+          {"Termination date"}
+        </span>
+        <span className="font-gilroy-regular text-base font-normal text-slate-mist">
+          {employee.terminationDate
+            ? getEmploymentDate(employee.terminationDate)
+            : "-"}
         </span>
       </div>
       <div className="flex flex-col border-b border-ashen-grey pb-4">

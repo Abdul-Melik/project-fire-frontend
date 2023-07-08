@@ -30,7 +30,8 @@ type Employee = {
   currency: Currency;
   techStack: TechStack;
   isEmployed: boolean;
-  isEmployedDate: string;
+  hiringDate: string;
+  terminationDate?: string;
   projects: Projects[];
 };
 

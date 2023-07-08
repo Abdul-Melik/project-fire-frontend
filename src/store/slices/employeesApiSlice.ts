@@ -6,12 +6,15 @@ export const employeesApiSlice = apiSlice.injectEndpoints({
       query: ({
         searchTerm,
         isEmployed,
+        standardDateFilter,
+        hiringDate,
+        terminationDate,
         orderByField,
         orderDirection,
         employeesPerPage,
         currentPage,
       }) => ({
-        url: `/employees?searchTerm=${searchTerm}&isEmployed=${isEmployed}&orderByField=${orderByField}&orderDirection=${orderDirection}&take=${employeesPerPage}&page=${currentPage}`,
+        url: `/employees?searchTerm=${searchTerm}&isEmployed=${isEmployed}&standardDateFilter=${standardDateFilter}&hiringDate=${hiringDate}&terminationDate=${terminationDate}&orderByField=${orderByField}&orderDirection=${orderDirection}&take=${employeesPerPage}&page=${currentPage}`,
         method: "GET",
       }),
       providesTags: (result, error, arg) =>

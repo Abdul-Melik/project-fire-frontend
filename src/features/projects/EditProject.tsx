@@ -148,6 +148,8 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
           />
           <EmployeesSelector
             selectedEmployees={selectedEmployees}
+            projectStartDate={startDate}
+            projectEndDate={endDate}
             handleEmployeesSelection={(employees) => {
               setSelectedEmployees(employees);
             }}

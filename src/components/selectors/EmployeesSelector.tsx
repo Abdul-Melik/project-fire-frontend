@@ -8,11 +8,15 @@ import Checkbox from "components/formElements/Checkbox";
 
 type Props = {
   selectedEmployees: Employees[];
+  projectStartDate: Date | null;
+  projectEndDate: Date | null;
   handleEmployeesSelection: (employees: Employees[]) => void;
 };
 
 const EmployeesSelector = ({
   selectedEmployees,
+  projectStartDate,
+  projectEndDate,
   handleEmployeesSelection,
 }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -26,7 +30,10 @@ const EmployeesSelector = ({
   const { isLoading, isFetching, isSuccess, data } = useGetEmployeesQuery(
     {
       searchTerm: "",
-      isEmployed: "true",
+      isEmployed: "",
+      standardDateFilter: "false",
+      hiringDate: projectEndDate?.toString() ?? "",
+      terminationDate: projectStartDate?.toString() ?? "",
       orderByField: "",
       orderDirection: "",
       employeesPerPage: "",
@@ -89,7 +96,7 @@ const EmployeesSelector = ({
         </div>
         {isEmployeesSelectorOpen && (
           <div
-            className="absolute left-0 z-20 flex max-h-[128px] flex-col overflow-y-scroll rounded-md border border-t-0 border-misty-moonstone bg-white py-2 scrollbar-thin scrollbar-track-ashen-grey scrollbar-thumb-misty-moonstone scrollbar-track-rounded-full scrollbar-thumb-rounded-full"
+            className="absolute left-0 z-20 flex max-h-[128px] flex-col overflow-y-auto rounded-md border border-t-0 border-misty-moonstone bg-white py-2 scrollbar-thin scrollbar-track-ashen-grey scrollbar-thumb-misty-moonstone scrollbar-track-rounded-full scrollbar-thumb-rounded-full"
             style={{ width, top: height }}
           >
             {isLoading || isFetching ? (

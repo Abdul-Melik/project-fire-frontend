@@ -124,6 +124,8 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
           />
           <EmployeesSelector
             selectedEmployees={selectedEmployees}
+            projectStartDate={startDate}
+            projectEndDate={endDate}
             handleEmployeesSelection={(employees) =>
               setSelectedEmployees(employees)
             }

@@ -49,6 +49,9 @@ const Employees = () => {
     {
       searchTerm,
       isEmployed,
+      standardDateFilter: "",
+      hiringDate: "",
+      terminationDate: "",
       orderByField,
       orderDirection,
       employeesPerPage,
