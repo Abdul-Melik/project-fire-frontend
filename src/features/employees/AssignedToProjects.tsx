@@ -9,7 +9,7 @@ const AssignedToProjects = ({ employee }: Props) => {
     <div
       className={`flex max-h-[240px] flex-col ${
         employee.projects.length > 0
-          ? "overflow-y-scroll scrollbar-thin scrollbar-track-ashen-grey scrollbar-thumb-misty-moonstone scrollbar-track-rounded-full scrollbar-thumb-rounded-full"
+          ? "overflow-y-auto scrollbar-thin scrollbar-track-ashen-grey scrollbar-thumb-misty-moonstone scrollbar-track-rounded-full scrollbar-thumb-rounded-full"
           : ""
       } rounded-lg bg-white p-6`}
     >
@@ -17,28 +17,34 @@ const AssignedToProjects = ({ employee }: Props) => {
         Assigned to projects
       </span>
       <div className="mt-2 flex flex-col gap-1">
-        {employee.projects.map(
-          ({ project, partTime }: Projects, index: number) => (
-            <div
-              key={project.id}
-              className={`flex items-center justify-between gap-4 p-2 ${
-                index < employee.projects.length - 1
-                  ? "border-b border-ashen-grey"
-                  : ""
-              }`}
-            >
-              <span className="font-gilroy-regular text-base font-normal text-slate-mist">
-                {project.name}
-              </span>
-              <span
-                className={`h-5 w-[68px] rounded-xl px-2 py-[2px] text-center font-gilroy-regular text-xs font-normal tracking-[0.16px] text-white ${
-                  partTime ? "bg-blue-ash" : "bg-sage-green"
+        {employee.projects.length > 0 ? (
+          employee.projects.map(
+            ({ project, partTime }: Projects, index: number) => (
+              <div
+                key={project.id}
+                className={`flex items-center justify-between gap-4 p-2 ${
+                  index < employee.projects.length - 1
+                    ? "border-b border-ashen-grey"
+                    : ""
                 }`}
               >
-                {partTime ? "Part time" : "Full time"}
-              </span>
-            </div>
+                <span className="font-gilroy-regular text-base font-normal text-slate-mist">
+                  {project.name}
+                </span>
+                <span
+                  className={`h-5 w-[68px] rounded-xl px-2 py-[2px] text-center font-gilroy-regular text-xs font-normal tracking-[0.16px] text-white ${
+                    partTime ? "bg-blue-ash" : "bg-sage-green"
+                  }`}
+                >
+                  {partTime ? "Part time" : "Full time"}
+                </span>
+              </div>
+            )
           )
+        ) : (
+          <span className="font-gilroy-regular text-base font-normal text-slate-mist">
+            Currently unassigned to any projects.
+          </span>
         )}
       </div>
     </div>

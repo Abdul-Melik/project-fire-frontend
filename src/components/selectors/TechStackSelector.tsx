@@ -27,7 +27,7 @@ const TechStackSelector = ({
   }, [isTechStackSelectorOpen]);
 
   return (
-    <div className="z-10 flex flex-col gap-1">
+    <div className="flex flex-col gap-1">
       <span className="font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey">
         Tech Stack
       </span>

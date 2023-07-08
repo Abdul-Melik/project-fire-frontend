@@ -24,7 +24,7 @@ const DepartmentSelector = ({
   }, [isDepartmentSelectorOpen]);
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="z-20 flex flex-col gap-1">
       <span className="font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey">
         Department
       </span>
