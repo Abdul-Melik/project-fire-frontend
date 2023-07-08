@@ -19,7 +19,7 @@ import ViewInvoice from "features/invoicing/ViewInvoice";
 import AddInvoice from "features/invoicing/AddInvoice";
 import EditInvoice from "features/invoicing/EditInvoice";
 
-const navLabels = ["All Invoices", "Sent", "Paid"];
+const navLabels = ["All Invoices", "Not sent", "Sent", "Paid"];
 
 const Invoicing = () => {
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
@@ -67,8 +67,9 @@ const Invoicing = () => {
 
   useEffect(() => {
     if (activePage === 1) setInvoiceStatus("");
-    else if (activePage === 2) setInvoiceStatus("Sent");
-    else if (activePage === 3) setInvoiceStatus("Paid");
+    else if (activePage === 2) setInvoiceStatus("NotSent");
+    else if (activePage === 3) setInvoiceStatus("Sent");
+    else if (activePage === 4) setInvoiceStatus("Paid");
   }, [activePage]);
 
   const updateInvoiceStatus = async (
