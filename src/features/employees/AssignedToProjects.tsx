@@ -7,7 +7,7 @@ type Props = {
 const AssignedToProjects = ({ employee }: Props) => {
   return (
     <div
-      className={`flex max-h-[240px] flex-col ${
+      className={`flex min-h-[200px] flex-col ${
         employee.projects.length > 0
           ? "overflow-y-auto scrollbar-thin scrollbar-track-ashen-grey scrollbar-thumb-misty-moonstone scrollbar-track-rounded-full scrollbar-thumb-rounded-full"
           : ""
