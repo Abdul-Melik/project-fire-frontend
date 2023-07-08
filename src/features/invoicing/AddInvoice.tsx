@@ -19,7 +19,7 @@ const AddInvoice = ({ closeAddInvoiceSideDrawer }: Props) => {
   const [industry, setIndustry] = useState("");
   const [totalHoursBilled, setTotalHoursBilled] = useState("");
   const [amountBilledBAM, setAmountBilledBAM] = useState("");
-  const [invoiceStatus, setInvoiceStatus] = useState("Sent");
+  const [invoiceStatus, setInvoiceStatus] = useState("NotSent");
 
   const [createInvoice, { isSuccess }] = useCreateInvoiceMutation();
 
