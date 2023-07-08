@@ -1,6 +1,7 @@
 import { useState, useLayoutEffect, useRef } from "react";
 
 import { SalesChannel } from "src/types";
+import { getProjectSalesChannel } from "src/helpers";
 import { chevronDown } from "assets/media";
 import RadioButton from "components/formElements/RadioButton";
 
@@ -41,7 +42,7 @@ const SalesChannelSelector = ({
         >
           <span className="font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist">
             {selectedSalesChannel
-              ? (selectedSalesChannel as SalesChannel)
+              ? getProjectSalesChannel(selectedSalesChannel as SalesChannel)
               : "Select sales channel"}
           </span>
 
@@ -78,7 +79,7 @@ const SalesChannelSelector = ({
               containerClassName="gap-2 px-4 py-1"
               labelClassName="font-gilroy-regular text-sm font-normal text-slate-mist"
               inputClassName="h-[15px] w-[15px] border-slate-mist text-evergreen"
-              label="InPerson"
+              label="In person"
               htmlFor="inperson"
               id="inperson"
               name="salesChannel"

@@ -1,8 +1,9 @@
 import { Project } from "src/types";
 import {
+  getProjectType,
+  getProjectSalesChannel,
   getProjectDate,
   getProjectValueBAM,
-  getProjectActualEndDate,
   getProjectColorAndStatus,
 } from "src/helpers";
 
@@ -11,10 +12,6 @@ type Props = {
 };
 
 const ProjectInfo = ({ project }: Props) => {
-  const endDate = project.actualEndDate
-    ? project.actualEndDate
-    : project.endDate;
-
   return (
     <div className="flex flex-col gap-4 rounded-lg bg-white p-6">
       <div className="flex flex-col border-b border-ashen-grey pb-4">
@@ -35,6 +32,22 @@ const ProjectInfo = ({ project }: Props) => {
       </div>
       <div className="flex flex-col border-b border-ashen-grey pb-4">
         <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
+          Project Type
+        </span>
+        <span className="font-gilroy-regular text-base font-normal text-slate-mist">
+          {getProjectType(project.projectType)}
+        </span>
+      </div>
+      <div className="flex flex-col border-b border-ashen-grey pb-4">
+        <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
+          Sales Channel
+        </span>
+        <span className="font-gilroy-regular text-base font-normal text-slate-mist">
+          {getProjectSalesChannel(project.salesChannel)}
+        </span>
+      </div>
+      <div className="flex flex-col border-b border-ashen-grey pb-4">
+        <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
           Duration
         </span>
         <span className="font-gilroy-regular text-base font-normal text-slate-mist">
@@ -43,20 +56,16 @@ const ProjectInfo = ({ project }: Props) => {
       </div>
       <div className="flex flex-col border-b border-ashen-grey pb-4">
         <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
-          Actual End Date
-        </span>
-        <span className="font-gilroy-regular text-base font-normal text-slate-mist">
-          {getProjectActualEndDate(endDate)}
-        </span>
-      </div>
-      <div className="flex flex-col border-b border-ashen-grey pb-4">
-        <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
           Team members
         </span>
         <span className="font-gilroy-regular text-base font-normal text-slate-mist">
-          {project.employees
-            .map(({ employee }) => `${employee.firstName} ${employee.lastName}`)
-            .join(", ")}
+          {project.employees.length > 0
+            ? project.employees
+                .map(
+                  ({ employee }) => `${employee.firstName} ${employee.lastName}`
+                )
+                .join(", ")
+            : "No team members added yet."}
         </span>
       </div>
       <div className="flex flex-col border-b border-ashen-grey pb-4">
@@ -75,7 +84,7 @@ const ProjectInfo = ({ project }: Props) => {
           {getProjectValueBAM(project.projectValueBAM)}
         </span>
       </div>
-      <div className="flex flex-col border-b border-ashen-grey pb-4">
+      <div className="flex flex-col">
         <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
           Status
         </span>
@@ -89,22 +98,6 @@ const ProjectInfo = ({ project }: Props) => {
             {getProjectColorAndStatus(project.projectStatus)?.status}
           </div>
         </div>
-      </div>
-      <div className="flex flex-col border-b border-ashen-grey pb-4">
-        <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
-          Project Type
-        </span>
-        <span className="font-gilroy-regular text-base font-normal text-slate-mist">
-          {project.projectType}
-        </span>
-      </div>
-      <div className="flex flex-col">
-        <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
-          Sales Channel
-        </span>
-        <span className="font-gilroy-regular text-base font-normal text-slate-mist">
-          {project.salesChannel}
-        </span>
       </div>
     </div>
   );

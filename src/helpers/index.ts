@@ -58,6 +58,20 @@ export const getIsEmployedDate = (isEmployedDateString: string) => {
   return isEmployedDateFormattedString;
 };
 
+export const getProjectType = (projectType: string) => {
+  if (projectType === "Fixed") return "Fixed";
+  if (projectType === "OnGoing") return "On-going";
+  return null;
+};
+
+export const getProjectSalesChannel = (salesChannel: string) => {
+  if (salesChannel === "Online") return "Online";
+  if (salesChannel === "InPerson") return "In person";
+  if (salesChannel === "Referral") return "Referral";
+  if (salesChannel === "Other") return "Other";
+  return null;
+};
+
 export const getProjectDate = (
   startDateString: string,
   endDateString: string

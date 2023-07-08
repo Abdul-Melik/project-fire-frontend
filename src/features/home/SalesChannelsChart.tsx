@@ -84,7 +84,7 @@ const SalesChannelsChart = ({ chartValues }: SalesChannelChartValues) => {
       value: chartValues["Online"] ?? 0,
     },
     {
-      name: "In Person",
+      name: "In person",
       value: chartValues["InPerson"] ?? 0,
     },
     {

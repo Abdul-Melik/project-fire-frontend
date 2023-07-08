@@ -46,13 +46,13 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
     await createProject({
       name,
       description,
+      projectType: selectedProjectType,
+      projectStatus: selectedProjectStatus,
       startDate,
       endDate,
-      projectType: selectedProjectType,
       hourlyRate: Number(hourlyRate),
       projectValueBAM: Number(projectValueBAM),
       salesChannel: selectedSalesChannel,
-      projectStatus: selectedProjectStatus,
       employees,
     });
   };
@@ -103,6 +103,18 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
             placeholder="Project description"
             value={description}
             handleInput={(description) => setDescription(description)}
+          />
+          <ProjectTypeSelector
+            selectedProjectType={selectedProjectType}
+            handleProjectTypeSelection={(projectType) =>
+              setSelectedProjectType(projectType)
+            }
+          />
+          <SalesChannelSelector
+            selectedSalesChannel={selectedSalesChannel}
+            handleSalesChannelSelection={(salesChannel) =>
+              setSelectedSalesChannel(salesChannel)
+            }
           />
           <DateInputs
             startDate={startDate}
@@ -156,18 +168,6 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
             selectedProjectStatus={selectedProjectStatus}
             handleProjectStatusSelection={(projectStatus) =>
               setSelectedProjectStatus(projectStatus)
-            }
-          />
-          <ProjectTypeSelector
-            selectedProjectType={selectedProjectType}
-            handleProjectTypeSelection={(projectType) =>
-              setSelectedProjectType(projectType)
-            }
-          />
-          <SalesChannelSelector
-            selectedSalesChannel={selectedSalesChannel}
-            handleSalesChannelSelection={(salesChannel) =>
-              setSelectedSalesChannel(salesChannel)
             }
           />
         </form>

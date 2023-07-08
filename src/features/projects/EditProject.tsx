@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import DatePicker from "react-datepicker";
 
 import { motion } from "framer-motion";
 
@@ -72,7 +71,6 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
       description,
       startDate,
       endDate,
-      actualEndDate,
       projectType: selectedProjectType,
       hourlyRate: Number(hourlyRate),
       projectValueBAM: Number(projectValueBAM),
@@ -130,18 +128,24 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
             value={description}
             handleInput={(description) => setDescription(description)}
           />
+          <ProjectTypeSelector
+            selectedProjectType={selectedProjectType}
+            handleProjectTypeSelection={(projectType) =>
+              setSelectedProjectType(projectType)
+            }
+          />
+          <SalesChannelSelector
+            selectedSalesChannel={selectedSalesChannel}
+            handleSalesChannelSelection={(salesChannel) =>
+              setSelectedSalesChannel(salesChannel)
+            }
+          />
           <DateInputs
             startDate={startDate}
             endDate={endDate}
             handleStartDateInput={(startDate) => setStartDate(startDate)}
             handleEndDateInput={(endDate) => setEndDate(endDate)}
           />
-          <DateInput
-            endDate={endDate}
-            actualEndDate={actualEndDate}
-            handleActualEndDateInput={(date) => setActualEndDate(date)}
-          />
-
           <EmployeesSelector
             selectedEmployees={selectedEmployees}
             handleEmployeesSelection={(employees) => {
@@ -188,18 +192,6 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
             selectedProjectStatus={selectedProjectStatus}
             handleProjectStatusSelection={(projectStatus) =>
               setSelectedProjectStatus(projectStatus)
-            }
-          />
-          <ProjectTypeSelector
-            selectedProjectType={selectedProjectType}
-            handleProjectTypeSelection={(projectType) =>
-              setSelectedProjectType(projectType)
-            }
-          />
-          <SalesChannelSelector
-            selectedSalesChannel={selectedSalesChannel}
-            handleSalesChannelSelection={(salesChannel) =>
-              setSelectedSalesChannel(salesChannel)
             }
           />
         </form>

@@ -1,6 +1,7 @@
 import { useState, useLayoutEffect, useRef } from "react";
 
 import { ProjectType } from "src/types";
+import { getProjectType } from "src/helpers";
 import { chevronDown } from "assets/media";
 import RadioButton from "components/formElements/RadioButton";
 
@@ -41,7 +42,7 @@ const ProjectTypeSelector = ({
         >
           <span className="font-gilroy-regular text-sm font-normal leading-[22px] text-slate-mist">
             {selectedProjectType
-              ? (selectedProjectType as ProjectType)
+              ? getProjectType(selectedProjectType as ProjectType)
               : "Select project type"}
           </span>
 
@@ -76,7 +77,7 @@ const ProjectTypeSelector = ({
               containerClassName="gap-2 px-4 py-1"
               labelClassName="font-gilroy-regular text-sm font-normal text-slate-mist"
               inputClassName="h-[15px] w-[15px] border-slate-mist text-evergreen"
-              label="OnGoing"
+              label="On-going"
               htmlFor="ongoing"
               id="ongoing"
               name="projectType"
