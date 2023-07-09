@@ -65,6 +65,9 @@ type Projects = {
 
 type ProjectInfo = {
   name: string;
+  startDate: string;
+  endDate: string;
+  actualEndDate?: string;
   hourlyRate: number;
   numberOfEmployees: number;
   revenue: number;
@@ -78,6 +81,7 @@ type ProjectsInfo = {
   averageValue: number;
   averageTeamSize: number;
   averageRate: number;
+  weeksOverDeadline: number;
   salesChannelPercentage: { [key in SalesChannel]?: number };
   projectTypeCount: { [key in ProjectType]?: number };
   projects: ProjectInfo[];

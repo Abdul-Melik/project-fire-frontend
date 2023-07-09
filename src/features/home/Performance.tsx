@@ -89,7 +89,7 @@ const Performance = ({ projectsInfo }: Props) => {
         <InfoCard
           className="overflow-hidden rounded-md border border-ashen-grey"
           description="Weeks over deadline"
-          amount={"7"}
+          amount={(projectsInfo?.weeksOverDeadline ?? 0).toFixed(1)}
           iconSrc={weeksOver}
           iconAlt="Weeks over deadline icon"
         />
