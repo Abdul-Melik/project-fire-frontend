@@ -49,7 +49,7 @@ const Employees = () => {
     {
       searchTerm,
       isEmployed,
-      standardDateFilter: "",
+      isStandardDateFilter: "",
       hiringDate: "",
       terminationDate: "",
       orderByField,

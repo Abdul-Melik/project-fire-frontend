@@ -31,7 +31,7 @@ const EmployeesSelector = ({
     {
       searchTerm: "",
       isEmployed: "",
-      standardDateFilter: "false",
+      isStandardDateFilter: "false",
       hiringDate: projectEndDate?.toString() ?? "",
       terminationDate: projectStartDate?.toString() ?? "",
       orderByField: "",
