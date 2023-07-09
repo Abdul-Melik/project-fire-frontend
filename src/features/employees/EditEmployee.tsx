@@ -32,6 +32,7 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [image, setImage] = useState<File | undefined>();
+  const [newImageUploaded, setNewImageUploaded] = useState(false);
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [salary, setSalary] = useState("");
   const [selectedCurrency, setSelectedCurrency] = useState("");
@@ -69,7 +70,7 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
     const formData = new FormData();
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);
-    if (image) formData.append("image", image);
+    if (newImageUploaded && image) formData.append("image", image);
     formData.append("department", selectedDepartment);
     formData.append("salary", salary);
     formData.append("currency", selectedCurrency);
@@ -152,7 +153,10 @@ const EditEmployee = ({ employee, closeEditEmployeeSideDrawer }: Props) => {
                 inputClassName="h-[104px] w-[104px] border-ashen-grey bg-frosty-mint"
                 label="Profile Image"
                 image={image}
-                handleImageUpload={(file) => setImage(file)}
+                handleImageUpload={(file) => {
+                  setImage(file);
+                  setNewImageUploaded(true);
+                }}
               />
               <DepartmentSelector
                 selectedDepartment={selectedDepartment}

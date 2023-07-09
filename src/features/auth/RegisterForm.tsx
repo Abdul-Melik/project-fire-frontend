@@ -91,7 +91,6 @@ const RegisterForm = () => {
                 placeholder="Enter your first name"
                 handleInput={(firstName) => setFirstName(firstName)}
               />
-
               <InputField
                 containerClassName="mb-[21px] gap-[10px]"
                 inputClassName="border-misty-lavender p-3 text-dark-indigo focus:border-misty-lavender text-base"

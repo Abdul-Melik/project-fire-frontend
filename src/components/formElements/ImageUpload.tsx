@@ -25,7 +25,7 @@ const ImageUpload = ({
         {label}
       </span>
       <label
-        className={`flex cursor-pointer flex-col items-center justify-center gap-[10px] overflow-hidden rounded-md border border-dashed ${inputClassName}`}
+        className={`flex max-h-[155px] cursor-pointer flex-col items-center justify-center gap-[10px] overflow-hidden rounded-md border border-dashed ${inputClassName}`}
         htmlFor="profileImage"
       >
         {!image ? (
