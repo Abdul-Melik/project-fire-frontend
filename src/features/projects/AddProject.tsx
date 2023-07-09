@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import { Employees } from "src/types";
@@ -30,10 +30,10 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
   );
   const [hourlyRate, setHourlyRate] = useState("");
   const [projectValueBAM, setProjectValueBAM] = useState("");
-  const [selectedProjectStatus, setSelectedProjectStatus] = useState("");
-  const [selectedEmployees, setSelectedEmployees] = useState<Employees[]>([]);
   const [selectedProjectType, setSelectedProjectType] = useState("");
   const [selectedSalesChannel, setSelectedSalesChannel] = useState("");
+  const [selectedEmployees, setSelectedEmployees] = useState<Employees[]>([]);
+  const [selectedProjectStatus, setSelectedProjectStatus] = useState("");
 
   const [createProject, { isSuccess }] = useCreateProjectMutation();
 
@@ -47,13 +47,13 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
       name,
       description,
       projectType: selectedProjectType,
-      projectStatus: selectedProjectStatus,
+      salesChannel: selectedSalesChannel,
       startDate,
       endDate,
       hourlyRate: Number(hourlyRate),
       projectValueBAM: Number(projectValueBAM),
-      salesChannel: selectedSalesChannel,
       employees,
+      projectStatus: selectedProjectStatus,
     });
   };
 
@@ -117,10 +117,13 @@ const AddProject = ({ closeAddProjectSideDrawer }: Props) => {
             }
           />
           <DateInputs
-            startDate={startDate}
-            endDate={endDate}
-            handleStartDateInput={(startDate) => setStartDate(startDate)}
-            handleEndDateInput={(endDate) => setEndDate(endDate)}
+            label="Duration"
+            startDateClassName="w-[175px]"
+            endDateClassName="w-[175px]"
+            selectedStartDate={startDate}
+            selectedEndDate={endDate}
+            handleStartDateSelection={(startDate) => setStartDate(startDate)}
+            handleEndDateSelection={(endDate) => setEndDate(endDate)}
           />
           <EmployeesSelector
             selectedEmployees={selectedEmployees}

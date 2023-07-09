@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import { Employees, Project } from "src/types";
@@ -31,15 +30,14 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
   const [endDate, setEndDate] = useState<Date | null>(
     new Date(new Date().getFullYear(), 11, 31)
   );
-  const [actualEndDate, setActualEndDate] = useState<Date | null>(
-    new Date(new Date().getFullYear(), 11, 31)
-  );
+  const [actualEndDate, setActualEndDate] = useState<Date | null>(null);
   const [hourlyRate, setHourlyRate] = useState("");
   const [projectValueBAM, setProjectValueBAM] = useState("");
-  const [selectedProjectStatus, setSelectedProjectStatus] = useState("");
-  const [selectedEmployees, setSelectedEmployees] = useState<Employees[]>([]);
   const [selectedProjectType, setSelectedProjectType] = useState("");
   const [selectedSalesChannel, setSelectedSalesChannel] = useState("");
+  const [selectedEmployees, setSelectedEmployees] = useState<Employees[]>([]);
+  const [selectedProjectStatus, setSelectedProjectStatus] = useState("");
+
   const [updateProject, { isSuccess }] = useUpdateProjectMutation();
 
   useEffect(() => {
@@ -51,12 +49,12 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
       setActualEndDate(
         project.actualEndDate ? new Date(project.actualEndDate) : null
       );
-      setSelectedProjectType(project.projectType);
       setHourlyRate(project.hourlyRate.toString());
       setProjectValueBAM(project.projectValueBAM.toString());
+      setSelectedProjectType(project.projectType);
       setSelectedSalesChannel(project.salesChannel);
-      setSelectedProjectStatus(project.projectStatus);
       setSelectedEmployees(project.employees);
+      setSelectedProjectStatus(project.projectStatus);
     }
   }, [project]);
 
@@ -71,6 +69,7 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
       description,
       startDate,
       endDate,
+      actualEndDate,
       projectType: selectedProjectType,
       hourlyRate: Number(hourlyRate),
       projectValueBAM: Number(projectValueBAM),
@@ -141,11 +140,24 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
             }
           />
           <DateInputs
-            startDate={startDate}
-            endDate={endDate}
-            handleStartDateInput={(startDate) => setStartDate(startDate)}
-            handleEndDateInput={(endDate) => setEndDate(endDate)}
+            label="Duration"
+            startDateClassName="w-[175px]"
+            endDateClassName="w-[175px]"
+            selectedStartDate={startDate}
+            selectedEndDate={endDate}
+            handleStartDateSelection={(startDate) => setStartDate(startDate)}
+            handleEndDateSelection={(endDate) => setEndDate(endDate)}
           />
+          {selectedProjectStatus === "Completed" && (
+            <DateInput
+              label="Actual end date"
+              selectedDate={actualEndDate}
+              className="w-full"
+              handleDateSelection={(actualEndDate) =>
+                setActualEndDate(actualEndDate)
+              }
+            />
+          )}
           <EmployeesSelector
             selectedEmployees={selectedEmployees}
             projectStartDate={startDate}
@@ -192,9 +204,10 @@ const EditProject = ({ project, closeEditProjectSideDrawer }: Props) => {
           />
           <ProjectStatusSelector
             selectedProjectStatus={selectedProjectStatus}
-            handleProjectStatusSelection={(projectStatus) =>
-              setSelectedProjectStatus(projectStatus)
-            }
+            handleProjectStatusSelection={(projectStatus) => {
+              setSelectedProjectStatus(projectStatus);
+              if (projectStatus !== "Completed") setActualEndDate(null);
+            }}
           />
         </form>
       </Main>

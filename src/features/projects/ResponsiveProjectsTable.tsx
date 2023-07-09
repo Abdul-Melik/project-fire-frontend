@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Project } from "src/types";
-import { getProjectDate, getProjectColorAndStatus } from "src/helpers";
+import { getProjectDuration, getProjectColorAndStatus } from "src/helpers";
 import { projectsResponsiveTableColumnsData as columns } from "src/data";
 import { useDeleteProjectMutation } from "store/slices/projectsApiSlice";
 import AlertModal from "components/modals/AlertModal";
@@ -111,7 +111,7 @@ const ResponsiveProjectsTable = ({
                         <div className="ml-[5%] mt-[11px] flex w-[90%] flex-col gap-[5px] !text-[15px]">
                           <PlanCardItem
                             text="Duration"
-                            amount={getProjectDate(
+                            amount={getProjectDuration(
                               project.startDate,
                               project.endDate
                             )}

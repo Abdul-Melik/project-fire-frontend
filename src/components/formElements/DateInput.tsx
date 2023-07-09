@@ -1,33 +1,35 @@
-import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import CustomDateInput from "components/formElements/CustomDateInput";
 
 type Props = {
-  endDate: Date | null;
-  actualEndDate: Date | null;
-  handleActualEndDateInput: (date: Date | null) => void;
+  label: string;
+  className?: string;
+  selectedDate: Date | null;
+  handleDateSelection: (date: Date | null) => void;
 };
 
 const DateInput = ({
-  endDate,
-  actualEndDate,
-  handleActualEndDateInput,
+  label,
+  className,
+  selectedDate,
+  handleDateSelection,
 }: Props) => {
   return (
     <div className="flex flex-col gap-1">
       <span className="font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey">
-        Actual End Date
+        {label}
       </span>
       <DatePicker
-        customInput={<CustomDateInput width="w-full" />}
-        placeholderText={endDate?.toLocaleDateString("en-US", {
+        customInput={<CustomDateInput width={className} />}
+        placeholderText={selectedDate?.toLocaleDateString("en-US", {
           year: "numeric",
-          month: "short",
+          month: "2-digit",
+          day: "2-digit",
         })}
-        selected={actualEndDate || endDate}
-        onChange={(date) => handleActualEndDateInput(date)}
+        selected={selectedDate}
+        onChange={(date) => handleDateSelection(date)}
       />
     </div>
   );

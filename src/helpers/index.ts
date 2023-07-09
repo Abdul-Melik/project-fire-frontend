@@ -72,7 +72,7 @@ export const getProjectSalesChannel = (salesChannel: string) => {
   return null;
 };
 
-export const getProjectDate = (
+export const getProjectDuration = (
   startDateString: string,
   endDateString: string
 ) => {
@@ -94,8 +94,9 @@ export const getProjectActualEndDate = (actualEndDateString: string) => {
   const actualEndDateFormattedString = actualEndDate.toLocaleDateString(
     "en-US",
     {
-      year: "numeric",
       month: "short",
+      day: "numeric",
+      year: "numeric",
     }
   );
   return actualEndDateFormattedString;

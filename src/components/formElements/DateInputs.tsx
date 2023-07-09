@@ -4,35 +4,41 @@ import "react-datepicker/dist/react-datepicker.css";
 import CustomDateInput from "components/formElements/CustomDateInput";
 
 type Props = {
-  startDate: Date | null;
-  endDate: Date | null;
-  handleStartDateInput: (date: Date | null) => void;
-  handleEndDateInput: (date: Date | null) => void;
+  label: string;
+  startDateClassName?: string;
+  endDateClassName?: string;
+  selectedStartDate: Date | null;
+  selectedEndDate: Date | null;
+  handleStartDateSelection: (date: Date | null) => void;
+  handleEndDateSelection: (date: Date | null) => void;
 };
 
 const DateInputs = ({
-  startDate,
-  endDate,
-  handleStartDateInput,
-  handleEndDateInput,
+  label,
+  startDateClassName,
+  endDateClassName,
+  selectedStartDate,
+  selectedEndDate,
+  handleStartDateSelection,
+  handleEndDateSelection,
 }: Props) => {
   return (
     <div className="flex flex-col gap-1">
       <span className="font-gilroy-medium text-base font-medium leading-[22px] text-midnight-grey">
-        Duration
+        {label}
       </span>
       <div className="flex w-full items-center gap-4">
         <div>
           <DatePicker
             required
-            customInput={<CustomDateInput width="w-[175px]" />}
-            placeholderText={startDate?.toLocaleDateString("en-US", {
+            customInput={<CustomDateInput width={startDateClassName} />}
+            placeholderText={selectedStartDate?.toLocaleDateString("en-US", {
               year: "numeric",
               month: "2-digit",
               day: "2-digit",
             })}
-            selected={startDate}
-            onChange={(date) => handleStartDateInput(date)}
+            selected={selectedStartDate}
+            onChange={(date) => handleStartDateSelection(date)}
           />
         </div>
         <span className="font-gilroy-regular text-lg font-normal leading-6 text-black">
@@ -41,14 +47,14 @@ const DateInputs = ({
         <div>
           <DatePicker
             required
-            customInput={<CustomDateInput width="w-[175px]" />}
-            placeholderText={endDate?.toLocaleDateString("en-US", {
+            customInput={<CustomDateInput width={endDateClassName} />}
+            placeholderText={selectedEndDate?.toLocaleDateString("en-US", {
               year: "numeric",
               month: "2-digit",
               day: "2-digit",
             })}
-            selected={endDate}
-            onChange={(date) => handleEndDateInput(date)}
+            selected={selectedEndDate}
+            onChange={(date) => handleEndDateSelection(date)}
           />
         </div>
       </div>

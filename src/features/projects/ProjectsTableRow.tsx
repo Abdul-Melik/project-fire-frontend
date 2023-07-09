@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Project } from "src/types";
 import {
   getEmployeeNamesAndImages,
-  getProjectDate,
+  getProjectDuration,
   getProjectValueBAM,
   getProjectColorAndStatus,
 } from "src/helpers";
@@ -48,7 +48,7 @@ const ProjectsTableRow = ({ project, openViewProjectSideDrawer }: Props) => {
         <div className="max-w-[100px] truncate">{project.description}</div>
       </td>
       <td className="p-4">
-        {getProjectDate(project.startDate, project.endDate)}
+        {getProjectDuration(project.startDate, project.endDate)}
       </td>
       <td className="py-1 pl-4 pr-2">
         <Avatars

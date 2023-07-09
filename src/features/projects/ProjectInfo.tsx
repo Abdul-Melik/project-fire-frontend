@@ -2,7 +2,8 @@ import { Project } from "src/types";
 import {
   getProjectType,
   getProjectSalesChannel,
-  getProjectDate,
+  getProjectDuration,
+  getProjectActualEndDate,
   getProjectValueBAM,
   getProjectColorAndStatus,
 } from "src/helpers";
@@ -51,9 +52,19 @@ const ProjectInfo = ({ project }: Props) => {
           Duration
         </span>
         <span className="font-gilroy-regular text-base font-normal text-slate-mist">
-          {getProjectDate(project.startDate, project.endDate)}
+          {getProjectDuration(project.startDate, project.endDate)}
         </span>
       </div>
+      {project.projectStatus === "Completed" && (
+        <div className="flex flex-col border-b border-ashen-grey pb-4">
+          <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
+            Actual end date
+          </span>
+          <span className="font-gilroy-regular text-base font-normal text-slate-mist">
+            {getProjectActualEndDate(project.actualEndDate!)}
+          </span>
+        </div>
+      )}
       <div className="flex flex-col border-b border-ashen-grey pb-4">
         <span className="font-gilroy-medium text-base font-medium text-midnight-grey">
           Team members
