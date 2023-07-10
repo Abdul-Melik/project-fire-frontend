@@ -4,13 +4,7 @@ type Department = "Administration" | "Management" | "Development" | "Design";
 
 type Currency = "USD" | "EUR" | "BAM";
 
-type TechStack =
-  | "AdminNA"
-  | "MgmtNA"
-  | "FullStack"
-  | "Frontend"
-  | "Backend"
-  | "UXUI";
+type TechStack = "AdminNA" | "MgmtNA" | "FullStack" | "Frontend" | "Backend" | "UXUI";
 
 type ProjectType = "Fixed" | "OnGoing";
 
@@ -49,6 +43,7 @@ type Project = {
   actualEndDate?: string;
   projectType: ProjectType;
   hourlyRate: number;
+  projectVelocity: number;
   projectValueBAM: number;
   salesChannel: SalesChannel;
   projectStatus: ProjectStatus;
@@ -69,6 +64,7 @@ type ProjectInfo = {
   endDate: string;
   actualEndDate?: string;
   hourlyRate: number;
+  projectVelocity: number;
   numberOfEmployees: number;
   revenue: number;
   cost: number;
@@ -80,6 +76,7 @@ type ProjectsInfo = {
   totalValue: number;
   averageValue: number;
   averageTeamSize: number;
+  averageVelocity: number;
   averageRate: number;
   weeksOverDeadline: number;
   salesChannelPercentage: { [key in SalesChannel]?: number };
