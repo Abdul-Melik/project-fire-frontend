@@ -1,3 +1,18 @@
+export const averageLeadClosingData = [
+  {
+    year: "2021",
+    value: 10.3,
+  },
+  {
+    year: "2022",
+    value: 15.6,
+  },
+  {
+    year: "2023",
+    value: 7.1,
+  },
+];
+
 // Charts Data
 export const hoursOverviewChartData = [
   {

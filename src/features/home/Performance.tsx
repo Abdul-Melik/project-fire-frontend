@@ -11,6 +11,7 @@ import {
   weeksOver,
   hourlyPrice,
 } from "assets/media";
+import { averageLeadClosingData } from "src/data";
 import InfoCard from "components/cards/InfoCard";
 import SalesChannelsChart from "features/home/SalesChannelsChart";
 import ProjectScopeChart from "features/home/ProjectScopeChart";
@@ -18,10 +19,11 @@ import HoursOverviewChart from "features/home/HoursOverviewChart";
 import ResponsiveHoursOverviewChart from "features/home/ResponsiveHoursOverviewChart";
 
 type Props = {
+  selectedYear: string;
   projectsInfo: ProjectsInfo | null;
 };
 
-const Performance = ({ projectsInfo }: Props) => {
+const Performance = ({ selectedYear, projectsInfo }: Props) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const windowLg = windowWidth >= 1024;
 
@@ -67,7 +69,12 @@ const Performance = ({ projectsInfo }: Props) => {
         <InfoCard
           className="overflow-hidden rounded-md border border-ashen-grey"
           description="Avg. lead closing (d)"
-          amount={"12"}
+          amount={(
+            averageLeadClosingData.find((data) => data.year === selectedYear)
+              ?.value ?? 0
+          )
+            .toFixed(1)
+            .toString()}
           iconSrc={leadClosing}
           iconAlt="Average lead closing icon"
         />

@@ -56,7 +56,10 @@ const Home = () => {
             isSuccess && (
               <>
                 {activePage === 1 && (
-                  <Performance projectsInfo={projectsInfo} />
+                  <Performance
+                    selectedYear={selectedYear}
+                    projectsInfo={projectsInfo}
+                  />
                 )}
                 {activePage === 2 && <DevelopmentRevenueCosts />}
                 {activePage === 3 && <Plan />}
