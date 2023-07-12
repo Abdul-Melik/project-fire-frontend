@@ -76,6 +76,11 @@ type ProjectsInfo = {
   totalValue: number;
   averageValue: number;
   averageTeamSize: number;
+  actualRevenue: number;
+  plannedCost: number;
+  actualMargin: number;
+  actualAvgMargin: number;
+  grossProfit: number;
   averageVelocity: number;
   averageRate: number;
   weeksOverDeadline: number;

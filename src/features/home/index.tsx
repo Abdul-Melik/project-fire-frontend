@@ -27,38 +27,26 @@ const Home = () => {
     }
   );
 
-  const navLabels = [
-    `${selectedYear}  Performance`,
-    "Development Revenue & Costs",
-    `${selectedYear} Plan`,
-  ];
+  const navLabels = [`${selectedYear}  Performance`, "Development Revenue & Costs", `${selectedYear} Plan`];
 
   return (
     <MainLayout activeMenuItem={"home"}>
-      <div className="mx-4 my-[34px] lg:mx-14">
-        <h1 className="mt-24 flex flex-1 justify-center font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest sm:justify-start lg:mt-0">
+      <div className='mx-4 my-[34px] lg:mx-14'>
+        <h1 className='mt-24 flex flex-1 justify-center font-gilroy-bold text-3xl font-bold leading-[40px] text-deep-forest sm:justify-start lg:mt-0'>
           Home
         </h1>
-        <div className="mt-[30px] flex flex-col">
-          <div className="mb-12 flex flex-wrap justify-center gap-4 lg:justify-between">
-            <Navbar
-              navLabels={navLabels}
-              handlePageSelect={(page) => setActivePage(page)}
-            />
-            <YearSelector
-              selectedYear={selectedYear}
-              handleYearSelection={(year) => setSelectedYear(year)}
-            />
+        <div className='mt-[30px] flex flex-col'>
+          <div className='mb-12 flex flex-wrap justify-center gap-4 lg:justify-between'>
+            <Navbar navLabels={navLabels} handlePageSelect={(page) => setActivePage(page)} />
+            <YearSelector selectedYear={selectedYear} handleYearSelection={(year) => setSelectedYear(year)} />
           </div>
           {isLoading || isFetching ? (
             <LoadingSpinner />
           ) : (
             isSuccess && (
               <>
-                {activePage === 1 && (
-                  <Performance projectsInfo={projectsInfo} />
-                )}
-                {activePage === 2 && <DevelopmentRevenueCosts />}
+                {activePage === 1 && <Performance projectsInfo={projectsInfo} />}
+                {activePage === 2 && <DevelopmentRevenueCosts projectsInfo={projectsInfo} />}
                 {activePage === 3 && <Plan />}
               </>
             )
