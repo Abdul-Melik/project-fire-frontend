@@ -14,39 +14,6 @@ export const averageLeadClosingData = [
 ];
 
 // Charts Data
-export const hoursOverviewChartData = [
-  {
-    month: "January: 1/1/2023",
-    "Grand Total Hours Available": 3310,
-    "Grand Total Hours Billed": 450,
-  },
-  {
-    month: "March: 1/3/2023",
-    "Grand Total Hours Available": 4433,
-    "Grand Total Hours Billed": 705,
-  },
-  {
-    month: "May: 1/5/2023",
-    "Grand Total Hours Available": 6000,
-    "Grand Total Hours Billed": 3001,
-  },
-  {
-    month: "July: 1/7/2023",
-    "Grand Total Hours Available": 1300,
-    "Grand Total Hours Billed": 4225,
-  },
-  {
-    month: "September: 1/9/2023",
-    "Grand Total Hours Available": 6080,
-    "Grand Total Hours Billed": 5000,
-  },
-  {
-    month: "November: 1/11/2023",
-    "Grand Total Hours Available": 1501,
-    "Grand Total Hours Billed": 610,
-  },
-];
-
 export const revenuesCostsActualChartData = [
   {
     organisation: "AlphaBid",
