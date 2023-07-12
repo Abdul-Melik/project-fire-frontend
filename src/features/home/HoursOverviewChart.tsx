@@ -62,65 +62,72 @@ const HoursOverviewChart = ({ employeesInfo }: Props) => {
   );
 
   const maxValue = Math.max(...totalHoursAvailableArray);
+  const renderChart = maxValue > 0;
 
   return (
     <DataCard
       className="h-[392px] rounded-md border border-ashen-grey bg-white"
       header={headerContent}
     >
-      <ResponsiveContainer width="100%" height="65%" className="mt-[38px]">
-        <BarChart data={employeesInfo}>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis
-            dataKey="month"
-            tickLine={false}
-            dy={12}
-            tick={{
-              fontFamily: "GilroyMedium",
-              fontWeight: 500,
-              fontSize: 12,
-              letterSpacing: "0.06em",
-              fill: "#232F2D",
-            }}
-          />
-          <YAxis
-            domain={[0, maxValue]}
-            axisLine={false}
-            tickLine={false}
-            tick={{
-              fontFamily: "GilroyMedium",
-              fontWeight: 500,
-              fontSize: 14,
-              fill: "#232F2D",
-            }}
-          />
-          <Tooltip
-            formatter={(value, name) => {
-              if (name === "totalHoursAvailable")
-                return [value, "Grand Total Hours Available"];
-              if (name === "totalHoursBilled")
-                return [value, "Grand Total Hours Billed"];
-              return [value, name];
-            }}
-          />
-          {firstOption && (
-            <Bar
-              dataKey="totalHoursAvailable"
-              fill="#FF9F5A"
-              radius={[4, 4, 0, 0]}
-              barSize={20}
+      {renderChart ? (
+        <ResponsiveContainer width="100%" height="65%" className="mt-[38px]">
+          <BarChart data={employeesInfo}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              dy={12}
+              tick={{
+                fontFamily: "GilroyMedium",
+                fontWeight: 500,
+                fontSize: 12,
+                letterSpacing: "0.06em",
+                fill: "#232F2D",
+              }}
             />
-          )}
-          {secondOption && (
-            <Bar
-              dataKey="totalHoursBilled"
-              fill="#7BB99F"
-              radius={[4, 4, 0, 0]}
-              barSize={20}
+            <YAxis
+              domain={[0, maxValue]}
+              axisLine={false}
+              tickLine={false}
+              tick={{
+                fontFamily: "GilroyMedium",
+                fontWeight: 500,
+                fontSize: 14,
+                fill: "#232F2D",
+              }}
             />
-          )}
-        </BarChart>
-      </ResponsiveContainer>
+            <Tooltip
+              formatter={(value, name) => {
+                if (name === "totalHoursAvailable")
+                  return [value, "Grand Total Hours Available"];
+                if (name === "totalHoursBilled")
+                  return [value, "Grand Total Hours Billed"];
+                return [value, name];
+              }}
+            />
+            {firstOption && (
+              <Bar
+                dataKey="totalHoursAvailable"
+                fill="#FF9F5A"
+                radius={[4, 4, 0, 0]}
+                barSize={20}
+              />
+            )}
+            {secondOption && (
+              <Bar
+                dataKey="totalHoursBilled"
+                fill="#7BB99F"
+                radius={[4, 4, 0, 0]}
+                barSize={20}
+              />
+            )}
+          </BarChart>
+        </ResponsiveContainer>
+      ) : (
+        <div className="mt-[38px] font-gilroy-medium font-medium text-deep-forest">
+          No data to display.
+        </div>
+      )}
     </DataCard>
   );
 };
