@@ -27,24 +27,17 @@ const EmployeesSelector = ({
     []
   );
 
-  const { isLoading, isFetching, isSuccess, data } = useGetEmployeesQuery(
-    {
-      searchTerm: "",
-      isEmployed: "",
-      isStandardDateFilter: "false",
-      hiringDate: projectEndDate?.toString() ?? "",
-      terminationDate: projectStartDate?.toString() ?? "",
-      orderByField: "",
-      orderDirection: "",
-      employeesPerPage: "",
-      currentPage: "",
-    },
-    {
-      pollingInterval: 60000,
-      refetchOnFocus: true,
-      refetchOnReconnect: true,
-    }
-  );
+  const { isLoading, isFetching, isSuccess, data } = useGetEmployeesQuery({
+    searchTerm: "",
+    isEmployed: "",
+    isStandardDateFilter: "false",
+    hiringDate: projectEndDate?.toISOString() ?? "",
+    terminationDate: projectStartDate?.toISOString() ?? "",
+    orderByField: "",
+    orderDirection: "",
+    employeesPerPage: "",
+    currentPage: "",
+  });
 
   useLayoutEffect(() => {
     setWidth(ref.current?.offsetWidth ?? 0);

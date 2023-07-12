@@ -20,7 +20,7 @@ const DataSelector = ({
   return (
     <div className="flex gap-2">
       <input
-        className={`h-[15px] w-[15px] appearance-none rounded-full border-2 border-solid`}
+        className="h-[15px] w-[15px] rounded-full border-2 border-solid focus:ring-transparent"
         style={{ borderColor: color, backgroundColor: checked ? color : "" }}
         type="checkbox"
         id={id}

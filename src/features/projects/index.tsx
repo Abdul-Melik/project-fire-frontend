@@ -42,21 +42,14 @@ const Projects = () => {
   const [windowLg, setWindowLg] = useState(windowWidth >= 1024);
 
   const user = useAppSelector(selectCurrentUser);
-  const { isLoading, isFetching, isSuccess, data } = useGetProjectsQuery(
-    {
-      searchTerm,
-      projectStatus,
-      orderByField,
-      orderDirection,
-      projectsPerPage,
-      currentPage,
-    },
-    {
-      pollingInterval: 60000,
-      refetchOnFocus: true,
-      refetchOnReconnect: true,
-    }
-  );
+  const { isLoading, isFetching, isSuccess, data } = useGetProjectsQuery({
+    searchTerm,
+    projectStatus,
+    orderByField,
+    orderDirection,
+    projectsPerPage,
+    currentPage,
+  });
 
   useEffect(() => {
     if (activePage === 1) setProjectStatus("");

@@ -4,7 +4,13 @@ type Department = "Administration" | "Management" | "Development" | "Design";
 
 type Currency = "USD" | "EUR" | "BAM";
 
-type TechStack = "AdminNA" | "MgmtNA" | "FullStack" | "Frontend" | "Backend" | "UXUI";
+type TechStack =
+  | "AdminNA"
+  | "MgmtNA"
+  | "FullStack"
+  | "Frontend"
+  | "Backend"
+  | "UXUI";
 
 type ProjectType = "Fixed" | "OnGoing";
 
@@ -34,6 +40,12 @@ type Employees = {
   employee: Employee;
 };
 
+type EmployeeInfo = {
+  month: string;
+  totalHoursAvailable: number;
+  totalHoursBilled: number;
+};
+
 type Project = {
   id: string;
   name: string;
@@ -43,8 +55,8 @@ type Project = {
   actualEndDate?: string;
   projectType: ProjectType;
   hourlyRate: number;
-  projectVelocity: number;
   projectValueBAM: number;
+  projectVelocity: number;
   salesChannel: SalesChannel;
   projectStatus: ProjectStatus;
   employees: Employees[];
@@ -81,8 +93,8 @@ type ProjectsInfo = {
   actualMargin: number;
   actualAvgMargin: number;
   grossProfit: number;
-  averageVelocity: number;
   averageRate: number;
+  averageVelocity: number;
   weeksOverDeadline: number;
   salesChannelPercentage: { [key in SalesChannel]?: number };
   projectTypeCount: { [key in ProjectType]?: number };
@@ -109,6 +121,7 @@ export type {
   InvoiceStatus,
   Employee,
   Employees,
+  EmployeeInfo,
   Project,
   Projects,
   ProjectInfo,
