@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { ProjectsInfo } from "src/types";
+import { EmployeeInfo, ProjectsInfo } from "src/types";
 import {
   projectsNumber,
   totalValue,
@@ -21,9 +21,10 @@ import ResponsiveHoursOverviewChart from "features/home/ResponsiveHoursOverviewC
 type Props = {
   selectedYear: string;
   projectsInfo: ProjectsInfo | null;
+  employeesInfo: EmployeeInfo[];
 };
 
-const Performance = ({ selectedYear, projectsInfo }: Props) => {
+const Performance = ({ selectedYear, projectsInfo, employeesInfo }: Props) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const windowLg = windowWidth >= 1024;
 
@@ -121,7 +122,7 @@ const Performance = ({ selectedYear, projectsInfo }: Props) => {
       </div>
       {windowLg && (
         <div className="block">
-          <HoursOverviewChart />
+          <HoursOverviewChart employeesInfo={employeesInfo} />
         </div>
       )}
       {!windowLg && (

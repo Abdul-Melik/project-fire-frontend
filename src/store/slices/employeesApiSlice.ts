@@ -28,6 +28,12 @@ export const employeesApiSlice = apiSlice.injectEndpoints({
             ]
           : ["Employee"],
     }),
+    getEmployeesInfo: builder.query({
+      query: ({ year }) => ({
+        url: `/employees/info?year=${year}`,
+        method: "GET",
+      }),
+    }),
     createEmployee: builder.mutation({
       query: (data) => ({
         url: "/employees",
@@ -58,6 +64,7 @@ export const employeesApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetEmployeesQuery,
+  useGetEmployeesInfoQuery,
   useCreateEmployeeMutation,
   useUpdateEmployeeMutation,
   useDeleteEmployeeMutation,

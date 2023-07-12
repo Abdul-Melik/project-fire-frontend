@@ -40,6 +40,12 @@ type Employees = {
   employee: Employee;
 };
 
+type EmployeeInfo = {
+  month: string;
+  totalHoursAvailable: number;
+  totalHoursBilled: number;
+};
+
 type Project = {
   id: string;
   name: string;
@@ -110,6 +116,7 @@ export type {
   InvoiceStatus,
   Employee,
   Employees,
+  EmployeeInfo,
   Project,
   Projects,
   ProjectInfo,

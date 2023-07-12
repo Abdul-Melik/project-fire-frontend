@@ -9,11 +9,15 @@ import {
   Tooltip,
 } from "recharts";
 
-import { hoursOverviewChartData } from "src/data";
+import { EmployeeInfo } from "src/types";
 import DataSelector from "components/selectors/DataSelector";
 import DataCard from "components/cards/DataCard";
 
-const HoursOverviewChart = () => {
+type Props = {
+  employeesInfo: EmployeeInfo[];
+};
+
+const HoursOverviewChart = ({ employeesInfo }: Props) => {
   const [firstOption, setFirstOption] = useState(true);
   const [secondOption, setSecondOption] = useState(true);
 
@@ -53,13 +57,19 @@ const HoursOverviewChart = () => {
     </>
   );
 
+  const totalHoursAvailableArray = employeesInfo.map(
+    ({ totalHoursAvailable }) => totalHoursAvailable
+  );
+
+  const maxValue = Math.max(...totalHoursAvailableArray);
+
   return (
     <DataCard
       className="h-[392px] rounded-md border border-ashen-grey bg-white"
       header={headerContent}
     >
       <ResponsiveContainer width="100%" height="65%" className="mt-[38px]">
-        <BarChart data={hoursOverviewChartData}>
+        <BarChart data={employeesInfo}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis
             dataKey="month"
@@ -74,7 +84,7 @@ const HoursOverviewChart = () => {
             }}
           />
           <YAxis
-            domain={[0, 6000]}
+            domain={[0, maxValue]}
             axisLine={false}
             tickLine={false}
             tick={{
@@ -84,10 +94,18 @@ const HoursOverviewChart = () => {
               fill: "#232F2D",
             }}
           />
-          <Tooltip />
+          <Tooltip
+            formatter={(value, name) => {
+              if (name === "totalHoursAvailable")
+                return [value, "Grand Total Hours Available"];
+              if (name === "totalHoursBilled")
+                return [value, "Grand Total Hours Billed"];
+              return [value, name];
+            }}
+          />
           {firstOption && (
             <Bar
-              dataKey="Grand Total Hours Available"
+              dataKey="totalHoursAvailable"
               fill="#FF9F5A"
               radius={[4, 4, 0, 0]}
               barSize={20}
@@ -95,7 +113,7 @@ const HoursOverviewChart = () => {
           )}
           {secondOption && (
             <Bar
-              dataKey="Grand Total Hours Billed"
+              dataKey="totalHoursBilled"
               fill="#7BB99F"
               radius={[4, 4, 0, 0]}
               barSize={20}
