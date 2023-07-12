@@ -20,7 +20,7 @@ import ResponsiveHoursOverviewChart from "features/home/ResponsiveHoursOverviewC
 
 type Props = {
   selectedYear: string;
-  projectsInfo: ProjectsInfo | null;
+  projectsInfo: ProjectsInfo;
   employeesInfo: EmployeeInfo[];
 };
 
@@ -39,7 +39,7 @@ const Performance = ({ selectedYear, projectsInfo, employeesInfo }: Props) => {
         <InfoCard
           className="overflow-hidden rounded-md border border-ashen-grey"
           description="Number of projects"
-          amount={`${projectsInfo?.totalProjects ?? 0}`}
+          amount={`${projectsInfo.totalProjects}`}
           iconSrc={projectsNumber}
           iconAlt="Number of projects icon"
         />
@@ -47,7 +47,7 @@ const Performance = ({ selectedYear, projectsInfo, employeesInfo }: Props) => {
           className="overflow-hidden rounded-md border border-ashen-grey"
           description="Total project value"
           amount={
-            (projectsInfo?.totalValue ?? 0).toLocaleString("en-US", {
+            projectsInfo.totalValue.toLocaleString("en-US", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             }) + " KM"
@@ -59,7 +59,7 @@ const Performance = ({ selectedYear, projectsInfo, employeesInfo }: Props) => {
           className="overflow-hidden rounded-md border border-ashen-grey"
           description="Avg. project value"
           amount={
-            (projectsInfo?.averageValue ?? 0).toLocaleString("en-US", {
+            projectsInfo.averageValue.toLocaleString("en-US", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             }) + " KM"
@@ -82,7 +82,7 @@ const Performance = ({ selectedYear, projectsInfo, employeesInfo }: Props) => {
         <InfoCard
           className="overflow-hidden rounded-md border border-ashen-grey"
           description="Avg. team size"
-          amount={(projectsInfo?.averageTeamSize ?? 0).toFixed(1).toString()}
+          amount={projectsInfo.averageTeamSize.toFixed(1).toString()}
           iconSrc={teamSize}
           iconAlt="Average team size icon"
         />
@@ -90,21 +90,21 @@ const Performance = ({ selectedYear, projectsInfo, employeesInfo }: Props) => {
         <InfoCard
           className="overflow-hidden rounded-md border border-ashen-grey"
           description="Avg. velocity"
-          amount={(projectsInfo?.averageVelocity ?? 0).toFixed(1)}
+          amount={projectsInfo.averageVelocity.toFixed(1)}
           iconSrc={velocity}
           iconAlt="Average velocity icon"
         />
         <InfoCard
           className="overflow-hidden rounded-md border border-ashen-grey"
           description="Weeks over deadline"
-          amount={(projectsInfo?.weeksOverDeadline ?? 0).toFixed(1)}
+          amount={(projectsInfo.weeksOverDeadline ?? 0).toFixed(1)}
           iconSrc={weeksOver}
           iconAlt="Weeks over deadline icon"
         />
         <InfoCard
           className="overflow-hidden rounded-md border border-ashen-grey"
           description="Avg. hourly price"
-          amount={`$${(projectsInfo?.averageRate ?? 0).toLocaleString("en-US", {
+          amount={`$${projectsInfo.averageRate.toLocaleString("en-US", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}`}
@@ -114,11 +114,9 @@ const Performance = ({ selectedYear, projectsInfo, employeesInfo }: Props) => {
       </div>
 
       <div className="block gap-[30px] lg:flex lg:flex-row">
-        <SalesChannelsChart
-          chartValues={projectsInfo?.salesChannelPercentage ?? {}}
-        />
+        <SalesChannelsChart chartValues={projectsInfo.salesChannelPercentage} />
         <div className="mb-[30px] lg:hidden"></div>
-        <ProjectScopeChart chartValues={projectsInfo?.projectTypeCount ?? {}} />
+        <ProjectScopeChart chartValues={projectsInfo.projectTypeCount} />
       </div>
       {windowLg && (
         <div className="block">
