@@ -45,21 +45,14 @@ const Invoicing = () => {
     isFetching,
     isSuccess: isInvoicesSuccess,
     data,
-  } = useGetInvoicesQuery(
-    {
-      client,
-      invoiceStatus,
-      orderByField,
-      orderDirection,
-      invoicesPerPage,
-      currentPage,
-    },
-    {
-      pollingInterval: 60000,
-      refetchOnFocus: true,
-      refetchOnReconnect: true,
-    }
-  );
+  } = useGetInvoicesQuery({
+    client,
+    invoiceStatus,
+    orderByField,
+    orderDirection,
+    invoicesPerPage,
+    currentPage,
+  });
   const [updateInvoice, { isSuccess: isUpdateSuccess }] =
     useUpdateInvoiceMutation();
   const [deleteInvoice, { isSuccess: isDeleteSuccess }] =

@@ -19,28 +19,14 @@ const Home = () => {
     isFetching: isProjectsInfoFetching,
     isSuccess: isProjectsInfoSuccess,
     data: projectsInfo,
-  } = useGetProjectsInfoQuery(
-    { year: selectedYear },
-    {
-      pollingInterval: 60000,
-      refetchOnFocus: true,
-      refetchOnReconnect: true,
-    }
-  );
+  } = useGetProjectsInfoQuery({ year: selectedYear });
 
   const {
     isLoading: isEmployeesInfoLoading,
     isFetching: isEmployeesInfoFetching,
     isSuccess: isEmployeesInfoSuccess,
     data: employeesInfo,
-  } = useGetEmployeesInfoQuery(
-    { year: selectedYear },
-    {
-      pollingInterval: 60000,
-      refetchOnFocus: true,
-      refetchOnReconnect: true,
-    }
-  );
+  } = useGetEmployeesInfoQuery({ year: selectedYear });
 
   const navLabels = [
     `${selectedYear}  Performance`,

@@ -45,24 +45,17 @@ const Employees = () => {
     isFetching,
     isSuccess: isEmployeesSuccess,
     data,
-  } = useGetEmployeesQuery(
-    {
-      searchTerm,
-      isEmployed,
-      isStandardDateFilter: "",
-      hiringDate: "",
-      terminationDate: "",
-      orderByField,
-      orderDirection,
-      employeesPerPage,
-      currentPage,
-    },
-    {
-      pollingInterval: 60000,
-      refetchOnFocus: true,
-      refetchOnReconnect: true,
-    }
-  );
+  } = useGetEmployeesQuery({
+    searchTerm,
+    isEmployed,
+    isStandardDateFilter: "",
+    hiringDate: "",
+    terminationDate: "",
+    orderByField,
+    orderDirection,
+    employeesPerPage,
+    currentPage,
+  });
   const [deleteEmployee, { isSuccess: isDeleteSuccess }] =
     useDeleteEmployeeMutation();
 
