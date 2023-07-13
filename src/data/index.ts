@@ -90,59 +90,6 @@ export const revenuesCostsPerMonthChartData = {
   revenueGap: ["914.00 KM", "10,000.00 KM", "-15,000.00 KM"],
 };
 
-export const responsiveHoursOverviewChartData = [
-  {
-    name: "January 1/1/2023",
-    value: [
-      { name: "Grand Total Hours Available", value: 18000 },
-      { name: "Grand Total Hours Billed", value: 20000 },
-    ],
-  },
-  {
-    name: "February 1/2/2023",
-    value: [
-      { name: "Grand Total Hours Available", value: 5000 },
-      { name: "Grand Total Hours Billed", value: 1000 },
-    ],
-  },
-  {
-    name: "March 1/3/2023",
-    value: [
-      { name: "Grand Total Hours Available", value: 3000 },
-      { name: "Grand Total Hours Billed", value: 7000 },
-    ],
-  },
-  {
-    name: "May 1/5/2023",
-    value: [
-      { name: "Grand Total Hours Available", value: 3000 },
-      { name: "Grand Total Hours Billed", value: 3001 },
-    ],
-  },
-  {
-    name: "July 1/7/2023",
-    value: [
-      { name: "Grand Total Hours Available", value: 300 },
-      { name: "Grand Total Hours Billed", value: 7000 },
-    ],
-  },
-
-  {
-    name: "September 1/9/2023",
-    value: [
-      { name: "Grand Total Hours Available", value: 1080 },
-      { name: "Grand Total Hours Billed", value: 5000 },
-    ],
-  },
-  {
-    name: "November 1/11/2023",
-    value: [
-      { name: "Grand Total Hours Available", value: 1580 },
-      { name: "Grand Total Hours Billed", value: 610 },
-    ],
-  },
-];
-
 export const responsiveCostsPerMonthChartData = [
   {
     name: "January 1/1/2023",
