@@ -30,6 +30,13 @@ const ResponsiveHoursOverview = ({ employeesInfo }: Props) => {
     </div>
   );
 
+  const formattedInfo = {
+    value: [
+      { name: "Grand Total Hours Available", value: info.totalHoursAvailable },
+      { name: "Grand Total Hours Billed", value: info.totalHoursBilled },
+    ],
+  };
+
   return (
     <DataCard
       header={headerContent}
@@ -47,7 +54,6 @@ const ResponsiveHoursOverview = ({ employeesInfo }: Props) => {
       </div>
       <HoursOverviewSelector
         show={showHoursOverviewSelector}
-        header="Select month"
         children={employeesInfo}
         closeSelector={() => {
           setShowHoursOverviewSelector(false);
@@ -58,11 +64,11 @@ const ResponsiveHoursOverview = ({ employeesInfo }: Props) => {
         <PieChart>
           <Pie
             cy={110}
-            data={employeesInfo}
+            data={formattedInfo.value}
             innerRadius={55}
             outerRadius={80}
             paddingAngle={3}
-            dataKey="month"
+            dataKey="value"
             startAngle={180}
             endAngle={0}
             label
