@@ -57,7 +57,9 @@ const HoursOverviewChart = ({ employeesInfo }: Props) => {
     </>
   );
 
-  const totalHoursAvailableArray = employeesInfo.map(
+  const data = employeesInfo.filter((_, index) => index % 2 === 0);
+
+  const totalHoursAvailableArray = data.map(
     ({ totalHoursAvailable }) => totalHoursAvailable
   );
 
@@ -71,7 +73,7 @@ const HoursOverviewChart = ({ employeesInfo }: Props) => {
     >
       {renderChart ? (
         <ResponsiveContainer width="100%" height="65%" className="mt-[38px]">
-          <BarChart data={employeesInfo}>
+          <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
             <XAxis
               dataKey="month"

@@ -1,20 +1,25 @@
 import { useState } from "react";
 import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
 
+import { EmployeeInfo } from "src/types";
 import { arrow } from "assets/media";
-import { responsiveHoursOverviewChartData as data } from "src/data";
-import ModalSelector from "components/modals/ModalSelector";
+import HoursOverviewSelector from "components/selectors/HoursOverviewSelector";
 import DataCard from "components/cards/DataCard";
 
 const COLORS = ["#7BB99F", "#FF9F5A"];
 
-const ResponsiveHoursOverview = () => {
-  const [project, setProject] = useState(data[0]);
-  const [show, setShow] = useState(false);
+type Props = {
+  employeesInfo: EmployeeInfo[];
+};
 
-  const handleNameClick = (index: number) => {
-    setProject(data[index]);
-    setShow(false);
+const ResponsiveHoursOverview = ({ employeesInfo }: Props) => {
+  const [info, setInfo] = useState(employeesInfo[0]);
+  const [showHoursOverviewSelector, setShowHoursOverviewSelector] =
+    useState(false);
+
+  const selectMonth = (index: number) => {
+    setInfo(employeesInfo[index]);
+    setShowHoursOverviewSelector(false);
   };
 
   const headerContent = (
@@ -34,36 +39,35 @@ const ResponsiveHoursOverview = () => {
         <h1
           className="absolute z-10 mt-[120px] flex cursor-pointer gap-2 font-gilroy-semi-bold text-2xl"
           onClick={() => {
-            setShow(true);
+            setShowHoursOverviewSelector(true);
           }}
         >
-          {project.name} <img src={arrow} className="mt-1" />
+          {info.month} <img src={arrow} className="mt-1" />
         </h1>
       </div>
-      <ModalSelector
-        show={show}
-        children={data}
-        header="Select a project"
-        isError={false}
-        onCancel={() => {
-          setShow(false);
+      <HoursOverviewSelector
+        show={showHoursOverviewSelector}
+        header="Select month"
+        children={employeesInfo}
+        closeSelector={() => {
+          setShowHoursOverviewSelector(false);
         }}
-        selectProject={handleNameClick}
+        handleSelection={selectMonth}
       />
       <ResponsiveContainer width="100%" height={250}>
         <PieChart>
           <Pie
             cy={110}
-            data={project.value}
+            data={employeesInfo}
             innerRadius={55}
             outerRadius={80}
             paddingAngle={3}
-            dataKey="value"
+            dataKey="month"
             startAngle={180}
             endAngle={0}
             label
           >
-            {data.map((entry, index) => (
+            {employeesInfo.map((_, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}
@@ -74,7 +78,7 @@ const ResponsiveHoursOverview = () => {
             height={80}
             layout="vertical"
             iconType="circle"
-            formatter={(value, entry, index) => (
+            formatter={(value, _) => (
               <span className="leading-8 text-deep-forest">{value}</span>
             )}
           />
