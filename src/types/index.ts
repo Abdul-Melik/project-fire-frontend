@@ -4,13 +4,7 @@ type Department = "Administration" | "Management" | "Development" | "Design";
 
 type Currency = "USD" | "EUR" | "BAM";
 
-type TechStack =
-  | "AdminNA"
-  | "MgmtNA"
-  | "FullStack"
-  | "Frontend"
-  | "Backend"
-  | "UXUI";
+type TechStack = "AdminNA" | "MgmtNA" | "FullStack" | "Frontend" | "Backend" | "UXUI";
 
 type ProjectType = "Fixed" | "OnGoing";
 
@@ -44,6 +38,9 @@ type EmployeeInfo = {
   month: string;
   totalHoursAvailable: number;
   totalHoursBilled: number;
+  designCost: number;
+  otherCost: number;
+  developmentCost: number;
 };
 
 type Project = {

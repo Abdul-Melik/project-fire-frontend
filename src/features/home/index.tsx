@@ -41,24 +41,19 @@ const Home = () => {
             <Navbar navLabels={navLabels} handlePageSelect={(page) => setActivePage(page)} />
             <YearSelector selectedYear={selectedYear} handleYearSelection={(year) => setSelectedYear(year)} />
           </div>
-          {isProjectsInfoLoading ||
-          isProjectsInfoFetching ||
-          isEmployeesInfoLoading ||
-          isEmployeesInfoFetching ? (
+          {isProjectsInfoLoading || isProjectsInfoFetching || isEmployeesInfoLoading || isEmployeesInfoFetching ? (
             <LoadingSpinner />
           ) : (
             isProjectsInfoSuccess &&
             isEmployeesInfoSuccess && (
               <>
                 {activePage === 1 && (
-                  <Performance
-                    selectedYear={selectedYear}
-                    projectsInfo={projectsInfo}
-                    employeesInfo={employeesInfo}
-                  />
+                  <Performance selectedYear={selectedYear} projectsInfo={projectsInfo} employeesInfo={employeesInfo} />
                 )}
-                {activePage === 2 && <DevelopmentRevenueCosts />}
-                {activePage === 3 && <Plan />}
+                {activePage === 2 && <DevelopmentRevenueCosts projectsInfo={projectsInfo} />}
+                {activePage === 3 && (
+                  <Plan selectedYear={selectedYear} projectsInfo={projectsInfo} employeesInfo={employeesInfo} />
+                )}
               </>
             )
           )}
