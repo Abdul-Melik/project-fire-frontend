@@ -125,7 +125,7 @@ const Performance = ({ selectedYear, projectsInfo, employeesInfo }: Props) => {
       )}
       {!windowLg && (
         <div className="block">
-          <ResponsiveHoursOverviewChart />
+          <ResponsiveHoursOverviewChart employeesInfo={employeesInfo} />
         </div>
       )}
     </div>
