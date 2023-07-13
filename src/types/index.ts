@@ -41,6 +41,7 @@ type EmployeeInfo = {
   designCost: number;
   otherCost: number;
   developmentCost: number;
+  totalCost: number;
 };
 
 type Project = {
@@ -65,6 +66,14 @@ type Projects = {
     id: string;
     name: string;
   };
+};
+
+type ExpensesInfo = {
+  year: number;
+  month: string;
+  plannedExpense: number;
+  actualExpense: number;
+  expenseCategory: string;
 };
 
 type ProjectInfo = {
@@ -119,6 +128,7 @@ export type {
   Employee,
   Employees,
   EmployeeInfo,
+  ExpensesInfo,
   Project,
   Projects,
   ProjectInfo,

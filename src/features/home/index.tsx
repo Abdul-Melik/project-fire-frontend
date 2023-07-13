@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { useGetProjectsInfoQuery } from "store/slices/projectsApiSlice";
 import { useGetEmployeesInfoQuery } from "store/slices/employeesApiSlice";
+
 import LoadingSpinner from "components/utils/LoadingSpinner";
 import YearSelector from "components/selectors/YearSelector";
 import Navbar from "components/navigation/NavBar";
@@ -28,6 +29,13 @@ const Home = () => {
     data: employeesInfo,
   } = useGetEmployeesInfoQuery({ year: selectedYear });
 
+  const {
+    isLoading: isExpensesInfoLoading,
+    isFetching: isExpensesInfoFetching,
+    isSuccess: isExpensesInfoSuccess,
+    data: expensesInfo,
+  } = useGetEmployeesInfoQuery({ year: selectedYear });
+
   const navLabels = [`${selectedYear}  Performance`, "Development Revenue & Costs", `${selectedYear} Plan`];
 
   return (
@@ -52,7 +60,12 @@ const Home = () => {
                 )}
                 {activePage === 2 && <DevelopmentRevenueCosts projectsInfo={projectsInfo} />}
                 {activePage === 3 && (
-                  <Plan selectedYear={selectedYear} projectsInfo={projectsInfo} employeesInfo={employeesInfo} />
+                  <Plan
+                    selectedYear={selectedYear}
+                    projectsInfo={projectsInfo}
+                    employeesInfo={employeesInfo}
+                    expensesInfo={expensesInfo}
+                  />
                 )}
               </>
             )
