@@ -6,7 +6,7 @@ import { download, dollar, email, trash } from "assets/media";
 import { useAppSelector } from "store/hooks";
 import { selectUserRole } from "store/slices/authSlice";
 import HoverTooltip from "components/utils/HoverTooltip";
-import PDFFile from "features/invoicing/PDFFile";
+import InvoicePDF from "features/invoicing/InvoicePDF";
 
 type Props = {
   invoice: Invoice;
@@ -41,7 +41,7 @@ const InvoiceActions = ({ invoice, handleUpdate, handleDelete }: Props) => {
       <div className="flex items-center gap-2">
         <div className="relative">
           <PDFDownloadLink
-            document={<PDFFile invoice={invoice} />}
+            document={<InvoicePDF invoice={invoice} />}
             fileName={`Invoice-${invoiceId}.pdf`}
           >
             <button
