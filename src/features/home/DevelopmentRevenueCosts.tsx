@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { ProjectsInfo } from "src/types";
+
 import { revenue, directCosts, margin, avgMargin } from "assets/media";
 import InfoCard from "components/cards/InfoCard";
 import SummaryCard from "components/cards/SummaryCard";
@@ -8,9 +10,15 @@ import RevenuesCostsPerMonthChart from "features/home/RevenuesCostsPerMonthChart
 import ResponsiveCostsPerProjectChart from "features/home/ResponsiveCostsPerProjectChart";
 import ResponsiveCostsPerMonthChart from "features/home/ResponsiveCostsPerMonthChart";
 
-const DevelopmentRevenueCosts = () => {
+type Props = {
+  projectsInfo: ProjectsInfo | null;
+};
+
+const DevelopmentRevenueCosts = ({ projectsInfo }: Props) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const windowLg = windowWidth >= 1024;
+
+  console.log("test" + JSON.stringify(projectsInfo));
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -19,55 +27,75 @@ const DevelopmentRevenueCosts = () => {
   });
 
   return (
-    <div className="flex flex-col gap-[42px]">
-      <div className="max-w-screen flex flex-col gap-[30px] lg:grid lg:grid-cols-[1fr,minmax(330px,auto)]">
-        <div className="grid auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(330px,1fr))] gap-[30px]">
+    <div className='flex flex-col gap-[42px]'>
+      <div className='max-w-screen flex flex-col gap-[30px] lg:grid lg:grid-cols-[1fr,minmax(330px,auto)]'>
+        <div className='grid auto-rows-[70px] grid-cols-[repeat(auto-fit,minmax(330px,1fr))] gap-[30px]'>
           <InfoCard
-            className="overflow-hidden rounded-md border border-ashen-grey"
-            description="Actual revenue"
-            amount={"1,615,341.00 KM"}
+            className='overflow-hidden rounded-md border border-ashen-grey'
+            description='Actual revenue'
+            amount={
+              (projectsInfo?.actualRevenue ?? 0).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " KM"
+            }
             iconSrc={revenue}
-            iconAlt="Actual revenue icon"
+            iconAlt='Actual revenue icon'
           />
           <InfoCard
-            className="overflow-hidden rounded-md border border-ashen-grey"
-            description="Planned direct costs"
-            amount={"1,890,000.00 KM"}
+            className='overflow-hidden rounded-md border border-ashen-grey'
+            description='Planned direct costs'
+            amount={
+              (projectsInfo?.plannedCost ?? 0).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " KM"
+            }
             iconSrc={directCosts}
-            iconAlt="Planned direct costs icon"
+            iconAlt='Planned direct costs icon'
           />
           <InfoCard
-            className="overflow-hidden rounded-md border border-ashen-grey"
-            description="Actual margin %"
-            amount={"40%"}
+            className='overflow-hidden rounded-md border border-ashen-grey'
+            description='Actual margin %'
+            amount={(projectsInfo?.actualMargin ?? 0).toFixed(0) + "%"}
             iconSrc={margin}
-            iconAlt="Actual margin icon"
+            iconAlt='Actual margin icon'
           />
           <InfoCard
-            className="overflow-hidden rounded-md border border-ashen-grey"
-            description="Actual avg. margin"
-            amount={"102,382.00 KM"}
+            className='overflow-hidden rounded-md border border-ashen-grey'
+            description='Actual avg. margin'
+            amount={
+              (projectsInfo?.actualAvgMargin ?? 0).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " KM"
+            }
             iconSrc={avgMargin}
-            iconAlt="Actual average margin icon"
+            iconAlt='Actual average margin icon'
           />
         </div>
         <SummaryCard
-          className="gap-2 overflow-hidden rounded-md bg-winter-mint py-3"
-          descriptionClassName="text-[18px] leading-[28px]"
-          amountClassName="text-[30px] leading-[40px]"
-          description="Actual gross profit"
-          amount={"-284,086.00 KM"}
+          className='gap-2 overflow-hidden rounded-md bg-winter-mint py-3'
+          descriptionClassName='text-[18px] leading-[28px]'
+          amountClassName='text-[30px] leading-[40px]'
+          description='Actual gross profit'
+          amount={
+            (projectsInfo?.grossProfit ?? 0).toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }) + " KM"
+          }
         />
       </div>
       {windowLg && (
-        <div className="block">
+        <div className='block'>
           <RevenuesCostsActualChart />
-          <div className="mb-[30px]"></div>
+          <div className='mb-[30px]'></div>
           <RevenuesCostsPerMonthChart />
         </div>
       )}
       {!windowLg && (
-        <div className="flex flex-col gap-5">
+        <div className='flex flex-col gap-5'>
           <ResponsiveCostsPerProjectChart />
           <ResponsiveCostsPerMonthChart />
         </div>
