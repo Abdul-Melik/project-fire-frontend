@@ -6,7 +6,6 @@ import Backdrop from "components/utils/Backdrop";
 
 type Props = {
   show: boolean;
-  header: string;
   children: EmployeeInfo[];
   closeSelector: () => void;
   handleSelection: (index: number) => void;
@@ -14,7 +13,6 @@ type Props = {
 
 const HoursOverviewSelector = ({
   show,
-  header,
   children,
   closeSelector,
   handleSelection,
@@ -40,17 +38,14 @@ const HoursOverviewSelector = ({
           }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
-          <header className="w-full bg-deep-teal p-4 text-white">
-            <h2 className="font-gilroy-semi-bold text-xl font-semibold">
-              {header}
-            </h2>
-          </header>
           <div className="p-4">
             {children.map((child, index) => (
               <div
                 key={index}
                 onClick={() => handleSelection(index)}
-                className="mt-2 cursor-pointer border-b leading-8"
+                className={`mt-2 cursor-pointer leading-8 ${
+                  index !== children.length - 1 ? "border-b" : ""
+                }`}
               >
                 {child.month}
               </div>
