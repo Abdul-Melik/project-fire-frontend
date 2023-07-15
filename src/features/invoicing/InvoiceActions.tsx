@@ -1,17 +1,20 @@
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
+import { Invoice } from "src/types";
 import { download, dollar, email, trash } from "assets/media";
 import { useAppSelector } from "store/hooks";
 import { selectUserRole } from "store/slices/authSlice";
 import HoverTooltip from "components/utils/HoverTooltip";
+import InvoicePDF from "features/invoicing/InvoicePDF";
 
 type Props = {
-  invoiceId: string;
+  invoice: Invoice;
   handleUpdate: (invoiceId: string, invoiceStatus: string) => void;
   handleDelete: (invoiceId: string) => void;
 };
 
-const InvoiceActions = ({ invoiceId, handleUpdate, handleDelete }: Props) => {
+const InvoiceActions = ({ invoice, handleUpdate, handleDelete }: Props) => {
   const ref = useRef<HTMLButtonElement | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -31,24 +34,32 @@ const InvoiceActions = ({ invoiceId, handleUpdate, handleDelete }: Props) => {
     setContainerHeight(ref.current?.offsetHeight ?? 0);
   }, []);
 
+  const invoiceId = invoice.id;
+
   return (
     <>
       <div className="flex items-center gap-2">
         <div className="relative">
-          <button
-            ref={ref}
-            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-ashen-grey"
-            onMouseEnter={() => {
-              setActionLabel("download");
-              setActionDescription("Download as PDF");
-            }}
-            onMouseLeave={() => {
-              setActionLabel("");
-              setActionDescription("");
-            }}
+          <PDFDownloadLink
+            document={<InvoicePDF invoice={invoice} />}
+            fileName={`Invoice-${invoiceId}.pdf`}
           >
-            <img src={download} alt="Download icon" />
-          </button>
+            <button
+              ref={ref}
+              className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-ashen-grey"
+              onMouseEnter={() => {
+                setActionLabel("download");
+                setActionDescription("Download as PDF");
+              }}
+              onMouseLeave={() => {
+                setActionLabel("");
+                setActionDescription("");
+              }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <img src={download} alt="Download icon" />
+            </button>
+          </PDFDownloadLink>
           {showActionDescription && actionLabel === "download" && (
             <HoverTooltip
               content={actionDescription}

@@ -41,7 +41,7 @@ const InvoicesTableRow = ({
       </td>
       <td className="p-3">
         <InvoiceActions
-          invoiceId={invoiceId}
+          invoice={invoice}
           handleUpdate={handleUpdate}
           handleDelete={handleDelete}
         />
