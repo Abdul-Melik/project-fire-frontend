@@ -1,18 +1,33 @@
 import { revenuesCostsPerMonthChartData } from "src/data";
 import DataCard from "components/cards/DataCard";
 import RevenuesCostsPerMonthChartItem from "features/home/RevenuesCostsPerMonthChartItem";
+import { Expense, ExpensesInfo, ProjectsInfo } from "src/types";
 
-const RevenuesCostsPerMonthChart = () => {
+type Props = {
+  projectsInfo: ProjectsInfo;
+  expensesInfo: Expense;
+  expense: ExpensesInfo;
+};
+
+const RevenuesCostsPerMonthChart = ({ projectsInfo, expensesInfo, expense }: Props) => {
+  const currentDate = new Date();
+  const currentMonth = currentDate.toLocaleString("default", { month: "long" });
+
+  const previousMonthDate = new Date();
+  previousMonthDate.setMonth(previousMonthDate.getMonth() - 1);
+  const previousMonth = previousMonthDate.toLocaleString("default", { month: "long" });
+
+  const nextMonthDate = new Date();
+  nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
+  const nextMonth = nextMonthDate.toLocaleString("default", { month: "long" });
+
   const headerContent = (
     <>
-      <div className="flex items-center gap-[10px]">
-        <h2 className="font-gilroy-semi-bold text-lg font-semibold text-deep-forest">
+      <div className='flex items-center gap-[10px]'>
+        <h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>
           Revenues & costs (per project) - per month
         </h2>
-        <a
-          href="#"
-          className="font-inter-medium text-base font-medium leading-[19px] text-sage-green underline"
-        >
+        <a href='#' className='font-inter-medium text-base font-medium leading-[19px] text-sage-green underline'>
           See Details
         </a>
       </div>
@@ -20,29 +35,39 @@ const RevenuesCostsPerMonthChart = () => {
   );
 
   return (
-    <DataCard
-      className="h-[695px] rounded-[6px] border border-ashen-grey bg-white pb-5"
-      header={headerContent}
-    >
-      <div className="flex h-full justify-around gap-[70px]">
+    <DataCard className='h-[695px] rounded-[6px] border border-ashen-grey bg-white pb-5' header={headerContent}>
+      <div className='flex h-full justify-around gap-[70px]'>
         <RevenuesCostsPerMonthChartItem
-          className="h-[330px] w-[328px]"
-          wrapperClassName="ml-16"
-          item="firstItem"
-          data={revenuesCostsPerMonthChartData.data[0]}
+          className='h-[330px] w-[328px]'
+          wrapperClassName='ml-16'
+          item='firstItem'
+          data='month'
+          projectsInfo={projectsInfo}
+          expense={expense}
+          month={previousMonth}
+          expensesInfo={expensesInfo}
           revenueGap={revenuesCostsPerMonthChartData.revenueGap[0]}
           tickNumbers
         />
+
         <RevenuesCostsPerMonthChartItem
-          className="h-[330px] w-[262px]"
-          data={revenuesCostsPerMonthChartData.data[1]}
-          item="secondItem"
+          className='h-[330px] w-[262px]'
+          data='month'
+          projectsInfo={projectsInfo}
+          expensesInfo={expensesInfo}
+          month={currentMonth}
+          expense={expense}
+          item='secondItem'
           revenueGap={revenuesCostsPerMonthChartData.revenueGap[1]}
         />
         <RevenuesCostsPerMonthChartItem
-          className="h-[330px] w-[262px]"
-          data={revenuesCostsPerMonthChartData.data[2]}
-          item="thirdItem"
+          className='h-[330px] w-[262px]'
+          data='month'
+          projectsInfo={projectsInfo}
+          expensesInfo={expensesInfo}
+          month={nextMonth}
+          expense={expense}
+          item='thirdItem'
           revenueGap={revenuesCostsPerMonthChartData.revenueGap[2]}
         />
       </div>

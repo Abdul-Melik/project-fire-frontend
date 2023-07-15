@@ -5,58 +5,76 @@ import { arrow } from "assets/media";
 import { responsiveCostsPerMonthChartData as data } from "src/data";
 import ModalSelector from "components/modals/ModalSelector";
 import DataCard from "components/cards/DataCard";
+import { Expense, ProjectInfo, ProjectsInfo } from "src/types";
 
 const COLORS = ["#7BB99F", "#FF9F5A", "#4C84F2", "#FDCA48"];
-type Props = {};
+type Props = {
+  expensesInfo: Expense[];
+  projectsInfo: ProjectsInfo;
+};
 
-const ResponsiveCostsPerMonthChart = (props: Props) => {
+const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo }: Props) => {
   const [project, setProject] = useState(data[0]);
+  const [infoExpenses, setInfoExpenses] = useState(expensesInfo[0]);
+  const [infoProject, setInfoProject] = useState(projectsInfo);
+  const [showHoursOverviewSelector, setShowHoursOverviewSelector] = useState(false);
+
+  const selectMonth = (index: number) => {
+    setInfoExpenses(expensesInfo[index]);
+    setShowHoursOverviewSelector(false);
+  };
   const [show, setShow] = useState(false);
   const handleNameClick = (index: number) => {
     setProject(data[index]);
     setShow(false);
   };
   const headerContent = (
-    <div className="flex gap-[10px] self-start">
-      <h2 className="font-gilroy-semi-bold text-lg font-semibold text-deep-forest">
+    <div className='flex gap-[10px] self-start'>
+      <h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>
         Revenues and Costs (per project) - per month
       </h2>
     </div>
   );
+  const formattedInfo = {
+    value: [
+      { name: "Grand Total Planned Revenue", value: infoProject.plannedRevenue },
+      { name: "Grand Total Actual Revenue", value: infoProject.actualRevenue },
+      { name: "'Grand Total Total Expenses (Planned)", value: infoExpenses.totalPlannedExpense },
+      { name: "Grand Total Total Expenses (Actual)", value: infoExpenses.totalActualExpense },
+    ],
+  };
+
   return (
-    <DataCard
-      header={headerContent}
-      className="w-full border border-ashen-grey pb-8 text-center font-gilroy-medium"
-    >
-      <div className="flex w-full justify-center bg-red-300">
+    <DataCard header={headerContent} className='w-full border border-ashen-grey pb-8 text-center font-gilroy-medium'>
+      <div className='flex w-full justify-center bg-red-300'>
         <h1
-          className="absolute z-10 mt-[220px] flex cursor-pointer gap-2 font-gilroy-semi-bold text-2xl"
+          className='absolute z-10 mt-[220px] flex cursor-pointer gap-2 font-gilroy-semi-bold text-2xl'
           onClick={() => {
             setShow(true);
           }}
         >
-          {project.name} <img src={arrow} className="mt-1" />
+          {project.name} <img src={arrow} className='mt-1' />
         </h1>
       </div>
       <ModalSelector
-        show={show}
+        show={showHoursOverviewSelector}
         children={data}
-        header="Select a project"
+        header='Select a project'
         isError={false}
         onCancel={() => {
           setShow(false);
         }}
         selectProject={handleNameClick}
       />
-      <ResponsiveContainer width="100%" height={350}>
+      <ResponsiveContainer width='100%' height={350}>
         <PieChart>
           <Pie
             cy={110}
-            data={project.value}
+            data={formattedInfo.value}
             innerRadius={55}
             outerRadius={80}
             paddingAngle={3}
-            dataKey="value"
+            dataKey='value'
             startAngle={360}
             endAngle={0}
             label
@@ -67,17 +85,13 @@ const ResponsiveCostsPerMonthChart = (props: Props) => {
           </Pie>
           <Legend
             height={80}
-            layout="vertical"
-            iconType="circle"
-            formatter={(value, entry, index) => (
-              <span className="leading-8 text-deep-forest">{value}</span>
-            )}
+            layout='vertical'
+            iconType='circle'
+            formatter={(value, entry, index) => <span className='leading-8 text-deep-forest'>{value}</span>}
           />
         </PieChart>
       </ResponsiveContainer>
-      <p className="mt-14 font-inter-medium text-lg">
-        Revenue Gap: {project.value[0].value - project.value[1].value}
-      </p>
+      <p className='mt-14 font-inter-medium text-lg'>Revenue Gap: {project.value[0].value - project.value[1].value}</p>
     </DataCard>
   );
 };

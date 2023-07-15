@@ -1,4 +1,4 @@
-import { EmployeeInfo, ExpensesInfo, ProjectsInfo } from "src/types";
+import { EmployeeInfo, Expense, ProjectsInfo } from "src/types";
 
 import DataCard from "components/cards/DataCard";
 import PlanCardItem from "features/home/PlanCardItem";
@@ -7,7 +7,7 @@ type Props = {
   selectedYear: string;
   projectsInfo: ProjectsInfo;
   employeesInfo: EmployeeInfo[];
-  expensesInfo: ExpensesInfo[];
+  expensesInfo: Expense;
 };
 
 const Plan = ({ selectedYear, projectsInfo, employeesInfo, expensesInfo }: Props) => {
@@ -23,6 +23,7 @@ const Plan = ({ selectedYear, projectsInfo, employeesInfo, expensesInfo }: Props
       <h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>Expenses</h2>
     </div>
   );
+
   return (
     <div className='flex flex-col gap-[30px]'>
       <DataCard className='rounded-[6px] border border-ashen-grey bg-white' header={firstHeader}>
@@ -90,17 +91,70 @@ const Plan = ({ selectedYear, projectsInfo, employeesInfo, expensesInfo }: Props
       </DataCard>
       <DataCard className='rounded-[6px] border border-ashen-grey bg-white' header={secondHeader}>
         <div className='mt-[11px] flex flex-col gap-[5px]'>
-          <PlanCardItem text='Direct' amount='as' />
-          <PlanCardItem text='Indirect' amount='1,400,000.00 KM' />
-          <PlanCardItem text='Marketing' amount='8,400,000.00 KM' />
-          <PlanCardItem text='HR costs' amount='400,000.00 KM' />
-          <PlanCardItem text='Office cost' amount='100,000.00 KM' />
-          <PlanCardItem text='Sales costs' amount='50,000.00 KM' />
-          <PlanCardItem text='Other costs' amount='800.00 KM' />
+          <PlanCardItem text='Direct' amount='' />
+          <PlanCardItem
+            text='Indirect'
+            amount={
+              expensesInfo.indirectTotalActualExpense.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " KM"
+            }
+          />
+          <PlanCardItem
+            text='Marketing'
+            amount={
+              expensesInfo.marketingTotalActualExpense.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " KM"
+            }
+          />
+          <PlanCardItem
+            text='HR costs'
+            amount={
+              expensesInfo.hrTotalActualExpense.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " KM"
+            }
+          />
+          <PlanCardItem
+            text='Office cost'
+            amount={
+              expensesInfo.officeTotalActualExpense.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " KM"
+            }
+          />
+          <PlanCardItem
+            text='Sales costs'
+            amount={
+              expensesInfo.salesTotalActualExpense.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " KM"
+            }
+          />
+          <PlanCardItem
+            text='Other costs'
+            amount={
+              expensesInfo.otherTotalActualExpense.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " KM"
+            }
+          />
           <PlanCardItem
             className='mx-[-20px] bg-winter-mint px-5 pb-[3px] pt-[6px]'
             text='TOTAL EXPENSES'
-            amount='91,800,000.00 KM'
+            amount={
+              expensesInfo.totalActualExpenses.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " KM"
+            }
             footer
           />
         </div>

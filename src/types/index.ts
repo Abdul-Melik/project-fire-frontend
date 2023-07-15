@@ -74,6 +74,30 @@ type ExpensesInfo = {
   plannedExpense: number;
   actualExpense: number;
   expenseCategory: string;
+  totalActualExpense2023: number;
+  totalExpensesActual: Expense[];
+  totalExpensesPlanned: Expense[];
+};
+
+type Expense = {
+  expenses: any;
+  year: number;
+  month: string;
+  expenseCategory: string;
+  expenseCategoryId: string;
+  monthsWithExpenses: string[];
+  marketingTotalActualExpense: number;
+  hrTotalActualExpense: number;
+  officeTotalActualExpense: number;
+  salesTotalActualExpense: number;
+  otherTotalActualExpense: number;
+  indirectTotalActualExpense: number;
+  totalExpensesActual: Expense[];
+  totalExpensesPlanned: Expense[];
+  totalActualExpenses: number;
+  totalActualExpense: number;
+  totalPlannedExpenses: number;
+  totalPlannedExpense: number;
 };
 
 type ProjectInfo = {
@@ -95,10 +119,15 @@ type ProjectsInfo = {
   averageValue: number;
   averageTeamSize: number;
   actualRevenue: number;
+  plannedRevenue: number;
   plannedCost: number;
   actualMargin: number;
+  directCost: number;
+  indirectCost: number;
   actualAvgMargin: number;
   grossProfit: number;
+  totalDirectCost: number;
+  totalIndirectCost: number;
   averageRate: number;
   averageVelocity: number;
   weeksOverDeadline: number;
@@ -129,6 +158,7 @@ export type {
   Employees,
   EmployeeInfo,
   ExpensesInfo,
+  Expense,
   Project,
   Projects,
   ProjectInfo,

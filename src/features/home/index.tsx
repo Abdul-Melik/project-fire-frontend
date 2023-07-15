@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { useGetProjectsInfoQuery } from "store/slices/projectsApiSlice";
 import { useGetEmployeesInfoQuery } from "store/slices/employeesApiSlice";
+import { useGetExpensesInfoQuery } from "src/store/slices/expensesApiSlice";
 
 import LoadingSpinner from "components/utils/LoadingSpinner";
 import YearSelector from "components/selectors/YearSelector";
@@ -10,8 +11,15 @@ import MainLayout from "components/layout";
 import Performance from "features/home/Performance";
 import DevelopmentRevenueCosts from "features/home/DevelopmentRevenueCosts";
 import Plan from "features/home/Plan";
+import { Expense, ExpensesInfo, ProjectsInfo } from "src/types";
 
-const Home = () => {
+type Props = {
+  projectsInfo: ProjectsInfo;
+  expensesInfo: Expense;
+  expense: ExpensesInfo;
+};
+
+const Home = ({ expense }: Props) => {
   const [selectedYear, setSelectedYear] = useState("2023");
   const [activePage, setActivePage] = useState(1);
 
@@ -34,7 +42,7 @@ const Home = () => {
     isFetching: isExpensesInfoFetching,
     isSuccess: isExpensesInfoSuccess,
     data: expensesInfo,
-  } = useGetEmployeesInfoQuery({ year: selectedYear });
+  } = useGetExpensesInfoQuery({ year: selectedYear });
 
   const navLabels = [`${selectedYear}  Performance`, "Development Revenue & Costs", `${selectedYear} Plan`];
 
@@ -49,16 +57,24 @@ const Home = () => {
             <Navbar navLabels={navLabels} handlePageSelect={(page) => setActivePage(page)} />
             <YearSelector selectedYear={selectedYear} handleYearSelection={(year) => setSelectedYear(year)} />
           </div>
-          {isProjectsInfoLoading || isProjectsInfoFetching || isEmployeesInfoLoading || isEmployeesInfoFetching ? (
+          {isProjectsInfoLoading ||
+          isProjectsInfoFetching ||
+          isEmployeesInfoLoading ||
+          isEmployeesInfoFetching ||
+          isExpensesInfoLoading ||
+          isExpensesInfoFetching ? (
             <LoadingSpinner />
           ) : (
             isProjectsInfoSuccess &&
-            isEmployeesInfoSuccess && (
+            isEmployeesInfoSuccess &&
+            isExpensesInfoSuccess && (
               <>
                 {activePage === 1 && (
                   <Performance selectedYear={selectedYear} projectsInfo={projectsInfo} employeesInfo={employeesInfo} />
                 )}
-                {activePage === 2 && <DevelopmentRevenueCosts projectsInfo={projectsInfo} />}
+                {activePage === 2 && (
+                  <DevelopmentRevenueCosts projectsInfo={projectsInfo} expensesInfo={expensesInfo} expense={expense} />
+                )}
                 {activePage === 3 && (
                   <Plan
                     selectedYear={selectedYear}
