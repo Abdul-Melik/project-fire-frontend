@@ -121,6 +121,7 @@ type ProjectsInfo = {
   actualRevenue: number;
   plannedRevenue: number;
   plannedCost: number;
+  revenueGap: number;
   actualMargin: number;
   directCost: number;
   indirectCost: number;

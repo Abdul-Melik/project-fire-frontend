@@ -46,7 +46,12 @@ const RevenuesCostsPerMonthChart = ({ projectsInfo, expensesInfo, expense }: Pro
           expense={expense}
           month={previousMonth}
           expensesInfo={expensesInfo}
-          revenueGap={revenuesCostsPerMonthChartData.revenueGap[0]}
+          revenueGap={
+            (projectsInfo?.grossProfit ?? 0).toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }) + " KM"
+          }
           tickNumbers
         />
 
@@ -58,7 +63,12 @@ const RevenuesCostsPerMonthChart = ({ projectsInfo, expensesInfo, expense }: Pro
           month={currentMonth}
           expense={expense}
           item='secondItem'
-          revenueGap={revenuesCostsPerMonthChartData.revenueGap[1]}
+          revenueGap={
+            (projectsInfo?.grossProfit ?? 0).toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }) + " KM"
+          }
         />
         <RevenuesCostsPerMonthChartItem
           className='h-[330px] w-[262px]'
@@ -68,7 +78,12 @@ const RevenuesCostsPerMonthChart = ({ projectsInfo, expensesInfo, expense }: Pro
           month={nextMonth}
           expense={expense}
           item='thirdItem'
-          revenueGap={revenuesCostsPerMonthChartData.revenueGap[2]}
+          revenueGap={
+            (projectsInfo?.grossProfit ?? 0).toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }) + " KM"
+          }
         />
       </div>
     </DataCard>

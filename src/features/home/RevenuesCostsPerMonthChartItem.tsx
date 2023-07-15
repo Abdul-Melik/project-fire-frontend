@@ -145,7 +145,12 @@ const RevenuesCostsPerMonthChartItem = ({
           descriptionClassName='text-sm leading-[22px]'
           amountClassName='text-2xl'
           description={"Revenue gap"}
-          amount={revenueGap}
+          amount={
+            (projectsInfo?.grossProfit ?? 0).toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }) +  " KM"
+          }
         />
       </div>
     </div>

@@ -3,9 +3,9 @@ import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
 
 import { arrow } from "assets/media";
 import { responsiveCostsPerMonthChartData as data } from "src/data";
-import ModalSelector from "components/modals/ModalSelector";
 import DataCard from "components/cards/DataCard";
 import { Expense, ProjectInfo, ProjectsInfo } from "src/types";
+import RevenuesCostsPerMonthSelector from "src/components/selectors/RevenuesCostsPerMonthSelector";
 
 const COLORS = ["#7BB99F", "#FF9F5A", "#4C84F2", "#FDCA48"];
 type Props = {
@@ -17,16 +17,11 @@ const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo }: Props) => 
   const [project, setProject] = useState(data[0]);
   const [infoExpenses, setInfoExpenses] = useState(expensesInfo[0]);
   const [infoProject, setInfoProject] = useState(projectsInfo);
-  const [showHoursOverviewSelector, setShowHoursOverviewSelector] = useState(false);
+  const [showRevenuesCostsPerMonthSelector, setShowRevenuesCostsPerMonthSelector] = useState(false);
 
   const selectMonth = (index: number) => {
     setInfoExpenses(expensesInfo[index]);
-    setShowHoursOverviewSelector(false);
-  };
-  const [show, setShow] = useState(false);
-  const handleNameClick = (index: number) => {
-    setProject(data[index]);
-    setShow(false);
+    setShowRevenuesCostsPerMonthSelector(false);
   };
   const headerContent = (
     <div className='flex gap-[10px] self-start'>
@@ -50,21 +45,19 @@ const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo }: Props) => 
         <h1
           className='absolute z-10 mt-[220px] flex cursor-pointer gap-2 font-gilroy-semi-bold text-2xl'
           onClick={() => {
-            setShow(true);
+            setShowRevenuesCostsPerMonthSelector(false);
           }}
         >
           {project.name} <img src={arrow} className='mt-1' />
         </h1>
       </div>
-      <ModalSelector
-        show={showHoursOverviewSelector}
-        children={data}
-        header='Select a project'
-        isError={false}
-        onCancel={() => {
-          setShow(false);
+      <RevenuesCostsPerMonthSelector
+        show={showRevenuesCostsPerMonthSelector}
+        children={expensesInfo}
+        closeSelector={() => {
+          setShowRevenuesCostsPerMonthSelector(false);
         }}
-        selectProject={handleNameClick}
+        handleSelection={selectMonth}
       />
       <ResponsiveContainer width='100%' height={350}>
         <PieChart>
