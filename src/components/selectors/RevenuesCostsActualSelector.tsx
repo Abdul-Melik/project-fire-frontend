@@ -1,18 +1,18 @@
-import { useState } from "react";
+import ReactDOM from "react-dom";
 import { motion } from "framer-motion";
-import ReactDOM from "react-dom"; // Dodajte import za ReactDOM
 
-import { ProjectInfo } from "src/types";
+import { ProjectsInfo } from "src/types";
 import Backdrop from "components/utils/Backdrop";
 
 type Props = {
   show: boolean;
-  children: ProjectInfo[];
+  children: ProjectsInfo;
   closeSelector: () => void;
-  handleSelection: (index: string) => void;
+  handleSelection: (index: number) => void;
 };
 
 const RevenuesCostsActualSelector = ({ show, children, closeSelector, handleSelection }: Props) => {
+  const { projects } = children;
   const content = (
     <>
       {show && <Backdrop onClick={() => closeSelector()} className='z-[20] bg-black bg-opacity-50' />}
@@ -30,11 +30,11 @@ const RevenuesCostsActualSelector = ({ show, children, closeSelector, handleSele
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           <div className='p-4'>
-            {children.map((child, index) => (
+            {projects.map((child, index) => (
               <div
-                key={index.toString()}
-                onClick={() => handleSelection(index.toString())}
-                className={`mt-2 cursor-pointer leading-8 ${index !== children.length - 1 ? "border-b" : ""}`}
+                key={index}
+                onClick={() => handleSelection(index)}
+                className={`mt-2 cursor-pointer leading-8 ${index !== projects.length - 1 ? "border-b" : ""}`}
               >
                 {child.name}
               </div>

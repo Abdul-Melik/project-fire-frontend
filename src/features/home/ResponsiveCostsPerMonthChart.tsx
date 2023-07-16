@@ -1,28 +1,32 @@
 import { useState } from "react";
 import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
-
 import { arrow } from "assets/media";
 import { responsiveCostsPerMonthChartData as data } from "src/data";
 import DataCard from "components/cards/DataCard";
-import { Expense, ProjectInfo, ProjectsInfo } from "src/types";
+import { Expense, ProjectsInfo } from "src/types";
 import RevenuesCostsPerMonthSelector from "src/components/selectors/RevenuesCostsPerMonthSelector";
 
 const COLORS = ["#7BB99F", "#FF9F5A", "#4C84F2", "#FDCA48"];
+
 type Props = {
-  expensesInfo: Expense[];
+  expensesInfo: Expense;
   projectsInfo: ProjectsInfo;
 };
 
 const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo }: Props) => {
-  const [project, setProject] = useState(data[0]);
-  const [infoExpenses, setInfoExpenses] = useState(expensesInfo[0]);
-  const [infoProject, setInfoProject] = useState(projectsInfo);
+  const { expenses } = expensesInfo;
+  const { projects } = projectsInfo;
+
+  const [infoExpenses, setInfoExpenses] = useState(expenses[0]);
+  const [infoProject, setInfoProject] = useState(projects);
   const [showRevenuesCostsPerMonthSelector, setShowRevenuesCostsPerMonthSelector] = useState(false);
 
   const selectMonth = (index: number) => {
-    setInfoExpenses(expensesInfo[index]);
+    setInfoProject(projects);
+    setInfoExpenses(expenses[index]);
     setShowRevenuesCostsPerMonthSelector(false);
   };
+
   const headerContent = (
     <div className='flex gap-[10px] self-start'>
       <h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>
@@ -32,8 +36,8 @@ const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo }: Props) => 
   );
   const formattedInfo = {
     value: [
-      { name: "Grand Total Planned Revenue", value: infoProject.plannedRevenue },
-      { name: "Grand Total Actual Revenue", value: infoProject.actualRevenue },
+      { name: "Grand Total Planned Revenue", value: projectsInfo.plannedRevenue },
+      { name: "Grand Total Actual Revenue", value: projectsInfo.actualRevenue },
       { name: "'Grand Total Total Expenses (Planned)", value: infoExpenses.totalPlannedExpense },
       { name: "Grand Total Total Expenses (Actual)", value: infoExpenses.totalActualExpense },
     ],
@@ -48,7 +52,7 @@ const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo }: Props) => 
             setShowRevenuesCostsPerMonthSelector(false);
           }}
         >
-          {project.name} <img src={arrow} className='mt-1' />
+          {infoExpenses.month} <img src={arrow} className='mt-1' />
         </h1>
       </div>
       <RevenuesCostsPerMonthSelector
@@ -72,7 +76,7 @@ const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo }: Props) => 
             endAngle={0}
             label
           >
-            {project.value.map((entry, index) => (
+            {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index]} />
             ))}
           </Pie>
@@ -84,7 +88,7 @@ const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo }: Props) => 
           />
         </PieChart>
       </ResponsiveContainer>
-      <p className='mt-14 font-inter-medium text-lg'>Revenue Gap: {project.value[0].value - project.value[1].value}</p>
+      <p className='mt-14 font-inter-medium text-lg'>Revenue Gap: {""}</p>
     </DataCard>
   );
 };

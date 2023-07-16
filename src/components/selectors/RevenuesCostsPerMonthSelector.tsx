@@ -6,12 +6,14 @@ import Backdrop from "components/utils/Backdrop";
 
 type Props = {
   show: boolean;
-  children: Expense[];
+  children: Expense;
   closeSelector: () => void;
   handleSelection: (index: number) => void;
 };
 
 const RevenuesCostsPerMonthSelector = ({ show, children, closeSelector, handleSelection }: Props) => {
+  const { expenses } = children;
+
   const content = (
     <>
       {show && <Backdrop onClick={() => closeSelector()} className='z-[20] bg-black bg-opacity-50' />}
@@ -29,11 +31,11 @@ const RevenuesCostsPerMonthSelector = ({ show, children, closeSelector, handleSe
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           <div className='p-4'>
-            {children.map((child, index) => (
+            {expenses.map((child, index) => (
               <div
                 key={index}
                 onClick={() => handleSelection(index)}
-                className={`mt-2 cursor-pointer leading-8 ${index !== children.length - 1 ? "border-b" : ""}`}
+                className={`mt-2 cursor-pointer leading-8 ${index !== expenses.length - 1 ? "border-b" : ""}`}
               >
                 {child.month}
               </div>

@@ -96,8 +96,8 @@ const DevelopmentRevenueCosts = ({ projectsInfo, expensesInfo, expense }: Props)
       )}
       {!windowLg && (
         <div className='flex flex-col gap-5'>
-          <ResponsiveCostsPerProjectChart />
-          <ResponsiveCostsPerMonthChart projectsInfo={projectsInfo} expensesInfo={[expensesInfo]} />
+          <ResponsiveCostsPerProjectChart projectsInfo={projectsInfo} />
+          <ResponsiveCostsPerMonthChart projectsInfo={projectsInfo} expensesInfo={expensesInfo} />
         </div>
       )}
     </div>
