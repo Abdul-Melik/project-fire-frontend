@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
+
 import { arrow } from "assets/media";
 import { responsiveCostsPerProjectChartData as data } from "src/data";
-import DataCard from "components/cards/DataCard";
 import { ProjectsInfo } from "src/types";
+
 import RevenuesCostsActualSelector from "src/components/selectors/RevenuesCostsActualSelector";
+import DataCard from "components/cards/DataCard";
 
 const COLORS = ["#7BB99F", "#FF9F5A"];
 
@@ -16,7 +18,7 @@ const ResponsiveCostsPerProjectChart = ({ projectsInfo }: Props) => {
   const { projects } = projectsInfo;
   const [info, setInfo] = useState(projects[0]);
   const [showRevenuesCostsActualSelector, setShowRevenuesCostsActualSelector] = useState(false);
-  
+
   const selectProject = (index: number) => {
     setInfo(projects[index]);
     setShowRevenuesCostsActualSelector(false);

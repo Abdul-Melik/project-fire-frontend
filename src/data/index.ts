@@ -13,6 +13,21 @@ export const averageLeadClosingData = [
   },
 ];
 
+export const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
 // Charts Data
 export const revenuesCostsActualChartData = [
   {

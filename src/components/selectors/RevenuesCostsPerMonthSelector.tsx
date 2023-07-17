@@ -1,18 +1,18 @@
 import ReactDOM from "react-dom";
 import { motion } from "framer-motion";
 
-import { Expense } from "src/types";
+import { ExpensesInfo } from "src/types";
 import Backdrop from "components/utils/Backdrop";
 
 type Props = {
   show: boolean;
-  children: Expense;
+  children: ExpensesInfo;
   closeSelector: () => void;
   handleSelection: (index: number) => void;
 };
 
 const RevenuesCostsPerMonthSelector = ({ show, children, closeSelector, handleSelection }: Props) => {
-  const { expenses } = children;
+  const { expensesPerMonth } = children;
 
   const content = (
     <>
@@ -31,11 +31,13 @@ const RevenuesCostsPerMonthSelector = ({ show, children, closeSelector, handleSe
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           <div className='p-4'>
-            {expenses.map((child, index) => (
+            {expensesPerMonth.map((child, index) => (
               <div
                 key={index}
                 onClick={() => handleSelection(index)}
-                className={`mt-2 cursor-pointer leading-8 ${index !== expenses.length - 1 ? "border-b" : ""}`}
+                className={`mt-2 cursor-pointer leading-8 ${
+                  index !== expensesPerMonth.length - 1 ? "border-b" : ""
+                }`}
               >
                 {child.month}
               </div>

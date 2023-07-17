@@ -1,16 +1,15 @@
-import { EmployeeInfo, Expense, ProjectsInfo } from "src/types";
+import { EmployeeInfo, ExpensesInfo, ProjectsInfo } from "src/types";
 
 import DataCard from "components/cards/DataCard";
 import PlanCardItem from "features/home/PlanCardItem";
 
 type Props = {
-  selectedYear: string;
   projectsInfo: ProjectsInfo;
   employeesInfo: EmployeeInfo[];
-  expensesInfo: Expense;
+  expensesInfo: ExpensesInfo;
 };
 
-const Plan = ({ selectedYear, projectsInfo, employeesInfo, expensesInfo }: Props) => {
+const Plan = ({ projectsInfo, employeesInfo, expensesInfo }: Props) => {
   const firstHeader = (
     <div className='flex items-center gap-[10px]'>
       <h2 className='font-gilroy-semi-bold text-lg font-semibold text-deep-forest'>
@@ -39,7 +38,6 @@ const Plan = ({ selectedYear, projectsInfo, employeesInfo, expensesInfo }: Props
                 }) + " KM"
             }
           />
-
           <PlanCardItem
             text='Design'
             amount={
@@ -91,11 +89,19 @@ const Plan = ({ selectedYear, projectsInfo, employeesInfo, expensesInfo }: Props
       </DataCard>
       <DataCard className='rounded-[6px] border border-ashen-grey bg-white' header={secondHeader}>
         <div className='mt-[11px] flex flex-col gap-[5px]'>
-          <PlanCardItem text='Direct' amount='' />
+          <PlanCardItem
+            text='Direct'
+            amount={
+              (projectsInfo?.actualRevenue ?? 0).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) + " KM"
+            }
+          />
           <PlanCardItem
             text='Indirect'
             amount={
-              expensesInfo.indirectTotalActualExpense.toLocaleString("en-US", {
+              expensesInfo.totalIndirectActualExpense.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               }) + " KM"
@@ -104,7 +110,7 @@ const Plan = ({ selectedYear, projectsInfo, employeesInfo, expensesInfo }: Props
           <PlanCardItem
             text='Marketing'
             amount={
-              expensesInfo.marketingTotalActualExpense.toLocaleString("en-US", {
+              expensesInfo.totalMarketingActualExpense.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               }) + " KM"
@@ -113,7 +119,7 @@ const Plan = ({ selectedYear, projectsInfo, employeesInfo, expensesInfo }: Props
           <PlanCardItem
             text='HR costs'
             amount={
-              expensesInfo.hrTotalActualExpense.toLocaleString("en-US", {
+              expensesInfo.totalHrActualExpense.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               }) + " KM"
@@ -122,7 +128,7 @@ const Plan = ({ selectedYear, projectsInfo, employeesInfo, expensesInfo }: Props
           <PlanCardItem
             text='Office cost'
             amount={
-              expensesInfo.officeTotalActualExpense.toLocaleString("en-US", {
+              expensesInfo.totalOfficeActualExpense.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               }) + " KM"
@@ -131,7 +137,7 @@ const Plan = ({ selectedYear, projectsInfo, employeesInfo, expensesInfo }: Props
           <PlanCardItem
             text='Sales costs'
             amount={
-              expensesInfo.salesTotalActualExpense.toLocaleString("en-US", {
+              expensesInfo.totalSalesActualExpense.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               }) + " KM"
@@ -140,7 +146,7 @@ const Plan = ({ selectedYear, projectsInfo, employeesInfo, expensesInfo }: Props
           <PlanCardItem
             text='Other costs'
             amount={
-              expensesInfo.otherTotalActualExpense.toLocaleString("en-US", {
+              expensesInfo.totalOtherActualExpense.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               }) + " KM"
@@ -150,7 +156,7 @@ const Plan = ({ selectedYear, projectsInfo, employeesInfo, expensesInfo }: Props
             className='mx-[-20px] bg-winter-mint px-5 pb-[3px] pt-[6px]'
             text='TOTAL EXPENSES'
             amount={
-              expensesInfo.totalActualExpenses.toLocaleString("en-US", {
+              (expensesInfo.totalActualExpenses + (projectsInfo?.actualRevenue ?? 0)).toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               }) + " KM"

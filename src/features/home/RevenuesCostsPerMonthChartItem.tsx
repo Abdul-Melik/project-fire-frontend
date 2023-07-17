@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
-import { Expense, ExpensesInfo, ProjectInfo, ProjectsInfo } from "src/types";
+
+import { months } from "src/data";
+import { ExpensesInfo, ProjectsInfo } from "src/types";
 
 import DataSelector from "components/selectors/DataSelector";
 import SummaryCard from "components/cards/SummaryCard";
@@ -10,40 +12,43 @@ type Props = {
   wrapperClassName?: string;
   item: string;
   data: string;
-  revenueGap: string;
   tickNumbers?: boolean;
   projectsInfo: ProjectsInfo;
-  expensesInfo: Expense;
+  expensesInfo: ExpensesInfo;
   month: string;
-  expense: ExpensesInfo;
+  amount: string;
+  selectedYear: string;
 };
 
 const RevenuesCostsPerMonthChartItem = ({
   className,
   wrapperClassName,
   item,
-  revenueGap,
   projectsInfo,
   month,
+  amount,
   tickNumbers = false,
   expensesInfo,
-  expense,
+  selectedYear,
 }: Props) => {
   const [firstOption, setFirstOption] = useState(true);
   const [secondOption, setSecondOption] = useState(true);
   const [thirdOption, setThirdOption] = useState(true);
   const [fourthOption, setFourthOption] = useState(true);
 
+  const { expensesPerMonth } = expensesInfo;
+
   const data =
     projectsInfo && expensesInfo
-      ? expensesInfo.totalExpensesPlanned
+      ? expensesPerMonth
           .filter((item) => item.month === month)
           .map((item) => {
-            const actualExpenseItem = expensesInfo.totalExpensesActual.find((expense) => expense.month === item.month);
+            const actualExpenseItem = expensesPerMonth.find((expense) => expense.month === item.month);
             return {
-              month: item.month,
-              totalExpensesActual: actualExpenseItem ? actualExpenseItem.totalActualExpense : 0,
-              totalExpensesPlanned: item.totalPlannedExpense,
+              month:
+                `${item.month}: ` + new Date(Number(selectedYear), months.indexOf(item.month)).toLocaleDateString(),
+              totalExpensesActual: actualExpenseItem ? actualExpenseItem.actualExpense : 0,
+              totalExpensesPlanned: item.plannedExpense,
               actualRevenue: projectsInfo.actualRevenue,
               plannedRevenue: projectsInfo.plannedRevenue,
             };
@@ -55,8 +60,8 @@ const RevenuesCostsPerMonthChartItem = ({
       Math.max(
         projectsInfo.actualRevenue,
         projectsInfo.plannedRevenue,
-        expensesInfo.totalPlannedExpense,
-        expensesInfo.totalActualExpense
+        expensesInfo.totalPlannedExpenses,
+        expensesInfo.totalActualExpenses
       )
     )
   );
@@ -145,12 +150,7 @@ const RevenuesCostsPerMonthChartItem = ({
           descriptionClassName='text-sm leading-[22px]'
           amountClassName='text-2xl'
           description={"Revenue gap"}
-          amount={
-            (projectsInfo?.grossProfit ?? 0).toLocaleString("en-US", {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            }) +  " KM"
-          }
+          amount={amount}
         />
       </div>
     </div>

@@ -68,36 +68,38 @@ type Projects = {
   };
 };
 
-type ExpensesInfo = {
+type ExpensesPerMonth = {
   year: number;
   month: string;
+  marketingActualExpense: number;
+  hrActualExpense: number;
+  officeActualExpense: number;
+  salesActualExpense: number;
+  otherActualExpense: number;
+  indirectActualExpense: number;
   plannedExpense: number;
   actualExpense: number;
-  expenseCategory: string;
-  totalActualExpense2023: number;
-  totalExpensesActual: Expense[];
-  totalExpensesPlanned: Expense[];
 };
 
-type Expense = {
-  expenses: any;
-  year: number;
-  month: string;
-  expenseCategory: string;
-  expenseCategoryId: string;
-  monthsWithExpenses: string[];
-  marketingTotalActualExpense: number;
-  hrTotalActualExpense: number;
-  officeTotalActualExpense: number;
-  salesTotalActualExpense: number;
-  otherTotalActualExpense: number;
-  indirectTotalActualExpense: number;
-  totalExpensesActual: Expense[];
-  totalExpensesPlanned: Expense[];
-  totalActualExpenses: number;
-  totalActualExpense: number;
+type ExpensesInfo = {
+  plannedExpense: number;
+  monthsWithPlannedExpenses: string[];
+  monthsWithActualExpenses: string[];
+  totalMarketingActualExpense: number;
+  totalHrActualExpense: number;
+  totalOfficeActualExpense: number;
+  totalSalesActualExpense: number;
+  totalOtherActualExpense: number;
+  totalIndirectActualExpense: number;
+  totalMarketingPlannedExpense: number;
+  totalHrPlannedExpense: number;
+  totalOfficePlannedExpense: number;
+  totalSalesPlannedExpense: number;
+  totalOtherPlannedExpense: number;
+  totalIndirectPlannedExpense: number;
   totalPlannedExpenses: number;
-  totalPlannedExpense: number;
+  totalActualExpenses: number;
+  expensesPerMonth: ExpensesPerMonth[];
 };
 
 type ProjectInfo = {
@@ -158,8 +160,8 @@ export type {
   Employee,
   Employees,
   EmployeeInfo,
+  ExpensesPerMonth,
   ExpensesInfo,
-  Expense,
   Project,
   Projects,
   ProjectInfo,

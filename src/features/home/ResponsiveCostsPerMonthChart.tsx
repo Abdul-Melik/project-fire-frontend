@@ -1,29 +1,29 @@
 import { useState } from "react";
 import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
+
 import { arrow } from "assets/media";
 import { responsiveCostsPerMonthChartData as data } from "src/data";
-import DataCard from "components/cards/DataCard";
-import { Expense, ProjectsInfo } from "src/types";
+import { months } from "src/data";
+import { ExpensesInfo, ProjectsInfo } from "src/types";
+
 import RevenuesCostsPerMonthSelector from "src/components/selectors/RevenuesCostsPerMonthSelector";
+import DataCard from "components/cards/DataCard";
 
 const COLORS = ["#7BB99F", "#FF9F5A", "#4C84F2", "#FDCA48"];
 
 type Props = {
-  expensesInfo: Expense;
+  selectedYear: string;
+  expensesInfo: ExpensesInfo;
   projectsInfo: ProjectsInfo;
 };
 
-const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo }: Props) => {
-  const { expenses } = expensesInfo;
-  const { projects } = projectsInfo;
-
-  const [infoExpenses, setInfoExpenses] = useState(expenses[0]);
-  const [infoProject, setInfoProject] = useState(projects);
+const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo, selectedYear }: Props) => {
+  const { expensesPerMonth } = expensesInfo;
+  const [infoExpenses, setInfoExpenses] = useState(expensesPerMonth[0]);
   const [showRevenuesCostsPerMonthSelector, setShowRevenuesCostsPerMonthSelector] = useState(false);
 
   const selectMonth = (index: number) => {
-    setInfoProject(projects);
-    setInfoExpenses(expenses[index]);
+    setInfoExpenses(expensesPerMonth[index]);
     setShowRevenuesCostsPerMonthSelector(false);
   };
 
@@ -38,21 +38,25 @@ const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo }: Props) => 
     value: [
       { name: "Grand Total Planned Revenue", value: projectsInfo.plannedRevenue },
       { name: "Grand Total Actual Revenue", value: projectsInfo.actualRevenue },
-      { name: "'Grand Total Total Expenses (Planned)", value: infoExpenses.totalPlannedExpense },
-      { name: "Grand Total Total Expenses (Actual)", value: infoExpenses.totalActualExpense },
+      { name: "'Grand Total Total Expenses (Planned)", value: infoExpenses.plannedExpense },
+      { name: "Grand Total Total Expenses (Actual)", value: infoExpenses.actualExpense },
     ],
   };
-
+  {
+    infoExpenses.month;
+  }
   return (
     <DataCard header={headerContent} className='w-full border border-ashen-grey pb-8 text-center font-gilroy-medium'>
       <div className='flex w-full justify-center bg-red-300'>
         <h1
           className='absolute z-10 mt-[220px] flex cursor-pointer gap-2 font-gilroy-semi-bold text-2xl'
           onClick={() => {
-            setShowRevenuesCostsPerMonthSelector(false);
+            setShowRevenuesCostsPerMonthSelector(true);
           }}
         >
-          {infoExpenses.month} <img src={arrow} className='mt-1' />
+          {`${infoExpenses.month}: ` +
+            new Date(Number(selectedYear), months.indexOf(infoExpenses.month)).toLocaleDateString()}
+          <img src={arrow} className='mt-1' />
         </h1>
       </div>
       <RevenuesCostsPerMonthSelector
@@ -76,7 +80,7 @@ const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo }: Props) => 
             endAngle={0}
             label
           >
-            {data.map((entry, index) => (
+            {data.map((_, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index]} />
             ))}
           </Pie>
@@ -84,11 +88,17 @@ const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo }: Props) => 
             height={80}
             layout='vertical'
             iconType='circle'
-            formatter={(value, entry, index) => <span className='leading-8 text-deep-forest'>{value}</span>}
+            formatter={(value, _) => <span className='leading-8 text-deep-forest'>{value}</span>}
           />
         </PieChart>
       </ResponsiveContainer>
-      <p className='mt-14 font-inter-medium text-lg'>Revenue Gap: {""}</p>
+      <p className='mt-14 font-inter-medium text-lg'>
+        Revenue Gap:
+        {(projectsInfo?.grossProfit + infoExpenses.actualExpense).toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }) + " KM"}
+      </p>
     </DataCard>
   );
 };

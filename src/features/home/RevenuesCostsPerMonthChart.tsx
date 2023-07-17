@@ -1,15 +1,17 @@
-import { revenuesCostsPerMonthChartData } from "src/data";
 import DataCard from "components/cards/DataCard";
 import RevenuesCostsPerMonthChartItem from "features/home/RevenuesCostsPerMonthChartItem";
-import { Expense, ExpensesInfo, ProjectsInfo } from "src/types";
+import { useState } from "react";
+import { ExpensesInfo, ProjectsInfo } from "src/types";
 
 type Props = {
+  selectedYear: string;
   projectsInfo: ProjectsInfo;
-  expensesInfo: Expense;
-  expense: ExpensesInfo;
+  expensesInfo: ExpensesInfo;
 };
 
-const RevenuesCostsPerMonthChart = ({ projectsInfo, expensesInfo, expense }: Props) => {
+const RevenuesCostsPerMonthChart = ({ selectedYear, projectsInfo, expensesInfo }: Props) => {
+  const { expensesPerMonth } = expensesInfo;
+
   const currentDate = new Date();
   const currentMonth = currentDate.toLocaleString("default", { month: "long" });
 
@@ -20,6 +22,10 @@ const RevenuesCostsPerMonthChart = ({ projectsInfo, expensesInfo, expense }: Pro
   const nextMonthDate = new Date();
   nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
   const nextMonth = nextMonthDate.toLocaleString("default", { month: "long" });
+
+  const currentMonthExpenses = expensesPerMonth.find((expense) => expense.month === currentMonth);
+  const previousMonthExpenses = expensesPerMonth.find((expense) => expense.month === previousMonth);
+  const nextMonthExpenses = expensesPerMonth.find((expense) => expense.month === nextMonth);
 
   const headerContent = (
     <>
@@ -42,29 +48,28 @@ const RevenuesCostsPerMonthChart = ({ projectsInfo, expensesInfo, expense }: Pro
           wrapperClassName='ml-16'
           item='firstItem'
           data='month'
+          selectedYear={selectedYear}
           projectsInfo={projectsInfo}
-          expense={expense}
           month={previousMonth}
           expensesInfo={expensesInfo}
-          revenueGap={
-            (projectsInfo?.grossProfit ?? 0).toLocaleString("en-US", {
+          amount={
+            (projectsInfo?.grossProfit - (previousMonthExpenses?.actualExpense || 0)).toLocaleString("en-US", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             }) + " KM"
           }
           tickNumbers
         />
-
         <RevenuesCostsPerMonthChartItem
           className='h-[330px] w-[262px]'
           data='month'
+          selectedYear={selectedYear}
           projectsInfo={projectsInfo}
           expensesInfo={expensesInfo}
           month={currentMonth}
-          expense={expense}
           item='secondItem'
-          revenueGap={
-            (projectsInfo?.grossProfit ?? 0).toLocaleString("en-US", {
+          amount={
+            (projectsInfo?.grossProfit - (currentMonthExpenses?.actualExpense || 0)).toLocaleString("en-US", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             }) + " KM"
@@ -73,13 +78,13 @@ const RevenuesCostsPerMonthChart = ({ projectsInfo, expensesInfo, expense }: Pro
         <RevenuesCostsPerMonthChartItem
           className='h-[330px] w-[262px]'
           data='month'
+          selectedYear={selectedYear}
           projectsInfo={projectsInfo}
           expensesInfo={expensesInfo}
           month={nextMonth}
-          expense={expense}
           item='thirdItem'
-          revenueGap={
-            (projectsInfo?.grossProfit ?? 0).toLocaleString("en-US", {
+          amount={
+            (projectsInfo?.grossProfit - (nextMonthExpenses?.actualExpense || 0)).toLocaleString("en-US", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             }) + " KM"

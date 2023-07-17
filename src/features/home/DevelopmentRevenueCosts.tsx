@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { Expense, ExpensesInfo, ProjectsInfo } from "src/types";
-
+import { ExpensesInfo, ProjectsInfo } from "src/types";
 import { revenue, directCosts, margin, avgMargin } from "assets/media";
+
 import InfoCard from "components/cards/InfoCard";
 import SummaryCard from "components/cards/SummaryCard";
 import RevenuesCostsActualChart from "features/home/RevenuesCostsActualChart";
@@ -11,12 +11,12 @@ import ResponsiveCostsPerProjectChart from "features/home/ResponsiveCostsPerProj
 import ResponsiveCostsPerMonthChart from "features/home/ResponsiveCostsPerMonthChart";
 
 type Props = {
+  selectedYear: string;
   projectsInfo: ProjectsInfo;
-  expensesInfo: Expense;
-  expense: ExpensesInfo;
+  expensesInfo: ExpensesInfo;
 };
 
-const DevelopmentRevenueCosts = ({ projectsInfo, expensesInfo, expense }: Props) => {
+const DevelopmentRevenueCosts = ({ selectedYear, projectsInfo, expensesInfo }: Props) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const windowLg = windowWidth >= 1024;
 
@@ -91,13 +91,21 @@ const DevelopmentRevenueCosts = ({ projectsInfo, expensesInfo, expense }: Props)
         <div className='block'>
           <RevenuesCostsActualChart projectsInfo={projectsInfo} />
           <div className='mb-[30px]'></div>
-          <RevenuesCostsPerMonthChart projectsInfo={projectsInfo} expensesInfo={expensesInfo} expense={expense} />
+          <RevenuesCostsPerMonthChart
+            selectedYear={selectedYear}
+            projectsInfo={projectsInfo}
+            expensesInfo={expensesInfo}
+          />
         </div>
       )}
       {!windowLg && (
         <div className='flex flex-col gap-5'>
           <ResponsiveCostsPerProjectChart projectsInfo={projectsInfo} />
-          <ResponsiveCostsPerMonthChart projectsInfo={projectsInfo} expensesInfo={expensesInfo} />
+          <ResponsiveCostsPerMonthChart
+            selectedYear={selectedYear}
+            projectsInfo={projectsInfo}
+            expensesInfo={expensesInfo}
+          />
         </div>
       )}
     </div>

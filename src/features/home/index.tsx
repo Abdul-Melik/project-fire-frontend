@@ -11,15 +11,8 @@ import MainLayout from "components/layout";
 import Performance from "features/home/Performance";
 import DevelopmentRevenueCosts from "features/home/DevelopmentRevenueCosts";
 import Plan from "features/home/Plan";
-import { Expense, ExpensesInfo, ProjectsInfo } from "src/types";
 
-type Props = {
-  projectsInfo: ProjectsInfo;
-  expensesInfo: Expense;
-  expense: ExpensesInfo;
-};
-
-const Home = ({ expense }: Props) => {
+const Home = () => {
   const [selectedYear, setSelectedYear] = useState("2023");
   const [activePage, setActivePage] = useState(1);
 
@@ -73,15 +66,14 @@ const Home = ({ expense }: Props) => {
                   <Performance selectedYear={selectedYear} projectsInfo={projectsInfo} employeesInfo={employeesInfo} />
                 )}
                 {activePage === 2 && (
-                  <DevelopmentRevenueCosts projectsInfo={projectsInfo} expensesInfo={expensesInfo} expense={expense} />
-                )}
-                {activePage === 3 && (
-                  <Plan
+                  <DevelopmentRevenueCosts
                     selectedYear={selectedYear}
                     projectsInfo={projectsInfo}
-                    employeesInfo={employeesInfo}
                     expensesInfo={expensesInfo}
                   />
+                )}
+                {activePage === 3 && (
+                  <Plan projectsInfo={projectsInfo} employeesInfo={employeesInfo} expensesInfo={expensesInfo} />
                 )}
               </>
             )
