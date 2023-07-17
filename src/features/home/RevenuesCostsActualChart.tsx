@@ -25,7 +25,7 @@ const RevenuesCostsActualChart = ({ projectsInfo }: Props) => {
       </div>
       <div className='flex gap-4'>
         <DataSelector
-          label='Grand Total Total Billed'
+          label='Grand Total Billed'
           htmlFor='revenuesCostsActualFirstOption'
           id='revenuesCostsActualFirstOption'
           name='revenuesCostsActualFirstOption'
@@ -83,7 +83,13 @@ const RevenuesCostsActualChart = ({ projectsInfo }: Props) => {
               fill: "#232F2D",
             }}
           />
-          <Tooltip />
+          <Tooltip
+            formatter={(value, name) => {
+              if (name === "value") return [value, "Grand Total Billed"];
+              if (name === "cost") return [value, "Grand Total Costs"];
+              return [value, name];
+            }}
+          />
           {firstOption && <Bar dataKey='value' fill='#FF9F5A' radius={[4, 4, 0, 0]} barSize={20} />}
           {secondOption && <Bar dataKey='cost' fill='#7BB99F' radius={[4, 4, 0, 0]} barSize={20} />}
         </BarChart>

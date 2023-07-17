@@ -97,7 +97,15 @@ const RevenuesCostsPerMonthChartItem = ({
                 }}
               />
             )}
-            <Tooltip />
+            <Tooltip
+              formatter={(value, name) => {
+                if (name === "actualRevenue") return [value, "Grand Total Actual Revenue"];
+                if (name === "plannedRevenue") return [value, "Grand Total Planned Revenue"];
+                if (name === "totalExpensesPlanned") return [value, "Grand Total Expenses (Planned)"];
+                if (name === "totalExpensesActual") return [value, "Grand Total Expenses (Actual)"];
+                return [value, name];
+              }}
+            />
             {firstOption && <Bar dataKey='actualRevenue' fill='#FF9F5A' radius={[4, 4, 0, 0]} barSize={20} />}
             {secondOption && <Bar dataKey='plannedRevenue' fill='#7BB99F' radius={[4, 4, 0, 0]} barSize={20} />}
             {thirdOption && <Bar dataKey='totalExpensesPlanned' fill='#4C84F2' radius={[4, 4, 0, 0]} barSize={20} />}
@@ -127,7 +135,7 @@ const RevenuesCostsPerMonthChartItem = ({
             toggle={() => setSecondOption(!secondOption)}
           />
           <DataSelector
-            label='Grand Total Total Expenses (Planned)'
+            label='Grand Total Expenses (Planned)'
             htmlFor={`revenuesCostsPerMonthThirdOption${item}`}
             id={`revenuesCostsPerMonthThirdOption${item}`}
             name={`revenuesCostsPerMonthThirdOption${item}`}
@@ -136,7 +144,7 @@ const RevenuesCostsPerMonthChartItem = ({
             toggle={() => setThirdOption(!thirdOption)}
           />
           <DataSelector
-            label='Grand Total Total Expenses (Actual)'
+            label='Grand Total Expenses (Actual)'
             htmlFor={`revenuesCostsPerMonthFourthOption${item}`}
             id={`revenuesCostsPerMonthFourthOption${item}`}
             name={`revenuesCostsPerMonthFourthOption${item}`}
