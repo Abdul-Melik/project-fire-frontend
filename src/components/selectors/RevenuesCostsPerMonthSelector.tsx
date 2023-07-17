@@ -1,17 +1,20 @@
 import ReactDOM from "react-dom";
 import { motion } from "framer-motion";
 
+import { months } from "src/data";
 import { ExpensesInfo } from "src/types";
+
 import Backdrop from "components/utils/Backdrop";
 
 type Props = {
   show: boolean;
   children: ExpensesInfo;
+  selectedYear: string;
   closeSelector: () => void;
   handleSelection: (index: number) => void;
 };
 
-const RevenuesCostsPerMonthSelector = ({ show, children, closeSelector, handleSelection }: Props) => {
+const RevenuesCostsPerMonthSelector = ({ show, children, selectedYear, closeSelector, handleSelection }: Props) => {
   const { expensesPerMonth } = children;
 
   const content = (
@@ -35,11 +38,9 @@ const RevenuesCostsPerMonthSelector = ({ show, children, closeSelector, handleSe
               <div
                 key={index}
                 onClick={() => handleSelection(index)}
-                className={`mt-2 cursor-pointer leading-8 ${
-                  index !== expensesPerMonth.length - 1 ? "border-b" : ""
-                }`}
+                className={`mt-2 cursor-pointer leading-8 ${index !== expensesPerMonth.length - 1 ? "border-b" : ""}`}
               >
-                {child.month}
+                {`${child.month}: ` + new Date(Number(selectedYear), months.indexOf(child.month)).toLocaleDateString()}{" "}
               </div>
             ))}
           </div>

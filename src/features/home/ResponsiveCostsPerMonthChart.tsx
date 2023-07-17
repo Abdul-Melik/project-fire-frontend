@@ -62,6 +62,7 @@ const ResponsiveCostsPerMonthChart = ({ expensesInfo, projectsInfo, selectedYear
       <RevenuesCostsPerMonthSelector
         show={showRevenuesCostsPerMonthSelector}
         children={expensesInfo}
+        selectedYear={selectedYear}
         closeSelector={() => {
           setShowRevenuesCostsPerMonthSelector(false);
         }}
