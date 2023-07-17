@@ -12,20 +12,18 @@ type Props = {
 const RevenuesCostsPerMonthChart = ({ selectedYear, projectsInfo, expensesInfo }: Props) => {
   const { expensesPerMonth } = expensesInfo;
 
-  const currentDate = new Date();
-  const currentMonth = currentDate.toLocaleString("default", { month: "long" });
+  const firstMonthDate = new Date();
+  firstMonthDate.setMonth(firstMonthDate.getMonth() - 2);
+  const firstMonth = firstMonthDate.toLocaleString("default", { month: "long" });
+  const secondMonthDate = new Date();
+  secondMonthDate.setMonth(secondMonthDate.getMonth() - 1);
+  const secondMonth = secondMonthDate.toLocaleString("default", { month: "long" });
+  const thirdDate = new Date();
+  const thirdMonth = thirdDate.toLocaleString("default", { month: "long" });
 
-  const previousMonthDate = new Date();
-  previousMonthDate.setMonth(previousMonthDate.getMonth() - 1);
-  const previousMonth = previousMonthDate.toLocaleString("default", { month: "long" });
-
-  const nextMonthDate = new Date();
-  nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
-  const nextMonth = nextMonthDate.toLocaleString("default", { month: "long" });
-
-  const currentMonthExpenses = expensesPerMonth.find((expense) => expense.month === currentMonth);
-  const previousMonthExpenses = expensesPerMonth.find((expense) => expense.month === previousMonth);
-  const nextMonthExpenses = expensesPerMonth.find((expense) => expense.month === nextMonth);
+  const firstMonthExpenses = expensesPerMonth.find((expense) => expense.month === firstMonth);
+  const secondMonthExpenses = expensesPerMonth.find((expense) => expense.month === secondMonth);
+  const thirdMonthExpenses = expensesPerMonth.find((expense) => expense.month === thirdMonth);
 
   const headerContent = (
     <>
@@ -50,10 +48,10 @@ const RevenuesCostsPerMonthChart = ({ selectedYear, projectsInfo, expensesInfo }
           data='month'
           selectedYear={selectedYear}
           projectsInfo={projectsInfo}
-          month={previousMonth}
+          month={firstMonth}
           expensesInfo={expensesInfo}
           amount={
-            (projectsInfo?.grossProfit - (previousMonthExpenses?.actualExpense || 0)).toLocaleString("en-US", {
+            (projectsInfo?.grossProfit - (firstMonthExpenses?.actualExpense || 0)).toLocaleString("en-US", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             }) + " KM"
@@ -66,10 +64,10 @@ const RevenuesCostsPerMonthChart = ({ selectedYear, projectsInfo, expensesInfo }
           selectedYear={selectedYear}
           projectsInfo={projectsInfo}
           expensesInfo={expensesInfo}
-          month={currentMonth}
+          month={secondMonth}
           item='secondItem'
           amount={
-            (projectsInfo?.grossProfit - (currentMonthExpenses?.actualExpense || 0)).toLocaleString("en-US", {
+            (projectsInfo?.grossProfit - (secondMonthExpenses?.actualExpense || 0)).toLocaleString("en-US", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             }) + " KM"
@@ -81,10 +79,10 @@ const RevenuesCostsPerMonthChart = ({ selectedYear, projectsInfo, expensesInfo }
           selectedYear={selectedYear}
           projectsInfo={projectsInfo}
           expensesInfo={expensesInfo}
-          month={nextMonth}
+          month={thirdMonth}
           item='thirdItem'
           amount={
-            (projectsInfo?.grossProfit - (nextMonthExpenses?.actualExpense || 0)).toLocaleString("en-US", {
+            (projectsInfo?.grossProfit - (thirdMonthExpenses?.actualExpense || 0)).toLocaleString("en-US", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             }) + " KM"
